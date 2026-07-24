@@ -1,0 +1,699 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions platforms API
+  version: 1.181.0
+tags:
+- description: Computing platforms
+  name: platforms
+paths:
+  /platforms:
+    get:
+      description: Lists all available computing platforms in a user context. Append `?workspaceId` to list platforms in a workspace context.
+      operationId: ListPlatforms
+      parameters:
+      - description: Organization numeric identifier
+        in: query
+        name: orgId
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPlatformsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List platforms
+      tags:
+      - platforms
+  /platforms/{platformId}:
+    get:
+      description: Retrieves the details of the computing platform identified by the given `platformId`.
+      operationId: DescribePlatform
+      parameters:
+      - description: Platform string identifier
+        in: path
+        name: platformId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: When true, narrow the catalog to Scheduler-compatible instance types (AWS only).
+        in: query
+        name: sched
+        schema:
+          type: boolean
+      - description: When true, narrow the catalog to NVMe-equipped instance types (AWS only).
+        in: query
+        name: nvme
+        schema:
+          type: boolean
+      - explode: false
+        in: query
+        name: regionId
+        required: true
+        schema:
+          type: string
+      - explode: false
+        in: query
+        name: credentialsId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePlatformResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Describe platform
+      tags:
+      - platforms
+  /platforms/{platformId}/regions:
+    get:
+      description: Lists the available regions for the computing platform identified by the given `platformId`.
+      operationId: ListPlatformRegions
+      parameters:
+      - description: Platform string identifier
+        in: path
+        name: platformId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRegionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List platform regions
+      tags:
+      - platforms
+components:
+  schemas:
+    ComputePlatform:
+      properties:
+        credentialsProviders:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    EksPlatformMetaInfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          clusters:
+            items:
+              type: string
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Amazon EKS platform metainfo
+      type: object
+    FsxFileSystem:
+      properties:
+        dns:
+          type: string
+        id:
+          type: string
+        mount:
+          type: string
+      type: object
+    ListRegionsResponse:
+      properties:
+        regions:
+          items:
+            $ref: '#/components/schemas/ComputeRegion'
+          type: array
+      type: object
+    ListPlatformsResponse:
+      properties:
+        platforms:
+          items:
+            $ref: '#/components/schemas/ComputePlatform'
+          type: array
+      type: object
+    InstanceType:
+      properties:
+        arch:
+          type: string
+        features:
+          description: Capability features advertised for this instance type (e.g. GPU, NVMe). Absent when the data source does not publish features; an empty list means none.
+          items:
+            $ref: '#/components/schemas/Feature'
+          type: array
+        id:
+          type: string
+      required:
+      - arch
+      type: object
+    SeqeraComputePlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          allocStrategy:
+            items:
+              type: string
+            type: array
+          buckets:
+            items:
+              $ref: '#/components/schemas/Bucket'
+            type: array
+          efsFileSystems:
+            items:
+              $ref: '#/components/schemas/EfsFileSystem'
+            type: array
+          fileSystems:
+            items:
+              $ref: '#/components/schemas/FsxFileSystem'
+            type: array
+          images:
+            items:
+              $ref: '#/components/schemas/Image'
+            type: array
+          instanceFamilies:
+            items:
+              type: string
+            type: array
+          instanceTypes:
+            items:
+              $ref: '#/components/schemas/InstanceType'
+            type: array
+          jobQueues:
+            items:
+              $ref: '#/components/schemas/JobQueue'
+            type: array
+          keyPairs:
+            items:
+              type: string
+            type: array
+          securityGroups:
+            items:
+              $ref: '#/components/schemas/SecurityGroup'
+            type: array
+          subnets:
+            items:
+              $ref: '#/components/schemas/Subnet'
+            type: array
+          vpcs:
+            items:
+              $ref: '#/components/schemas/Vpc'
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Seqera Compute platform metainfo
+      type: object
+    GoogleInstanceType:
+      properties:
+        arch:
+          type: string
+        features:
+          description: Capability features advertised for this instance type (e.g. GPU). Absent when the data source does not publish features; an empty list means none.
+          items:
+            $ref: '#/components/schemas/Feature'
+          type: array
+        id:
+          type: string
+      type: object
+    K8sPlatformMetaInfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      title: Kubernetes platform metainfo
+      type: object
+    AzCloudPlatformMetaInfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          containers:
+            items:
+              type: string
+            type: array
+          instanceTypes:
+            items:
+              type: string
+            type: array
+          networks:
+            items:
+              $ref: '#/components/schemas/AzNetwork'
+            type: array
+          subnets:
+            items:
+              $ref: '#/components/schemas/AzSubnet'
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Azure Cloud platform metainfo
+      type: object
+    JobQueue:
+      properties:
+        name:
+          type: string
+        state:
+          type: string
+      required:
+      - name
+      - state
+      type: object
+    GooglePlatformMetainfo.Filestore:
+      properties:
+        location:
+          type: string
+        name:
+          type: string
+        target:
+          type: string
+      type: object
+    AwsCloudPlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          buckets:
+            items:
+              $ref: '#/components/schemas/Bucket'
+            type: array
+          images:
+            items:
+              $ref: '#/components/schemas/Image'
+            type: array
+          instanceTypes:
+            items:
+              $ref: '#/components/schemas/InstanceType'
+            type: array
+          keyPairs:
+            items:
+              type: string
+            type: array
+          securityGroups:
+            items:
+              $ref: '#/components/schemas/SecurityGroup'
+            type: array
+          subnets:
+            items:
+              $ref: '#/components/schemas/Subnet'
+            type: array
+          vpcs:
+            items:
+              $ref: '#/components/schemas/Vpc'
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+        type: object
+      title: AWS Cloud platform metainfo
+      type: object
+    Bucket:
+      properties:
+        path:
+          type: string
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    Vpc:
+      properties:
+        id:
+          type: string
+        isDefault:
+          type: boolean
+      type: object
+    Feature:
+      enum:
+      - AMD
+      - ARM
+      - SCHED
+      - GPU
+      - FPGA
+      - NVME
+      type: string
+    GoogleCloudPlatformMetaInfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          buckets:
+            items:
+              $ref: '#/components/schemas/GoogleBucket'
+            type: array
+          images:
+            items:
+              $ref: '#/components/schemas/GoogleImage'
+            type: array
+          instanceTypes:
+            items:
+              $ref: '#/components/schemas/GoogleInstanceType'
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+          zones:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Google Cloud platform metainfo
+      type: object
+    GkePlatformMetaInfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          clusters:
+            items:
+              type: string
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Google GKE platform metainfo
+      type: object
+    DescribePlatformResponse:
+      properties:
+        metainfo:
+          $ref: '#/components/schemas/PlatformMetainfo'
+      type: object
+    AzSubnet:
+      properties:
+        name:
+          type: string
+        networkId:
+          type: string
+        region:
+          type: string
+      type: object
+    GridPlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      title: Grid platform metainfo
+      type: object
+    ComputeRegion:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    GooglePlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          buckets:
+            items:
+              $ref: '#/components/schemas/GooglePlatformMetainfo.Bucket'
+            type: array
+          filestores:
+            items:
+              $ref: '#/components/schemas/GooglePlatformMetainfo.Filestore'
+            type: array
+          images:
+            items:
+              $ref: '#/components/schemas/GoogleImage'
+            type: array
+          instanceTypes:
+            items:
+              $ref: '#/components/schemas/GoogleInstanceType'
+            type: array
+          locations:
+            items:
+              type: string
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+          zones:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Google Batch platform metainfo
+      type: object
+    Image:
+      properties:
+        arch:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - arch
+      - description
+      - id
+      - name
+      type: object
+    Subnet:
+      properties:
+        id:
+          type: string
+        vpcId:
+          type: string
+        zone:
+          type: string
+      type: object
+    PlatformMetainfo:
+      discriminator:
+        mapping:
+          aws-batch: '#/components/schemas/AwsBatchPlatformMetainfo'
+          aws-cloud: '#/components/schemas/AwsCloudPlatformMetainfo'
+          azure-batch: '#/components/schemas/AzBatchPlatformMetainfo'
+          azure-cloud: '#/components/schemas/AzCloudPlatformMetaInfo'
+          eks-platform: '#/components/schemas/EksPlatformMetaInfo'
+          gke-platform: '#/components/schemas/GkePlatformMetaInfo'
+          google: '#/components/schemas/GooglePlatformMetainfo'
+          google-cloud: '#/components/schemas/GoogleCloudPlatformMetaInfo'
+          grid: '#/components/schemas/GridPlatformMetainfo'
+          k8s-platform: '#/components/schemas/K8sPlatformMetaInfo'
+          local-platform: '#/components/schemas/LocalPlatformMetainfo'
+          seqeracompute: '#/components/schemas/SeqeraComputePlatformMetainfo'
+        propertyName: discriminator
+      oneOf:
+      - $ref: '#/components/schemas/AwsBatchPlatformMetainfo'
+      - $ref: '#/components/schemas/AwsCloudPlatformMetainfo'
+      - $ref: '#/components/schemas/GooglePlatformMetainfo'
+      - $ref: '#/components/schemas/GoogleCloudPlatformMetaInfo'
+      - $ref: '#/components/schemas/AzBatchPlatformMetainfo'
+      - $ref: '#/components/schemas/AzCloudPlatformMetaInfo'
+      - $ref: '#/components/schemas/EksPlatformMetaInfo'
+      - $ref: '#/components/schemas/GkePlatformMetaInfo'
+      - $ref: '#/components/schemas/K8sPlatformMetaInfo'
+      - $ref: '#/components/schemas/GridPlatformMetainfo'
+      - $ref: '#/components/schemas/SeqeraComputePlatformMetainfo'
+      - $ref: '#/components/schemas/LocalPlatformMetainfo'
+      properties:
+        discriminator:
+          description: property to select the platform metainfo type
+          type: string
+      type: object
+    GoogleImage:
+      properties:
+        arch:
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        qualifiedName:
+          type: string
+      type: object
+    AwsBatchPlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          allocStrategy:
+            items:
+              type: string
+            type: array
+          buckets:
+            items:
+              $ref: '#/components/schemas/Bucket'
+            type: array
+          efsFileSystems:
+            items:
+              $ref: '#/components/schemas/EfsFileSystem'
+            type: array
+          fileSystems:
+            items:
+              $ref: '#/components/schemas/FsxFileSystem'
+            type: array
+          images:
+            items:
+              $ref: '#/components/schemas/Image'
+            type: array
+          instanceFamilies:
+            items:
+              type: string
+            type: array
+          jobQueues:
+            items:
+              $ref: '#/components/schemas/JobQueue'
+            type: array
+          keyPairs:
+            items:
+              type: string
+            type: array
+          securityGroups:
+            items:
+              $ref: '#/components/schemas/SecurityGroup'
+            type: array
+          subnets:
+            items:
+              $ref: '#/components/schemas/Subnet'
+            type: array
+          vpcs:
+            items:
+              $ref: '#/components/schemas/Vpc'
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+        type: object
+      title: AWS Batch platform metainfo
+      type: object
+    AzBatchPlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          containers:
+            items:
+              type: string
+            type: array
+          pools:
+            items:
+              type: string
+            type: array
+          vmTypes:
+            items:
+              type: string
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Azure Batch platform metainfo
+      type: object
+    SecurityGroup:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        vpcId:
+          type: string
+      type: object
+    GoogleBucket:
+      properties:
+        path:
+          type: string
+      type: object
+    AzNetwork:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        region:
+          type: string
+        resourceGroup:
+          type: string
+      type: object
+    EfsFileSystem:
+      properties:
+        id:
+          type: string
+      type: object
+    GooglePlatformMetainfo.Bucket:
+      properties:
+        path:
+          type: string
+      type: object
+    LocalPlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      title: Local platform metainfo
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

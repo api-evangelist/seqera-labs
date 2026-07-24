@@ -1,0 +1,81 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions pipeline-schemas API
+  version: 1.181.0
+tags:
+- name: pipeline-schemas
+paths:
+  /pipeline-schemas:
+    post:
+      description: Creates a new pipeline schema in a user context. Append `?workspaceId` to create the schema in a workspace context.
+      operationId: CreatePipelineSchema
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePipelineSchemaRequest'
+        description: Pipeline schema creation request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePipelineSchemaResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Create pipeline schema
+      tags:
+      - pipeline-schemas
+components:
+  schemas:
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    PipelineSchemaDbDto:
+      properties:
+        content:
+          type: string
+        id:
+          format: int64
+          type: integer
+      type: object
+    CreatePipelineSchemaRequest:
+      properties:
+        content:
+          type: string
+      type: object
+    CreatePipelineSchemaResponse:
+      properties:
+        pipelineSchema:
+          $ref: '#/components/schemas/PipelineSchemaDbDto'
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

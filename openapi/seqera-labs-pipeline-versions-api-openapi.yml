@@ -1,0 +1,482 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions pipeline-versions API
+  version: 1.181.0
+tags:
+- name: pipeline-versions
+paths:
+  /pipelines/{pipelineId}/versions:
+    get:
+      description: Lists all available pipeline versions in a user context. Append `workspaceId` to list pipeline versions in a workspace context.
+      operationId: ListPipelineVersions
+      parameters:
+      - description: Pipeline numeric identifier
+        in: path
+        name: pipelineId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: Filter search parameter
+        in: query
+        name: search
+        schema:
+          type: string
+      - description: Set to true to retrieve published versions, false to fetch draft versions
+        in: query
+        name: isPublished
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListPipelineVersionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List pipeline versions
+      tags:
+      - pipeline-versions
+  /pipelines/{pipelineId}/versions/validate:
+    get:
+      description: Confirms the validity of the given pipeline version `name` in a user context.
+      operationId: ValidatePipelineVersionName
+      parameters:
+      - description: Pipeline numeric identifier
+        in: path
+        name: pipelineId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Pipeline name to validate
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Workspace Identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicate element
+      security:
+      - BearerAuth: []
+      summary: Validate pipeline version name
+      tags:
+      - pipeline-versions
+  /pipelines/{pipelineId}/versions/{versionId}:
+    post:
+      description: "Updates the details of the pipeline version identified by the given `pipelineId` and `versionId`. \n            **Note**: If `labelIds` is `null`, empty, or omitted, existing pipeline labels are removed.\n            Include `labelIds: [<label-id-1>,<label-id-2>]` to override existing labels. Labels to be preserved must be included.\n            To append a list of labels to multiple pipelines, use `/pipelines/labels/add`."
+      operationId: UpdatePipelineVersion
+      parameters:
+      - description: Pipeline numeric identifier
+        in: path
+        name: pipelineId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Pipeline version string identifier
+        in: path
+        name: versionId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePipelineRequest'
+        description: Pipeline version update request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePipelineResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicate element
+      security:
+      - BearerAuth: []
+      summary: Update pipeline version
+      tags:
+      - pipeline-versions
+  /pipelines/{pipelineId}/versions/{versionId}/manage:
+    put:
+      description: "Updates a pipeline version's name and/or marks it as the default version.\n                             When setting a version as default, any previously default version is automatically unset.\n                             Version names cannot be changed if the version is already referenced by workflow runs."
+      operationId: ManagePipelineVersion
+      parameters:
+      - description: Pipeline numeric identifier
+        in: path
+        name: pipelineId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Pipeline Version identifier (Launch ID)
+        in: path
+        name: versionId
+        required: true
+        schema:
+          type: string
+      - description: Workspace Identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PipelineVersionManageRequest'
+        description: Pipeline Version Manage Request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Version not found
+        '409':
+          description: Conflict - unsetting a default pipeline version
+      security:
+      - BearerAuth: []
+      summary: Update pipeline version name and default flag
+      tags:
+      - pipeline-versions
+components:
+  schemas:
+    ListPipelineVersionsResponse:
+      properties:
+        totalSize:
+          format: int64
+          type: integer
+        versions:
+          items:
+            $ref: '#/components/schemas/PipelineDbDto'
+          type: array
+      type: object
+    WorkflowLaunchRequest:
+      properties:
+        commitId:
+          type: string
+        computeEnvId:
+          type: string
+        configProfiles:
+          items:
+            type: string
+          type: array
+        configText:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        entryName:
+          type: string
+        headJobCpus:
+          format: int32
+          type: integer
+        headJobMemoryMb:
+          format: int32
+          type: integer
+        id:
+          type: string
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        launchContainer:
+          type: string
+        mainScript:
+          type: string
+        optimizationId:
+          type: string
+        optimizationTargets:
+          type: string
+        outputDir:
+          description: Per-run output directory passed as Nextflow -output-dir (requires Nextflow 24.10.0 or later and workflow outputs syntax).
+          nullable: true
+          type: string
+        paramsText:
+          type: string
+        pipeline:
+          type: string
+        pipelineSchemaId:
+          format: int64
+          type: integer
+        postRunScript:
+          type: string
+        preRunScript:
+          type: string
+        pullLatest:
+          type: boolean
+        resume:
+          type: boolean
+        revision:
+          type: string
+        runName:
+          type: string
+        schemaName:
+          type: string
+        sessionId:
+          type: string
+        stubRun:
+          type: boolean
+        syntaxParser:
+          enum:
+          - v1
+          - v2
+          nullable: true
+          type: string
+        towerConfig:
+          type: string
+        userSecrets:
+          items:
+            type: string
+          type: array
+        workDir:
+          type: string
+        workspaceSecrets:
+          items:
+            type: string
+          type: array
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    PipelineVersionFullInfoDto:
+      properties:
+        creatorAvatarUrl:
+          type: string
+        creatorFirstName:
+          type: string
+        creatorLastName:
+          type: string
+        creatorUserId:
+          format: int64
+          type: integer
+        creatorUserName:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        hash:
+          type: string
+        id:
+          type: string
+        isDefault:
+          type: boolean
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
+          type: string
+      type: object
+    UpdatePipelineRequest:
+      properties:
+        description:
+          type: string
+        icon:
+          type: string
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        launch:
+          $ref: '#/components/schemas/WorkflowLaunchRequest'
+        name:
+          type: string
+      type: object
+    PipelineDbDto:
+      properties:
+        computeEnv:
+          $ref: '#/components/schemas/ComputeEnvDbDto'
+        deleted:
+          type: boolean
+        description:
+          type: string
+        icon:
+          type: string
+        labels:
+          items:
+            $ref: '#/components/schemas/LabelDbDto'
+          type: array
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
+          type: string
+        optimizationId:
+          type: string
+        optimizationStatus:
+          $ref: '#/components/schemas/PipelineOptimizationStatus'
+        optimizationTargets:
+          type: string
+        orgId:
+          format: int64
+          type: integer
+        orgName:
+          type: string
+        pipelineId:
+          format: int64
+          type: integer
+        repository:
+          type: string
+        userFirstName:
+          type: string
+        userId:
+          format: int64
+          type: integer
+        userLastName:
+          type: string
+        userName:
+          type: string
+        version:
+          $ref: '#/components/schemas/PipelineVersionFullInfoDto'
+        visibility:
+          type: string
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+    LabelDbDto:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        isDynamic:
+          type: boolean
+        isInterpolated:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    PipelineOptimizationStatus:
+      enum:
+      - OPTIMIZED
+      - OPTIMIZABLE
+      - UNAVAILABLE
+      type: string
+    ComputeEnvDbDto:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        region:
+          type: string
+      type: object
+    UpdatePipelineResponse:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PipelineDbDto'
+      type: object
+    PipelineVersionManageRequest:
+      properties:
+        isDefault:
+          type: boolean
+        name:
+          type: string
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

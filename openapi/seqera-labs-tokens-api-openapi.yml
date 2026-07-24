@@ -1,0 +1,174 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions tokens API
+  version: 1.181.0
+tags:
+- description: API access tokens
+  name: tokens
+paths:
+  /tokens:
+    get:
+      description: Retrieves the list of all available API access tokens.
+      operationId: TokenList
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAccessTokensResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List tokens
+      tags:
+      - tokens
+    post:
+      description: Creates an API access token with the details in the given request body.
+      operationId: CreateToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAccessTokenRequest'
+        description: Access token create request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAccessTokenResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicated element
+      security:
+      - BearerAuth: []
+      summary: Create token
+      tags:
+      - tokens
+  /tokens/delete-all:
+    delete:
+      description: Deletes all API access tokens in the user context.
+      operationId: DeleteAllTokens
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete all user tokens
+      tags:
+      - tokens
+  /tokens/{tokenId}:
+    delete:
+      description: Deletes the given API access token ID.
+      operationId: DeleteToken
+      parameters:
+      - description: Token numeric identifier
+        in: path
+        name: tokenId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete token
+      tags:
+      - tokens
+components:
+  schemas:
+    CreateAccessTokenResponse:
+      properties:
+        accessKey:
+          type: string
+        token:
+          $ref: '#/components/schemas/AccessToken'
+      type: object
+    ListAccessTokensResponse:
+      properties:
+        tokens:
+          items:
+            $ref: '#/components/schemas/AccessToken'
+          type: array
+      type: object
+    CreateAccessTokenRequest:
+      properties:
+        name:
+          type: string
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    AccessToken:
+      properties:
+        basicAuth:
+          deprecated: true
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        lastUsed:
+          format: date-time
+          type: string
+        name:
+          maxLength: 50
+          minLength: 1
+          type: string
+      required:
+      - name
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

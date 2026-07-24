@@ -1,0 +1,115 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions avatars API
+  version: 1.181.0
+tags:
+- description: Avatars
+  name: avatars
+paths:
+  /avatars:
+    post:
+      operationId: CreateAvatar
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              image:
+                contentType: application/octet-stream
+                explode: false
+            schema:
+              properties:
+                image:
+                  format: binary
+                  type: string
+              type: object
+        description: Image file request
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAvatarResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Create the avatar image
+      tags:
+      - avatars
+  /avatars/{avatarId}:
+    get:
+      operationId: DownloadAvatar
+      parameters:
+      - description: Avatar string identifier
+        in: path
+        name: avatarId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Not found element
+      security:
+      - BearerAuth: []
+      summary: Download the avatar image
+      tags:
+      - avatars
+components:
+  schemas:
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    Avatar:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          maxLength: 22
+          type: string
+        lastUpdated:
+          format: date-time
+          type: string
+      type: object
+    CreateAvatarResponse:
+      properties:
+        avatar:
+          $ref: '#/components/schemas/Avatar'
+        url:
+          type: string
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

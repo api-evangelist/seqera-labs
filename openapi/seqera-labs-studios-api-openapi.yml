@@ -1,0 +1,1427 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions studios API
+  version: 1.181.0
+tags:
+- description: Studios and Studio sessions
+  name: studios
+paths:
+  /studios:
+    get:
+      description: Lists all available Studios in a user context. Append `?workspaceId` to list Studios in a workspace context.
+      operationId: ListDataStudios
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: 'Optional search criteria, allowing free text search on name and templateUrl and keywords: `userId`, `computeEnvId` and `status`.'
+        in: query
+        name: search
+        schema:
+          type: string
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: 'Optional attribute values to be included in the response (`labels`). Returns an empty value (`labels: null`) if omitted.'
+        in: query
+        name: attributes
+        schema:
+          items:
+            $ref: '#/components/schemas/DataStudioQueryAttribute'
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the workspace is not found or when the API is disabled for the workspace.
+      security:
+      - BearerAuth: []
+      summary: List Studios
+      tags:
+      - studios
+    post:
+      description: Creates a new Studio environment, starting it by default. Default behavior can be changed using the query parameter `autoStart=false`.
+      operationId: CreateDataStudio
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Optionally disable the Studio's automatic launch when it is created.
+        in: query
+        name: autoStart
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataStudioCreateRequest'
+        description: Create Studio request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioCreateResponse'
+          description: CreateDataStudio 200 response
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioCreateResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the workspace or compute environment is not found or when the API is disabled.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Conflict - duplicated name
+      security:
+      - BearerAuth: []
+      summary: Create Studio
+      tags:
+      - studios
+  /studios/data-links:
+    get:
+      description: Lists the IDs of all available data-links mounted in existing Studios. Append `orgId` or `?workspaceId` to list mounted data-links in an organization or workspace context, respectively.
+      operationId: ListMountedDataLinkIds
+      parameters:
+      - description: Organization numeric identifier
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Optional Studio status
+        in: query
+        name: status
+        schema:
+          type: string
+      - description: Optional Studio session ID to exclude in the request.
+        in: query
+        name: exclude
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioMountedLinksResponse'
+          description: OK
+        '403':
+          description: Operation not allowed.
+      security:
+      - BearerAuth: []
+      summary: List mounted data-links
+      tags:
+      - studios
+  /studios/templates:
+    get:
+      description: Returns the list of available, configured Studio templates.
+      operationId: ListDataStudioTemplates
+      parameters:
+      - description: Workspace identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioTemplatesListResponse'
+          description: Ok - paginated list of available Studio templates.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the API is disabled for the workspace.
+      security:
+      - BearerAuth: []
+      summary: List available Studio templates
+      tags:
+      - studios
+  /studios/validate:
+    get:
+      description: Confirms the availability of the given name for a Studio in the user context. Append `?workspaceId=` to validate the name in a workspace context.
+      operationId: ValidateDataStudioName
+      parameters:
+      - description: Workspace identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Studio name to validate
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Ok - No content, if the name is valid and available.
+        '400':
+          description: Bad request, if the name is not valid.
+        '403':
+          description: Operation not allowed.
+        '409':
+          description: Conflict, name duplicated in the given context.
+      security:
+      - BearerAuth: []
+      summary: Validate Studio name
+      tags:
+      - studios
+  /studios/{sessionId}:
+    delete:
+      description: Deletes the Studio associated with the given Studio session ID.
+      operationId: DeleteDataStudio
+      parameters:
+      - description: Studio session numeric identifier
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the Studio is not found or when the API is disabled for the workspace.
+      security:
+      - BearerAuth: []
+      summary: Delete Studio
+      tags:
+      - studios
+    get:
+      description: Retrieves the details of the Studio session identified by the given `sessionId`.
+      operationId: DescribeDataStudio
+      parameters:
+      - description: Studio session numeric identifier
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioDto'
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioDto'
+          description: Accepted, when the Studio is fetching mounted data links in the background.
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the Studio is not found or when the API is disabled for the workspace.
+      security:
+      - BearerAuth: []
+      summary: Describe Studio
+      tags:
+      - studios
+    put:
+      description: Updates the given Studio session ID. Can only update non-running Studios. The compute environment can be changed by setting `computeEnvId` to a CE compatible with the Studio's current one; see `GET /studios/{sessionId}/compatible-ce`.
+      operationId: UpdateDataStudio
+      parameters:
+      - description: Studio session numeric identifier
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataStudioUpdateRequest'
+        description: Fields to update on the studio.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioDto'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the Studio is not found or when the API is disabled for the workspace.
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Conflict - duplicated name
+      security:
+      - BearerAuth: []
+      summary: Update a Studio
+      tags:
+      - studios
+  /studios/{sessionId}/checkpoints:
+    get:
+      description: Retrieves the list of checkpoints for the given Studio session ID, sorted by creation date in descending order.
+      operationId: ListDataStudioCheckpoints
+      parameters:
+      - description: Studio session numeric identifier
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: 'Optional search criteria, allowing free text search on name and keywords: `status`, `before` and `after` for saved date'
+        in: query
+        name: search
+        schema:
+          type: string
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioListCheckpointsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the Studio is not found or when the API is disabled for the workspace.
+      security:
+      - BearerAuth: []
+      summary: List Studio checkpoints
+      tags:
+      - studios
+  /studios/{sessionId}/checkpoints/{checkpointId}:
+    get:
+      description: Retrieves the details of the given Studio checkpoint ID.
+      operationId: GetDataStudioCheckpoint
+      parameters:
+      - description: Studio session numeric identifier
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+      - description: Numeric identifier of the checkpoint.
+        in: path
+        name: checkpointId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioCheckpointDto'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the studio or the checkpoint is not found or when the API is disabled for the workspace
+      security:
+      - BearerAuth: []
+      summary: Get Studio checkpoint
+      tags:
+      - studios
+    put:
+      description: Updates the name of the given Studio checkpoint ID.
+      operationId: UpdateDataStudioCheckpoint
+      parameters:
+      - description: Studio session numeric identifier
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+      - description: Numeric identifier of the checkpoint.
+        in: path
+        name: checkpointId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataStudioCheckpointUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioCheckpointDto'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the studio or the checkpoint is not found or when the API is disabled for the workspace
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Conflict, when the checkpoint name conflicts with an existing checkpoint for the same Studio.
+      security:
+      - BearerAuth: []
+      summary: Update Studio checkpoint name
+      tags:
+      - studios
+  /studios/{sessionId}/compatible-ce:
+    get:
+      description: Lists the compute environments in the same workspace as the given Studio that are compatible with its compute environment.
+      operationId: ListDataStudioCompatibleComputeEnvs
+      parameters:
+      - description: Studio session numeric identifier
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: 'Additional attribute values to include in the response (`labels`, `resources`). Returns an empty value (ex. `labels: null`) if omitted.'
+        explode: false
+        in: query
+        name: attributes
+        schema:
+          items:
+            $ref: '#/components/schemas/ComputeEnvQueryAttribute'
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListComputeEnvsResponse'
+          description: OK
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the Studio is not found, has no compute environment, or when the API is disabled for the workspace.
+      security:
+      - BearerAuth: []
+      summary: List compute environments compatible with a Studio
+      tags:
+      - studios
+  /studios/{sessionId}/lifespan:
+    post:
+      description: Extends the lifespan of the given Studio session ID.
+      operationId: ExtendDataStudioLifespan
+      parameters:
+      - description: Studio session numeric identifier
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioDto'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the Studio is not found or when the API is disabled for the workspace.
+      security:
+      - BearerAuth: []
+      tags:
+      - studios
+  /studios/{sessionId}/start:
+    put:
+      description: Starts the given Studio session ID.
+      operationId: StartDataStudio
+      parameters:
+      - description: Studio session numeric identifier
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataStudioStartRequest'
+        description: An optional overriding configuration for the studio to be started.
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioStartResponse'
+          description: OK
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the Studio is not found or when the API is disabled for the workspace.
+      security:
+      - BearerAuth: []
+      summary: Starts a Studio
+      tags:
+      - studios
+  /studios/{sessionId}/stop:
+    put:
+      description: Stops the given Studio session ID.
+      operationId: StopDataStudio
+      parameters:
+      - description: Studio session numeric identifier
+        in: path
+        name: sessionId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStudioStopResponse'
+          description: OK
+        '403':
+          description: Operation not allowed.
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound, when the Studio is not found or when the API is disabled for the workspace.
+      security:
+      - BearerAuth: []
+      summary: Stop Studio
+      tags:
+      - studios
+components:
+  schemas:
+    UserInfo:
+      properties:
+        avatar:
+          type: string
+        email:
+          type: string
+        id:
+          format: int64
+          type: integer
+        userName:
+          type: string
+      type: object
+    ComputeEnv.Status:
+      enum:
+      - CREATING
+      - AVAILABLE
+      - DISABLED
+      - DELETING
+      - ERRORED
+      - INVALID
+      - DELETED
+      type: string
+    DataStudioProgressStep:
+      properties:
+        message:
+          type: string
+        status:
+          $ref: '#/components/schemas/DataStudioProgressStep.Status'
+        warnings:
+          items:
+            type: string
+          type: array
+      type: object
+    DataStudioStatus:
+      enum:
+      - starting
+      - running
+      - stopping
+      - stopped
+      - errored
+      - building
+      - buildFailed
+      type: string
+      x-enum-varnames:
+      - starting
+      - running
+      - stopping
+      - stopped
+      - errored
+      - building
+      - buildFailed
+    DataStudioListResponse:
+      properties:
+        studios:
+          items:
+            $ref: '#/components/schemas/DataStudioDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      required:
+      - studios
+      - totalSize
+      type: object
+    DataStudioVersionStatus:
+      enum:
+      - recommended
+      - deprecated
+      - experimental
+      - unsupported
+      type: string
+      x-enum-varnames:
+      - recommended
+      - deprecated
+      - experimental
+      - unsupported
+    LabelDbDto:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        isDynamic:
+          type: boolean
+        isInterpolated:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    DataStudioTemplate:
+      properties:
+        icon:
+          type: string
+        repository:
+          type: string
+        status:
+          $ref: '#/components/schemas/DataStudioVersionStatus'
+        tool:
+          type: string
+      type: object
+    ListComputeEnvsResponse.Entry:
+      properties:
+        credentialsId:
+          type: string
+        description:
+          nullable: true
+          type: string
+        fusion2Enabled:
+          nullable: true
+          type: boolean
+        id:
+          type: string
+        labels:
+          items:
+            $ref: '#/components/schemas/LabelDbDto'
+          nullable: true
+          type: array
+        lastUsed:
+          format: date-time
+          type: string
+        message:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        primary:
+          type: boolean
+        region:
+          type: string
+        resources:
+          allOf:
+          - $ref: '#/components/schemas/ComputeEnvResources'
+          nullable: true
+        schedEnabled:
+          nullable: true
+          type: boolean
+        status:
+          $ref: '#/components/schemas/ComputeEnv.Status'
+        visibility:
+          type: string
+        waveEnabled:
+          nullable: true
+          type: boolean
+        workDir:
+          type: string
+        workspaceName:
+          type: string
+      type: object
+    DataStudioCreateRequest:
+      properties:
+        computeEnvId:
+          minLength: 1
+          type: string
+        configuration:
+          $ref: '#/components/schemas/DataStudioConfiguration'
+        dataStudioToolUrl:
+          type: string
+        description:
+          maxLength: 2048
+          type: string
+        initialCheckpointId:
+          format: int64
+          type: integer
+        isPrivate:
+          type: boolean
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          nullable: true
+          type: array
+        name:
+          maxLength: 80
+          minLength: 1
+          type: string
+        remoteConfig:
+          allOf:
+          - $ref: '#/components/schemas/StudioRemoteConfiguration'
+          nullable: true
+        spot:
+          nullable: true
+          type: boolean
+      required:
+      - computeEnvId
+      - name
+      type: object
+    StudioRemoteConfiguration:
+      properties:
+        commitId:
+          nullable: true
+          type: string
+        repository:
+          type: string
+        revision:
+          nullable: true
+          type: string
+      required:
+      - repository
+      type: object
+    DataStudioStopReason:
+      enum:
+      - CREDITS_RUN_OUT
+      - LIFESPAN_EXPIRED
+      - SPOT_RECLAMATION
+      - NO_STATS_AVAIL
+      type: string
+    DataStudioQueryAttribute:
+      enum:
+      - labels
+      type: string
+      x-enum-varnames:
+      - labels
+    DataStudioCheckpointDto:
+      properties:
+        author:
+          $ref: '#/components/schemas/UserInfo'
+        dateCreated:
+          format: date-time
+          type: string
+        dateSaved:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        path:
+          type: string
+        status:
+          $ref: '#/components/schemas/StudioCheckpointStatus'
+      required:
+      - author
+      - dateCreated
+      - dateSaved
+      - id
+      - name
+      - path
+      - status
+      type: object
+    DataLinkType:
+      enum:
+      - bucket
+      type: string
+      x-enum-varnames:
+      - bucket
+    DataStudioTemplatesListResponse:
+      properties:
+        templates:
+          items:
+            $ref: '#/components/schemas/DataStudioTemplate'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      required:
+      - templates
+      - totalSize
+      type: object
+    DataStudioListCheckpointsResponse:
+      properties:
+        checkpoints:
+          items:
+            $ref: '#/components/schemas/DataStudioCheckpointDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      required:
+      - checkpoints
+      - totalSize
+      type: object
+    DataStudioStopResponse:
+      properties:
+        jobSubmitted:
+          type: boolean
+        sessionId:
+          type: string
+        statusInfo:
+          $ref: '#/components/schemas/DataStudioStatusInfo'
+      required:
+      - jobSubmitted
+      - sessionId
+      - statusInfo
+      type: object
+    DataLinkCredentials:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        provider:
+          $ref: '#/components/schemas/DataLinkProvider'
+      required:
+      - id
+      - name
+      - provider
+      type: object
+    DataStudioStatusInfo:
+      properties:
+        lastUpdate:
+          format: date-time
+          type: string
+        message:
+          type: string
+        status:
+          $ref: '#/components/schemas/DataStudioStatus'
+        stopReason:
+          $ref: '#/components/schemas/DataStudioStopReason'
+      type: object
+    DataStudioCheckpointUpdateRequest:
+      properties:
+        name:
+          type: string
+      type: object
+    DataStudioStartRequest:
+      properties:
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/DataStudioConfiguration'
+          nullable: true
+        description:
+          nullable: true
+          type: string
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          nullable: true
+          type: array
+        name:
+          maxLength: 80
+          minLength: 1
+          nullable: true
+          type: string
+        spot:
+          nullable: true
+          type: boolean
+      type: object
+    ComputeEnvResources:
+      properties:
+        cpus:
+          format: int32
+          nullable: true
+          type: integer
+        diskSize:
+          format: int32
+          nullable: true
+          type: integer
+        estimatedPrice:
+          format: float
+          nullable: true
+          type: number
+        gpuEnabled:
+          nullable: true
+          type: boolean
+        gpus:
+          format: int32
+          nullable: true
+          type: integer
+        instanceType:
+          nullable: true
+          type: string
+        memory:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    DataLinkDto:
+      properties:
+        credentials:
+          items:
+            $ref: '#/components/schemas/DataLinkCredentials'
+          type: array
+        description:
+          type: string
+        hidden:
+          type: boolean
+        id:
+          type: string
+        message:
+          type: string
+        name:
+          type: string
+        provider:
+          $ref: '#/components/schemas/DataLinkProvider'
+        publicAccessible:
+          type: boolean
+        region:
+          type: string
+        resourceRef:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/DataLink.Status'
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/DataLinkType'
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    ListComputeEnvsResponse:
+      properties:
+        computeEnvs:
+          items:
+            $ref: '#/components/schemas/ListComputeEnvsResponse.Entry'
+          type: array
+      type: object
+    DataStudioMountedLinksResponse:
+      properties:
+        dataLinkIds:
+          items:
+            type: string
+          type: array
+      type: object
+    DataStudioDto.ParentCheckpoint:
+      properties:
+        checkpointId:
+          format: int64
+          type: integer
+        checkpointName:
+          type: string
+        sessionId:
+          type: string
+        studioName:
+          type: string
+      type: object
+    DataStudioStartResponse:
+      properties:
+        jobSubmitted:
+          type: boolean
+        sessionId:
+          type: string
+        statusInfo:
+          $ref: '#/components/schemas/DataStudioStatusInfo'
+      required:
+      - jobSubmitted
+      - sessionId
+      - statusInfo
+      type: object
+    DataLinkProvider:
+      enum:
+      - aws
+      - google
+      - azure
+      - azure_entra
+      - azure-cloud
+      - seqeracompute
+      - s3
+      type: string
+    DataLink.Status:
+      enum:
+      - VALID
+      - INVALID
+      readOnly: true
+      type: string
+    DataStudioUpdateRequest:
+      properties:
+        computeEnvId:
+          nullable: true
+          type: string
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/DataStudioConfiguration'
+          nullable: true
+        description:
+          maxLength: 2048
+          nullable: true
+          type: string
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          nullable: true
+          type: array
+        name:
+          maxLength: 80
+          minLength: 1
+          nullable: true
+          type: string
+      type: object
+    MountData:
+      properties:
+        dataLinkId:
+          type: string
+        path:
+          nullable: true
+          type: string
+      type: object
+    DataStudioConfiguration:
+      properties:
+        condaEnvironment:
+          maxLength: 2048
+          type: string
+        cpu:
+          format: int32
+          minimum: 0
+          type: integer
+        environment:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        gpu:
+          format: int32
+          minimum: 0
+          type: integer
+        lifespanHours:
+          format: int32
+          minimum: 0
+          type: integer
+        memory:
+          format: int32
+          minimum: 0
+          type: integer
+        mountData:
+          deprecated: true
+          items:
+            type: string
+          nullable: true
+          type: array
+        mountDataV2:
+          items:
+            $ref: '#/components/schemas/MountData'
+          nullable: true
+          type: array
+        sshEnabled:
+          nullable: true
+          type: boolean
+      type: object
+    ActiveConnection:
+      allOf:
+      - $ref: '#/components/schemas/UserInfo'
+      - properties:
+          lastActive:
+            format: date-time
+            type: string
+        type: object
+      type: object
+    DataStudioProgressStep.Status:
+      enum:
+      - pending
+      - in-progress
+      - succeeded
+      - errored
+      type: string
+    StudioCheckpointStatus:
+      enum:
+      - empty
+      - interim
+      - finalized
+      - invalid
+      type: string
+      x-enum-varnames:
+      - empty
+      - interim
+      - finalized
+      - invalid
+    DataStudioDto:
+      properties:
+        activeConnections:
+          items:
+            $ref: '#/components/schemas/ActiveConnection'
+          type: array
+        baseImage:
+          type: string
+        computeEnv:
+          $ref: '#/components/schemas/DataStudioComputeEnvDto'
+        configuration:
+          $ref: '#/components/schemas/DataStudioConfiguration'
+        customImage:
+          type: boolean
+        dateCreated:
+          format: date-time
+          type: string
+        description:
+          type: string
+        effectiveLifespanHours:
+          format: int32
+          type: integer
+        isPrivate:
+          type: boolean
+        labels:
+          items:
+            $ref: '#/components/schemas/LabelDbDto'
+          nullable: true
+          type: array
+        lastStarted:
+          format: date-time
+          type: string
+        lastUpdated:
+          format: date-time
+          type: string
+        mountedDataLinks:
+          items:
+            $ref: '#/components/schemas/DataLinkDto'
+          type: array
+        name:
+          type: string
+        parentCheckpoint:
+          $ref: '#/components/schemas/DataStudioDto.ParentCheckpoint'
+        progress:
+          items:
+            $ref: '#/components/schemas/DataStudioProgressStep'
+          type: array
+        remoteConfig:
+          $ref: '#/components/schemas/StudioRemoteConfiguration'
+        sessionId:
+          type: string
+        sshDetails:
+          allOf:
+          - $ref: '#/components/schemas/StudioSshDetailsDto'
+          nullable: true
+        statusInfo:
+          $ref: '#/components/schemas/DataStudioStatusInfo'
+        studioUrl:
+          type: string
+        template:
+          $ref: '#/components/schemas/DataStudioTemplate'
+        user:
+          $ref: '#/components/schemas/UserInfo'
+        waveBuildUrl:
+          type: string
+        workspaceId:
+          format: int64
+          type: integer
+      type: object
+    DataStudioComputeEnvDto:
+      allOf:
+      - $ref: '#/components/schemas/ComputeEnvDbDto'
+      - properties:
+          credentialsId:
+            type: string
+          workDir:
+            type: string
+        type: object
+      type: object
+    StudioSshDetailsDto:
+      description: SSH connection details for a Studio session
+      properties:
+        command:
+          description: The full SSH command to execute
+          example: ssh username@sessionId@host -p port
+          type: string
+        host:
+          description: The hostname to connect to
+          type: string
+        port:
+          description: The SSH port number
+          format: int32
+          type: integer
+        user:
+          description: The user in the format 'username@sessionId'
+          type: string
+      required:
+      - command
+      - host
+      - port
+      - user
+      type: object
+    DataStudioCreateResponse:
+      properties:
+        studio:
+          $ref: '#/components/schemas/DataStudioDto'
+      type: object
+    ComputeEnvQueryAttribute:
+      enum:
+      - labels
+      - resources
+      type: string
+      x-enum-varnames:
+      - labels
+      - resources
+    ComputeEnvDbDto:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        region:
+          type: string
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

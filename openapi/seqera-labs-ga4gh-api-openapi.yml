@@ -1,0 +1,349 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions ga4gh API
+  version: 1.181.0
+tags:
+- description: GA4GH workflow execution service runs
+  name: ga4gh
+paths:
+  /ga4gh/wes/v1/runs:
+    get:
+      description: Uses the GA4GH workflow execution service API to list all run records.
+      operationId: Ga4ghRunList
+      parameters:
+      - description: Page size
+        in: query
+        name: page_size
+        schema:
+          format: int32
+          type: integer
+      - description: Page token
+        in: query
+        name: page_token
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WesErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      summary: 'GA4GH: List runs'
+      tags:
+      - ga4gh
+    post:
+      description: Uses the GA4GH workflow execution service API to launch a new run. Runs are launched in the user workspace context by default. To launch in an organization workspace context, include the `workspaceId` in `workflow_engine_parameters`. Runs are launched with the workspace primary compute environment by default. To launch with a different compute environment, include the `computeEnvId` in `workflow_engine_parameters`.
+      operationId: Ga4ghRunCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RunRequest'
+        description: Run request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunId'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WesErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      summary: 'GA4GH: Launch run'
+      tags:
+      - ga4gh
+  /ga4gh/wes/v1/runs/{run_id}:
+    get:
+      description: Uses the GA4GH workflow execution service API to retrieve the details of the run assoiated with the given `run_id`.
+      operationId: Ga4ghRunDescribe
+      parameters:
+      - description: Run string identifier
+        in: path
+        name: run_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunLog'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WesErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      summary: 'GA4GH: Describe run'
+      tags:
+      - ga4gh
+  /ga4gh/wes/v1/runs/{run_id}/cancel:
+    post:
+      description: Uses the GA4GH workflow execution service API to cancel the run associated with the given `run_id`.
+      operationId: Ga4ghRunCancel
+      parameters:
+      - description: Run string identifier
+        in: path
+        name: run_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmptyBodyRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunId'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WesErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      summary: 'GA4GH: Cancel run'
+      tags:
+      - ga4gh
+  /ga4gh/wes/v1/runs/{run_id}/status:
+    get:
+      description: Uses the GA4GH workflow execution service API to retrieve the status of the run associated with the given `run_id`.
+      operationId: Ga4ghRunStatus
+      parameters:
+      - description: Run string identifier
+        in: path
+        name: run_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunStatus'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WesErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      summary: 'GA4GH: Retrieve run status'
+      tags:
+      - ga4gh
+  /ga4gh/wes/v1/service-info:
+    get:
+      operationId: Ga4ghServiceInfo
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WesServiceInfo'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WesErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      summary: GA4GH workflow execution service API info
+      tags:
+      - ga4gh
+components:
+  schemas:
+    WorkflowTypeVersion:
+      properties:
+        workflow_type_version:
+          items:
+            type: string
+          type: array
+      type: object
+    Log:
+      properties:
+        cmd:
+          items:
+            type: string
+          type: array
+        end_time:
+          type: string
+        exit_code:
+          format: int32
+          type: integer
+        name:
+          type: string
+        start_time:
+          type: string
+        stderr:
+          type: string
+        stdout:
+          type: string
+      type: object
+    RunId:
+      properties:
+        run_id:
+          type: string
+      type: object
+    EmptyBodyRequest:
+      type: object
+    RunLog:
+      properties:
+        outputs:
+          type: object
+        request:
+          $ref: '#/components/schemas/RunRequest'
+        run_id:
+          type: string
+        run_log:
+          $ref: '#/components/schemas/Log'
+        state:
+          $ref: '#/components/schemas/State'
+        task_logs:
+          items:
+            $ref: '#/components/schemas/Log'
+          type: array
+      type: object
+    RunStatus:
+      properties:
+        run_id:
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+      type: object
+    RunListResponse:
+      properties:
+        next_page_token:
+          type: string
+        runs:
+          items:
+            $ref: '#/components/schemas/RunStatus'
+          type: array
+      type: object
+    State:
+      enum:
+      - UNKNOWN
+      - QUEUED
+      - INITIALIZING
+      - RUNNING
+      - PAUSED
+      - COMPLETE
+      - EXECUTOR_ERROR
+      - SYSTEM_ERROR
+      - CANCELED
+      - CANCELING
+      type: string
+    RunRequest:
+      properties:
+        tags:
+          additionalProperties:
+            type: string
+          type: object
+        workflow_engine_parameters:
+          additionalProperties:
+            type: string
+          type: object
+        workflow_params:
+          type: string
+        workflow_type:
+          type: string
+        workflow_type_version:
+          type: string
+        workflow_url:
+          type: string
+      type: object
+    WesErrorResponse:
+      properties:
+        msg:
+          type: string
+        status_code:
+          format: int32
+          type: integer
+      type: object
+    DefaultWorkflowEngineParameter:
+      properties:
+        default_value:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+      type: object
+    WesServiceInfo:
+      properties:
+        auth_instructions_url:
+          type: string
+        contact_info_url:
+          type: string
+        default_workflow_engine_parameters:
+          items:
+            $ref: '#/components/schemas/DefaultWorkflowEngineParameter'
+          type: array
+        supported_filesystem_protocols:
+          items:
+            type: string
+          type: array
+        supported_wes_versions:
+          items:
+            type: string
+          type: array
+        system_state_counts:
+          additionalProperties:
+            format: int64
+            type: integer
+          type: object
+        tags:
+          additionalProperties:
+            type: string
+          type: object
+        workflow_engine_versions:
+          additionalProperties:
+            type: string
+          type: object
+        workflow_type_versions:
+          additionalProperties:
+            $ref: '#/components/schemas/WorkflowTypeVersion'
+          type: object
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

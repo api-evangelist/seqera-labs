@@ -1,0 +1,652 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions teams API
+  version: 1.181.0
+tags:
+- description: Teams in an organization context
+  name: teams
+paths:
+  /orgs/{orgId}/teams:
+    get:
+      description: Lists all teams in the organization identified by the given `orgId`.
+      operationId: ListOrganizationTeams
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: Filter search parameter
+        in: query
+        name: search
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTeamResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List organization teams
+      tags:
+      - teams
+    post:
+      description: Creates a new team in the organization identified by the given `orgId`.
+      operationId: CreateOrganizationTeam
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTeamRequest'
+        description: Team create request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTeamResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicated element
+      security:
+      - BearerAuth: []
+      summary: Create team
+      tags:
+      - teams
+  /orgs/{orgId}/teams/validate:
+    get:
+      description: Confirms the validity of the given team name. Append `?name=<your_team_name>`.
+      operationId: ValidateTeamName
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Team name to validate
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Validate team name
+      tags:
+      - teams
+  /orgs/{orgId}/teams/{teamId}:
+    delete:
+      description: Deletes the team identified by the given `teamId`.
+      operationId: DeleteOrganizationTeam
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Team numeric identifier
+        in: path
+        name: teamId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete team
+      tags:
+      - teams
+    get:
+      description: Retrieves the details of the team identified by the given `teamId`.
+      operationId: DescribeOrganizationTeam
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Team numeric identifier
+        in: path
+        name: teamId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTeamResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Describe team
+      tags:
+      - teams
+    put:
+      description: Updates the details of the team identified by the given `teamId`.
+      operationId: UpdateOrganizationTeam
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Team numeric identifier
+        in: path
+        name: teamId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTeamRequest'
+        description: Team update request
+        required: true
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: UpdateOrganizationTeam 204 response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicated element
+      security:
+      - BearerAuth: []
+      summary: Update team
+      tags:
+      - teams
+  /orgs/{orgId}/teams/{teamId}/members:
+    get:
+      description: Lists the team members associated with the given `teamId`.
+      operationId: ListOrganizationTeamMembers
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Team numeric identifier
+        in: path
+        name: teamId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - explode: false
+        in: query
+        name: search
+        schema:
+          nullable: true
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMembersResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List team members
+      tags:
+      - teams
+    post:
+      description: Adds a new member to the team identified by the given `teamId`.
+      operationId: CreateOrganizationTeamMember
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Team numeric identifier
+        in: path
+        name: teamId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTeamMemberRequest'
+        description: Team create request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddTeamMemberResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Create team member
+      tags:
+      - teams
+  /orgs/{orgId}/teams/{teamId}/members/{memberId}/delete:
+    delete:
+      description: Deletes the team member identified by the given `memberId`.
+      operationId: DeleteOrganizationTeamMember
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Team numeric identifier
+        in: path
+        name: teamId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Member numeric identifier
+        in: path
+        name: memberId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete team member
+      tags:
+      - teams
+  /orgs/{orgId}/teams/{teamId}/workspaces:
+    get:
+      description: Lists all the workspaces of which the given `teamId` is a participant.
+      operationId: ListWorkspacesByTeam
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Team numeric identifier
+        in: path
+        name: teamId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: Search criteria
+        in: query
+        name: search
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkspacesByTeamResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not Found
+      security:
+      - BearerAuth: []
+      summary: List team workspaces
+      tags:
+      - teams
+components:
+  schemas:
+    OrgRole:
+      enum:
+      - owner
+      - member
+      - collaborator
+      type: string
+      x-enum-varnames:
+      - owner
+      - member
+      - collaborator
+    CreateTeamResponse:
+      properties:
+        team:
+          $ref: '#/components/schemas/TeamDbDto'
+      type: object
+    TeamDbDto:
+      properties:
+        avatarUrl:
+          type: string
+        description:
+          type: string
+        idpGroupId:
+          format: int64
+          nullable: true
+          type: integer
+        idpGroupName:
+          nullable: true
+          type: string
+        membersCount:
+          format: int64
+          type: integer
+        name:
+          type: string
+        teamId:
+          format: int64
+          type: integer
+      type: object
+    CreateTeamMemberRequest:
+      properties:
+        userNameOrEmail:
+          type: string
+      type: object
+    AddTeamMemberResponse:
+      properties:
+        member:
+          $ref: '#/components/schemas/MemberDbDto'
+      type: object
+    WorkspaceParticipantResponseDto:
+      properties:
+        orgId:
+          format: int64
+          type: integer
+        orgName:
+          type: string
+        participantId:
+          format: int64
+          type: integer
+        participantRole:
+          type: string
+        workspaceFullName:
+          type: string
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+    UpdateTeamRequest:
+      properties:
+        avatarId:
+          type: string
+        description:
+          type: string
+        idpGroupId:
+          format: int64
+          nullable: true
+          type: integer
+        name:
+          type: string
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    CreateTeamRequest:
+      properties:
+        avatarId:
+          type: string
+        idpGroupId:
+          format: int64
+          nullable: true
+          type: integer
+        team:
+          $ref: '#/components/schemas/Team'
+      type: object
+    ListWorkspacesByTeamResponse:
+      properties:
+        totalSize:
+          format: int64
+          type: integer
+        workspaces:
+          items:
+            $ref: '#/components/schemas/WorkspaceParticipantResponseDto'
+          type: array
+      type: object
+    ListTeamResponse:
+      properties:
+        teams:
+          items:
+            $ref: '#/components/schemas/TeamDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    Team:
+      properties:
+        dateCreated:
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          maxLength: 250
+          type: string
+        id:
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        lastUpdated:
+          format: date-time
+          readOnly: true
+          type: string
+        name:
+          maxLength: 40
+          pattern: ^[a-zA-Z\d](?:[a-zA-Z\d]|[-_](?=[a-zA-Z\d])){1,38}$
+          type: string
+      required:
+      - name
+      type: object
+    MemberDbDto:
+      properties:
+        avatar:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        memberId:
+          format: int64
+          type: integer
+        role:
+          $ref: '#/components/schemas/OrgRole'
+        userId:
+          format: int64
+          type: integer
+        userName:
+          type: string
+      type: object
+    ListMembersResponse:
+      properties:
+        members:
+          items:
+            $ref: '#/components/schemas/MemberDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    DescribeTeamResponse:
+      properties:
+        team:
+          $ref: '#/components/schemas/TeamDbDto'
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

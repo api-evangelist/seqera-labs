@@ -1,0 +1,237 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions ssh-keys API
+  version: 1.181.0
+tags:
+- name: ssh-keys
+paths:
+  /ssh-keys:
+    get:
+      description: Retrieves the list of all SSH public keys for the authenticated user.
+      operationId: ListSshKeys
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSshKeysResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List SSH keys
+      tags:
+      - ssh-keys
+    post:
+      description: Creates a new SSH public key with the details in the given request body.
+      operationId: CreateSshKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSshKeyRequest'
+        description: SSH key create request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSshKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicated element
+      security:
+      - BearerAuth: []
+      summary: Create SSH key
+      tags:
+      - ssh-keys
+  /ssh-keys/validate/key:
+    get:
+      description: Confirms the availability of the given key for a SSH key in the user context.
+      operationId: ValidateSshKey
+      parameters:
+      - description: SSH key to validate
+        in: query
+        name: key
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Ok - No content, if the key is valid.
+        '400':
+          description: Bad request, if the key is not valid.
+        '403':
+          description: Operation not allowed.
+        '409':
+          description: Conflict, key duplicated in the given context.
+      security:
+      - BearerAuth: []
+      summary: Validate SSH key
+      tags:
+      - ssh-keys
+  /ssh-keys/validate/name:
+    get:
+      description: Confirms the availability of the given name for a SSH key in the user context.
+      operationId: ValidateSshKeyName
+      parameters:
+      - description: SSH key name to validate
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Ok - No content, if the name is valid and available.
+        '400':
+          description: Bad request, if the name is not valid.
+        '403':
+          description: Operation not allowed.
+        '409':
+          description: Conflict, name duplicated in the given context.
+      security:
+      - BearerAuth: []
+      summary: Validate SSH key name
+      tags:
+      - ssh-keys
+  /ssh-keys/{keyId}:
+    delete:
+      description: Deletes the given SSH public key by its ID.
+      operationId: DeleteSshKey
+      parameters:
+      - description: SSH key numeric identifier
+        in: path
+        name: keyId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete SSH key
+      tags:
+      - ssh-keys
+    get:
+      description: Retrieves the details of an SSH public key by its ID.
+      operationId: DescribeSshKey
+      parameters:
+      - description: SSH key numeric identifier
+        in: path
+        name: keyId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSshKeyResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '404':
+          description: SSH key not found
+      security:
+      - BearerAuth: []
+      summary: Describe SSH key
+      tags:
+      - ssh-keys
+components:
+  schemas:
+    CreateSshKeyRequest:
+      properties:
+        name:
+          type: string
+        publicKey:
+          type: string
+      required:
+      - name
+      - publicKey
+      type: object
+    UserSshPublicKeyDto:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        lastUsed:
+          format: date-time
+          type: string
+        name:
+          type: string
+        publicKey:
+          type: string
+      type: object
+    ListSshKeysResponse:
+      properties:
+        sshKeys:
+          items:
+            $ref: '#/components/schemas/UserSshPublicKeyDto'
+          type: array
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    DescribeSshKeyResponse:
+      properties:
+        sshKey:
+          $ref: '#/components/schemas/UserSshPublicKeyDto'
+      type: object
+    CreateSshKeyResponse:
+      properties:
+        sshKey:
+          $ref: '#/components/schemas/UserSshPublicKeyDto'
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

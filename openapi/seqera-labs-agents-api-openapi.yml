@@ -1,0 +1,425 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions agents API
+  version: 1.181.0
+tags:
+- name: agents
+paths:
+  /agents:
+    get:
+      description: Lists non-deleted agents in a workspace.
+      operationId: ListAgents
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Filter by agent name
+        in: query
+        name: search
+        schema:
+          type: string
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAgentsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List agents
+      tags:
+      - agents
+    post:
+      description: Creates an agent in a workspace.
+      operationId: CreateAgent
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAgentRequest'
+        description: Agent create request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAgentResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicate element
+      security:
+      - BearerAuth: []
+      summary: Create agent
+      tags:
+      - agents
+  /agents/{agentId}:
+    delete:
+      description: Tombstones an agent in a workspace.
+      operationId: DeleteAgent
+      parameters:
+      - description: Agent string identifier
+        in: path
+        name: agentId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete agent
+      tags:
+      - agents
+    get:
+      description: Retrieves an agent in a workspace.
+      operationId: DescribeAgent
+      parameters:
+      - description: Agent string identifier
+        in: path
+        name: agentId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAgentResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+      security:
+      - BearerAuth: []
+      summary: Describe agent
+      tags:
+      - agents
+    put:
+      description: Updates an agent in a workspace.
+      operationId: UpdateAgent
+      parameters:
+      - description: Agent string identifier
+        in: path
+        name: agentId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAgentRequest'
+        description: Agent update request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAgentResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicate element
+      security:
+      - BearerAuth: []
+      summary: Update agent
+      tags:
+      - agents
+  /agents/{agentId}/disable:
+    post:
+      description: Marks an active agent as inactive.
+      operationId: DisableAgent
+      parameters:
+      - description: Agent string identifier
+        in: path
+        name: agentId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAgentResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+      security:
+      - BearerAuth: []
+      summary: Disable agent
+      tags:
+      - agents
+  /agents/{agentId}/enable:
+    post:
+      description: Marks an inactive agent as active.
+      operationId: EnableAgent
+      parameters:
+      - description: Agent string identifier
+        in: path
+        name: agentId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAgentResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+      security:
+      - BearerAuth: []
+      summary: Enable agent
+      tags:
+      - agents
+components:
+  schemas:
+    Agent.Status:
+      enum:
+      - active
+      - inactive
+      - deleted
+      type: string
+      x-enum-varnames:
+      - active
+      - inactive
+      - deleted
+    CreateAgentResponse:
+      properties:
+        agent:
+          $ref: '#/components/schemas/AgentDbDto'
+      type: object
+    ListAgentsResponse:
+      properties:
+        agents:
+          items:
+            $ref: '#/components/schemas/AgentDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    UpdateAgentResponse:
+      properties:
+        agent:
+          $ref: '#/components/schemas/AgentDbDto'
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    CreateAgentRequest:
+      properties:
+        description:
+          nullable: true
+          type: string
+        name:
+          type: string
+        systemPrompt:
+          type: string
+        templateId:
+          nullable: true
+          type: string
+      type: object
+    DescribeAgentResponse:
+      properties:
+        agent:
+          $ref: '#/components/schemas/AgentDbDto'
+      type: object
+    AgentDbDto:
+      properties:
+        createdBy:
+          format: int64
+          type: integer
+        dateCreated:
+          format: date-time
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          type: string
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/Agent.Status'
+        systemPrompt:
+          type: string
+        templateId:
+          nullable: true
+          type: string
+        updatedBy:
+          format: int64
+          type: integer
+        workspaceId:
+          format: int64
+          type: integer
+      type: object
+    UpdateAgentRequest:
+      properties:
+        description:
+          nullable: true
+          type: string
+        name:
+          type: string
+        systemPrompt:
+          type: string
+        templateId:
+          nullable: true
+          type: string
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

@@ -1,0 +1,1129 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions orgs API
+  version: 1.181.0
+tags:
+- description: Organizations
+  name: orgs
+paths:
+  /orgs:
+    get:
+      description: Lists all available organizations in a user context.
+      operationId: ListOrganizations
+      parameters:
+      - description: Organization user role identifier
+        in: query
+        name: role
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOrganizationsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List organizations
+      tags:
+      - orgs
+    post:
+      description: Creates a new organization.
+      operationId: CreateOrganization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrganizationRequest'
+        description: Organization create request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrganizationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicate element
+      security:
+      - BearerAuth: []
+      summary: Create organization
+      tags:
+      - orgs
+  /orgs/validate:
+    get:
+      description: Confirms the validity of the given organization name. Append `?name=<your_org_name>`.
+      operationId: ValidateOrganizationName
+      parameters:
+      - description: Organization name to validate
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicated element
+      security:
+      - BearerAuth: []
+      summary: Validate organization name
+      tags:
+      - orgs
+  /orgs/{orgId}:
+    delete:
+      description: Deletes the organization identified by the given `orgId`.
+      operationId: DeleteOrganization
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete organization
+      tags:
+      - orgs
+    get:
+      description: Retrieves the details of the organization identified by the given `orgId`.
+      operationId: DescribeOrganization
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeOrganizationResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Describe organization
+      tags:
+      - orgs
+    put:
+      description: Updates the details of the organization identified by the given `orgId`.
+      operationId: UpdateOrganization
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOrganizationRequest'
+        description: Organization update request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicate element
+      security:
+      - BearerAuth: []
+      summary: Update organization
+      tags:
+      - orgs
+  /orgs/{orgId}/collaborators:
+    get:
+      description: Lists the collaborators of the organization identified by the given `orgId`.
+      operationId: ListOrganizationCollaborators
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: Filter search parameter
+        in: query
+        name: search
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMembersResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List organization collaborators
+      tags:
+      - orgs
+  /orgs/{orgId}/idp-groups:
+    get:
+      description: Returns the IdP group catalog for the organization, including both SCIM-pushed and manually entered groups.
+      operationId: ListOrganizationIdpGroups
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIdpGroupsResponse'
+          description: OK
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Feature not enabled or organization not found
+      security:
+      - BearerAuth: []
+      summary: List IdP groups for an organization
+      tags:
+      - orgs
+    post:
+      description: Adds a group entry to the IdP group catalog via manual entry. The admin must enter the exact claim value their IdP sends in the groups claim.
+      operationId: CreateOrganizationIdpGroup
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIdpGroupRequest'
+        description: IdP group create request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdpGroupEntry'
+          description: Group entry created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request (empty group value)
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Feature not enabled or organization not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Group with same value already exists
+      security:
+      - BearerAuth: []
+      summary: Manually add an IdP group to the catalog
+      tags:
+      - orgs
+  /orgs/{orgId}/idp-groups/{groupId}:
+    delete:
+      description: Removes a manually-entered group from the catalog. SCIM-managed groups cannot be deleted via this endpoint.
+      operationId: DeleteOrganizationIdpGroup
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: IdP group numeric identifier
+        in: path
+        name: groupId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: Group entry deleted
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Feature not enabled or group not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Cannot delete SCIM-managed group
+      security:
+      - BearerAuth: []
+      summary: Remove an IdP group from the catalog
+      tags:
+      - orgs
+  /orgs/{orgId}/members:
+    get:
+      description: Lists the members of the organization identified by the given `orgId`.
+      operationId: ListOrganizationMembers
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: Filter search parameter
+        in: query
+        name: search
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMembersResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List organization members
+      tags:
+      - orgs
+  /orgs/{orgId}/members/add:
+    put:
+      description: Adds a new member to the organization identified by the given `orgId`.
+      operationId: CreateOrganizationMember
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddMemberRequest'
+        description: Member addition request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddMemberResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicate element
+      security:
+      - BearerAuth: []
+      summary: Add organization member
+      tags:
+      - orgs
+  /orgs/{orgId}/members/leave:
+    delete:
+      description: Removes the requesting user from the organization identified by the given `orgId`.
+      operationId: LeaveOrganization
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Leave organization
+      tags:
+      - orgs
+  /orgs/{orgId}/members/{memberId}:
+    delete:
+      description: Deletes the member identified by the given `memberId`.
+      operationId: DeleteOrganizationMember
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Organization member numeric identifier
+        in: path
+        name: memberId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete member
+      tags:
+      - orgs
+  /orgs/{orgId}/members/{memberId}/role:
+    put:
+      description: Updates the role of the member identified by the given `memberId`.
+      operationId: UpdateOrganizationMemberRole
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Organization member numeric identifier
+        in: path
+        name: memberId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMemberRoleRequest'
+        description: Member role update request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Update member role
+      tags:
+      - orgs
+  /orgs/{orgId}/quotas:
+    get:
+      description: Retrieves the details of the organization quotas identified by the given `orgId`.
+      operationId: DescribeOrganizationQuotas
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Optional list of quota names to include
+        in: query
+        name: include
+        schema:
+          items:
+            type: object
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeOrganizationQuotasResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Describe organization quotas
+      tags:
+      - orgs
+  /orgs/{orgId}/scim/config:
+    get:
+      description: Returns the SCIM configuration for the organization, including token metadata, group count, and SSO state. Accessible to all org members (read access).
+      operationId: DescribeOrganizationScimConfig
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeScimConfigResponse'
+          description: OK
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Feature not enabled or organization not found
+      security:
+      - BearerAuth: []
+      summary: View SCIM configuration
+      tags:
+      - orgs
+  /orgs/{orgId}/scim/token:
+    delete:
+      description: Revokes the active SCIM bearer token for the organization. Returns 404 if no active token exists.
+      operationId: RevokeOrganizationScimToken
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: Token revoked
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Feature not enabled, organization not found, or no active token
+      security:
+      - BearerAuth: []
+      summary: Revoke the active SCIM bearer token
+      tags:
+      - orgs
+    post:
+      description: Generates a new SCIM bearer token for the organization. If an active token already exists it is revoked first. The plaintext token is returned only once.
+      operationId: CreateOrganizationScimToken
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateScimTokenResponse'
+          description: Token created
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Feature not enabled or organization not found
+      security:
+      - BearerAuth: []
+      summary: Generate a SCIM bearer token
+      tags:
+      - orgs
+  /orgs/{orgId}/scim/token/rotate:
+    post:
+      description: Revokes the current active token and generates a new one. The new plaintext token is returned only once.
+      operationId: RotateOrganizationScimToken
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateScimTokenResponse'
+          description: Token rotated
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Feature not enabled, organization not found, or no active token to rotate
+      security:
+      - BearerAuth: []
+      summary: Rotate the SCIM bearer token
+      tags:
+      - orgs
+  /orgs/{orgId}/users/{userId}/roles:
+    get:
+      description: List all user roles and permissions in an organization; also list the sources of those roles (via team assignment or direct user assignment).
+      operationId: ListUserRolesInOrganization
+      parameters:
+      - description: Organization numeric identifier
+        in: path
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: User numeric identifier
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUserRolesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List all user roles and permissions in an organization
+      tags:
+      - orgs
+components:
+  schemas:
+    CreateOrganizationResponse:
+      properties:
+        organization:
+          $ref: '#/components/schemas/OrganizationDbDto'
+      type: object
+    OrgIdpGroupSource:
+      enum:
+      - SCIM
+      - MANUAL
+      type: string
+    ListOrganizationsResponse:
+      properties:
+        organizations:
+          items:
+            $ref: '#/components/schemas/OrganizationDbDto'
+          type: array
+        totalSize:
+          format: int32
+          type: integer
+      type: object
+    OrganizationDbDto:
+      properties:
+        description:
+          type: string
+        fullName:
+          type: string
+        location:
+          type: string
+        logoId:
+          type: string
+        logoUrl:
+          type: string
+        memberId:
+          format: int64
+          type: integer
+        memberRole:
+          $ref: '#/components/schemas/OrgRole'
+        name:
+          type: string
+        orgId:
+          format: int64
+          type: integer
+        paying:
+          deprecated: true
+          type: boolean
+        type:
+          $ref: '#/components/schemas/OrgType'
+        website:
+          type: string
+      type: object
+    CreateIdpGroupRequest:
+      properties:
+        displayName:
+          type: string
+      type: object
+    UpdateMemberRoleRequest:
+      properties:
+        role:
+          $ref: '#/components/schemas/OrgRole'
+      type: object
+    IdpGroupEntry:
+      properties:
+        displayName:
+          type: string
+        id:
+          format: int64
+          type: integer
+        source:
+          $ref: '#/components/schemas/OrgIdpGroupSource'
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    MemberDbDto:
+      properties:
+        avatar:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        memberId:
+          format: int64
+          type: integer
+        role:
+          $ref: '#/components/schemas/OrgRole'
+        userId:
+          format: int64
+          type: integer
+        userName:
+          type: string
+      type: object
+    ListMembersResponse:
+      properties:
+        members:
+          items:
+            $ref: '#/components/schemas/MemberDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    UserWorkspaceRoleDto:
+      properties:
+        role:
+          type: string
+        roleSourceType:
+          $ref: '#/components/schemas/WspRoleSourceType'
+        sourceTeamId:
+          format: int64
+          type: integer
+        sourceTeamName:
+          type: string
+        sourceTeamType:
+          $ref: '#/components/schemas/TeamType'
+      type: object
+    TeamType:
+      enum:
+      - regular
+      - system_owners
+      type: string
+      x-enum-varnames:
+      - regular
+      - system_owners
+    OrgRole:
+      enum:
+      - owner
+      - member
+      - collaborator
+      type: string
+      x-enum-varnames:
+      - owner
+      - member
+      - collaborator
+    DescribeScimConfigResponse:
+      properties:
+        endpointUrl:
+          type: string
+        groupCount:
+          format: int32
+          type: integer
+        hasActiveToken:
+          type: boolean
+        maskedToken:
+          nullable: true
+          type: string
+        ssoActive:
+          type: boolean
+        tokenCreatedAt:
+          format: date-time
+          nullable: true
+          type: string
+        tokenLastUsed:
+          format: date-time
+          nullable: true
+          type: string
+      type: object
+    ListUserRolesResponse:
+      properties:
+        user:
+          $ref: '#/components/schemas/MemberDbDto'
+        userWorkspaces:
+          items:
+            $ref: '#/components/schemas/UserWorkspaceRolesDto'
+          type: array
+      type: object
+    UpdateOrganizationRequest:
+      properties:
+        description:
+          type: string
+        fullName:
+          type: string
+        location:
+          type: string
+        logoId:
+          type: string
+        name:
+          type: string
+        paying:
+          deprecated: true
+          nullable: true
+          type: boolean
+        type:
+          allOf:
+          - $ref: '#/components/schemas/OrgType'
+          nullable: true
+        website:
+          type: string
+      type: object
+    WspRoleSourceType:
+      enum:
+      - individual
+      - team
+      type: string
+      x-enum-varnames:
+      - individual
+      - team
+    Organization:
+      properties:
+        dateCreated:
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          maxLength: 1000
+          type: string
+        fullName:
+          maxLength: 100
+          type: string
+        id:
+          format: int64
+          nullable: true
+          readOnly: true
+          type: integer
+        lastUpdated:
+          format: date-time
+          readOnly: true
+          type: string
+        location:
+          maxLength: 100
+          type: string
+        name:
+          maxLength: 40
+          pattern: ^[a-zA-Z\d](?:[a-zA-Z\d]|[-_](?=[a-zA-Z\d])){1,38}$
+          type: string
+        website:
+          pattern: ''
+          type: string
+      required:
+      - fullName
+      - name
+      type: object
+    ListIdpGroupsResponse:
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/IdpGroupEntry'
+          type: array
+      type: object
+    AddMemberRequest:
+      properties:
+        user:
+          type: string
+      type: object
+    OrganizationQuotas:
+      properties:
+        maxCustomRolesPerOrg:
+          format: int64
+          type: integer
+        maxDataStudiosRunning:
+          format: int64
+          type: integer
+        maxDatasetsPerWorkspace:
+          format: int64
+          type: integer
+        maxFusionThroughputBytes:
+          format: int64
+          type: integer
+        maxLabelsPerWorkspace:
+          format: int64
+          type: integer
+        maxMembers:
+          format: int64
+          type: integer
+        maxParticipantsPerWorkspace:
+          format: int64
+          type: integer
+        maxPipelinesPerWorkspace:
+          format: int64
+          type: integer
+        maxRunHistory:
+          format: int64
+          type: integer
+        maxRuns:
+          format: int64
+          type: integer
+        maxSeqeraComputeComputeEnvs:
+          format: int64
+          type: integer
+        maxTeams:
+          format: int64
+          type: integer
+        maxVersionsPerDataset:
+          format: int64
+          type: integer
+        maxWorkspaces:
+          format: int64
+          type: integer
+      type: object
+    DescribeOrganizationQuotasResponse:
+      properties:
+        quotas:
+          $ref: '#/components/schemas/OrganizationQuotas'
+      type: object
+    OrgType:
+      enum:
+      - academic
+      - evaluating
+      - pro
+      - basic
+      - internal
+      type: string
+      x-enum-varnames:
+      - academic
+      - evaluating
+      - pro
+      - basic
+      - internal
+    UserWorkspaceRolesDto:
+      properties:
+        permissions:
+          items:
+            $ref: '#/components/schemas/UserWorkspacePermissionDto'
+          type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/UserWorkspaceRoleDto'
+          type: array
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+    AddMemberResponse:
+      properties:
+        member:
+          $ref: '#/components/schemas/MemberDbDto'
+      type: object
+    CreateOrganizationRequest:
+      properties:
+        logoId:
+          type: string
+        organization:
+          $ref: '#/components/schemas/Organization'
+      type: object
+    DescribeOrganizationResponse:
+      properties:
+        organization:
+          $ref: '#/components/schemas/OrganizationDbDto'
+      type: object
+    UserWorkspacePermissionDto:
+      properties:
+        permission:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+      type: object
+    CreateScimTokenResponse:
+      properties:
+        endpointUrl:
+          type: string
+        maskedToken:
+          type: string
+        token:
+          type: string
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

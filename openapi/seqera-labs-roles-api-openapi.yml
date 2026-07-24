@@ -1,0 +1,393 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions roles API
+  version: 1.181.0
+tags:
+- name: roles
+paths:
+  /roles:
+    get:
+      operationId: ListRoles
+      parameters:
+      - description: Numeric identifier of the organization
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: Search by name parameter
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Filter by role type (predefined, custom)
+        in: query
+        name: type
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRolesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List all roles
+      tags:
+      - roles
+    post:
+      operationId: CreateRole
+      parameters:
+      - description: Numeric identifier of the organization
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRoleRequest'
+        description: Create role request
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRoleResponse'
+          description: Created
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          description: Duplicate role name
+      security:
+      - BearerAuth: []
+      summary: Create a role with the given name
+      tags:
+      - roles
+  /roles/permissions:
+    get:
+      operationId: ListRolePermissions
+      parameters:
+      - description: Numeric identifier of the organization
+        in: query
+        name: orgId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Search query for name filtering
+        in: query
+        name: name
+        required: false
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRolePermissionsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Not Found
+      security:
+      - BearerAuth: []
+      summary: List all role permissions available in the system
+      tags:
+      - roles
+  /roles/validate:
+    get:
+      operationId: ValidateRoleName
+      parameters:
+      - description: The role name
+        in: query
+        name: name
+        schema:
+          type: string
+      - description: Numeric identifier of the organization
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No content - Role name is valid and available
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          description: Role name already exists
+      security:
+      - BearerAuth: []
+      summary: Validate if a role name is available within the organization
+      tags:
+      - roles
+  /roles/{roleName}:
+    delete:
+      operationId: DeleteRole
+      parameters:
+      - description: The role name
+        in: path
+        name: roleName
+        required: true
+        schema:
+          type: string
+      - description: Numeric identifier of the organization
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: No Content - Role deleted successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Role not found
+      security:
+      - BearerAuth: []
+      summary: Delete a role with the given name
+      tags:
+      - roles
+    get:
+      operationId: DescribeRole
+      parameters:
+      - description: The role name
+        in: path
+        name: roleName
+        required: true
+        schema:
+          type: string
+      - description: Numeric identifier of the organization
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRoleResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Role not found
+      security:
+      - BearerAuth: []
+      summary: Describe role and its permissions fetching by role name
+      tags:
+      - roles
+    put:
+      operationId: UpdateRole
+      parameters:
+      - description: The role name
+        in: path
+        name: roleName
+        required: true
+        schema:
+          type: string
+      - description: Numeric identifier of the organization
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRoleRequest'
+        description: Update role request
+        required: true
+      responses:
+        '204':
+          description: No Content - Role updated successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '404':
+          description: Role not found
+        '409':
+          description: Duplicate role name
+      security:
+      - BearerAuth: []
+      summary: Update a role with the given name
+      tags:
+      - roles
+components:
+  schemas:
+    UpdateRoleRequest:
+      properties:
+        description:
+          maxLength: 120
+          minLength: 1
+          type: string
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+      required:
+      - description
+      type: object
+    CreateRoleResponse:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+      type: object
+    RolePermissionResponseDto:
+      properties:
+        category:
+          type: string
+        name:
+          type: string
+      type: object
+    ListRolesResponse:
+      properties:
+        roles:
+          items:
+            $ref: '#/components/schemas/ListRolesResponse.RoleInfo'
+          type: array
+        totalSize:
+          format: int32
+          type: integer
+      type: object
+    DescribeRoleResponse:
+      properties:
+        role:
+          $ref: '#/components/schemas/RoleDto'
+      type: object
+    RoleDto:
+      properties:
+        description:
+          type: string
+        isPredefined:
+          type: boolean
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    ListRolesResponse.RoleInfo:
+      properties:
+        description:
+          type: string
+        isPredefined:
+          type: boolean
+        name:
+          type: string
+      type: object
+    CreateRoleRequest:
+      properties:
+        description:
+          maxLength: 120
+          minLength: 1
+          type: string
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+      required:
+      - description
+      type: object
+    ListRolePermissionsResponse:
+      properties:
+        permissions:
+          items:
+            $ref: '#/components/schemas/RolePermissionResponseDto'
+          type: array
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

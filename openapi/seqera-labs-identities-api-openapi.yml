@@ -1,0 +1,1936 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions identities API
+  version: 1.181.0
+tags:
+- name: identities
+paths:
+  /identities:
+    get:
+      description: List all Managed Identities in an organization.
+      operationId: ListManagedIdentities
+      parameters:
+      - description: Organization numeric identifier
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      - description: 'Optional search criteria, allowing free text search on name and keywords: `platform:`'
+        in: query
+        name: search
+        schema:
+          nullable: true
+          type: string
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          nullable: true
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          nullable: true
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListManagedIdentitiesResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List Managed Identities
+      tags:
+      - identities
+    post:
+      description: Create a new Managed Identity in an organization.
+      operationId: CreateManagedIdentity
+      parameters:
+      - description: Organization numeric identifier
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateManagedIdentityRequest'
+        description: Managed Identity create request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateManagedIdentityResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Create Managed Identity
+      tags:
+      - identities
+  /identities/{managedIdentityId}:
+    delete:
+      description: Delete a Managed Identity identified by the given ID.
+      operationId: DeleteManagedIdentity
+      parameters:
+      - description: Managed Identity numeric identifier
+        in: path
+        name: managedIdentityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Organization numeric identifier
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      - description: If deletion of associated Managed Credentials will be blocked by running jobs that depend on them
+        in: query
+        name: checked
+        schema:
+          nullable: true
+          type: boolean
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteManagedCredentialsConflictResponse'
+          description: Running jobs block the deletion of this Managed Identity
+      security:
+      - BearerAuth: []
+      summary: Delete a Managed Identity
+      tags:
+      - identities
+    get:
+      description: Describe a Managed Identity in an organization.
+      operationId: DescribeManagedIdentity
+      parameters:
+      - description: Managed Identity numeric identifier
+        in: path
+        name: managedIdentityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Organization numeric identifier
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateManagedIdentityResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Describe a Managed Identity
+      tags:
+      - identities
+    put:
+      description: Update a Managed Identity identified by the given ID.
+      operationId: UpdateManagedIdentity
+      parameters:
+      - description: Organization numeric identifier
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      - description: Managed Identity numeric identifier
+        in: path
+        name: managedIdentityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateManagedIdentityRequest'
+        description: Managed Identity update request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Update a Managed Identity
+      tags:
+      - identities
+  /identities/{managedIdentityId}/credentials:
+    get:
+      description: List Managed Credentials belonging to a Managed Identity.
+      operationId: ListManagedCredentials
+      parameters:
+      - description: Managed Identity numeric identifier
+        in: path
+        name: managedIdentityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Organization numeric identifier
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      - description: User numeric identifier to filter records by
+        in: query
+        name: userId
+        schema:
+          format: int64
+          nullable: true
+          type: integer
+      - description: 'Optional filtering on Managed Credentials for the given Managed Identity:                                              Allows free text search on `userName` or `firstName + lastName`.                                              Accepts keywords: `is:missing` or `is:added` to filter on credentials status.                                              If not provided (or both provided), all are returned.'
+        in: query
+        name: search
+        schema:
+          type: string
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListManagedCredentialsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List Managed Credentials
+      tags:
+      - identities
+    post:
+      description: Creates Managed Credentials for the given Managed Identity
+      operationId: CreateManagedCredentials
+      parameters:
+      - description: Managed Identity numeric identifier
+        in: path
+        name: managedIdentityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Organization numeric identifier
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      - description: User numeric identifier
+        in: query
+        name: userId
+        schema:
+          format: int64
+          nullable: true
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateManagedCredentialsRequest'
+        description: Managed Credentials create request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateManagedCredentialsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Creates Managed Credentials
+      tags:
+      - identities
+  /identities/{managedIdentityId}/credentials/{managedCredentialsId}:
+    delete:
+      description: Delete Managed Credentials
+      operationId: DeleteManagedCredentials
+      parameters:
+      - description: Managed Identity numeric identifier
+        in: path
+        name: managedIdentityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Managed Credentials numeric identifier
+        in: path
+        name: managedCredentialsId
+        required: true
+        schema:
+          format: int64
+          nullable: true
+          type: integer
+      - description: Organization numeric identifier
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      - description: If Managed Credentials deletion will be blocked by running jobs that depend on them
+        in: query
+        name: checked
+        schema:
+          nullable: true
+          type: boolean
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteManagedCredentialsConflictResponse'
+          description: Running jobs block the deletion of this Managed Credentials
+      security:
+      - BearerAuth: []
+      summary: Delete a user's Managed Credentials record belonging to a Managed Identity
+      tags:
+      - identities
+    put:
+      description: Update Managed Credentials for the given Managed Identity
+      operationId: UpdateManagedCredentials
+      parameters:
+      - description: Managed Identity numeric identifier
+        in: path
+        name: managedIdentityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Managed Credentials numeric identifier
+        in: path
+        name: managedCredentialsId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Organization numeric identifier
+        in: query
+        name: orgId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateManagedCredentialsRequest'
+        description: Managed Credentials update request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Updates Managed Credentials
+      tags:
+      - identities
+components:
+  schemas:
+    CreateManagedIdentityResponse:
+      properties:
+        config:
+          $ref: '#/components/schemas/ComputeConfig'
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        platform:
+          type: string
+      type: object
+    AzureCloudKeys:
+      allOf:
+      - $ref: '#/components/schemas/AzureSecurityKeys'
+      - properties:
+          clientId:
+            type: string
+          clientSecret:
+            type: string
+            writeOnly: true
+          discriminator:
+            type: string
+          storageName:
+            type: string
+          subscriptionId:
+            type: string
+          tenantId:
+            type: string
+        type: object
+      title: Azure Cloud credentials
+      type: object
+    AltairPbsComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Altair PBS configuration
+      type: object
+    AzBatchConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          autoPoolMode:
+            deprecated: true
+            type: boolean
+          deleteJobsOnCompletion:
+            allOf:
+            - $ref: '#/components/schemas/JobCleanupPolicy'
+            nullable: true
+            readOnly: true
+          deleteJobsOnCompletionEnabled:
+            nullable: true
+            type: boolean
+          deletePoolsOnCompletion:
+            type: boolean
+          deleteTasksOnCompletion:
+            nullable: true
+            type: boolean
+          forge:
+            $ref: '#/components/schemas/AzBatchForgeConfig'
+          fusion2Enabled:
+            type: boolean
+          headJobCpus:
+            description: Number of CPU slots reserved on the head pool VM for the Nextflow head job. Defaults to 1 so multiple head jobs can share a head pool VM; increase to dedicate more CPU and memory to each head job.
+            example: 1
+            format: int32
+            nullable: true
+            type: integer
+          headJobMemoryMb:
+            description: Memory in MiB reserved for the Nextflow head job container. When omitted, the value is derived from the head pool VM size as the per-slot share (vmMemory / vmCpus) multiplied by the requested slot count.
+            example: 4096
+            format: int32
+            nullable: true
+            type: integer
+          headPool:
+            type: string
+          jobMaxWallClockTime:
+            description: 'Maximum wall clock time for Azure Batch jobs before automatic termination. Accepts human-readable duration syntax (e.g., ''7d'', ''1d1h1m''). Defaults to 7d when not specified. Maximum: 180 days.'
+            example: 7d
+            nullable: true
+            type: string
+          managedIdentityClientId:
+            nullable: true
+            type: string
+          managedIdentityHeadResourceId:
+            nullable: true
+            type: string
+          managedIdentityPoolClientId:
+            nullable: true
+            type: string
+          managedIdentityPoolResourceId:
+            nullable: true
+            type: string
+          region:
+            type: string
+          subnetId:
+            description: Azure VNet subnet resource ID for private network isolation. Requires Entra (service principal) credentials.
+            example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet
+            nullable: true
+            type: string
+          terminateJobsOnCompletion:
+            nullable: true
+            type: boolean
+          tokenDuration:
+            type: string
+          waveEnabled:
+            type: boolean
+          workerPool:
+            type: string
+        type: object
+      title: Azure Batch configuration
+      type: object
+    SecurityKeys:
+      discriminator:
+        mapping:
+          aws: '#/components/schemas/AwsSecurityKeys'
+          azure: '#/components/schemas/AzureSecurityKeys'
+          azure-cloud: '#/components/schemas/AzureCloudKeys'
+          azure_entra: '#/components/schemas/AzureEntraKeys'
+          azurerepos: '#/components/schemas/AzureReposSecurityKeys'
+          bitbucket: '#/components/schemas/BitBucketSecurityKeys'
+          codecommit: '#/components/schemas/CodeCommitSecurityKeys'
+          container-reg: '#/components/schemas/ContainerRegistryKeys'
+          gitea: '#/components/schemas/GiteaSecurityKeys'
+          github: '#/components/schemas/GitHubSecurityKeys'
+          github_app: '#/components/schemas/GitHubAppSecurityKeys'
+          gitlab: '#/components/schemas/GitLabSecurityKeys'
+          google: '#/components/schemas/GoogleSecurityKeys'
+          k8s: '#/components/schemas/K8sSecurityKeys'
+          local: '#/components/schemas/LocalSecurityKeys'
+          s3: '#/components/schemas/S3SecurityKeys'
+          seqeracompute: '#/components/schemas/SeqeraComputeSecurityKeys'
+          ssh: '#/components/schemas/SSHSecurityKeys'
+          tw-agent: '#/components/schemas/AgentSecurityKeys'
+        propertyName: discriminator
+      oneOf:
+      - $ref: '#/components/schemas/AwsSecurityKeys'
+      - $ref: '#/components/schemas/GoogleSecurityKeys'
+      - $ref: '#/components/schemas/GitHubSecurityKeys'
+      - $ref: '#/components/schemas/GitHubAppSecurityKeys'
+      - $ref: '#/components/schemas/GitLabSecurityKeys'
+      - $ref: '#/components/schemas/BitBucketSecurityKeys'
+      - $ref: '#/components/schemas/GiteaSecurityKeys'
+      - $ref: '#/components/schemas/SSHSecurityKeys'
+      - $ref: '#/components/schemas/K8sSecurityKeys'
+      - $ref: '#/components/schemas/AzureSecurityKeys'
+      - $ref: '#/components/schemas/AzureCloudKeys'
+      - $ref: '#/components/schemas/AzureReposSecurityKeys'
+      - $ref: '#/components/schemas/ContainerRegistryKeys'
+      - $ref: '#/components/schemas/AgentSecurityKeys'
+      - $ref: '#/components/schemas/CodeCommitSecurityKeys'
+      - $ref: '#/components/schemas/AzureEntraKeys'
+      - $ref: '#/components/schemas/SeqeraComputeSecurityKeys'
+      - $ref: '#/components/schemas/S3SecurityKeys'
+      - $ref: '#/components/schemas/LocalSecurityKeys'
+      properties:
+        discriminator:
+          type: string
+      type: object
+    SSHSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          discriminator:
+            type: string
+          passphrase:
+            type: string
+            writeOnly: true
+          privateKey:
+            type: string
+            writeOnly: true
+        type: object
+      title: SSH credentials
+      type: object
+    ListManagedCredentialsRespDto:
+      properties:
+        avatarUrl:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        managedCredentialsId:
+          format: int64
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/ManagedCredentialsMetadata'
+        provider:
+          enum:
+          - ssh
+          type: string
+        userId:
+          format: int64
+          type: integer
+        userName:
+          type: string
+      type: object
+    GitHubSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/GitKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+          token:
+            type: string
+          username:
+            type: string
+        type: object
+      title: GitHub credentials
+      type: object
+    UpdateManagedCredentialsRequest:
+      properties:
+        credentials:
+          $ref: '#/components/schemas/Credentials'
+        metadata:
+          $ref: '#/components/schemas/ManagedCredentialsMetadata'
+        provider:
+          enum:
+          - ssh
+          type: string
+      type: object
+    ForgeConfig:
+      properties:
+        allocStrategy:
+          enum:
+          - BEST_FIT
+          - BEST_FIT_PROGRESSIVE
+          - SPOT_CAPACITY_OPTIMIZED
+          - SPOT_PRICE_CAPACITY_OPTIMIZED
+          type: string
+        allowBuckets:
+          items:
+            type: string
+          type: array
+        arm64Enabled:
+          type: boolean
+        bidPercentage:
+          format: int32
+          type: integer
+        disposeOnDeletion:
+          type: boolean
+        dragenAmiId:
+          type: string
+        dragenEnabled:
+          type: boolean
+        dragenInstanceType:
+          type: string
+        ebsAutoScale:
+          type: boolean
+        ebsBlockSize:
+          format: int32
+          type: integer
+        ebsBootSize:
+          format: int32
+          type: integer
+        ec2KeyPair:
+          type: string
+        ecsConfig:
+          type: string
+        efsCreate:
+          type: boolean
+        efsId:
+          type: string
+        efsMount:
+          type: string
+        fargateHeadEnabled:
+          type: boolean
+        fsxMount:
+          type: string
+        fsxName:
+          type: string
+        fsxSize:
+          format: int32
+          type: integer
+        fusionEnabled:
+          type: boolean
+        gpuEnabled:
+          type: boolean
+        imageId:
+          type: string
+        instanceTypes:
+          items:
+            type: string
+          type: array
+        maxCpus:
+          format: int32
+          type: integer
+        minCpus:
+          format: int32
+          type: integer
+        securityGroups:
+          items:
+            type: string
+          type: array
+        subnets:
+          items:
+            type: string
+          type: array
+        type:
+          enum:
+          - SPOT
+          - EC2
+          type: string
+        vpcId:
+          type: string
+      type: object
+    Map.Entry_String.String_:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    GoogleSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          data:
+            type: string
+            writeOnly: true
+          discriminator:
+            type: string
+          serviceAccountEmail:
+            type: string
+          tokenAudience:
+            type: string
+          workloadIdentityProvider:
+            type: string
+        type: object
+      title: Google credentials
+      type: object
+    AzureEntraKeys:
+      allOf:
+      - $ref: '#/components/schemas/AzureSecurityKeys'
+      - properties:
+          clientId:
+            type: string
+          clientSecret:
+            type: string
+            writeOnly: true
+          discriminator:
+            type: string
+          tenantId:
+            type: string
+        type: object
+      title: Azure Entra credentials
+      type: object
+    DeleteManagedCredentialsConflictResponse.Conflict:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        url:
+          type: string
+      type: object
+    ConfigEnvVariable:
+      properties:
+        compute:
+          type: boolean
+        head:
+          type: boolean
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    LocalComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          fusion2Enabled:
+            type: boolean
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Local execution configuration
+      type: object
+    PodCleanupPolicy:
+      enum:
+      - on_success
+      - always
+      - never
+      type: string
+      x-enum-varnames:
+      - on_success
+      - always
+      - never
+    BitBucketSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/GitKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+          token:
+            type: string
+            writeOnly: true
+          username:
+            type: string
+        type: object
+      title: BitBucket credentials
+      type: object
+    LsfComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      - properties:
+          perJobMemLimit:
+            type: boolean
+          perTaskReserve:
+            type: boolean
+          unitForLimits:
+            type: string
+        type: object
+      title: IBM LSF configuration
+      type: object
+    AgentSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          connectionId:
+            type: string
+          discriminator:
+            type: string
+          shared:
+            type: boolean
+          workDir:
+            type: string
+        type: object
+      title: Tower Agent credentials
+      type: object
+    EksComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - properties:
+          clusterName:
+            description: The AWS EKS cluster name
+            type: string
+          fusion2Enabled:
+            type: boolean
+          region:
+            description: AWS region
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Amazon EKS cluster configuration
+      type: object
+    SeqeraComputeCloudInstanceTypeSize:
+      enum:
+      - SMALL
+      - MEDIUM
+      - LARGE
+      type: string
+    CreateManagedCredentialsResponse:
+      properties:
+        managedCredentials:
+          $ref: '#/components/schemas/ManagedCredentialsDbDto'
+      type: object
+    ManagedCredentialsDbDto:
+      properties:
+        id:
+          format: int64
+          type: integer
+      type: object
+    Credentials:
+      properties:
+        baseUrl:
+          maxLength: 200
+          pattern: ''
+          type: string
+        category:
+          maxLength: 20
+          type: string
+        dateCreated:
+          format: date-time
+          readOnly: true
+          type: string
+        deleted:
+          readOnly: true
+          type: boolean
+        description:
+          type: string
+        id:
+          maxLength: 22
+          type: string
+        keys:
+          $ref: '#/components/schemas/SecurityKeys'
+        lastUpdated:
+          format: date-time
+          readOnly: true
+          type: string
+        lastUsed:
+          format: date-time
+          readOnly: true
+          type: string
+        lastValidated:
+          description: Timestamp of the most recent completed validation probe (success or authoritative fail). Null until first probe. NOT advanced on transient probe outcomes.
+          format: date-time
+          readOnly: true
+          type: string
+        message:
+          description: Provider-supplied error detail captured when status transitions to INVALID. Cleared (null) whenever status returns to AVAILABLE. Truncated to 4096 characters with a trailing " (truncated)" suffix when the underlying provider message exceeds that limit.
+          maxLength: 4096
+          readOnly: true
+          type: string
+        name:
+          maxLength: 100
+          type: string
+        provider:
+          enum:
+          - aws
+          - azure
+          - azure_entra
+          - google
+          - github
+          - github_app
+          - gitlab
+          - bitbucket
+          - ssh
+          - k8s
+          - container-reg
+          - tw-agent
+          - codecommit
+          - gitea
+          - azurerepos
+          - seqeracompute
+          - azure-cloud
+          - s3
+          maxLength: 16
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/Credentials.Status'
+          description: Validation health for these credentials. AVAILABLE = last probe succeeded (or no probe has been attempted yet). INVALID = the last probe was authoritatively rejected by the provider (see message). Transient probe failures (network / 5xx) leave this field untouched.
+          readOnly: true
+      required:
+      - name
+      - provider
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    SchedConfig:
+      properties:
+        backendStrategy:
+          description: Backend used by Intelligent Compute to run tasks. 'ECS' (AWS only, default) delegates task execution to AWS ECS; 'EC2' (AWS only) runs tasks directly on AWS EC2 instances; 'VM' runs tasks on cloud VMs (provider-agnostic).
+          enum:
+          - ECS
+          - EC2
+          - VM
+          type: string
+        diskAllocation:
+          type: string
+        fusionSnapshots:
+          description: Enable Fusion snapshots so interrupted (e.g. spot-reclaimed) tasks can resume from a snapshot instead of restarting from scratch.
+          type: boolean
+        machineTypes:
+          description: EC2 instance types for compute nodes. Leave empty to automatically select the most cost-effective types for each task.
+          items:
+            type: string
+          type: array
+        nvmeEnabled:
+          description: When true, only use instance types providing local SSD (NVMe) storage. Maps to diskAllocation='nvme'.
+          type: boolean
+        pool:
+          allOf:
+          - $ref: '#/components/schemas/SchedConfig.Pool'
+          description: Warm-pool configuration. When present and enabled, the scheduler maintains a pool of idle VMs ready to absorb incoming tasks with sub-5s start latency.
+        predictionModel:
+          description: 'Resource-prediction model used by Intelligent Compute to size tasks. Suggested values: ''none'' (default), ''qr/v1'', ''qr/v2''. Any other string is accepted.'
+          type: string
+        provisioningModel:
+          enum:
+          - spot
+          - spotFirst
+          - ondemand
+          type: string
+      type: object
+    AwsCredentialsMode:
+      enum:
+      - keys
+      - role
+      type: string
+      x-enum-varnames:
+      - keys
+      - role
+      x-type: String
+    DeleteManagedCredentialsConflictResponse:
+      properties:
+        conflicts:
+          items:
+            $ref: '#/components/schemas/DeleteManagedCredentialsConflictResponse.Conflict'
+          type: array
+        managedCredentialsId:
+          type: string
+      type: object
+    GiteaSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/GitKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+          token:
+            type: string
+          username:
+            type: string
+        type: object
+      title: Gitea credentials
+      type: object
+    ContainerRegistryKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+          registry:
+            type: string
+          userName:
+            type: string
+        type: object
+      title: Container registry credentials
+      type: object
+    GkeComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - properties:
+          clusterName:
+            description: The GKE cluster name
+            type: string
+          fusion2Enabled:
+            type: boolean
+          region:
+            description: The GKE cluster region - or - zone
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Google GKE cluster configuration
+      type: object
+    GoogleBatchConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          bootDiskImage:
+            type: string
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          computeJobsInstanceTemplate:
+            type: string
+          computeJobsMachineType:
+            items:
+              type: string
+            type: array
+          copyImage:
+            type: string
+          cpuPlatform:
+            type: string
+          debugMode:
+            format: int32
+            type: integer
+          fusion2Enabled:
+            type: boolean
+          fusionSnapshots:
+            type: boolean
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobInstanceTemplate:
+            type: string
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          labels:
+            additionalProperties:
+              type: string
+            type: object
+          location:
+            type: string
+          machineType:
+            type: string
+          network:
+            type: string
+          networkTags:
+            items:
+              type: string
+            type: array
+          nfsMount:
+            type: string
+          nfsTarget:
+            type: string
+          projectId:
+            type: string
+          serviceAccount:
+            type: string
+          spot:
+            type: boolean
+          sshDaemon:
+            type: boolean
+          sshImage:
+            type: string
+          subnetwork:
+            type: string
+          usePrivateAddress:
+            type: boolean
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Google Batch service configuration
+      type: object
+    UpdateManagedIdentityRequest:
+      properties:
+        managedIdentity:
+          $ref: '#/components/schemas/ManagedIdentityDbDto_AbstractGridConfig_'
+      type: object
+    GitKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          password:
+            type: string
+          token:
+            type: string
+          username:
+            type: string
+        type: object
+      type: object
+    CreateManagedIdentityRequest:
+      properties:
+        config:
+          $ref: '#/components/schemas/AbstractGridConfig'
+        name:
+          type: string
+        platform:
+          enum:
+          - altair-platform
+          - lsf-platform
+          - moab-platform
+          - slurm-platform
+          - uge-platform
+          type: string
+      type: object
+    AzureReposSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/GitKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+          token:
+            type: string
+          username:
+            type: string
+        type: object
+      title: Azure Repos credentials
+      type: object
+    ListManagedIdentitiesResponse:
+      properties:
+        managedIdentities:
+          items:
+            $ref: '#/components/schemas/ManagedIdentityDbDto_AbstractGridConfig_'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    AzBatchPoolConfig:
+      description: Azure Batch pool configuration for head or worker pool
+      properties:
+        autoScale:
+          type: boolean
+        bootDiskSizeGB:
+          description: Boot disk size in GB for this pool's nodes. Overrides the forge-level bootDiskSizeGB. When omitted, falls back to the forge-level value or Azure's default.
+          example: 100
+          format: int32
+          maximum: 4095
+          minimum: 50
+          nullable: true
+          type: integer
+        vmCount:
+          format: int32
+          type: integer
+        vmType:
+          type: string
+      type: object
+    ComputeConfig:
+      discriminator:
+        mapping:
+          altair-platform: '#/components/schemas/AltairPbsComputeConfig'
+          aws-batch: '#/components/schemas/AwsBatchConfig'
+          aws-cloud: '#/components/schemas/AwsCloudConfig'
+          azure-batch: '#/components/schemas/AzBatchConfig'
+          azure-cloud: '#/components/schemas/AzCloudConfig'
+          eks-platform: '#/components/schemas/EksComputeConfig'
+          gke-platform: '#/components/schemas/GkeComputeConfig'
+          google-batch: '#/components/schemas/GoogleBatchConfig'
+          google-cloud: '#/components/schemas/GoogleCloudConfig'
+          google-lifesciences: '#/components/schemas/GoogleLifeSciencesConfig'
+          k8s-platform: '#/components/schemas/K8sComputeConfig'
+          local-platform: '#/components/schemas/LocalComputeConfig'
+          lsf-platform: '#/components/schemas/LsfComputeConfig'
+          moab-platform: '#/components/schemas/MoabComputeConfig'
+          seqeracompute-platform: '#/components/schemas/SeqeraComputeConfig'
+          slurm-platform: '#/components/schemas/SlurmComputeConfig'
+          uge-platform: '#/components/schemas/UnivaComputeConfig'
+        propertyName: discriminator
+      oneOf:
+      - $ref: '#/components/schemas/AwsBatchConfig'
+      - $ref: '#/components/schemas/AwsCloudConfig'
+      - $ref: '#/components/schemas/SeqeraComputeConfig'
+      - $ref: '#/components/schemas/GoogleBatchConfig'
+      - $ref: '#/components/schemas/GoogleCloudConfig'
+      - $ref: '#/components/schemas/AzBatchConfig'
+      - $ref: '#/components/schemas/AzCloudConfig'
+      - $ref: '#/components/schemas/LsfComputeConfig'
+      - $ref: '#/components/schemas/SlurmComputeConfig'
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - $ref: '#/components/schemas/EksComputeConfig'
+      - $ref: '#/components/schemas/GkeComputeConfig'
+      - $ref: '#/components/schemas/UnivaComputeConfig'
+      - $ref: '#/components/schemas/AltairPbsComputeConfig'
+      - $ref: '#/components/schemas/MoabComputeConfig'
+      - $ref: '#/components/schemas/LocalComputeConfig'
+      - $ref: '#/components/schemas/GoogleLifeSciencesConfig'
+      properties:
+        discriminator:
+          description: property to select the compute config platform
+          type: string
+        environment:
+          items:
+            $ref: '#/components/schemas/ConfigEnvVariable'
+          type: array
+        nextflowConfig:
+          type: string
+        postRunScript:
+          description: Add a script that executes after all Nextflow processes have completed. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
+          type: string
+        preRunScript:
+          description: Add a script that executes in the nf-launch script prior to invoking Nextflow processes. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
+          type: string
+        workDir:
+          description: Compute environment working directory
+          type: string
+      type: object
+    GoogleCloudConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          arm64Enabled:
+            type: boolean
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          gpuEnabled:
+            type: boolean
+          imageId:
+            type: string
+          instanceType:
+            type: string
+          projectId:
+            type: string
+          region:
+            type: string
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          serviceAccountEmail:
+            type: string
+          waveEnabled:
+            type: boolean
+          zone:
+            type: string
+        type: object
+      title: Google Cloud configuration
+      type: object
+    AwsSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          accessKey:
+            type: string
+          assumeRoleArn:
+            type: string
+          discriminator:
+            type: string
+          externalId:
+            type: string
+          mode:
+            $ref: '#/components/schemas/AwsCredentialsMode'
+          secretKey:
+            type: string
+            writeOnly: true
+        type: object
+      title: AWS credentials
+      type: object
+    CreateManagedCredentialsRequest:
+      properties:
+        credentials:
+          $ref: '#/components/schemas/Credentials'
+        metadata:
+          $ref: '#/components/schemas/ManagedCredentialsMetadata'
+        provider:
+          enum:
+          - ssh
+          type: string
+      type: object
+    AzCloudConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          dataCollectionEndpoint:
+            type: string
+          dataCollectionRuleId:
+            type: string
+          deletedResources:
+            items:
+              $ref: '#/components/schemas/Map.Entry_String.String_'
+            readOnly: true
+            type: array
+          forgedResources:
+            items:
+              $ref: '#/components/schemas/Map.Entry_String.String_'
+            type: array
+          fusion2Enabled:
+            type: boolean
+          instanceType:
+            type: string
+          logTableName:
+            type: string
+          logWorkspaceId:
+            type: string
+          managedIdentityClientId:
+            type: string
+          managedIdentityId:
+            type: string
+          networkId:
+            type: string
+          region:
+            type: string
+          resourceGroup:
+            type: string
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          subnets:
+            items:
+              type: string
+            type: array
+          subscriptionId:
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Azure Cloud configuration
+      type: object
+    K8sComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          computeServiceAccount:
+            type: string
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          headPodSpec:
+            type: string
+          headServiceAccount:
+            type: string
+          namespace:
+            type: string
+          podCleanup:
+            $ref: '#/components/schemas/PodCleanupPolicy'
+          server:
+            type: string
+          servicePodSpec:
+            type: string
+          sslCert:
+            type: string
+          storageClaimName:
+            type: string
+          storageMountPath:
+            type: string
+        type: object
+      title: Kubernetes compute configuration
+      type: object
+    LocalSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+        type: object
+      title: Local security keys
+      type: object
+    SchedConfig.Pool:
+      properties:
+        desiredWarm:
+          description: Target number of idle VMs to keep warm. Bounds total warm-VM cost across all of this CE's pool clusters.
+          format: int32
+          type: integer
+        enabled:
+          description: Whether the warm pool is active for this CE. When false, the scheduler will not maintain idle VMs.
+          type: boolean
+        scaleToZeroSecs:
+          description: Seconds of inactivity after which the warm pool scales to zero. Set to 0 to never scale to zero.
+          format: int32
+          type: integer
+      type: object
+    ManagedIdentityDbDto_AbstractGridConfig_:
+      properties:
+        config:
+          $ref: '#/components/schemas/AbstractGridConfig'
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        platform:
+          enum:
+          - altair-platform
+          - lsf-platform
+          - moab-platform
+          - slurm-platform
+          - uge-platform
+          type: string
+      type: object
+    MoabComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Moab configuration
+      type: object
+    GitLabSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/GitKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+          token:
+            type: string
+            writeOnly: true
+          username:
+            type: string
+        type: object
+      title: GitLab credentials
+      type: object
+    CodeCommitSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/GitKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+          token:
+            type: string
+          username:
+            type: string
+        type: object
+      title: AWS CodeCommit credentials
+      type: object
+    AwsCloudConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          allowBuckets:
+            items:
+              type: string
+            type: array
+          arm64Enabled:
+            type: boolean
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          ebsBootSize:
+            format: int32
+            type: integer
+          ebsEncrypted:
+            description: When true, the boot EBS volume of provisioned instances is encrypted. Null/absent (the default) is treated as false — no encryption.
+            type: boolean
+          ebsKmsKeyId:
+            description: Optional KMS key ARN used to encrypt the boot EBS volume. Only applied when ebsEncrypted is true. When omitted, the account/region default EBS encryption key is used.
+            type: string
+          ec2KeyPair:
+            type: string
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          gpuEnabled:
+            type: boolean
+          imageId:
+            type: string
+          instanceProfileArn:
+            type: string
+          instanceType:
+            type: string
+          logGroup:
+            type: string
+          region:
+            type: string
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          securityGroups:
+            items:
+              type: string
+            type: array
+          subnetId:
+            deprecated: true
+            description: DEPRECATED — use subnetIds. Kept in sync with the first element of subnetIds.
+            type: string
+          subnetIds:
+            description: Subnets to launch into. Basic uses the first; Intelligent Compute may use all.
+            items:
+              type: string
+            type: array
+          vpcId:
+            description: The VPC used to scope subnet and security-group selection.
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: AWS Cloud configuration
+      type: object
+    S3SecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          accessKey:
+            type: string
+          discriminator:
+            type: string
+          pathStyleAccessEnabled:
+            type: boolean
+          secretKey:
+            type: string
+            writeOnly: true
+        type: object
+      title: S3-compatible credentials
+      type: object
+    K8sSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          certificate:
+            type: string
+          discriminator:
+            type: string
+          privateKey:
+            type: string
+            writeOnly: true
+          token:
+            type: string
+            writeOnly: true
+        type: object
+      title: Kubernetes credentials
+      type: object
+    AzBatchForgeConfig:
+      properties:
+        autoScale:
+          type: boolean
+        bootDiskSizeGB:
+          description: Boot disk size in GB for all pool nodes. When omitted, Azure uses the default disk size for the selected VM image. Per-pool values in headPool/workerPool take precedence in dual-pool mode.
+          example: 100
+          format: int32
+          maximum: 4095
+          minimum: 50
+          nullable: true
+          type: integer
+        containerRegIds:
+          items:
+            type: string
+          type: array
+        disposeOnDeletion:
+          type: boolean
+        dualPoolConfig:
+          type: boolean
+        headPool:
+          allOf:
+          - $ref: '#/components/schemas/AzBatchPoolConfig'
+          description: Head pool configuration for dual pool mode
+        vmCount:
+          format: int32
+          type: integer
+        vmType:
+          type: string
+        workerPool:
+          allOf:
+          - $ref: '#/components/schemas/AzBatchPoolConfig'
+          description: Worker pool configuration for dual pool mode
+      type: object
+    JobCleanupPolicy:
+      enum:
+      - on_success
+      - always
+      - never
+      type: string
+      x-enum-varnames:
+      - on_success
+      - always
+      - never
+    ManagedCredentialsMetadata:
+      properties:
+        discriminator:
+          readOnly: true
+          type: string
+      type: object
+    ListManagedCredentialsResponse:
+      properties:
+        managedCredentials:
+          items:
+            $ref: '#/components/schemas/ListManagedCredentialsRespDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    Credentials.Status:
+      enum:
+      - AVAILABLE
+      - INVALID
+      type: string
+    SeqeraComputeSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/AwsSecurityKeys'
+      - properties:
+          discriminator:
+            type: string
+        type: object
+      title: Seqera Compute credentials
+      type: object
+    AzureSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          batchKey:
+            type: string
+            writeOnly: true
+          batchName:
+            type: string
+          discriminator:
+            type: string
+          storageKey:
+            type: string
+            writeOnly: true
+          storageName:
+            type: string
+        type: object
+      title: Azure credentials
+      type: object
+    AbstractGridConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          computeQueue:
+            type: string
+          headJobOptions:
+            type: string
+          headQueue:
+            type: string
+          hostName:
+            type: string
+          launchDir:
+            type: string
+          maxQueueSize:
+            format: int32
+            type: integer
+          port:
+            format: int32
+            type: integer
+          propagateHeadJobOptions:
+            type: boolean
+          userName:
+            type: string
+        type: object
+      type: object
+    SlurmComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Slurm configuration
+      type: object
+    GitHubAppSecurityKeys:
+      properties:
+        appId:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+          writeOnly: true
+        discriminator:
+          type: string
+        privateKey:
+          type: string
+          writeOnly: true
+        slug:
+          type: string
+        webhookSecret:
+          type: string
+          writeOnly: true
+      type: object
+    UnivaComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Univa Grid Engine configuration
+      type: object
+    SeqeraComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          defaultDataRetentionPolicy:
+            type: boolean
+          instanceTypeSize:
+            allOf:
+            - $ref: '#/components/schemas/SeqeraComputeCloudInstanceTypeSize'
+            description: Size of the Data Studios instance (SMALL, MEDIUM, LARGE)
+          region:
+            type: string
+        type: object
+      title: Seqera Compute configuration
+      type: object
+    AwsBatchConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          cliPath:
+            type: string
+          computeJobRole:
+            type: string
+          computeQueue:
+            type: string
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          dragenInstanceType:
+            type: string
+          dragenQueue:
+            type: string
+          executionRole:
+            type: string
+          forge:
+            $ref: '#/components/schemas/ForgeConfig'
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          fusionSnapshots:
+            type: boolean
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          headJobRole:
+            type: string
+          headQueue:
+            type: string
+          logGroup:
+            type: string
+          lustreId:
+            deprecated: true
+            type: string
+          nvnmeStorageEnabled:
+            type: boolean
+          region:
+            type: string
+          storageType:
+            deprecated: true
+            type: string
+          volumes:
+            items:
+              type: string
+            type: array
+          waveEnabled:
+            type: boolean
+        type: object
+      title: AWS Batch configuration
+      type: object
+    GoogleLifeSciencesConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          copyImage:
+            type: string
+          debugMode:
+            format: int32
+            type: integer
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          labels:
+            additionalProperties:
+              type: string
+            type: object
+          location:
+            type: string
+          nfsMount:
+            type: string
+          nfsTarget:
+            type: string
+          preemptible:
+            type: boolean
+          projectId:
+            type: string
+          region:
+            type: string
+          sshDaemon:
+            type: boolean
+          sshImage:
+            type: string
+          usePrivateAddress:
+            type: boolean
+          zones:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Google Life Sciences configuration (retired)
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

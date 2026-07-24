@@ -1,0 +1,269 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions users API
+  version: 1.181.0
+tags:
+- description: Users
+  name: users
+paths:
+  /user-info:
+    get:
+      operationId: UserInfo
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeUserResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Describe current user
+      tags:
+      - users
+  /users/validate:
+    get:
+      operationId: ValidateUserName
+      parameters:
+      - description: User name to validate
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicated element
+      security:
+      - BearerAuth: []
+      summary: Check that the user name is valid
+      tags:
+      - users
+  /users/{userId}:
+    delete:
+      operationId: DeleteUser
+      parameters:
+      - description: User numeric identifier
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete a user entity
+      tags:
+      - users
+    get:
+      deprecated: true
+      operationId: DescribeUser
+      parameters:
+      - description: User numeric identifier
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeUserResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Describe a user entity
+      tags:
+      - users
+    post:
+      operationId: UpdateUser
+      parameters:
+      - description: User numeric identifier
+        in: path
+        name: userId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpsertUserRequest'
+        description: User update request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Update an user entity
+      tags:
+      - users
+components:
+  schemas:
+    WaveBuildNotification:
+      enum:
+      - ALWAYS_ON
+      - ON_ERROR
+      - ALWAYS_OFF
+      type: string
+    UpsertUserRequest:
+      properties:
+        avatar:
+          type: string
+        avatarId:
+          type: string
+        defaultWorkspaceId:
+          format: int64
+          nullable: true
+          type: integer
+        description:
+          maxLength: 1000
+          type: string
+        email:
+          format: email
+          maxLength: 255
+          type: string
+        firstName:
+          maxLength: 100
+          type: string
+        lastName:
+          maxLength: 100
+          type: string
+        notification:
+          type: boolean
+        organization:
+          maxLength: 100
+          type: string
+        userName:
+          maxLength: 40
+          type: string
+        waveBuildNotification:
+          allOf:
+          - $ref: '#/components/schemas/WaveBuildNotification'
+          nullable: true
+      required:
+      - email
+      - userName
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    DescribeUserResponse:
+      properties:
+        defaultWorkspaceId:
+          format: int64
+          type: integer
+        needConsent:
+          type: boolean
+        user:
+          $ref: '#/components/schemas/UserResponseDto'
+      type: object
+    UserResponseDto:
+      properties:
+        avatar:
+          type: string
+        avatarId:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        deleted:
+          type: boolean
+        description:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        id:
+          format: int64
+          type: integer
+        lastAccess:
+          format: date-time
+          type: string
+        lastName:
+          type: string
+        lastUpdated:
+          format: date-time
+          type: string
+        marketingConsent:
+          type: boolean
+        notification:
+          type: boolean
+        organization:
+          type: string
+        termsOfUseConsent:
+          type: boolean
+        userName:
+          type: string
+        waveBuildNotification:
+          allOf:
+          - $ref: '#/components/schemas/WaveBuildNotification'
+          nullable: true
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

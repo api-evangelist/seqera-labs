@@ -1,0 +1,152 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions service-info API
+  version: 1.181.0
+tags:
+- description: Seqera Platform API service information
+  name: service-info
+paths:
+  /service-info:
+    get:
+      operationId: Info
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceInfoResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+      summary: General Seqera service features and version.
+      tags:
+      - service-info
+components:
+  schemas:
+    ServiceInfoResponse:
+      properties:
+        serviceInfo:
+          $ref: '#/components/schemas/ServiceInfo'
+      type: object
+    NavbarConfig.NavbarMenu:
+      properties:
+        label:
+          type: string
+        url:
+          type: string
+      type: object
+    ServiceInfo:
+      properties:
+        allowInstanceCredentials:
+          type: boolean
+        allowLocalRepos:
+          deprecated: true
+          type: boolean
+        allowNextflowCliLogs:
+          type: boolean
+        analytics:
+          $ref: '#/components/schemas/Analytics'
+        apiVersion:
+          type: string
+        authTypes:
+          items:
+            type: string
+          type: array
+        commitId:
+          type: string
+        contactEmail:
+          type: string
+        contentMaxFileSize:
+          format: int64
+          type: integer
+        contentUrl:
+          type: string
+        evalWorkspaceIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        forgePrefix:
+          type: string
+        groundswellAllowedWorkspaces:
+          items:
+            format: int64
+            type: integer
+          type: array
+        groundswellEnabled:
+          type: boolean
+        heartbeatInterval:
+          format: int32
+          type: integer
+        landingUrl:
+          type: string
+        launchConfigTextMaxSize:
+          format: int32
+          type: integer
+        launchParamsTextMaxSize:
+          format: int32
+          type: integer
+        llmEnabled:
+          type: boolean
+        loginPath:
+          type: string
+        logoutUrl:
+          nullable: true
+          type: string
+        navbar:
+          $ref: '#/components/schemas/NavbarConfig'
+        seqeraAgentBackendUrl:
+          nullable: true
+          type: string
+        seqeraAiBaseUrl:
+          nullable: true
+          type: string
+        seqeraCloud:
+          type: boolean
+        seqeraComputeEnabled:
+          type: boolean
+        termsOfUseUrl:
+          type: string
+        userWorkspaceEnabled:
+          type: boolean
+        version:
+          type: string
+        waveEnabled:
+          type: boolean
+      type: object
+    Analytics:
+      properties:
+        hubspotId:
+          type: string
+        posthogApiHost:
+          type: string
+        posthogApiKey:
+          type: string
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    NavbarConfig:
+      properties:
+        menus:
+          items:
+            $ref: '#/components/schemas/NavbarConfig.NavbarMenu'
+          type: array
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

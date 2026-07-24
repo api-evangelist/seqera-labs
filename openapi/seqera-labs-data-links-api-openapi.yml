@@ -1,0 +1,1213 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions data-links API
+  version: 1.181.0
+tags:
+- description: Cloud storage directory paths in Data Explorer
+  name: data-links
+paths:
+  /data-links:
+    get:
+      description: 'Retrieves all available data-links in a user context. Append `?workspaceId={your-workspace-id}` to retrieve data-links in a workspace context.
+
+        '
+      operationId: ListDataLinks
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Credentials identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      - description: 'Free text search criteria — data-link name and keywords: `region`, `provider`.'
+        in: query
+        name: search
+        schema:
+          type: string
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: Filter results by visibility
+        in: query
+        name: visibility
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinksListResponse'
+          description: OK
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinksListResponse'
+          description: Accepted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, or the API is disabled in the workspace.
+      security:
+      - BearerAuth: []
+      summary: List data-links
+      tags:
+      - data-links
+    post:
+      description: Creates a new data-link in a user context. Append `?workspaceId=` to create the data-link in a workspace context.
+      operationId: CreateCustomDataLink
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataLinkCreateRequest'
+        description: Data-link creation request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinkDto'
+          description: Success
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled in the workspace, or data-link or path not found
+      security:
+      - BearerAuth: []
+      summary: Create data-link
+      tags:
+      - data-links
+  /data-links/cache/refresh:
+    get:
+      description: Refreshes the data-link cache for the given `workspaceId` or `credentialsId`
+      operationId: RefreshDataLinkCache
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Refresh data-link cache
+      tags:
+      - data-links
+  /data-links/{dataLinkId}:
+    delete:
+      description: Deletes the data-link associated with the given `dataLinkId`.
+      operationId: DeleteCustomDataLink
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          description: Success — Data-link deleted
+        '204':
+          description: DeleteCustomDataLink 204 response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link not found
+      security:
+      - BearerAuth: []
+      summary: Delete data-link
+      tags:
+      - data-links
+    get:
+      description: Retrieves the details of the data-link associated with the given `dataLinkId`.
+      operationId: DescribeDataLink
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinkResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link not found
+      security:
+      - BearerAuth: []
+      summary: Describe data-link
+      tags:
+      - data-links
+    put:
+      description: Update the data-link associated with the given `dataLinkId`.
+      operationId: UpdateCustomDataLink
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataLinkUpdateRequest'
+        description: Data-link update request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinkDto'
+          description: Success — Data-link updated
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link not found
+      security:
+      - BearerAuth: []
+      summary: Update data-link
+      tags:
+      - data-links
+  /data-links/{dataLinkId}/browse:
+    get:
+      description: Retrieves the content of the data-link associated with the given `dataLinkId`
+      operationId: ExploreDataLink
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      - description: Prefix search of data-link content
+        in: query
+        name: search
+        schema:
+          type: string
+      - description: Token used to fetch the next page of items
+        in: query
+        name: nextPageToken
+        schema:
+          type: string
+      - description: Number of items to return per page. If ommitted, a default maximum value is returned.
+        in: query
+        name: pageSize
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinkContentResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link not found
+      security:
+      - BearerAuth: []
+      summary: Explore data-link
+      tags:
+      - data-links
+  /data-links/{dataLinkId}/browse-tree:
+    get:
+      description: Provides a list of all files in the provided paths (including files in sub-paths).
+      operationId: ExploreDataLinkTree
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      - description: List of paths
+        in: query
+        name: paths
+        schema:
+          items:
+            type: object
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinkContentTreeListResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link or path not found
+      security:
+      - BearerAuth: []
+      summary: Explore a data-link tree
+      tags:
+      - data-links
+  /data-links/{dataLinkId}/browse/{path}:
+    get:
+      description: Retrieves the content of the data-link associated with the given `dataLinkId`, at the given `path`.
+      operationId: ExploreDataLinkWithPath
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Content path
+        in: path
+        name: path
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      - description: Prefix search of data-link content
+        in: query
+        name: search
+        schema:
+          type: string
+      - description: Token used to fetch the next page of items
+        in: query
+        name: nextPageToken
+        schema:
+          type: string
+      - description: Number of items to return per page. If ommitted, a default maximum value is returned.
+        in: query
+        name: pageSize
+        schema:
+          format: int32
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinkContentResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link not found
+      security:
+      - BearerAuth: []
+      summary: Explore data-link path
+      tags:
+      - data-links
+  /data-links/{dataLinkId}/content:
+    delete:
+      description: Deletes the content of the data-link associated with the given `dataLinkId`. The data-link itself is preserved.
+      operationId: DeleteDataLinkItem
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataLinkDeleteItemRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinkDeleteItemResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link or path not found
+      security:
+      - BearerAuth: []
+      summary: Delete data-link content
+      tags:
+      - data-links
+  /data-links/{dataLinkId}/download/{filePath}:
+    get:
+      description: Downloads the content at the given `filePath` in the data-link associated with the given `dataLinkId`.
+      operationId: DownloadDataLink
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: File path to download
+        in: path
+        name: filePath
+        required: true
+        schema:
+          type: string
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link or path not found
+      security:
+      - BearerAuth: []
+      summary: Download data-link file at path
+      tags:
+      - data-links
+  /data-links/{dataLinkId}/generate-download-url:
+    get:
+      description: Returns a URL to download files from the data-link associated with the given `dataLinkId`.
+      operationId: GenerateDownloadUrlDataLink
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: File path to download
+        in: query
+        name: filePath
+        schema:
+          type: string
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: 'Whether to generate the URL for preview purposes or direct download (default: false)'
+        in: query
+        name: preview
+        schema:
+          type: boolean
+      - description: 'When true, treats the file as a Fusion symlink and resolves its target (default: false)'
+        in: query
+        name: resolveSymlink
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinkDownloadUrlResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link or path not found
+      security:
+      - BearerAuth: []
+      summary: Generate data-link file download URL
+      tags:
+      - data-links
+  /data-links/{dataLinkId}/script/download:
+    get:
+      description: Creates a script to download files from the data-link associated with the given `dataLinkId`. Append `?dirs` or `?files` to specify a list of files or paths to download within the data-link.
+      operationId: GenerateDownloadScript
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      - description: List of paths to directories to download
+        in: query
+        name: dirs
+        schema:
+          items:
+            type: object
+          type: array
+      - description: List of paths to files to download
+        in: query
+        name: files
+        schema:
+          items:
+            type: object
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinkDownloadScriptResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link or path not found
+      security:
+      - BearerAuth: []
+      summary: Generate download script
+      tags:
+      - data-links
+  /data-links/{dataLinkId}/upload:
+    post:
+      description: 'Creates a URL to upload files to the data-link associated with the given `dataLinkId`.
+
+        For AWS S3 data-links, an additional follow-up request must be sent after your file upload has completed (or encountered an error) to finalize the upload - see the `/upload/finish` endpoint.'
+      operationId: GenerateDataLinkUploadUrl
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - in: header
+        name: Origin
+        schema:
+          nullable: true
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataLinkMultiPartUploadRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinkMultiPartUploadResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link or path not found
+      security:
+      - BearerAuth: []
+      summary: Generate data-link file upload URL
+      tags:
+      - data-links
+  /data-links/{dataLinkId}/upload/finish:
+    post:
+      description: Finish upload of a data-link file. This is necessary for AWS S3 data-links (`DataLinkProvider=aws`) to finalize a successful file upload, or abort an upload if an error was encountered while uploading a file using an upload URL from the `/upload` endpoint.
+      operationId: FinishDataLinkUpload
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataLinkFinishMultiPartUploadRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: FinishDataLinkUpload 200 response
+        '202':
+          description: No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link not found
+      security:
+      - BearerAuth: []
+      summary: Finish data-link file upload
+      tags:
+      - data-links
+  /data-links/{dataLinkId}/upload/finish/{dirPath}:
+    post:
+      description: Finish upload of a data-link file, specifying a file path (`dirPath`). This is necessary for AWS S3 data-links (`DataLinkProvider=aws`) to finalize a successful file upload, or abort an upload if an error was encountered while uploading a file using an upload URL from the `/upload` endpoint.
+      operationId: FinishDataLinkUploadWithPath
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Path to the destination directory
+        in: path
+        name: dirPath
+        required: true
+        schema:
+          type: string
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataLinkFinishMultiPartUploadRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: FinishDataLinkUploadWithPath 200 response
+        '202':
+          description: No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link or path not found
+      security:
+      - BearerAuth: []
+      summary: Finish data-link file upload to given path
+      tags:
+      - data-links
+  /data-links/{dataLinkId}/upload/{dirPath}:
+    post:
+      description: 'Creates a URL to upload files to the data-link associated with the given `dataLinkId`, specifying a file path (`dirPath`).
+
+        For AWS S3 data-links, an additional follow-up request must be sent after your file upload has completed (or encountered an error) to finalize the upload - see the `/upload/finish` endpoint.'
+      operationId: GenerateDataLinkUploadUrlWithPath
+      parameters:
+      - description: Data-link string identifier
+        in: path
+        name: dataLinkId
+        required: true
+        schema:
+          type: string
+      - description: Path to the destination directory
+        in: path
+        name: dirPath
+        required: true
+        schema:
+          type: string
+      - description: Credentials string identifier
+        in: query
+        name: credentialsId
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - in: header
+        name: Origin
+        schema:
+          nullable: true
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataLinkMultiPartUploadRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataLinkMultiPartUploadResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: BadRequest
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: NotFound — workspace or credentials not found, API disabled for the workspace, or data-link or path not found
+      security:
+      - BearerAuth: []
+      summary: Generate data-link file upload URL (to given path)
+      tags:
+      - data-links
+components:
+  schemas:
+    DataLinkUpdateRequest:
+      properties:
+        credentialsId:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+      type: object
+    DataLinkItem:
+      properties:
+        mimeType:
+          type: string
+        name:
+          type: string
+        size:
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/DataLinkItemType'
+      type: object
+    DataLinkContentTreeListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DataLinkSimpleItem'
+          type: array
+      required:
+      - items
+      type: object
+    DataLinkDeleteItemResponse:
+      properties:
+        deletionFailures:
+          items:
+            $ref: '#/components/schemas/DataLinkItemDeletionFailure'
+          type: array
+      type: object
+    DataLinkType:
+      enum:
+      - bucket
+      type: string
+      x-enum-varnames:
+      - bucket
+    DataLinkCredentials:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        provider:
+          $ref: '#/components/schemas/DataLinkProvider'
+      required:
+      - id
+      - name
+      - provider
+      type: object
+    DataLinkMultiPartUploadResponse:
+      properties:
+        uploadId:
+          type: string
+        uploadUrls:
+          items:
+            type: string
+          type: array
+      type: object
+    DataLinkDto:
+      properties:
+        credentials:
+          items:
+            $ref: '#/components/schemas/DataLinkCredentials'
+          type: array
+        description:
+          type: string
+        hidden:
+          type: boolean
+        id:
+          type: string
+        message:
+          type: string
+        name:
+          type: string
+        provider:
+          $ref: '#/components/schemas/DataLinkProvider'
+        publicAccessible:
+          type: boolean
+        region:
+          type: string
+        resourceRef:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/DataLink.Status'
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/DataLinkType'
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    DataLinkMultiPartUploadRequest:
+      properties:
+        contentLength:
+          format: int64
+          type: integer
+        contentType:
+          type: string
+        fileName:
+          type: string
+      type: object
+    UploadEtag:
+      properties:
+        eTag:
+          type: string
+        partNumber:
+          format: int32
+          type: integer
+      type: object
+    DataLinkCreateRequest:
+      properties:
+        credentialsId:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+        provider:
+          $ref: '#/components/schemas/DataLinkProvider'
+        publicAccessible:
+          type: boolean
+        resourceRef:
+          type: string
+        type:
+          $ref: '#/components/schemas/DataLinkType'
+      type: object
+    DataLinkItemDeletionFailure:
+      properties:
+        dataLinkItem:
+          $ref: '#/components/schemas/DataLinkItem'
+        errorMessage:
+          type: string
+      required:
+      - dataLinkItem
+      - errorMessage
+      type: object
+    DataLinkDownloadUrlResponse:
+      properties:
+        resolvedMimeType:
+          type: string
+        resolvedPath:
+          type: string
+        url:
+          type: string
+        warning:
+          type: string
+      type: object
+    DataLinkProvider:
+      enum:
+      - aws
+      - google
+      - azure
+      - azure_entra
+      - azure-cloud
+      - seqeracompute
+      - s3
+      type: string
+    DataLinkDownloadScriptResponse:
+      properties:
+        script:
+          type: string
+      type: object
+    DataLinkResponse:
+      properties:
+        dataLink:
+          $ref: '#/components/schemas/DataLinkDto'
+      type: object
+    DataLink.Status:
+      enum:
+      - VALID
+      - INVALID
+      readOnly: true
+      type: string
+    DataLinkContentResponse:
+      properties:
+        nextPageToken:
+          type: string
+        objects:
+          items:
+            $ref: '#/components/schemas/DataLinkItem'
+          type: array
+        originalPath:
+          type: string
+      type: object
+    DataLinksListResponse:
+      properties:
+        dataLinks:
+          items:
+            $ref: '#/components/schemas/DataLinkDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    DataLinkSimpleItem:
+      properties:
+        path:
+          type: string
+        size:
+          format: int64
+          type: integer
+      required:
+      - path
+      - size
+      type: object
+    DataLinkDeleteItemRequest:
+      properties:
+        dirs:
+          items:
+            type: string
+          type: array
+        files:
+          items:
+            type: string
+          type: array
+      type: object
+    DataLinkFinishMultiPartUploadRequest:
+      properties:
+        fileName:
+          type: string
+        tags:
+          items:
+            $ref: '#/components/schemas/UploadEtag'
+          type: array
+        uploadId:
+          type: string
+        withError:
+          type: boolean
+      type: object
+    DataLinkItemType:
+      enum:
+      - FOLDER
+      - FILE
+      - FUSION_SYMLINK_FILE
+      type: string
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

@@ -1,0 +1,700 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions labels API
+  version: 1.181.0
+tags:
+- description: Labels and resource labels
+  name: labels
+paths:
+  /actions/labels/add:
+    post:
+      description: Adds the given list of labels to the given pipeline actions. Existing labels are preserved.
+      operationId: AddLabelsToActions
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateActionLabelsRequest'
+        description: Labels add request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Add labels to actions
+      tags:
+      - labels
+  /actions/labels/apply:
+    post:
+      description: Applies the given list of labels to the given pipeline actions. Existing labels are replaced — include labels to be preserved in `labelIds`.
+      operationId: ApplyLabelsToActions
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateActionLabelsRequest'
+        description: Labels apply request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Replace action labels
+      tags:
+      - labels
+  /actions/labels/remove:
+    post:
+      description: Removes the given list of labels from the given pipeline actions.
+      operationId: RemoveLabelsFromActions
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateActionLabelsRequest'
+        description: Labels remove request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Remove labels from actions
+      tags:
+      - labels
+  /datasets/labels/add:
+    post:
+      description: Adds the given list of labels to the given datasets. Existing labels are preserved.
+      operationId: AddLabelsToDatasets
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateDatasetsLabelsRequest'
+        description: Labels add request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Add labels to datasets
+      tags:
+      - labels
+  /datasets/labels/apply:
+    post:
+      description: Applies the given list of labels to the given datasets. Existing labels are replaced - include labels to be preserved in `labelIds`. Only simple labels can be attached to datasets
+      operationId: ApplyLabelsToDatasets
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateDatasetsLabelsRequest'
+        description: Labels apply request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          description: Invalid request, if trying to associate resource labels
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Replace datasets labels
+      tags:
+      - labels
+  /datasets/labels/remove:
+    post:
+      description: Removes the given list of labels from the given datasets.
+      operationId: RemoveLabelsFromDatasets
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateDatasetsLabelsRequest'
+        description: Labels remove request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Remove labels from datasets
+      tags:
+      - labels
+  /labels:
+    get:
+      description: Lists all available labels in a user context. Append `?workspaceId` to list labels in a workspace context.
+      operationId: ListLabels
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: Filter search parameter
+        in: query
+        name: search
+        schema:
+          type: string
+      - description: Label type
+        in: query
+        name: type
+        schema:
+          $ref: '#/components/schemas/LabelType'
+      - description: Label default flag
+        in: query
+        name: isDefault
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLabelsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List labels
+      tags:
+      - labels
+    post:
+      description: 'Creates a new label or returns an existing label based on name/value. By default the operation works in a user context, append `?workspaceId` to create/retrieve a label in a workspace context. Resource labels include `resource: true` and a `value`.'
+      operationId: CreateLabel
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLabelRequest'
+        description: 'Provide a label `name`. Set `resource: true` for resource labels. Only resource labels have a `value` — if `resource: true`, include a `value`. Else, omit `value` from your request body.'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLabelResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Create label
+      tags:
+      - labels
+  /labels/dynamic/allowed:
+    get:
+      operationId: GetAllowedDynamicLabels
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllowedDynamicLabelsResponse'
+          description: Ok
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad Request
+      security:
+      - BearerAuth: []
+      tags:
+      - labels
+  /labels/{labelId}:
+    delete:
+      description: Deletes the label identified by the given `labelId`.
+      operationId: DeleteLabel
+      parameters:
+      - description: Label numeric identifier
+        in: path
+        name: labelId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete label
+      tags:
+      - labels
+    put:
+      description: Updates the label identified by the given `labelId`.
+      operationId: UpdateLabel
+      parameters:
+      - description: Label numeric identifier
+        in: path
+        name: labelId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLabelRequest'
+        description: Label update request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateLabelResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Update label
+      tags:
+      - labels
+  /pipelines/labels/add:
+    post:
+      description: Adds the given list of labels to the given pipelines. Existing labels are preserved.
+      operationId: AddLabelsToPipelines
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociatePipelineLabelsRequest'
+        description: Labels add request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Add labels to pipelines
+      tags:
+      - labels
+  /pipelines/labels/apply:
+    post:
+      description: Applies the given list of labels to the given pipelines. Existing labels are replaced — include labels to be preserved in `labelIds`.
+      operationId: ApplyLabelsToPipelines
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociatePipelineLabelsRequest'
+        description: Labels apply request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Replace pipeline labels
+      tags:
+      - labels
+  /pipelines/labels/remove:
+    post:
+      description: Removes the given list of labels from the given pipelines.
+      operationId: RemoveLabelsFromPipelines
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociatePipelineLabelsRequest'
+        description: Labels remove request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Remove labels from pipelines
+      tags:
+      - labels
+  /workflow/labels/add:
+    post:
+      description: Adds the given list of labels to the given workflows. Existing labels are preserved.
+      operationId: AddLabelsToWorkflows
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateWorkflowLabelsRequest'
+        description: Labels add request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Add labels to workflows
+      tags:
+      - labels
+  /workflow/labels/apply:
+    post:
+      description: Applies the given list of labels to the given workflows. Existing labels are replaced — include labels to be preserved in `labelIds`.
+      operationId: ApplyLabelsToWorkflows
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateWorkflowLabelsRequest'
+        description: Labels apply request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Replace workflow labels
+      tags:
+      - labels
+  /workflow/labels/remove:
+    post:
+      description: Removes the given list of labels from the given workflows.
+      operationId: RemoveLabelsFromWorkflows
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateWorkflowLabelsRequest'
+        description: Labels remove request
+        required: true
+      responses:
+        '204':
+          description: OK - No content
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Remove labels from workflows
+      tags:
+      - labels
+components:
+  schemas:
+    CreateLabelRequest:
+      properties:
+        isDefault:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    AssociateWorkflowLabelsRequest:
+      properties:
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        workflowIds:
+          items:
+            type: string
+          type: array
+      type: object
+    LabelType:
+      enum:
+      - simple
+      - resource
+      - all
+      type: string
+      x-enum-varnames:
+      - simple
+      - resource
+      - all
+    AssociatePipelineLabelsRequest:
+      properties:
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        pipelineIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
+    AssociateDatasetsLabelsRequest:
+      properties:
+        datasetIds:
+          items:
+            type: string
+          type: array
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
+    AssociateActionLabelsRequest:
+      properties:
+        actionIds:
+          items:
+            type: string
+          type: array
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
+    UpdateLabelResponse:
+      properties:
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    UpdateLabelRequest:
+      properties:
+        isDefault:
+          type: boolean
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    AllowedDynamicLabelsResponse:
+      properties:
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    ListLabelsResponse:
+      properties:
+        labels:
+          items:
+            $ref: '#/components/schemas/LabelDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    CreateLabelResponse:
+      properties:
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    LabelDbDto:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        isDynamic:
+          type: boolean
+        isInterpolated:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http

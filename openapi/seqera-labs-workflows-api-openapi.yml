@@ -1,0 +1,3248 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@seqera.io
+    url: https://seqera.io
+  description: Seqera Platform services API
+  title: Seqera actions workflows API
+  version: 1.181.0
+tags:
+- description: Workflow executions
+  name: workflows
+paths:
+  /workflow:
+    get:
+      description: Lists all workflow records, enriched with `attributes`. Append `?workspaceId` to list workflow records in a workspace context.
+      operationId: ListWorkflows
+      parameters:
+      - description: 'Additional attribute values to include in the response (`labels`, `optimized` status). Returns an empty value (`labels: null`) if omitted.'
+        explode: false
+        in: query
+        name: attributes
+        schema:
+          items:
+            $ref: '#/components/schemas/WorkflowQueryAttribute'
+          type: array
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: Filter search parameter
+        in: query
+        name: search
+        schema:
+          type: string
+      - description: Include total size in the response
+        in: query
+        name: includeTotalSize
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkflowsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List workflows
+      tags:
+      - workflows
+  /workflow/delete:
+    post:
+      description: Deletes the workflow records identified by the given list of `workflowIds`.
+      operationId: DeleteWorkflowMany
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Force the deletion even if any workflows are active
+        in: query
+        name: force
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteWorkflowsRequest'
+        description: Delete workflows request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteWorkflowsResponse'
+          description: OK - Return the IDs of workflows that could not be deleted, if any
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete workflows
+      tags:
+      - workflows
+  /workflow/launch:
+    post:
+      description: Submits a workflow execution.
+      operationId: CreateWorkflowLaunch
+      parameters:
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Source workspace numeric identifier
+        in: query
+        name: sourceWorkspaceId
+        required: false
+        schema:
+          format: int64
+          nullable: true
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitWorkflowLaunchRequest'
+        description: Workflow launch request
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitWorkflowLaunchResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/ErrorResponse'
+                - $ref: '#/components/schemas/WorkflowLaunchValidationErrorResponse'
+          description: Bad request — single-failure launches return `ErrorResponse`; multi-failure launches return `WorkflowLaunchValidationErrorResponse` with a per-blocker `errors[]` array
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Launch workflow
+      tags:
+      - workflows
+  /workflow/random-name:
+    get:
+      operationId: GenerateRandomWorkflowName
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RandomWorkflowNameResponse'
+          description: Generated name
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Generates a random name
+      tags:
+      - workflows
+  /workflow/validate:
+    get:
+      description: 'Check that the given run name of a workflow has a valid format. When the session ID is given: check that no other workflow in the system exists with the combination of both elements.'
+      operationId: ValidateWorkflowConstraints
+      parameters:
+      - description: Workflow run name to validate
+        in: query
+        name: runName
+        schema:
+          type: string
+      - description: Workflow session ID to validate
+        in: query
+        name: sessionId
+        schema:
+          type: string
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request. Invalid run name format
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicated element. Existing run name and session ID combination
+      security:
+      - BearerAuth: []
+      summary: Validate run name
+      tags:
+      - workflows
+  /workflow/{workflowId}:
+    delete:
+      operationId: DeleteWorkflow
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Force the deletion even if the workflow is active
+        in: query
+        name: force
+        schema:
+          type: boolean
+      responses:
+        '204':
+          description: OK - Not content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Delete the Workflow entity with the given ID
+      tags:
+      - workflows
+    get:
+      description: Retrieves the details of the workflow record associated with the given `workflowId`.
+      operationId: DescribeWorkflow
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Comma-separated list of attributes to retrieve. Returns an empty value for each attribute not specified.
+        explode: false
+        in: query
+        name: attributes
+        schema:
+          items:
+            $ref: '#/components/schemas/WorkflowQueryAttribute'
+          type: array
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorkflowResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Describe workflow
+      tags:
+      - workflows
+    patch:
+      description: Updates only the workflow-extension store; never a core workflow field. Designed to carry workflow-extension attributes generally so future fields reuse this operation. Returns the updated workflow representation.
+      operationId: UpdateWorkflow
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkflowRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorkflowResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Conflict — a concurrent update prevented the write; the request may be retried
+      security:
+      - BearerAuth: []
+      summary: Apply a partial update to the workflow-extension metadata for the given Workflow ID
+      tags:
+      - workflows
+  /workflow/{workflowId}/cancel:
+    post:
+      description: Cancels the workflow execution identified by the given `workflowId`.
+      operationId: CancelWorkflow
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Cancel on the Platform side even if it cannot be cancelled on the CE provider side
+        in: query
+        name: force
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmptyBodyRequest'
+      responses:
+        '204':
+          description: OK - No content
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Cancel workflow
+      tags:
+      - workflows
+  /workflow/{workflowId}/download:
+    get:
+      description: Downloads the workflow files for the Nextflow main job associated with the given `workflowId`.
+      operationId: DownloadWorkflowLog
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Filename to download
+        in: query
+        name: fileName
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Download workflow files
+      tags:
+      - workflows
+  /workflow/{workflowId}/download/{taskId}:
+    get:
+      description: Downloads the workflow files of the task identified by the given `taskId`.
+      operationId: DownloadWorkflowTaskLog
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Task numeric identifier
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Filename to download
+        in: query
+        name: fileName
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                format: binary
+                type: string
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Download workflow task files
+      tags:
+      - workflows
+  /workflow/{workflowId}/launch:
+    get:
+      description: Retrieves the details of the workflow launch associated with the given `workflowId`.
+      operationId: DescribeWorkflowLaunch
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeWorkflowLaunchResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicate element. Existing run name and session ID combination
+      security:
+      - BearerAuth: []
+      summary: Describe workflow launch
+      tags:
+      - workflows
+  /workflow/{workflowId}/log:
+    get:
+      description: Retrieves the output logs for the Nextflow main job of the workflow identified by the given `workflowId`.
+      operationId: GetWorkflowLog
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Workflow log cursor
+        in: query
+        name: next
+        schema:
+          type: string
+      - description: Maximum length in bytes of the log to retrieve
+        in: query
+        name: maxLength
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowLogResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Get workflow logs
+      tags:
+      - workflows
+  /workflow/{workflowId}/log/{taskId}:
+    get:
+      description: Retrieves the output logs for the workflow task identified by the given `taskId`.
+      operationId: GetWorkflowTaskLog
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Task numeric identifier
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Workflow log cursor
+        in: query
+        name: next
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Maximum length in bytes of the log to retrieve
+        in: query
+        name: maxLength
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkflowLogResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Get workflow task logs
+      tags:
+      - workflows
+  /workflow/{workflowId}/metrics:
+    get:
+      operationId: DescribeWorkflowMetrics
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetWorkflowMetricsResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Get the execution metrics for the given Workflow ID
+      tags:
+      - workflows
+  /workflow/{workflowId}/progress:
+    get:
+      operationId: DescribeWorkflowProgress
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetProgressResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Retrieve the execution progress for the given Workflow ID
+      tags:
+      - workflows
+  /workflow/{workflowId}/star:
+    delete:
+      description: Removes the workflow identified by the given `workflowId` from your list of starred workflows.
+      operationId: DeleteWorkflowStar
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkflowStarResponse'
+          description: OK
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+      summary: Unstar workflow
+      tags:
+      - workflows
+    get:
+      description: Confirms whether the given `workflowId` is starred.
+      operationId: DescribeWorkflowStar
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkflowStarResponse'
+          description: OK
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+      summary: Check workflow star status
+      tags:
+      - workflows
+    post:
+      description: Adds the workflow identified by the given `workflowId` to your list of starred workflows.
+      operationId: CreateWorkflowStar
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkflowStarResponse'
+          description: OK
+        '403':
+          description: Operation not allowed
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Duplicated element
+      summary: Star workflow
+      tags:
+      - workflows
+  /workflow/{workflowId}/task/{taskId}:
+    get:
+      operationId: DescribeWorkflowTask
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Task numeric identifier
+        in: path
+        name: taskId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeTaskResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: Describe a task entity with the given ID
+      tags:
+      - workflows
+  /workflow/{workflowId}/tasks:
+    get:
+      operationId: ListWorkflowTasks
+      parameters:
+      - description: Workflow string identifier
+        in: path
+        name: workflowId
+        required: true
+        schema:
+          type: string
+      - description: Workspace numeric identifier
+        in: query
+        name: workspaceId
+        schema:
+          format: int64
+          type: integer
+      - description: Pagination max results
+        in: query
+        name: max
+        schema:
+          format: int32
+          type: integer
+      - description: Pagination offset
+        in: query
+        name: offset
+        schema:
+          format: int32
+          type: integer
+      - description: Field to sort by
+        in: query
+        name: sortBy
+        schema:
+          type: string
+      - description: Sorting direction (asc|desc)
+        in: query
+        name: sortDir
+        schema:
+          type: string
+      - description: Search tasks by name
+        in: query
+        name: search
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTasksResponse'
+          description: OK
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          description: Operation not allowed
+      security:
+      - BearerAuth: []
+      summary: List the tasks for the given Workflow ID and filter parameters
+      tags:
+      - workflows
+components:
+  schemas:
+    WfFusionMeta:
+      properties:
+        enabled:
+          type: boolean
+        version:
+          maxLength: 20
+          type: string
+      type: object
+    ComputeEnv.Status:
+      enum:
+      - CREATING
+      - AVAILABLE
+      - DISABLED
+      - DELETING
+      - ERRORED
+      - INVALID
+      - DELETED
+      type: string
+    JobInfoDto:
+      properties:
+        exitCode:
+          format: int32
+          type: integer
+        id:
+          format: int64
+          type: integer
+        message:
+          type: string
+        operationId:
+          type: string
+        status:
+          type: string
+      type: object
+    PipelineMinInfoResponse.PipelineVersionMinInfoResponse:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        hash:
+          type: string
+        id:
+          type: string
+        isDefault:
+          type: boolean
+        isDraftVersion:
+          type: boolean
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
+          type: string
+      type: object
+    LabelDbDto:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        isDynamic:
+          type: boolean
+        isInterpolated:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    LocalComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          fusion2Enabled:
+            type: boolean
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Local execution configuration
+      type: object
+    LsfComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      - properties:
+          perJobMemLimit:
+            type: boolean
+          perTaskReserve:
+            type: boolean
+          unitForLimits:
+            type: string
+        type: object
+      title: IBM LSF configuration
+      type: object
+    EksComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - properties:
+          clusterName:
+            description: The AWS EKS cluster name
+            type: string
+          fusion2Enabled:
+            type: boolean
+          region:
+            description: AWS region
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Amazon EKS cluster configuration
+      type: object
+    DescribeWorkflowLaunchResponse:
+      properties:
+        launch:
+          $ref: '#/components/schemas/WorkflowLaunchResponse'
+      type: object
+    SchedConfig:
+      properties:
+        backendStrategy:
+          description: Backend used by Intelligent Compute to run tasks. 'ECS' (AWS only, default) delegates task execution to AWS ECS; 'EC2' (AWS only) runs tasks directly on AWS EC2 instances; 'VM' runs tasks on cloud VMs (provider-agnostic).
+          enum:
+          - ECS
+          - EC2
+          - VM
+          type: string
+        diskAllocation:
+          type: string
+        fusionSnapshots:
+          description: Enable Fusion snapshots so interrupted (e.g. spot-reclaimed) tasks can resume from a snapshot instead of restarting from scratch.
+          type: boolean
+        machineTypes:
+          description: EC2 instance types for compute nodes. Leave empty to automatically select the most cost-effective types for each task.
+          items:
+            type: string
+          type: array
+        nvmeEnabled:
+          description: When true, only use instance types providing local SSD (NVMe) storage. Maps to diskAllocation='nvme'.
+          type: boolean
+        pool:
+          allOf:
+          - $ref: '#/components/schemas/SchedConfig.Pool'
+          description: Warm-pool configuration. When present and enabled, the scheduler maintains a pool of idle VMs ready to absorb incoming tasks with sub-5s start latency.
+        predictionModel:
+          description: 'Resource-prediction model used by Intelligent Compute to size tasks. Suggested values: ''none'' (default), ''qr/v1'', ''qr/v2''. Any other string is accepted.'
+          type: string
+        provisioningModel:
+          enum:
+          - spot
+          - spotFirst
+          - ondemand
+          type: string
+      type: object
+    CloudPriceModel:
+      enum:
+      - standard
+      - spot
+      type: string
+      x-enum-varnames:
+      - standard
+      - spot
+    WorkflowMetrics:
+      properties:
+        cpu:
+          $ref: '#/components/schemas/ResourceData'
+        cpuUsage:
+          $ref: '#/components/schemas/ResourceData'
+        gpuMemAvg:
+          $ref: '#/components/schemas/ResourceData'
+        gpuMemPeak:
+          $ref: '#/components/schemas/ResourceData'
+        gpuUsage:
+          $ref: '#/components/schemas/ResourceData'
+        id:
+          format: int64
+          nullable: true
+          type: integer
+        mem:
+          $ref: '#/components/schemas/ResourceData'
+        memUsage:
+          $ref: '#/components/schemas/ResourceData'
+        process:
+          maxLength: 255
+          type: string
+        reads:
+          $ref: '#/components/schemas/ResourceData'
+        time:
+          $ref: '#/components/schemas/ResourceData'
+        timeUsage:
+          $ref: '#/components/schemas/ResourceData'
+        vmem:
+          $ref: '#/components/schemas/ResourceData'
+        writes:
+          $ref: '#/components/schemas/ResourceData'
+      required:
+      - process
+      type: object
+    DescribeTaskResponse:
+      properties:
+        task:
+          $ref: '#/components/schemas/Task'
+      type: object
+    TaskStatus:
+      enum:
+      - NEW
+      - SUBMITTED
+      - RUNNING
+      - CACHED
+      - COMPLETED
+      - FAILED
+      - ABORTED
+      type: string
+    EmptyBodyRequest:
+      type: object
+    DeleteWorkflowsResponse:
+      properties:
+        failedWorkflowIds:
+          items:
+            type: string
+          type: array
+      type: object
+    AzCloudConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          dataCollectionEndpoint:
+            type: string
+          dataCollectionRuleId:
+            type: string
+          deletedResources:
+            items:
+              $ref: '#/components/schemas/Map.Entry_String.String_'
+            readOnly: true
+            type: array
+          forgedResources:
+            items:
+              $ref: '#/components/schemas/Map.Entry_String.String_'
+            type: array
+          fusion2Enabled:
+            type: boolean
+          instanceType:
+            type: string
+          logTableName:
+            type: string
+          logWorkspaceId:
+            type: string
+          managedIdentityClientId:
+            type: string
+          managedIdentityId:
+            type: string
+          networkId:
+            type: string
+          region:
+            type: string
+          resourceGroup:
+            type: string
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          subnets:
+            items:
+              type: string
+            type: array
+          subscriptionId:
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Azure Cloud configuration
+      type: object
+    ComputeEnv_ComputeConfig_:
+      properties:
+        config:
+          $ref: '#/components/schemas/ComputeConfig'
+        credentialsId:
+          type: string
+        dateCreated:
+          format: date-time
+          readOnly: true
+          type: string
+        deleted:
+          readOnly: true
+          type: boolean
+        description:
+          maxLength: 2000
+          type: string
+        fusionMetricsCollectionEnabled:
+          type: boolean
+        id:
+          maxLength: 22
+          readOnly: true
+          type: string
+        lastUpdated:
+          format: date-time
+          readOnly: true
+          type: string
+        lastUsed:
+          format: date-time
+          readOnly: true
+          type: string
+        message:
+          maxLength: 4096
+          type: string
+        name:
+          maxLength: 100
+          type: string
+        orgId:
+          format: int64
+          readOnly: true
+          type: integer
+        platform:
+          enum:
+          - aws-batch
+          - aws-cloud
+          - seqeracompute-platform
+          - google-batch
+          - google-cloud
+          - azure-batch
+          - azure-cloud
+          - k8s-platform
+          - eks-platform
+          - gke-platform
+          - uge-platform
+          - slurm-platform
+          - lsf-platform
+          - altair-platform
+          - moab-platform
+          - local-platform
+          - google-lifesciences
+          maxLength: 25
+          type: string
+        primary:
+          readOnly: true
+          type: boolean
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ComputeEnv.Status'
+          readOnly: true
+        workspaceId:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - config
+      - name
+      - platform
+      type: object
+    AwsCloudConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          allowBuckets:
+            items:
+              type: string
+            type: array
+          arm64Enabled:
+            type: boolean
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          ebsBootSize:
+            format: int32
+            type: integer
+          ebsEncrypted:
+            description: When true, the boot EBS volume of provisioned instances is encrypted. Null/absent (the default) is treated as false — no encryption.
+            type: boolean
+          ebsKmsKeyId:
+            description: Optional KMS key ARN used to encrypt the boot EBS volume. Only applied when ebsEncrypted is true. When omitted, the account/region default EBS encryption key is used.
+            type: string
+          ec2KeyPair:
+            type: string
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          gpuEnabled:
+            type: boolean
+          imageId:
+            type: string
+          instanceProfileArn:
+            type: string
+          instanceType:
+            type: string
+          logGroup:
+            type: string
+          region:
+            type: string
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          securityGroups:
+            items:
+              type: string
+            type: array
+          subnetId:
+            deprecated: true
+            description: DEPRECATED — use subnetIds. Kept in sync with the first element of subnetIds.
+            type: string
+          subnetIds:
+            description: Subnets to launch into. Basic uses the first; Intelligent Compute may use all.
+            items:
+              type: string
+            type: array
+          vpcId:
+            description: The VPC used to scope subnet and security-group selection.
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: AWS Cloud configuration
+      type: object
+    AzBatchForgeConfig:
+      properties:
+        autoScale:
+          type: boolean
+        bootDiskSizeGB:
+          description: Boot disk size in GB for all pool nodes. When omitted, Azure uses the default disk size for the selected VM image. Per-pool values in headPool/workerPool take precedence in dual-pool mode.
+          example: 100
+          format: int32
+          maximum: 4095
+          minimum: 50
+          nullable: true
+          type: integer
+        containerRegIds:
+          items:
+            type: string
+          type: array
+        disposeOnDeletion:
+          type: boolean
+        dualPoolConfig:
+          type: boolean
+        headPool:
+          allOf:
+          - $ref: '#/components/schemas/AzBatchPoolConfig'
+          description: Head pool configuration for dual pool mode
+        vmCount:
+          format: int32
+          type: integer
+        vmType:
+          type: string
+        workerPool:
+          allOf:
+          - $ref: '#/components/schemas/AzBatchPoolConfig'
+          description: Worker pool configuration for dual pool mode
+      type: object
+    ProcessLoad:
+      properties:
+        aborted:
+          format: int64
+          type: integer
+        cached:
+          format: int64
+          type: integer
+        cpuEfficiency:
+          format: float
+          type: number
+        cpuLoad:
+          deprecated: true
+          format: int64
+          type: integer
+        cpuShareMillis:
+          format: int64
+          nullable: true
+          type: integer
+        cpuShares:
+          format: int64
+          nullable: true
+          type: integer
+        cpuTime:
+          deprecated: true
+          format: int64
+          type: integer
+        cpus:
+          deprecated: true
+          format: int64
+          type: integer
+        dateCreated:
+          format: date-time
+          type: string
+        failed:
+          format: int64
+          type: integer
+        ignored:
+          format: int64
+          type: integer
+        invCtxSwitch:
+          deprecated: true
+          format: int64
+          type: integer
+        lastUpdated:
+          format: date-time
+          type: string
+        loadCpus:
+          format: int64
+          type: integer
+        loadMemory:
+          format: int64
+          type: integer
+        loadTasks:
+          deprecated: true
+          format: int64
+          type: integer
+        memoryEfficiency:
+          format: float
+          type: number
+        memoryReq:
+          deprecated: true
+          format: int64
+          type: integer
+        memoryRss:
+          deprecated: true
+          format: int64
+          type: integer
+        peakCpus:
+          format: int64
+          type: integer
+        peakMemory:
+          format: int64
+          type: integer
+        peakTasks:
+          format: int64
+          type: integer
+        pending:
+          format: int64
+          type: integer
+        process:
+          type: string
+        readBytes:
+          deprecated: true
+          format: int64
+          type: integer
+        retries:
+          format: int64
+          type: integer
+        running:
+          format: int64
+          type: integer
+        submitted:
+          format: int64
+          type: integer
+        succeeded:
+          format: int64
+          type: integer
+        version:
+          format: int64
+          type: integer
+        volCtxSwitch:
+          deprecated: true
+          format: int64
+          type: integer
+        writeBytes:
+          deprecated: true
+          format: int64
+          type: integer
+      required:
+      - aborted
+      - cached
+      - cpuLoad
+      - cpuTime
+      - cpus
+      - failed
+      - ignored
+      - invCtxSwitch
+      - loadCpus
+      - loadMemory
+      - loadTasks
+      - memoryReq
+      - memoryRss
+      - peakCpus
+      - peakMemory
+      - peakTasks
+      - pending
+      - process
+      - readBytes
+      - retries
+      - running
+      - submitted
+      - succeeded
+      - volCtxSwitch
+      - writeBytes
+      type: object
+    GetWorkflowMetricsResponse:
+      properties:
+        metrics:
+          items:
+            $ref: '#/components/schemas/WorkflowMetrics'
+          type: array
+      type: object
+    DeleteWorkflowsRequest:
+      properties:
+        workflowIds:
+          items:
+            type: string
+          type: array
+      type: object
+    GetProgressResponse:
+      properties:
+        progress:
+          $ref: '#/components/schemas/ProgressData'
+      type: object
+    Task:
+      properties:
+        attempt:
+          format: int32
+          type: integer
+        cloudZone:
+          type: string
+        complete:
+          format: date-time
+          type: string
+        container:
+          type: string
+        cost:
+          type: number
+        cpus:
+          format: int32
+          type: integer
+        dateCreated:
+          format: date-time
+          nullable: true
+          type: string
+        disk:
+          format: int64
+          type: integer
+        duration:
+          format: int64
+          type: integer
+        env:
+          type: string
+        errorAction:
+          type: string
+        errorMessage:
+          nullable: true
+          type: string
+        executor:
+          type: string
+        exit:
+          format: int32
+          type: integer
+        exitStatus:
+          format: int32
+          type: integer
+        gpuMetrics:
+          allOf:
+          - $ref: '#/components/schemas/GpuMetrics'
+          nullable: true
+        hash:
+          type: string
+        id:
+          format: int64
+          nullable: true
+          type: integer
+        invCtxt:
+          format: int64
+          type: integer
+        lastUpdated:
+          format: date-time
+          nullable: true
+          type: string
+        logStreamId:
+          type: string
+        machineType:
+          type: string
+        memory:
+          format: int64
+          type: integer
+        module:
+          items:
+            type: string
+          type: array
+        name:
+          type: string
+        nativeId:
+          type: string
+        numSpotInterruptions:
+          format: int32
+          type: integer
+        pcpu:
+          format: double
+          type: number
+        peakRss:
+          format: int64
+          type: integer
+        peakVmem:
+          format: int64
+          type: integer
+        pmem:
+          format: double
+          type: number
+        priceModel:
+          $ref: '#/components/schemas/CloudPriceModel'
+        process:
+          type: string
+        queue:
+          type: string
+        rchar:
+          format: int64
+          type: integer
+        readBytes:
+          format: int64
+          type: integer
+        realtime:
+          format: int64
+          type: integer
+        resourceAllocation:
+          $ref: '#/components/schemas/ResourceAllocation'
+        rss:
+          format: int64
+          type: integer
+        scratch:
+          type: string
+        script:
+          type: string
+        start:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/TaskStatus'
+        submit:
+          format: date-time
+          type: string
+        syscr:
+          format: int64
+          type: integer
+        syscw:
+          format: int64
+          type: integer
+        tag:
+          type: string
+        taskId:
+          format: int64
+          type: integer
+        time:
+          format: int64
+          type: integer
+        vmem:
+          format: int64
+          type: integer
+        volCtxt:
+          format: int64
+          type: integer
+        wchar:
+          format: int64
+          type: integer
+        workdir:
+          type: string
+        writeBytes:
+          format: int64
+          type: integer
+      required:
+      - status
+      - taskId
+      type: object
+    SubmitWorkflowLaunchRequest:
+      properties:
+        launch:
+          $ref: '#/components/schemas/WorkflowLaunchRequest'
+      type: object
+    WorkflowLaunchValidationErrorResponse:
+      properties:
+        errors:
+          description: Every blocker that prevented the launch, in evaluation order; absent on single-failure responses
+          items:
+            $ref: '#/components/schemas/LaunchValidationError'
+          nullable: true
+          type: array
+        message:
+          description: Composed prose listing every blocker — same field as ErrorResponse.message
+          type: string
+      required:
+      - message
+      type: object
+    SeqeraComputeCloudInstanceTypeSize:
+      enum:
+      - SMALL
+      - MEDIUM
+      - LARGE
+      type: string
+    RandomWorkflowNameResponse:
+      properties:
+        name:
+          type: string
+      type: object
+    UpdateWorkflowRequest:
+      properties:
+        schedRunId:
+          nullable: true
+          type: string
+      type: object
+    ResourceData:
+      properties:
+        max:
+          format: float
+          type: number
+        maxLabel:
+          type: string
+        mean:
+          format: float
+          type: number
+        min:
+          format: float
+          type: number
+        minLabel:
+          type: string
+        q1:
+          format: float
+          type: number
+        q1Label:
+          type: string
+        q2:
+          format: float
+          type: number
+        q2Label:
+          type: string
+        q3:
+          format: float
+          type: number
+        q3Label:
+          type: string
+        warnings:
+          items:
+            type: string
+          type: array
+      type: object
+    ComputeConfig:
+      discriminator:
+        mapping:
+          altair-platform: '#/components/schemas/AltairPbsComputeConfig'
+          aws-batch: '#/components/schemas/AwsBatchConfig'
+          aws-cloud: '#/components/schemas/AwsCloudConfig'
+          azure-batch: '#/components/schemas/AzBatchConfig'
+          azure-cloud: '#/components/schemas/AzCloudConfig'
+          eks-platform: '#/components/schemas/EksComputeConfig'
+          gke-platform: '#/components/schemas/GkeComputeConfig'
+          google-batch: '#/components/schemas/GoogleBatchConfig'
+          google-cloud: '#/components/schemas/GoogleCloudConfig'
+          google-lifesciences: '#/components/schemas/GoogleLifeSciencesConfig'
+          k8s-platform: '#/components/schemas/K8sComputeConfig'
+          local-platform: '#/components/schemas/LocalComputeConfig'
+          lsf-platform: '#/components/schemas/LsfComputeConfig'
+          moab-platform: '#/components/schemas/MoabComputeConfig'
+          seqeracompute-platform: '#/components/schemas/SeqeraComputeConfig'
+          slurm-platform: '#/components/schemas/SlurmComputeConfig'
+          uge-platform: '#/components/schemas/UnivaComputeConfig'
+        propertyName: discriminator
+      oneOf:
+      - $ref: '#/components/schemas/AwsBatchConfig'
+      - $ref: '#/components/schemas/AwsCloudConfig'
+      - $ref: '#/components/schemas/SeqeraComputeConfig'
+      - $ref: '#/components/schemas/GoogleBatchConfig'
+      - $ref: '#/components/schemas/GoogleCloudConfig'
+      - $ref: '#/components/schemas/AzBatchConfig'
+      - $ref: '#/components/schemas/AzCloudConfig'
+      - $ref: '#/components/schemas/LsfComputeConfig'
+      - $ref: '#/components/schemas/SlurmComputeConfig'
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - $ref: '#/components/schemas/EksComputeConfig'
+      - $ref: '#/components/schemas/GkeComputeConfig'
+      - $ref: '#/components/schemas/UnivaComputeConfig'
+      - $ref: '#/components/schemas/AltairPbsComputeConfig'
+      - $ref: '#/components/schemas/MoabComputeConfig'
+      - $ref: '#/components/schemas/LocalComputeConfig'
+      - $ref: '#/components/schemas/GoogleLifeSciencesConfig'
+      properties:
+        discriminator:
+          description: property to select the compute config platform
+          type: string
+        environment:
+          items:
+            $ref: '#/components/schemas/ConfigEnvVariable'
+          type: array
+        nextflowConfig:
+          type: string
+        postRunScript:
+          description: Add a script that executes after all Nextflow processes have completed. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
+          type: string
+        preRunScript:
+          description: Add a script that executes in the nf-launch script prior to invoking Nextflow processes. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
+          type: string
+        workDir:
+          description: Compute environment working directory
+          type: string
+      type: object
+    GoogleCloudConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          arm64Enabled:
+            type: boolean
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          gpuEnabled:
+            type: boolean
+          imageId:
+            type: string
+          instanceType:
+            type: string
+          projectId:
+            type: string
+          region:
+            type: string
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          serviceAccountEmail:
+            type: string
+          waveEnabled:
+            type: boolean
+          zone:
+            type: string
+        type: object
+      title: Google Cloud configuration
+      type: object
+    WorkflowLaunchRequest:
+      properties:
+        commitId:
+          type: string
+        computeEnvId:
+          type: string
+        configProfiles:
+          items:
+            type: string
+          type: array
+        configText:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        entryName:
+          type: string
+        headJobCpus:
+          format: int32
+          type: integer
+        headJobMemoryMb:
+          format: int32
+          type: integer
+        id:
+          type: string
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        launchContainer:
+          type: string
+        mainScript:
+          type: string
+        optimizationId:
+          type: string
+        optimizationTargets:
+          type: string
+        outputDir:
+          description: Per-run output directory passed as Nextflow -output-dir (requires Nextflow 24.10.0 or later and workflow outputs syntax).
+          nullable: true
+          type: string
+        paramsText:
+          type: string
+        pipeline:
+          type: string
+        pipelineSchemaId:
+          format: int64
+          type: integer
+        postRunScript:
+          type: string
+        preRunScript:
+          type: string
+        pullLatest:
+          type: boolean
+        resume:
+          type: boolean
+        revision:
+          type: string
+        runName:
+          type: string
+        schemaName:
+          type: string
+        sessionId:
+          type: string
+        stubRun:
+          type: boolean
+        syntaxParser:
+          enum:
+          - v1
+          - v2
+          nullable: true
+          type: string
+        towerConfig:
+          type: string
+        userSecrets:
+          items:
+            type: string
+          type: array
+        workDir:
+          type: string
+        workspaceSecrets:
+          items:
+            type: string
+          type: array
+      type: object
+    WorkflowDbDto:
+      properties:
+        commandLine:
+          type: string
+        commitId:
+          type: string
+        complete:
+          format: date-time
+          type: string
+        configFiles:
+          items:
+            type: string
+          type: array
+        configText:
+          type: string
+        container:
+          type: string
+        containerEngine:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        deleted:
+          type: boolean
+        duration:
+          format: int64
+          type: integer
+        errorMessage:
+          type: string
+        errorReport:
+          type: string
+        exitStatus:
+          format: int32
+          type: integer
+        homeDir:
+          type: string
+        id:
+          type: string
+        lastUpdated:
+          format: date-time
+          type: string
+        launchDir:
+          type: string
+        launchId:
+          type: string
+        manifest:
+          $ref: '#/components/schemas/WfManifest'
+        nextflow:
+          $ref: '#/components/schemas/WfNextflow'
+        ownerId:
+          format: int64
+          type: integer
+        params:
+          additionalProperties:
+            type: object
+          type: object
+        profile:
+          type: string
+        projectDir:
+          type: string
+        projectName:
+          type: string
+        repository:
+          type: string
+        requiresAttention:
+          type: boolean
+        resume:
+          type: boolean
+        revision:
+          type: string
+        runName:
+          type: string
+        scriptFile:
+          type: string
+        scriptId:
+          type: string
+        scriptName:
+          type: string
+        sessionId:
+          type: string
+        start:
+          format: date-time
+          type: string
+        stats:
+          $ref: '#/components/schemas/WfStats'
+        status:
+          $ref: '#/components/schemas/WorkflowStatus'
+        submit:
+          format: date-time
+          type: string
+        success:
+          type: boolean
+        userName:
+          type: string
+        workDir:
+          type: string
+      type: object
+    LogPage.Download:
+      properties:
+        displayText:
+          type: string
+        fileName:
+          type: string
+        saveName:
+          type: string
+      type: object
+    AbstractGridConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          computeQueue:
+            type: string
+          headJobOptions:
+            type: string
+          headQueue:
+            type: string
+          hostName:
+            type: string
+          launchDir:
+            type: string
+          maxQueueSize:
+            format: int32
+            type: integer
+          port:
+            format: int32
+            type: integer
+          propagateHeadJobOptions:
+            type: boolean
+          userName:
+            type: string
+        type: object
+      type: object
+    WfStats:
+      properties:
+        cachedCount:
+          format: int32
+          type: integer
+        cachedCountFmt:
+          type: string
+        cachedDuration:
+          format: int64
+          type: integer
+        cachedPct:
+          format: float
+          type: number
+        computeTimeFmt:
+          maxLength: 50
+          type: string
+        failedCount:
+          format: int32
+          type: integer
+        failedCountFmt:
+          type: string
+        failedDuration:
+          format: int64
+          type: integer
+        failedPct:
+          format: float
+          type: number
+        ignoredCount:
+          format: int32
+          type: integer
+        ignoredCountFmt:
+          type: string
+        ignoredPct:
+          format: float
+          type: number
+        succeedCount:
+          format: int32
+          type: integer
+        succeedCountFmt:
+          type: string
+        succeedDuration:
+          format: int64
+          type: integer
+        succeedPct:
+          format: float
+          type: number
+      type: object
+    AltairPbsComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Altair PBS configuration
+      type: object
+    Map.Entry_String.String_:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    ProgressData:
+      properties:
+        processesProgress:
+          items:
+            $ref: '#/components/schemas/ProcessLoad'
+          type: array
+        totalProcesses:
+          format: int32
+          type: integer
+        workflowProgress:
+          $ref: '#/components/schemas/WorkflowLoad'
+      type: object
+    ForgeConfig:
+      properties:
+        allocStrategy:
+          enum:
+          - BEST_FIT
+          - BEST_FIT_PROGRESSIVE
+          - SPOT_CAPACITY_OPTIMIZED
+          - SPOT_PRICE_CAPACITY_OPTIMIZED
+          type: string
+        allowBuckets:
+          items:
+            type: string
+          type: array
+        arm64Enabled:
+          type: boolean
+        bidPercentage:
+          format: int32
+          type: integer
+        disposeOnDeletion:
+          type: boolean
+        dragenAmiId:
+          type: string
+        dragenEnabled:
+          type: boolean
+        dragenInstanceType:
+          type: string
+        ebsAutoScale:
+          type: boolean
+        ebsBlockSize:
+          format: int32
+          type: integer
+        ebsBootSize:
+          format: int32
+          type: integer
+        ec2KeyPair:
+          type: string
+        ecsConfig:
+          type: string
+        efsCreate:
+          type: boolean
+        efsId:
+          type: string
+        efsMount:
+          type: string
+        fargateHeadEnabled:
+          type: boolean
+        fsxMount:
+          type: string
+        fsxName:
+          type: string
+        fsxSize:
+          format: int32
+          type: integer
+        fusionEnabled:
+          type: boolean
+        gpuEnabled:
+          type: boolean
+        imageId:
+          type: string
+        instanceTypes:
+          items:
+            type: string
+          type: array
+        maxCpus:
+          format: int32
+          type: integer
+        minCpus:
+          format: int32
+          type: integer
+        securityGroups:
+          items:
+            type: string
+          type: array
+        subnets:
+          items:
+            type: string
+          type: array
+        type:
+          enum:
+          - SPOT
+          - EC2
+          type: string
+        vpcId:
+          type: string
+      type: object
+    ConfigEnvVariable:
+      properties:
+        compute:
+          type: boolean
+        head:
+          type: boolean
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    PodCleanupPolicy:
+      enum:
+      - on_success
+      - always
+      - never
+      type: string
+      x-enum-varnames:
+      - on_success
+      - always
+      - never
+    ListWorkflowsResponse:
+      properties:
+        hasMore:
+          type: boolean
+        totalSize:
+          format: int64
+          type: integer
+        workflows:
+          items:
+            $ref: '#/components/schemas/ListWorkflowsResponse.ListWorkflowsElement'
+          type: array
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    WfWaveMeta:
+      properties:
+        enabled:
+          type: boolean
+      type: object
+    WorkflowStatus:
+      enum:
+      - SUBMITTED
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+      - CANCELLED
+      - UNKNOWN
+      type: string
+    GpuMetrics:
+      properties:
+        active_time:
+          format: int64
+          type: integer
+        avg_mem:
+          format: int64
+          type: integer
+        avg_mem_bw_util:
+          format: double
+          type: number
+        driver:
+          type: string
+        mem:
+          format: int64
+          type: integer
+        name:
+          type: string
+        pct:
+          format: double
+          type: number
+        pct_mem:
+          format: double
+          type: number
+        peak:
+          format: double
+          type: number
+        peak_mem:
+          format: double
+          type: number
+        peak_mem_bw_util:
+          format: double
+          type: number
+        peak_mem_used:
+          format: int64
+          type: integer
+      type: object
+    ListWorkflowsResponse.ListWorkflowsElement:
+      properties:
+        labels:
+          items:
+            $ref: '#/components/schemas/LabelDbDto'
+          type: array
+        optimized:
+          type: boolean
+        orgId:
+          format: int64
+          type: integer
+        orgName:
+          type: string
+        pipelineInfo:
+          $ref: '#/components/schemas/PipelineMinInfoResponse'
+        progress:
+          $ref: '#/components/schemas/ProgressData'
+        starred:
+          type: boolean
+        workflow:
+          $ref: '#/components/schemas/WorkflowDbDto'
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+    WorkflowLoad:
+      properties:
+        aborted:
+          format: int64
+          type: integer
+        cached:
+          format: int64
+          type: integer
+        cost:
+          type: number
+        cpuEfficiency:
+          format: float
+          type: number
+        cpuLoad:
+          format: int64
+          type: integer
+        cpuShareMillis:
+          format: int64
+          nullable: true
+          type: integer
+        cpuShares:
+          format: int64
+          nullable: true
+          type: integer
+        cpuTime:
+          format: int64
+          type: integer
+        cpus:
+          format: int64
+          type: integer
+        dateCreated:
+          format: date-time
+          type: string
+        executors:
+          items:
+            type: string
+          type: array
+        failed:
+          format: int64
+          type: integer
+        ignored:
+          format: int64
+          type: integer
+        invCtxSwitch:
+          format: int64
+          type: integer
+        lastUpdated:
+          format: date-time
+          type: string
+        loadCpus:
+          format: int64
+          type: integer
+        loadMemory:
+          format: int64
+          type: integer
+        loadTasks:
+          format: int64
+          type: integer
+        memoryEfficiency:
+          format: float
+          type: number
+        memoryReq:
+          format: int64
+          type: integer
+        memoryRss:
+          format: int64
+          type: integer
+        netCost:
+          type: number
+        netCpuLoad:
+          format: int64
+          type: integer
+        netCpuShareMillis:
+          format: int64
+          nullable: true
+          type: integer
+        netCpuShares:
+          format: int64
+          nullable: true
+          type: integer
+        netCpuTime:
+          format: int64
+          type: integer
+        netCpus:
+          format: int64
+          type: integer
+        netInvCtxSwitch:
+          format: int64
+          type: integer
+        netMemoryConsumption:
+          type: number
+        netMemoryReq:
+          format: int64
+          type: integer
+        netMemoryRss:
+          format: int64
+          type: integer
+        netReadBytes:
+          format: int64
+          type: integer
+        netVolCtxSwitch:
+          format: int64
+          type: integer
+        netWriteBytes:
+          format: int64
+          type: integer
+        numSpotInterruptions:
+          format: int32
+          type: integer
+        peakCpus:
+          format: int64
+          type: integer
+        peakMemory:
+          format: int64
+          type: integer
+        peakTasks:
+          format: int64
+          type: integer
+        pending:
+          format: int64
+          type: integer
+        readBytes:
+          format: int64
+          type: integer
+        requestedCpuTime:
+          format: int64
+          nullable: true
+          type: integer
+        requestedMemory:
+          format: int64
+          nullable: true
+          type: integer
+        retries:
+          format: int64
+          type: integer
+        running:
+          format: int64
+          type: integer
+        submitted:
+          format: int64
+          type: integer
+        succeeded:
+          format: int64
+          type: integer
+        version:
+          format: int64
+          type: integer
+        volCtxSwitch:
+          format: int64
+          type: integer
+        writeBytes:
+          format: int64
+          type: integer
+      required:
+      - aborted
+      - cached
+      - cpuLoad
+      - cpuTime
+      - cpus
+      - failed
+      - ignored
+      - invCtxSwitch
+      - loadCpus
+      - loadMemory
+      - loadTasks
+      - memoryReq
+      - memoryRss
+      - peakCpus
+      - peakMemory
+      - peakTasks
+      - pending
+      - readBytes
+      - retries
+      - running
+      - submitted
+      - succeeded
+      - volCtxSwitch
+      - writeBytes
+      type: object
+    ListTasksResponse:
+      properties:
+        tasks:
+          items:
+            $ref: '#/components/schemas/DescribeTaskResponse'
+          type: array
+        total:
+          format: int64
+          type: integer
+      type: object
+    JobCleanupPolicy:
+      enum:
+      - on_success
+      - always
+      - never
+      type: string
+      x-enum-varnames:
+      - on_success
+      - always
+      - never
+    ResourceAllocation:
+      properties:
+        acceleratorCount:
+          format: int32
+          type: integer
+        acceleratorName:
+          type: string
+        acceleratorType:
+          type: string
+        cpuShares:
+          format: int32
+          type: integer
+        memoryMiB:
+          format: int32
+          type: integer
+        time:
+          type: string
+      type: object
+    WorkflowLogResponse:
+      properties:
+        log:
+          $ref: '#/components/schemas/LogPage'
+      type: object
+    PipelineMinInfoResponse:
+      properties:
+        id:
+          format: int64
+          type: integer
+        version:
+          $ref: '#/components/schemas/PipelineMinInfoResponse.PipelineVersionMinInfoResponse'
+        workspaceId:
+          format: int64
+          type: integer
+      type: object
+    SchedConfig.Pool:
+      properties:
+        desiredWarm:
+          description: Target number of idle VMs to keep warm. Bounds total warm-VM cost across all of this CE's pool clusters.
+          format: int32
+          type: integer
+        enabled:
+          description: Whether the warm pool is active for this CE. When false, the scheduler will not maintain idle VMs.
+          type: boolean
+        scaleToZeroSecs:
+          description: Seconds of inactivity after which the warm pool scales to zero. Set to 0 to never scale to zero.
+          format: int32
+          type: integer
+      type: object
+    SubmitWorkflowLaunchResponse:
+      properties:
+        workflowId:
+          type: string
+      type: object
+    GoogleLifeSciencesConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          copyImage:
+            type: string
+          debugMode:
+            format: int32
+            type: integer
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          labels:
+            additionalProperties:
+              type: string
+            type: object
+          location:
+            type: string
+          nfsMount:
+            type: string
+          nfsTarget:
+            type: string
+          preemptible:
+            type: boolean
+          projectId:
+            type: string
+          region:
+            type: string
+          sshDaemon:
+            type: boolean
+          sshImage:
+            type: string
+          usePrivateAddress:
+            type: boolean
+          zones:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Google Life Sciences configuration (retired)
+      type: object
+    LaunchValidationError:
+      properties:
+        code:
+          description: Stable machine-readable code identifying the failing check
+          example: COMPUTE_ENV_INVALID
+          type: string
+        message:
+          description: Human-readable explanation of this single blocker
+          type: string
+      type: object
+    LogPage:
+      properties:
+        downloads:
+          items:
+            $ref: '#/components/schemas/LogPage.Download'
+          type: array
+        entries:
+          $ref: '#/components/schemas/Iterator_String_'
+        forwardToken:
+          type: string
+        message:
+          type: string
+        pending:
+          type: boolean
+        rewindToken:
+          type: string
+        truncated:
+          type: boolean
+      type: object
+    WorkflowMaxDbDto:
+      allOf:
+      - $ref: '#/components/schemas/WorkflowDbDto'
+      - properties:
+          configProfiles:
+            items:
+              type: string
+            nullable: true
+            type: array
+          fusion:
+            $ref: '#/components/schemas/WfFusionMeta'
+          logFile:
+            type: string
+          nextflowConfig:
+            nullable: true
+            type: string
+          operationId:
+            type: string
+          outFile:
+            type: string
+          postRunScript:
+            nullable: true
+            type: string
+          preRunScript:
+            nullable: true
+            type: string
+          syntaxParser:
+            nullable: true
+            type: string
+          towerConfig:
+            nullable: true
+            type: string
+          wave:
+            $ref: '#/components/schemas/WfWaveMeta'
+        type: object
+      type: object
+    WorkflowLaunchResponse:
+      properties:
+        commitId:
+          type: string
+        computeEnv:
+          $ref: '#/components/schemas/ComputeEnv_ComputeConfig_'
+        configProfiles:
+          items:
+            type: string
+          type: array
+        configText:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        entryName:
+          type: string
+        headJobCpus:
+          format: int32
+          type: integer
+        headJobMemoryMb:
+          format: int32
+          type: integer
+        id:
+          type: string
+        mainScript:
+          type: string
+        optimizationId:
+          type: string
+        optimizationTargets:
+          type: string
+        outputDir:
+          description: Per-run output directory passed as Nextflow -output-dir (requires Nextflow 24.10.0 or later and workflow outputs syntax).
+          nullable: true
+          type: string
+        paramsText:
+          type: string
+        pipeline:
+          type: string
+        pipelineId:
+          format: int64
+          type: integer
+        pipelineSchemaId:
+          format: int64
+          type: integer
+        postRunScript:
+          type: string
+        preRunScript:
+          type: string
+        pullLatest:
+          type: boolean
+        resume:
+          type: boolean
+        resumeCommitId:
+          type: string
+        resumeDir:
+          type: string
+        revision:
+          type: string
+        schemaName:
+          type: string
+        sessionId:
+          type: string
+        stubRun:
+          type: boolean
+        syntaxParser:
+          enum:
+          - v1
+          - v2
+          nullable: true
+          type: string
+        towerConfig:
+          type: string
+        userSecrets:
+          items:
+            type: string
+          type: array
+        workDir:
+          type: string
+        workspaceSecrets:
+          items:
+            type: string
+          type: array
+      type: object
+    AzBatchConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          autoPoolMode:
+            deprecated: true
+            type: boolean
+          deleteJobsOnCompletion:
+            allOf:
+            - $ref: '#/components/schemas/JobCleanupPolicy'
+            nullable: true
+            readOnly: true
+          deleteJobsOnCompletionEnabled:
+            nullable: true
+            type: boolean
+          deletePoolsOnCompletion:
+            type: boolean
+          deleteTasksOnCompletion:
+            nullable: true
+            type: boolean
+          forge:
+            $ref: '#/components/schemas/AzBatchForgeConfig'
+          fusion2Enabled:
+            type: boolean
+          headJobCpus:
+            description: Number of CPU slots reserved on the head pool VM for the Nextflow head job. Defaults to 1 so multiple head jobs can share a head pool VM; increase to dedicate more CPU and memory to each head job.
+            example: 1
+            format: int32
+            nullable: true
+            type: integer
+          headJobMemoryMb:
+            description: Memory in MiB reserved for the Nextflow head job container. When omitted, the value is derived from the head pool VM size as the per-slot share (vmMemory / vmCpus) multiplied by the requested slot count.
+            example: 4096
+            format: int32
+            nullable: true
+            type: integer
+          headPool:
+            type: string
+          jobMaxWallClockTime:
+            description: 'Maximum wall clock time for Azure Batch jobs before automatic termination. Accepts human-readable duration syntax (e.g., ''7d'', ''1d1h1m''). Defaults to 7d when not specified. Maximum: 180 days.'
+            example: 7d
+            nullable: true
+            type: string
+          managedIdentityClientId:
+            nullable: true
+            type: string
+          managedIdentityHeadResourceId:
+            nullable: true
+            type: string
+          managedIdentityPoolClientId:
+            nullable: true
+            type: string
+          managedIdentityPoolResourceId:
+            nullable: true
+            type: string
+          region:
+            type: string
+          subnetId:
+            description: Azure VNet subnet resource ID for private network isolation. Requires Entra (service principal) credentials.
+            example: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet
+            nullable: true
+            type: string
+          terminateJobsOnCompletion:
+            nullable: true
+            type: boolean
+          tokenDuration:
+            type: string
+          waveEnabled:
+            type: boolean
+          workerPool:
+            type: string
+        type: object
+      title: Azure Batch configuration
+      type: object
+    WfManifest:
+      properties:
+        author:
+          maxLength: 150
+          type: string
+        defaultBranch:
+          maxLength: 20
+          type: string
+        description:
+          maxLength: 1024
+          type: string
+        gitmodules:
+          maxLength: 150
+          type: string
+        homePage:
+          maxLength: 200
+          type: string
+        icon:
+          maxLength: 255
+          type: string
+        mainScript:
+          maxLength: 100
+          type: string
+        name:
+          maxLength: 150
+          type: string
+        nextflowVersion:
+          maxLength: 20
+          type: string
+        version:
+          maxLength: 20
+          type: string
+      type: object
+    ComputePlatformDto:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    Iterator_String_:
+      type: object
+    GkeComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - properties:
+          clusterName:
+            description: The GKE cluster name
+            type: string
+          fusion2Enabled:
+            type: boolean
+          region:
+            description: The GKE cluster region - or - zone
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Google GKE cluster configuration
+      type: object
+    GoogleBatchConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          bootDiskImage:
+            type: string
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          computeJobsInstanceTemplate:
+            type: string
+          computeJobsMachineType:
+            items:
+              type: string
+            type: array
+          copyImage:
+            type: string
+          cpuPlatform:
+            type: string
+          debugMode:
+            format: int32
+            type: integer
+          fusion2Enabled:
+            type: boolean
+          fusionSnapshots:
+            type: boolean
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobInstanceTemplate:
+            type: string
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          labels:
+            additionalProperties:
+              type: string
+            type: object
+          location:
+            type: string
+          machineType:
+            type: string
+          network:
+            type: string
+          networkTags:
+            items:
+              type: string
+            type: array
+          nfsMount:
+            type: string
+          nfsTarget:
+            type: string
+          projectId:
+            type: string
+          serviceAccount:
+            type: string
+          spot:
+            type: boolean
+          sshDaemon:
+            type: boolean
+          sshImage:
+            type: string
+          subnetwork:
+            type: string
+          usePrivateAddress:
+            type: boolean
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Google Batch service configuration
+      type: object
+    WfNextflow:
+      properties:
+        build:
+          maxLength: 10
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+        version:
+          maxLength: 20
+          type: string
+      type: object
+    AzBatchPoolConfig:
+      description: Azure Batch pool configuration for head or worker pool
+      properties:
+        autoScale:
+          type: boolean
+        bootDiskSizeGB:
+          description: Boot disk size in GB for this pool's nodes. Overrides the forge-level bootDiskSizeGB. When omitted, falls back to the forge-level value or Azure's default.
+          example: 100
+          format: int32
+          maximum: 4095
+          minimum: 50
+          nullable: true
+          type: integer
+        vmCount:
+          format: int32
+          type: integer
+        vmType:
+          type: string
+      type: object
+    K8sComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          computeServiceAccount:
+            type: string
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          headPodSpec:
+            type: string
+          headServiceAccount:
+            type: string
+          namespace:
+            type: string
+          podCleanup:
+            $ref: '#/components/schemas/PodCleanupPolicy'
+          server:
+            type: string
+          servicePodSpec:
+            type: string
+          sslCert:
+            type: string
+          storageClaimName:
+            type: string
+          storageMountPath:
+            type: string
+        type: object
+      title: Kubernetes compute configuration
+      type: object
+    WorkflowQueryAttribute:
+      enum:
+      - optimized
+      - labels
+      - messages
+      - minimal
+      - pipelineInfo
+      type: string
+      x-enum-varnames:
+      - optimized
+      - labels
+      - messages
+      - minimal
+      - pipelineInfo
+    MoabComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Moab configuration
+      type: object
+    UnivaComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Univa Grid Engine configuration
+      type: object
+    CreateWorkflowStarResponse:
+      properties:
+        workflowId:
+          type: string
+      type: object
+    SlurmComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Slurm configuration
+      type: object
+    SeqeraComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          defaultDataRetentionPolicy:
+            type: boolean
+          instanceTypeSize:
+            allOf:
+            - $ref: '#/components/schemas/SeqeraComputeCloudInstanceTypeSize'
+            description: Size of the Data Studios instance (SMALL, MEDIUM, LARGE)
+          region:
+            type: string
+        type: object
+      title: Seqera Compute configuration
+      type: object
+    AwsBatchConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          cliPath:
+            type: string
+          computeJobRole:
+            type: string
+          computeQueue:
+            type: string
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          dragenInstanceType:
+            type: string
+          dragenQueue:
+            type: string
+          executionRole:
+            type: string
+          forge:
+            $ref: '#/components/schemas/ForgeConfig'
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          fusionSnapshots:
+            type: boolean
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          headJobRole:
+            type: string
+          headQueue:
+            type: string
+          logGroup:
+            type: string
+          lustreId:
+            deprecated: true
+            type: string
+          nvnmeStorageEnabled:
+            type: boolean
+          region:
+            type: string
+          storageType:
+            deprecated: true
+            type: string
+          volumes:
+            items:
+              type: string
+            type: array
+          waveEnabled:
+            type: boolean
+        type: object
+      title: AWS Batch configuration
+      type: object
+    DescribeWorkflowResponse:
+      properties:
+        cost:
+          nullable: true
+          type: number
+        costCurrency:
+          nullable: true
+          type: string
+        costIsEstimate:
+          nullable: true
+          type: boolean
+        instancesProvisioned:
+          format: int32
+          nullable: true
+          type: integer
+        jobInfo:
+          $ref: '#/components/schemas/JobInfoDto'
+        labels:
+          items:
+            $ref: '#/components/schemas/LabelDbDto'
+          type: array
+        messages:
+          items:
+            type: string
+          type: array
+        optimized:
+          type: boolean
+        orgId:
+          format: int64
+          type: integer
+        orgName:
+          type: string
+        pipelineInfo:
+          $ref: '#/components/schemas/PipelineMinInfoResponse'
+        platform:
+          $ref: '#/components/schemas/ComputePlatformDto'
+        progress:
+          $ref: '#/components/schemas/ProgressData'
+        schedConfig:
+          allOf:
+          - $ref: '#/components/schemas/SchedConfig'
+          nullable: true
+        schedEnabled:
+          nullable: true
+          type: boolean
+        schedRunId:
+          nullable: true
+          type: string
+        workflow:
+          $ref: '#/components/schemas/WorkflowMaxDbDto'
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: jwt
+      scheme: bearer
+      type: http
