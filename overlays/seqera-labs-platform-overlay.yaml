@@ -1,0 +1,28 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enrichment overlay for the Seqera Platform API
+  version: 1.0.0
+extends: ../openapi/seqera-labs-platform-openapi.yml
+x-generated: '2026-07-21'
+x-method: generated
+x-source: API Evangelist enrichment pipeline (adds servers + provenance the upstream spec omits)
+actions:
+- target: $
+  description: Add the production and legacy servers, which the upstream spec omits.
+  update:
+    servers:
+    - url: https://api.cloud.seqera.io
+      description: Seqera Platform Cloud (production)
+    - url: https://api.tower.nf
+      description: Legacy Nextflow Tower API host (still operational)
+- target: $.info
+  description: Annotate contact, docs, and rate-limit metadata gathered by API Evangelist.
+  update:
+    contact:
+      name: Seqera
+      url: https://docs.seqera.io/platform-cloud/api/overview
+    x-api-evangelist:
+      docs: https://docs.seqera.io/platform-cloud/api/overview
+      rate_limit: 20 requests/second per access token
+      auth: HTTP bearer (JWT personal access token)
+      ga4gh_wes: /ga4gh/wes/v1

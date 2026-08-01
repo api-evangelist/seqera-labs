@@ -1,0 +1,42 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/seqera-labs-platform-openapi.yml
+summary: >-
+  No official hosted/remote Seqera MCP server was found via search/probe as of
+  this pass. This is a CANDIDATE tool surface derived from Seqera Platform
+  OpenAPI operations, suitable for generating an MCP server. Not an endorsement
+  of an existing server.
+server:
+  name: seqera-platform
+  transport: candidate (not published)
+  auth: HTTP bearer (Seqera personal access token)
+  base_url: https://api.cloud.seqera.io
+tools:
+- name: list_workflows
+  operationId: ListWorkflows
+  description: List workflow runs in a workspace.
+- name: describe_workflow
+  operationId: DescribeWorkflow
+  description: Get details of a single workflow run.
+- name: launch_pipeline
+  operationId: CreateWorkflowLaunch
+  description: Launch a pipeline as a new workflow run.
+- name: list_pipelines
+  operationId: ListPipelines
+  description: List pipelines available in a workspace.
+- name: list_compute_envs
+  operationId: ListComputeEnvs
+  description: List compute environments in a workspace.
+- name: list_datasets
+  operationId: ListDatasets
+  description: List datasets in a workspace.
+- name: list_actions
+  operationId: ListActions
+  description: List pipeline actions (event/webhook launches).
+- name: list_workspaces
+  operationId: ListWorkspacesUser
+  description: List workspaces the user can access.
+- name: service_info
+  operationId: Info
+  description: Return API service info / version.

@@ -1,0 +1,93 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/seqera-labs-platform-openapi.yml (paths + $ref graph)
+summary: >-
+  Entity-relationship graph for the Seqera Platform, derived from the OpenAPI
+  resource paths and id-reference fields. The account hierarchy is
+  Organization -> Workspace, with most operational resources scoped to a
+  Workspace and executed against a Compute Environment.
+entities:
+- name: Organization
+  path: /orgs
+  relationships:
+  - has_many: Workspace
+  - has_many: Team
+  - has_many: Member
+- name: Workspace
+  path: /workspaces
+  relationships:
+  - belongs_to: Organization
+    via: orgId
+  - has_many: Pipeline
+  - has_many: ComputeEnv
+  - has_many: Credentials
+  - has_many: Dataset
+  - has_many: DataLink
+  - has_many: Workflow
+  - has_many: Action
+  - has_many: PipelineSecret
+  - has_many: Studio
+  - has_many: Label
+- name: ComputeEnv
+  path: /compute-envs
+  relationships:
+  - belongs_to: Workspace
+    via: workspaceId
+  - belongs_to: Credentials
+    via: credentialsId
+- name: Credentials
+  path: /credentials
+  relationships:
+  - belongs_to: Workspace
+    via: workspaceId
+- name: Pipeline
+  path: /pipelines
+  relationships:
+  - belongs_to: Workspace
+    via: workspaceId
+  - has_one: ComputeEnv
+    via: computeEnvId
+- name: Workflow
+  path: /workflow
+  relationships:
+  - belongs_to: Workspace
+    via: workspaceId
+  - belongs_to: Pipeline
+    via: pipeline
+  - belongs_to: ComputeEnv
+    via: computeEnvId
+- name: Action
+  path: /actions
+  relationships:
+  - belongs_to: Workspace
+    via: workspaceId
+  - has_one: Pipeline
+    via: launch
+- name: Dataset
+  path: /datasets
+  relationships:
+  - belongs_to: Workspace
+    via: workspaceId
+- name: DataLink
+  path: /data-links
+  relationships:
+  - belongs_to: Workspace
+    via: workspaceId
+  - belongs_to: Credentials
+    via: credentialsId
+- name: Studio
+  path: /studios
+  relationships:
+  - belongs_to: Workspace
+    via: workspaceId
+  - belongs_to: ComputeEnv
+    via: computeEnvId
+- name: AccessToken
+  path: /tokens
+  relationships:
+  - belongs_to: User
+- name: PipelineSecret
+  path: /pipeline-secrets
+  relationships:
+  - belongs_to: Workspace
+    via: workspaceId

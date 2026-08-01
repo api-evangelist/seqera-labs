@@ -1,0 +1,14 @@
+generated: '2026-07-21'
+method: searched
+source: probed .well-known/ paths on Seqera hosts
+entries:
+- path: https://seqera.io/.well-known/security.txt
+  status: 200
+  file: seqera-labs-security.txt
+  type: SecurityTxt
+notes: |
+  cloud.seqera.io/.well-known/security.txt and /openid-configuration return HTTP 200
+  but serve the Angular SPA index.html (text/html), not real well-known documents, so
+  they are not captured. No /oauth-authorization-server, /api-catalog, or /ai-plugin.json
+  found on api.cloud.seqera.io (all 404). The Seqera API uses HTTP bearer (JWT access
+  token) auth, not OAuth/OIDC discovery.

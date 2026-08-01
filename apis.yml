@@ -1,7 +1,16 @@
 aid: seqera-labs
 name: Seqera Labs
-description: Seqera Labs is a company surfaced as a portfolio company of speedinvest and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Seqera (Seqera Labs) builds open, cloud-based software for scientific data
+  analysis at scale. It is the company behind Nextflow, the widely adopted
+  open-source workflow orchestration engine, and the Seqera Platform (formerly
+  Nextflow Tower) for launching, monitoring, and governing data pipelines across
+  cloud and HPC compute. Its product family also includes Wave (on-demand
+  container provisioning), Fusion (a distributed file system for cloud pipelines),
+  Data Studios (interactive analysis environments), and MultiQC. The Seqera
+  Platform exposes a REST API (OpenAPI 3.0.1, 250 operations) plus a CLI (tw) and
+  Python automation (seqerakit), and implements the GA4GH Workflow Execution
+  Service (WES) standard.
 url: https://raw.githubusercontent.com/api-evangelist/seqera-labs/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,14 +18,666 @@ x-backed-by:
 - speedinvest
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
+image: https://avatars.githubusercontent.com/u/32700669?v=4
 tags:
 - Company
-apis: []
+- Bioinformatics
+- Workflow Orchestration
+- Data Pipelines
+- Scientific Computing
+- Nextflow
+- Cloud Compute
+- Life Sciences
+- Containers
+- GA4GH
+apis:
+- aid: seqera-labs:seqera-labs-actions-api
+  name: Seqera Labs actions API
+  description: Pipeline actions
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - actions
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-actions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-admin-api
+  name: Seqera Labs admin API
+  description: The admin API from Seqera Labs — 3 operation(s) for admin.
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - admin
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-admin-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-agents-api
+  name: Seqera Labs agents API
+  description: The agents API from Seqera Labs — 4 operation(s) for agents.
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - agents
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-agents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-avatars-api
+  name: Seqera Labs avatars API
+  description: Avatars
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - avatars
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-avatars-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-compute-envs-api
+  name: Seqera Labs compute-envs API
+  description: Compute environments
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - compute-envs
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-compute-envs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-credentials-api
+  name: Seqera Labs credentials API
+  description: Credentials
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - credentials
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-credentials-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-data-links-api
+  name: Seqera Labs data-links API
+  description: Cloud storage directory paths in Data Explorer
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - data-links
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-data-links-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-datasets-api
+  name: Seqera Labs datasets API
+  description: Pipeline input datasets (samplesheets) in CSV or TSV format
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - datasets
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-datasets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-ga4gh-api
+  name: Seqera Labs ga4gh API
+  description: GA4GH workflow execution service runs
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - ga4gh
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-ga4gh-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-identities-api
+  name: Seqera Labs identities API
+  description: The identities API from Seqera Labs — 4 operation(s) for identities.
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - identities
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-identities-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-labels-api
+  name: Seqera Labs labels API
+  description: Labels and resource labels
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - labels
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-labels-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-launch-api
+  name: Seqera Labs launch API
+  description: Workflow launch events
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - launch
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-launch-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-orgs-api
+  name: Seqera Labs orgs API
+  description: Organizations
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - orgs
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-orgs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-pipeline-schemas-api
+  name: Seqera Labs pipeline-schemas API
+  description: The pipeline-schemas API from Seqera Labs — 1 operation(s) for pipeline-schemas.
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - pipeline-schemas
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-pipeline-schemas-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-pipeline-secrets-api
+  name: Seqera Labs pipeline-secrets API
+  description: Pipeline secrets in a user or workspace context
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - pipeline-secrets
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-pipeline-secrets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-pipeline-versions-api
+  name: Seqera Labs pipeline-versions API
+  description: The pipeline-versions API from Seqera Labs — 4 operation(s) for pipeline-versions.
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - pipeline-versions
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-pipeline-versions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-pipelines-api
+  name: Seqera Labs pipelines API
+  description: Pipelines
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - pipelines
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-pipelines-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-platforms-api
+  name: Seqera Labs platforms API
+  description: Computing platforms
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - platforms
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-platforms-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-roles-api
+  name: Seqera Labs roles API
+  description: The roles API from Seqera Labs — 4 operation(s) for roles.
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - roles
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-roles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-service-info-api
+  name: Seqera Labs service-info API
+  description: Seqera Platform API service information
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - service-info
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-service-info-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-ssh-keys-api
+  name: Seqera Labs ssh-keys API
+  description: The ssh-keys API from Seqera Labs — 4 operation(s) for ssh-keys.
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - ssh-keys
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-ssh-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-studios-api
+  name: Seqera Labs studios API
+  description: Studios and Studio sessions
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - studios
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-studios-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-teams-api
+  name: Seqera Labs teams API
+  description: Teams in an organization context
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - teams
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-teams-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-tokens-api
+  name: Seqera Labs tokens API
+  description: API access tokens
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-trace-api
+  name: Seqera Labs trace API
+  description: Workflow execution traces
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - trace
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-trace-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-users-api
+  name: Seqera Labs users API
+  description: Users
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-workflows-api
+  name: Seqera Labs workflows API
+  description: Workflow executions
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+- aid: seqera-labs:seqera-labs-workspaces-api
+  name: Seqera Labs workspaces API
+  description: Workspaces in an organization context
+  humanURL: https://docs.seqera.io/platform-cloud/api/overview
+  baseURL: https://api.cloud.seqera.io
+  tags:
+  - workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/seqera-labs-workspaces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.seqera.io/platform-cloud/api/overview
+  - type: APIReference
+    url: https://docs.seqera.io/platform-api/
+  - type: Authentication
+    url: authentication/seqera-labs-authentication.yml
+  - type: ErrorCatalog
+    url: errors/seqera-labs-problem-types.yml
+  - type: DataModel
+    url: data-model/seqera-labs-data-model.yml
+common:
+- type: DomainSecurity
+  url: security/seqera-labs-domain-security.yml
+- type: DeveloperPortal
+  url: https://docs.seqera.io
+- type: Documentation
+  url: https://docs.seqera.io
+- type: APIReference
+  url: https://docs.seqera.io/platform-api/
+- type: GettingStarted
+  url: https://docs.seqera.io/platform-cloud/getting-started/quickstart-demo/comm-showcase
+- type: SignUp
+  url: https://cloud.seqera.io/login
+- type: Pricing
+  url: https://seqera.io/pricing
+- type: Blog
+  url: https://seqera.io/blog
+- type: Support
+  url: https://community.seqera.io
+- type: GitHubOrganization
+  url: https://github.com/seqeralabs
+- type: TermsOfService
+  url: https://seqera.io/legal
+- type: PrivacyPolicy
+  url: https://seqera.io/privacy-policy
+- type: ChangeLog
+  url: https://docs.seqera.io/changelog
+- type: StatusPage
+  url: https://status.seqera.io
+- type: Authentication
+  url: authentication/seqera-labs-authentication.yml
+- type: Packages
+  url: packages/seqera-labs-packages.yml
+- type: SDKs
+  url: packages/seqera-labs-packages.yml
+- type: CLI
+  url: cli/seqera-labs-cli.yml
+- type: Conventions
+  url: conventions/seqera-labs-conventions.yml
+- type: Conformance
+  url: conformance/seqera-labs-conformance.yml
+- type: Lifecycle
+  url: lifecycle/seqera-labs-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/seqera-labs-lifecycle.yml
+- type: ChangeLog
+  url: changelog/seqera-labs-changelog.yml
+- type: DataModel
+  url: data-model/seqera-labs-data-model.yml
+- type: MCPServer
+  url: mcp/seqera-labs-mcp.yml
+- type: LLMsTxt
+  url: llms/seqera-labs-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: WellKnown
+  url: well-known/seqera-labs-well-known.yml
+- type: SecurityTxt
+  url: well-known/seqera-labs-security.txt
+- type: VulnerabilityDisclosure
+  url: security/seqera-labs-vulnerability-disclosure.yml
+- type: Security
+  url: security/seqera-labs-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/seqera-labs-trust-center.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 20
+  pass: local-v1

@@ -1,0 +1,43 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/seqera-labs-platform-openapi.yml + Seqera Platform docs
+summary: >-
+  Cross-cutting standards conformance for the Seqera Platform API, derived from
+  the OpenAPI (openapi 3.0.1, 186 paths, 250 operations) and confirmed docs.
+standards:
+- id: openapi
+  conforms: true
+  evidence: Published OpenAPI 3.0.1 document at https://cloud.seqera.io/openapi/seqera-api-latest.yml
+- id: ga4gh-wes
+  conforms: true
+  evidence: >-
+    Implements the GA4GH Workflow Execution Service (WES) v1 API under
+    /ga4gh/wes/v1 (runs, runs/{run_id}, cancel, status, service-info) plus a
+    top-level /service-info endpoint.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No oauth2 securityScheme. The API uses a single HTTP bearer (JWT) personal
+    access token scheme (BearerAuth).
+- id: oidc
+  conforms: false
+  evidence: No OpenID Connect discovery document served for the API host.
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    Errors use a provider JSON envelope ({"message": ...}; WES uses
+    {"msg","status_code"}), not application/problem+json.
+- id: pagination
+  conforms: true
+  evidence: >-
+    Offset/limit pagination via max + offset query parameters across list
+    endpoints; GA4GH WES endpoints use page_size + page_token cursor pagination.
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key header or idempotency mechanism documented.
+- id: json-api
+  conforms: false
+  evidence: Plain JSON resource envelopes, not the JSON:API media type.
+- id: fhir
+  conforms: false
+  evidence: Not a healthcare/FHIR API.

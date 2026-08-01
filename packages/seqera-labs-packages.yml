@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: searched
+source: PyPI, GitHub seqeralabs org, Seqera Platform docs
+packages:
+- name: seqerakit
+  registry: pypi
+  url: https://pypi.org/project/seqerakit/
+  version: 0.5.7
+  language: python
+  official: true
+  description: >-
+    Official Seqera Python automation tool. Wraps the Seqera Platform CLI
+    (tw) to declaratively create and manage Seqera Platform resources
+    (compute environments, credentials, pipelines, datasets, launches)
+    from YAML.
+  repo: https://github.com/seqeralabs/seqerakit
+- name: tw (tower-cli)
+  registry: github-releases
+  url: https://github.com/seqeralabs/tower-cli
+  language: java
+  official: true
+  kind: cli
+  description: >-
+    Official Seqera Platform command line tool (binary "tw"), released as
+    native GitHub release binaries (Linux/macOS/Windows) and via Homebrew.
+    Full command coverage of the Seqera Platform REST API.
+  install:
+  - homebrew: brew install seqeralabs/tap/tw
+  - github-release: https://github.com/seqeralabs/tower-cli/releases
+notes: |
+  Nextflow (github.com/nextflow-io/nextflow) is Seqera's open-source workflow
+  engine, not a client SDK for the Seqera Platform API, so it is not listed as
+  a package here. Seqera does not publish a first-party JavaScript/TypeScript,
+  Go, or .NET SDK; seqerakit (Python) and tw (CLI) are the official API clients.

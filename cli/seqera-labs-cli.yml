@@ -1,0 +1,47 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/seqeralabs/tower-cli + https://docs.seqera.io/platform-cloud/cli/overview
+cli:
+  name: tw
+  full_name: Seqera Platform CLI (tower-cli)
+  official: true
+  repo: https://github.com/seqeralabs/tower-cli
+  docs: https://docs.seqera.io/platform-cloud/cli/overview
+  language: java
+  description: >-
+    Official command line tool for the Seqera Platform. Provides full command
+    coverage of the Seqera Platform REST API for automating pipelines, compute
+    environments, credentials, datasets, and workflow launches from scripts and
+    CI/CD.
+  install:
+  - method: homebrew
+    command: brew install seqeralabs/tap/tw
+  - method: github-release
+    url: https://github.com/seqeralabs/tower-cli/releases
+  auth:
+    env: TOWER_ACCESS_TOKEN
+    endpoint_env: TOWER_API_ENDPOINT
+    note: Uses the same personal access token (bearer) as the REST API.
+  command_groups:
+  - name: pipelines
+    summary: Add, list, view, update, delete pipelines in a workspace.
+  - name: launch
+    summary: Launch pipelines and passing params/config.
+  - name: runs
+    summary: List, view, cancel, and relaunch workflow runs.
+  - name: compute-envs
+    summary: Manage compute environments (AWS Batch, Azure, GCP, K8s, HPC).
+  - name: credentials
+    summary: Manage cloud and container-registry credentials.
+  - name: datasets
+    summary: Create, list, and update datasets.
+  - name: data-links
+    summary: Manage data links to cloud storage.
+  - name: secrets
+    summary: Manage pipeline secrets.
+  - name: actions
+    summary: Manage pipeline actions (event/webhook-triggered launches).
+  - name: organizations / teams / members / workspaces
+    summary: Manage org structure and access.
+  - name: labels
+    summary: Manage resource labels.

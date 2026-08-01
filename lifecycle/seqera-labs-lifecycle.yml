@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.seqera.io/changelog + https://status.seqera.io
+summary: Versioning, deprecation, and operational lifecycle for the Seqera Platform.
+versioning:
+  api_version: 1.181.0
+  scheme: >-
+    Rolling single-version API; the platform (Cloud/Enterprise) is released on a
+    calendar-cycle scheme (e.g. Seqera Cloud v26.2.0_cycleNN, Enterprise v26.x).
+  changelog: https://docs.seqera.io/changelog
+status_page:
+  url: https://status.seqera.io
+  present: true
+deprecation:
+  policy_documented: true
+  mechanism: Deprecation notices published in the dated changelog per release.
+  examples:
+  - subject: 'cr.seqera.io/private legacy distribution endpoint'
+    note: Deprecated (Enterprise v26.1.3); only bug fixes continue there.
+  - subject: 'api.tower.nf legacy API host'
+    note: Remains operational; superseded by api.cloud.seqera.io.
+  header_support:
+    sunset_rfc8594: unverified
+    note: No documented use of Sunset/Deprecation HTTP headers.
+sla:
+  documented: false
+  note: Enterprise/support SLAs handled via commercial agreement, not published publicly.

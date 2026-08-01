@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: searched
+source: https://trust.seqera.io
+summary: >-
+  Seqera operates a public Trust Center (SafeBase-style portal) at
+  trust.seqera.io. The portal is a JavaScript application whose specific
+  certification list could not be extracted verbatim in this pass; named
+  certifications are therefore NOT asserted here to avoid fabrication.
+trust_center:
+  url: https://trust.seqera.io
+  status: 200
+  present: true
+certifications:
+  status: unverified
+  note: >-
+    Certification/compliance detail is gated behind the JS portal and was not
+    machine-readable during this probe. Re-run with an authenticated/rendered
+    fetch to enumerate SOC 2 / ISO 27001 / GDPR / HIPAA claims before emitting a
+    Compliance pointer.
+security_contact: security@seqera.io

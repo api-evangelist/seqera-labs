@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/seqera-labs-platform-openapi.yml (4xx/5xx responses)
+format: provider-json-envelope
+envelope:
+  field: message
+  media_type: application/json
+  note: >-
+    The Seqera Platform API is NOT RFC 9457 (application/problem+json). Error
+    bodies use the ErrorResponse schema {"message": string}. Launch validation
+    returns WorkflowLaunchValidationErrorResponse {"message","errors"[]} and
+    LaunchValidationError {"code","message"}. GA4GH WES endpoints return
+    WesErrorResponse {"msg","status_code"}.
+status_codes:
+- code: 400
+  title: Bad Request
+  count: 219
+  remediation: Validate request body/params; check launch config and required fields.
+- code: 403
+  title: Forbidden
+  count: 247
+  remediation: >-
+    Access token missing, expired, or lacking workspace role/permission for the
+    resource. Most operations require an appropriate workspace/org role.
+- code: 404
+  title: Not Found
+  count: 58
+  remediation: Verify the resource id and that it exists in the target workspaceId.
+- code: 409
+  title: Conflict
+  count: 53
+  remediation: Resource name already exists or state conflict; use a unique name or resolve the conflicting state.
+- code: 405
+  title: Method Not Allowed
+  count: 1
+  remediation: Use a supported HTTP method for the endpoint.
+error_schemas:
+- name: ErrorResponse
+  fields: [message]
+- name: WorkflowLaunchValidationErrorResponse
+  fields: [message, errors]
+- name: LaunchValidationError
+  fields: [code, message]
+- name: WesErrorResponse
+  fields: [msg, status_code]

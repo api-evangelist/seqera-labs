@@ -1,0 +1,8 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/seqera-labs-platform-openapi.yml
+skills:
+- name: seqera-labs-launch-pipeline
+  file: seqera-labs-launch-pipeline.md
+  description: Launch a Nextflow pipeline as a workflow run on the Seqera Platform and monitor it to completion.
+  operations: [ListWorkspacesUser, ListComputeEnvs, ListPipelines, DescribePipelineLaunch, CreateWorkflowLaunch, DescribeWorkflow, DescribeWorkflowProgress, CancelWorkflow]

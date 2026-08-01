@@ -1,0 +1,34 @@
+# Seqera Labs
+
+> Seqera builds open, cloud-based software for scientific data analysis at scale. It is the company behind Nextflow, the widely used open-source workflow orchestration engine, and the Seqera Platform (formerly Nextflow Tower) for launching, monitoring, and governing data pipelines across cloud and HPC compute.
+
+## API
+
+- [Seqera Platform API overview](https://docs.seqera.io/platform-cloud/api/overview): REST API reference for the Seqera Platform.
+- [OpenAPI specification](https://cloud.seqera.io/openapi/seqera-api-latest.yml): OpenAPI 3.0.1, 186 paths / 250 operations, version 1.181.0.
+- Base URL: `https://api.cloud.seqera.io` (legacy: `https://api.tower.nf`).
+- Auth: HTTP bearer — `Authorization: Bearer <access-token>` (personal access token / JWT).
+- Rate limit: 20 requests/second per access token.
+- GA4GH Workflow Execution Service (WES) v1 supported under `/ga4gh/wes/v1`.
+
+## Resources
+- Organizations & Workspaces (account hierarchy)
+- Pipelines, Workflows (runs), Launch
+- Compute environments (AWS Batch, Azure, Google Cloud, Kubernetes, HPC)
+- Credentials, Pipeline secrets, SSH keys
+- Datasets, Data links, Data Studios
+- Actions (event/webhook-triggered launches), Labels, Trace, Tokens
+
+## Tooling
+- [Seqera Platform CLI (tw / tower-cli)](https://github.com/seqeralabs/tower-cli): official command line tool (Java).
+- [seqerakit](https://pypi.org/project/seqerakit/): official Python automation tool (YAML-driven).
+- [Nextflow](https://github.com/nextflow-io/nextflow): open-source workflow engine.
+
+## Docs & Support
+- [Documentation](https://docs.seqera.io)
+- [Changelog](https://docs.seqera.io/changelog)
+- [Community forum](https://community.seqera.io)
+- [Status page](https://status.seqera.io)
+- [Pricing](https://seqera.io/pricing)
+- [Trust Center](https://trust.seqera.io)
+- [Security contact](mailto:security@seqera.io)

@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://docs.seqera.io/platform-cloud/api/overview +
+  openapi/seqera-labs-platform-openapi.yml
+summary: Cross-cutting runtime semantics for the Seqera Platform REST API.
+base_url: https://api.cloud.seqera.io
+legacy_base_url: https://api.tower.nf
+auth:
+  style: http-bearer
+  header: 'Authorization: Bearer <access-token>'
+  token: Personal access token (JWT) created in the Seqera Platform UI.
+  see: authentication/seqera-labs-authentication.yml
+workspace_scoping:
+  param: workspaceId
+  note: >-
+    Most operations are scoped to a workspace via the workspaceId query
+    parameter; omitting it targets the user (personal) context.
+pagination:
+  style: offset-limit
+  params:
+    limit: max
+    offset: offset
+    search: search
+    sort_field: sortBy
+    sort_direction: sortDir
+  ga4gh_wes:
+    style: cursor
+    params: [page_size, page_token, next_page_token]
+rate_limiting:
+  limit: 20 requests per second per access token
+  source: https://docs.seqera.io/platform-cloud/api/overview
+  signaling: HTTP 429 on exceed (standard); no documented rate-limit response headers.
+idempotency:
+  supported: false
+  note: No Idempotency-Key header documented; create operations are not idempotent.
+versioning:
+  style: single-version rolling API; version reported via info.version (currently 1.181.0) and /service-info.
+  media_type: application/json
+error_envelope:
+  field: message
+  format: provider-json (not RFC 9457)
+  see: errors/seqera-labs-problem-types.yml
+lifecycle:
+  see: lifecycle/seqera-labs-lifecycle.yml

@@ -1,0 +1,4 @@
+Contact: mailto:security@seqera.io
+Encryption: https://seqera.io/.well-known/security-team-publickey.txt
+Preferred-Languages: en
+Expires: 2035-08-29T00:00:00Z
