@@ -607,6 +607,8 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 common:
+- type: Overlay
+  url: overlays/seqera-labs-platform-overlay.yaml
 - type: DomainSecurity
   url: security/seqera-labs-domain-security.yml
 - type: DeveloperPortal
