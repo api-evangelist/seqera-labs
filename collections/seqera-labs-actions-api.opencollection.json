@@ -1,0 +1,315 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "actions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/actions",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Additional attribute values to include in the response (`labels`). Returns an empty value (`labels: null`) if omitted."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all available actions in a user context, enriched by `attributes`. Append `?workspaceId` to list actions in a workspace context."
+        },
+        {
+          "info": {
+            "name": "Create action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/actions",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new pipeline action. Append `?workspaceId` to associate the action with the given workspace."
+        },
+        {
+          "info": {
+            "name": "Resolve a schedule description to a cron expression",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/actions/cron/resolve",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Resolve a schedule description to a cron expression"
+        },
+        {
+          "info": {
+            "name": "List action event types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/actions/types",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists the supported event types that trigger a pipeline action. Append `?workspaceId` to list event types in a workspace context."
+        },
+        {
+          "info": {
+            "name": "Validate action name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/actions/validate",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Action name to validate"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Confirms the validity of the given action name. Append `?name=<your_action_name>`."
+        },
+        {
+          "info": {
+            "name": "Describe action",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/actions/:actionId",
+            "params": [
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "path",
+                "description": "Action string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Additional attribute values to include in the response (`labels`). Returns an empty value (`labels: null`) if omitted."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the details of the action identified by the given `actionId`."
+        },
+        {
+          "info": {
+            "name": "Update action",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/actions/:actionId",
+            "params": [
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "path",
+                "description": "Action string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the details of the action identified by the given `actionId`. The `source` of an existing action cannot be changed."
+        },
+        {
+          "info": {
+            "name": "Delete action",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/actions/:actionId",
+            "params": [
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "path",
+                "description": "Action string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the pipeline action identified by the given `actionId`."
+        },
+        {
+          "info": {
+            "name": "Trigger Tower Launch action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/actions/:actionId/launch",
+            "params": [
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "path",
+                "description": "Action string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Triggers the execution of the Tower Launch action identified by the given `actionId`."
+        },
+        {
+          "info": {
+            "name": "Pause or resume action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/actions/:actionId/pause",
+            "params": [
+              {
+                "name": "actionId",
+                "value": "",
+                "type": "path",
+                "description": "Action string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Pauses or resumes the pipeline action identified by the given `actionId`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

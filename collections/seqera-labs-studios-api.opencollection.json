@@ -1,0 +1,541 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions studios API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "studios",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Studios",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/studios",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Optional search criteria, allowing free text search on name and templateUrl and keywords: `userId`, `computeEnvId` and `status`."
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Optional attribute values to be included in the response (`labels`). Returns an empty value (`labels: null`) if omitted."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all available Studios in a user context. Append `?workspaceId` to list Studios in a workspace context."
+        },
+        {
+          "info": {
+            "name": "Create Studio",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/studios",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "autoStart",
+                "value": "",
+                "type": "query",
+                "description": "Optionally disable the Studio's automatic launch when it is created."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new Studio environment, starting it by default. Default behavior can be changed using the query parameter `autoStart=false`."
+        },
+        {
+          "info": {
+            "name": "List mounted data-links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/studios/data-links",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Optional Studio status"
+              },
+              {
+                "name": "exclude",
+                "value": "",
+                "type": "query",
+                "description": "Optional Studio session ID to exclude in the request."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists the IDs of all available data-links mounted in existing Studios. Append `orgId` or `?workspaceId` to list mounted data-links in an organization or workspace context, respectively."
+        },
+        {
+          "info": {
+            "name": "List available Studio templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/studios/templates",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace identifier"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the list of available, configured Studio templates."
+        },
+        {
+          "info": {
+            "name": "Validate Studio name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/studios/validate",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Studio name to validate"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Confirms the availability of the given name for a Studio in the user context. Append `?workspaceId=` to validate the name in a workspace context."
+        },
+        {
+          "info": {
+            "name": "Describe Studio",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/studios/:sessionId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Studio session numeric identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the details of the Studio session identified by the given `sessionId`."
+        },
+        {
+          "info": {
+            "name": "Update a Studio",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/studios/:sessionId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Studio session numeric identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the given Studio session ID. Can only update non-running Studios. The compute environment can be changed by setting `computeEnvId` to a CE compatible with the Studio's current one; see `GET /studios/{sessionId}/compatible-ce`."
+        },
+        {
+          "info": {
+            "name": "Delete Studio",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/studios/:sessionId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Studio session numeric identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the Studio associated with the given Studio session ID."
+        },
+        {
+          "info": {
+            "name": "List Studio checkpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/studios/:sessionId/checkpoints",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Studio session numeric identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Optional search criteria, allowing free text search on name and keywords: `status`, `before` and `after` for saved date"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the list of checkpoints for the given Studio session ID, sorted by creation date in descending order."
+        },
+        {
+          "info": {
+            "name": "Get Studio checkpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/studios/:sessionId/checkpoints/:checkpointId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Studio session numeric identifier"
+              },
+              {
+                "name": "checkpointId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric identifier of the checkpoint."
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the details of the given Studio checkpoint ID."
+        },
+        {
+          "info": {
+            "name": "Update Studio checkpoint name",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/studios/:sessionId/checkpoints/:checkpointId",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Studio session numeric identifier"
+              },
+              {
+                "name": "checkpointId",
+                "value": "",
+                "type": "path",
+                "description": "Numeric identifier of the checkpoint."
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the name of the given Studio checkpoint ID."
+        },
+        {
+          "info": {
+            "name": "List compute environments compatible with a Studio",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/studios/:sessionId/compatible-ce",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Studio session numeric identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Additional attribute values to include in the response (`labels`, `resources`). Returns an empty value (ex. `labels: null`) if omitted."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists the compute environments in the same workspace as the given Studio that are compatible with its compute environment."
+        },
+        {
+          "info": {
+            "name": "ExtendDataStudioLifespan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/studios/:sessionId/lifespan",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Studio session numeric identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Extends the lifespan of the given Studio session ID."
+        },
+        {
+          "info": {
+            "name": "Starts a Studio",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/studios/:sessionId/start",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Studio session numeric identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Starts the given Studio session ID."
+        },
+        {
+          "info": {
+            "name": "Stop Studio",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/studios/:sessionId/stop",
+            "params": [
+              {
+                "name": "sessionId",
+                "value": "",
+                "type": "path",
+                "description": "Studio session numeric identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Stops the given Studio session ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

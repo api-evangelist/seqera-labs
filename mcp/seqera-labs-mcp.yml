@@ -2,11 +2,9 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/seqera-labs-platform-openapi.yml
-summary: >-
-  No official hosted/remote Seqera MCP server was found via search/probe as of
-  this pass. This is a CANDIDATE tool surface derived from Seqera Platform
-  OpenAPI operations, suitable for generating an MCP server. Not an endorsement
-  of an existing server.
+summary: No official hosted/remote Seqera MCP server was found via search/probe as of this pass. This
+  is a CANDIDATE tool surface derived from Seqera Platform OpenAPI operations, suitable for generating
+  an MCP server. Not an endorsement of an existing server.
 server:
   name: seqera-platform
   transport: candidate (not published)
@@ -40,3 +38,9 @@ tools:
 - name: service_info
   operationId: Info
   description: Return API service info / version.
+deployment:
+  mode: none
+  verified: derived
+  tools: 9
+  checked: '2026-08-12'
+  source: catalog MCP census

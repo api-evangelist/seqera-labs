@@ -1,0 +1,2517 @@
+{
+  "item": [
+    {
+      "id": "f8ad5995-4f50-43e0-a9a7-0d28cb4134b5",
+      "name": "identities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "69a110e5-1cae-44a1-8b7d-b0be03be1d5f",
+          "name": "List Managed Identities",
+          "request": {
+            "name": "List Managed Identities",
+            "description": {
+              "content": "List all Managed Identities in an organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orgId",
+                  "value": "<long>",
+                  "description": "Organization numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Optional search criteria, allowing free text search on name and keywords: `platform:`"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>",
+                  "description": "Pagination max results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8077abc9-8288-47b8-adce-e5a44e39c80a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"managedIdentities\": [\n    {\n      \"config\": {\n        \"computeQueue\": \"string\",\n        \"headJobOptions\": \"string\",\n        \"headQueue\": \"string\",\n        \"hostName\": \"string\",\n        \"launchDir\": \"string\",\n        \"maxQueueSize\": 8115,\n        \"port\": 7149,\n        \"propagateHeadJobOptions\": true,\n        \"userName\": \"string\"\n      },\n      \"id\": 8362,\n      \"name\": \"string\",\n      \"platform\": \"moab-platform\"\n    },\n    {\n      \"config\": {\n        \"computeQueue\": \"string\",\n        \"headJobOptions\": \"string\",\n        \"headQueue\": \"string\",\n        \"hostName\": \"string\",\n        \"launchDir\": \"string\",\n        \"maxQueueSize\": 6236,\n        \"port\": 6001,\n        \"propagateHeadJobOptions\": true,\n        \"userName\": \"string\"\n      },\n      \"id\": 3727,\n      \"name\": \"string\",\n      \"platform\": \"moab-platform\"\n    }\n  ],\n  \"totalSize\": 5883\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "92d936f7-6a44-4bec-aa46-47157ea00fd8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad423f0b-2c1a-4298-b715-ca71fe958b5b",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8c25f3a-b2a3-428b-a4ad-b9f41af95528",
+          "name": "Create Managed Identity",
+          "request": {
+            "name": "Create Managed Identity",
+            "description": {
+              "content": "Create a new Managed Identity in an organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orgId",
+                  "value": "<long>",
+                  "description": "Organization numeric identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": \"<object>\",\n  \"name\": \"<string>\",\n  \"platform\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3376ae70-f008-4d28-8227-7248ccf5ec97",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"cliPath\": \"<string>\",\n    \"computeJobRole\": \"<string>\",\n    \"computeQueue\": \"<string>\",\n    \"dragenInstanceType\": \"<string>\",\n    \"dragenQueue\": \"<string>\",\n    \"executionRole\": \"<string>\",\n    \"forge\": {\n      \"allocStrategy\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"allowBuckets\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"arm64Enabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"bidPercentage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"disposeOnDeletion\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenAmiId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenInstanceType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ebsAutoScale\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ebsBlockSize\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ebsBootSize\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ec2KeyPair\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ecsConfig\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"efsCreate\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"efsId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"efsMount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fargateHeadEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fsxMount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fsxName\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fsxSize\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fusionEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"gpuEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"imageId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"instanceTypes\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"maxCpus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"minCpus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"securityGroups\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"subnets\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"vpcId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"forgedResources\": [\n      {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"fusion2Enabled\": \"<boolean>\",\n    \"fusionSnapshots\": \"<boolean>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"headJobRole\": \"<string>\",\n    \"headQueue\": \"<string>\",\n    \"logGroup\": \"<string>\",\n    \"lustreId\": \"<string>\",\n    \"nvnmeStorageEnabled\": \"<boolean>\",\n    \"region\": \"<string>\",\n    \"storageType\": \"<string>\",\n    \"volumes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"waveEnabled\": \"<boolean>\",\n    \"headJobOptions\": \"<string>\",\n    \"hostName\": \"<string>\",\n    \"launchDir\": \"<string>\",\n    \"maxQueueSize\": \"<integer>\",\n    \"port\": \"<integer>\",\n    \"propagateHeadJobOptions\": \"<boolean>\",\n    \"userName\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"platform\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"config\": {\n    \"cliPath\": \"<string>\",\n    \"computeJobRole\": \"<string>\",\n    \"computeQueue\": \"<string>\",\n    \"deletedResources\": [\n      {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      {\n        \"key_0\": {}\n      }\n    ],\n    \"dragenInstanceType\": \"<string>\",\n    \"dragenQueue\": \"<string>\",\n    \"executionRole\": \"<string>\",\n    \"forge\": {\n      \"allocStrategy\": \"BEST_FIT\",\n      \"allowBuckets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"arm64Enabled\": true,\n      \"bidPercentage\": 3116,\n      \"disposeOnDeletion\": false,\n      \"dragenAmiId\": \"string\",\n      \"dragenEnabled\": false,\n      \"dragenInstanceType\": \"string\",\n      \"ebsAutoScale\": false,\n      \"ebsBlockSize\": 3027,\n      \"ebsBootSize\": 1141,\n      \"ec2KeyPair\": \"string\",\n      \"ecsConfig\": \"string\",\n      \"efsCreate\": true,\n      \"efsId\": \"string\",\n      \"efsMount\": \"string\",\n      \"fargateHeadEnabled\": false,\n      \"fsxMount\": \"string\",\n      \"fsxName\": \"string\",\n      \"fsxSize\": 8428,\n      \"fusionEnabled\": false,\n      \"gpuEnabled\": false,\n      \"imageId\": \"string\",\n      \"instanceTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"maxCpus\": 4015,\n      \"minCpus\": 4481,\n      \"securityGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"subnets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"type\": \"EC2\",\n      \"vpcId\": \"string\"\n    },\n    \"forgedResources\": [\n      {\n        \"key_0\": {}\n      },\n      {\n        \"key_0\": {}\n      }\n    ],\n    \"fusion2Enabled\": \"<boolean>\",\n    \"fusionSnapshots\": \"<boolean>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"headJobRole\": \"<string>\",\n    \"headQueue\": \"<string>\",\n    \"logGroup\": \"<string>\",\n    \"lustreId\": \"<string>\",\n    \"nvnmeStorageEnabled\": \"<boolean>\",\n    \"region\": \"<string>\",\n    \"storageType\": \"<string>\",\n    \"volumes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"waveEnabled\": \"<boolean>\"\n  },\n  \"id\": 9013,\n  \"name\": \"string\",\n  \"platform\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bb4cb06f-4e0b-4fb2-89e7-c752c0fa163d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"cliPath\": \"<string>\",\n    \"computeJobRole\": \"<string>\",\n    \"computeQueue\": \"<string>\",\n    \"dragenInstanceType\": \"<string>\",\n    \"dragenQueue\": \"<string>\",\n    \"executionRole\": \"<string>\",\n    \"forge\": {\n      \"allocStrategy\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"allowBuckets\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"arm64Enabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"bidPercentage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"disposeOnDeletion\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenAmiId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenInstanceType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ebsAutoScale\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ebsBlockSize\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ebsBootSize\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ec2KeyPair\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ecsConfig\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"efsCreate\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"efsId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"efsMount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fargateHeadEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fsxMount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fsxName\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fsxSize\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fusionEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"gpuEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"imageId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"instanceTypes\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"maxCpus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"minCpus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"securityGroups\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"subnets\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"vpcId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"forgedResources\": [\n      {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"fusion2Enabled\": \"<boolean>\",\n    \"fusionSnapshots\": \"<boolean>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"headJobRole\": \"<string>\",\n    \"headQueue\": \"<string>\",\n    \"logGroup\": \"<string>\",\n    \"lustreId\": \"<string>\",\n    \"nvnmeStorageEnabled\": \"<boolean>\",\n    \"region\": \"<string>\",\n    \"storageType\": \"<string>\",\n    \"volumes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"waveEnabled\": \"<boolean>\",\n    \"headJobOptions\": \"<string>\",\n    \"hostName\": \"<string>\",\n    \"launchDir\": \"<string>\",\n    \"maxQueueSize\": \"<integer>\",\n    \"port\": \"<integer>\",\n    \"propagateHeadJobOptions\": \"<boolean>\",\n    \"userName\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"platform\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "64832d03-f3ed-4cbd-8d27-ce52de1944e7",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"cliPath\": \"<string>\",\n    \"computeJobRole\": \"<string>\",\n    \"computeQueue\": \"<string>\",\n    \"dragenInstanceType\": \"<string>\",\n    \"dragenQueue\": \"<string>\",\n    \"executionRole\": \"<string>\",\n    \"forge\": {\n      \"allocStrategy\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"allowBuckets\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"arm64Enabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"bidPercentage\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"disposeOnDeletion\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenAmiId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenInstanceType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ebsAutoScale\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ebsBlockSize\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ebsBootSize\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ec2KeyPair\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"ecsConfig\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"efsCreate\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"efsId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"efsMount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fargateHeadEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fsxMount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fsxName\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fsxSize\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fusionEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"gpuEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"imageId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"instanceTypes\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"maxCpus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"minCpus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"securityGroups\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"subnets\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"type\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"vpcId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"forgedResources\": [\n      {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"key_2\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      {\n        \"key_0\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    ],\n    \"fusion2Enabled\": \"<boolean>\",\n    \"fusionSnapshots\": \"<boolean>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"headJobRole\": \"<string>\",\n    \"headQueue\": \"<string>\",\n    \"logGroup\": \"<string>\",\n    \"lustreId\": \"<string>\",\n    \"nvnmeStorageEnabled\": \"<boolean>\",\n    \"region\": \"<string>\",\n    \"storageType\": \"<string>\",\n    \"volumes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"waveEnabled\": \"<boolean>\",\n    \"headJobOptions\": \"<string>\",\n    \"hostName\": \"<string>\",\n    \"launchDir\": \"<string>\",\n    \"maxQueueSize\": \"<integer>\",\n    \"port\": \"<integer>\",\n    \"propagateHeadJobOptions\": \"<boolean>\",\n    \"userName\": \"<string>\"\n  },\n  \"name\": \"<string>\",\n  \"platform\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "127a122e-cb20-40e6-858b-6fbffc816fd4",
+          "name": "Delete a Managed Identity",
+          "request": {
+            "name": "Delete a Managed Identity",
+            "description": {
+              "content": "Delete a Managed Identity identified by the given ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":managedIdentityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orgId",
+                  "value": "<long>",
+                  "description": "Organization numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "checked",
+                  "value": "<boolean>",
+                  "description": "If deletion of associated Managed Credentials will be blocked by running jobs that depend on them"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "managedIdentityId",
+                  "description": "(Required) Managed Identity numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c174d2e0-fe9f-43c4-8326-f3d14faddef8",
+              "name": "OK - No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9da375f0-5f82-420c-a99b-a62b11af6842",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da7de0a6-4f54-41ee-947f-88fbecbcce1d",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a0492d7b-57d8-45b7-941c-e8a6093a0609",
+              "name": "Running jobs block the deletion of this Managed Identity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"conflicts\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"url\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"url\": \"string\"\n    }\n  ],\n  \"managedCredentialsId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f454a7cb-be79-40b8-a082-5e842b4d9770",
+          "name": "Describe a Managed Identity",
+          "request": {
+            "name": "Describe a Managed Identity",
+            "description": {
+              "content": "Describe a Managed Identity in an organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":managedIdentityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orgId",
+                  "value": "<long>",
+                  "description": "Organization numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "managedIdentityId",
+                  "description": "(Required) Managed Identity numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "83800d3e-f284-4f0a-af68-2137fc24917b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"config\": {\n    \"cliPath\": \"<string>\",\n    \"computeJobRole\": \"<string>\",\n    \"computeQueue\": \"<string>\",\n    \"deletedResources\": [\n      {\n        \"key_0\": {}\n      },\n      {\n        \"key_0\": {},\n        \"key_1\": {}\n      }\n    ],\n    \"dragenInstanceType\": \"<string>\",\n    \"dragenQueue\": \"<string>\",\n    \"executionRole\": \"<string>\",\n    \"forge\": {\n      \"allocStrategy\": \"SPOT_CAPACITY_OPTIMIZED\",\n      \"allowBuckets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"arm64Enabled\": true,\n      \"bidPercentage\": 4926,\n      \"disposeOnDeletion\": true,\n      \"dragenAmiId\": \"string\",\n      \"dragenEnabled\": false,\n      \"dragenInstanceType\": \"string\",\n      \"ebsAutoScale\": true,\n      \"ebsBlockSize\": 1042,\n      \"ebsBootSize\": 5385,\n      \"ec2KeyPair\": \"string\",\n      \"ecsConfig\": \"string\",\n      \"efsCreate\": true,\n      \"efsId\": \"string\",\n      \"efsMount\": \"string\",\n      \"fargateHeadEnabled\": true,\n      \"fsxMount\": \"string\",\n      \"fsxName\": \"string\",\n      \"fsxSize\": 6512,\n      \"fusionEnabled\": false,\n      \"gpuEnabled\": true,\n      \"imageId\": \"string\",\n      \"instanceTypes\": [\n        \"string\",\n        \"string\"\n      ],\n      \"maxCpus\": 8894,\n      \"minCpus\": 4901,\n      \"securityGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"subnets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"type\": \"EC2\",\n      \"vpcId\": \"string\"\n    },\n    \"forgedResources\": [\n      {\n        \"key_0\": {}\n      },\n      {\n        \"key_0\": {},\n        \"key_1\": {},\n        \"key_2\": {}\n      }\n    ],\n    \"fusion2Enabled\": \"<boolean>\",\n    \"fusionSnapshots\": \"<boolean>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"headJobRole\": \"<string>\",\n    \"headQueue\": \"<string>\",\n    \"logGroup\": \"<string>\",\n    \"lustreId\": \"<string>\",\n    \"nvnmeStorageEnabled\": \"<boolean>\",\n    \"region\": \"<string>\",\n    \"storageType\": \"<string>\",\n    \"volumes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"waveEnabled\": \"<boolean>\"\n  },\n  \"id\": 4754,\n  \"name\": \"string\",\n  \"platform\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "436388d8-e5fc-4419-b77d-bd83060b4d62",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d9699072-9eac-4d07-bdbc-0fa4e9652fdc",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9275cc15-d912-4fcc-8073-043c28107e8c",
+          "name": "Update a Managed Identity",
+          "request": {
+            "name": "Update a Managed Identity",
+            "description": {
+              "content": "Update a Managed Identity identified by the given ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":managedIdentityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orgId",
+                  "value": "<long>",
+                  "description": "Organization numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "managedIdentityId",
+                  "description": "(Required) Managed Identity numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"managedIdentity\": {\n    \"config\": \"<object>\",\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"platform\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6d8667f6-3df9-4506-b5d7-1128c5613958",
+              "name": "OK - No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"managedIdentity\": {\n    \"config\": {\n      \"cliPath\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"computeJobRole\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"computeQueue\": \"<string>\",\n      \"dragenInstanceType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenQueue\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"executionRole\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"forge\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"forgedResources\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fusion2Enabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fusionSnapshots\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobCpus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobMemoryMb\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobRole\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headQueue\": \"<string>\",\n      \"logGroup\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"lustreId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"nvnmeStorageEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"region\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"storageType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"volumes\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"waveEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobOptions\": \"<string>\",\n      \"hostName\": \"<string>\",\n      \"launchDir\": \"<string>\",\n      \"maxQueueSize\": \"<integer>\",\n      \"port\": \"<integer>\",\n      \"propagateHeadJobOptions\": \"<boolean>\",\n      \"userName\": \"<string>\"\n    },\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"platform\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f00b7606-3c7c-49c7-91f1-2b0bdf32e1b9",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"managedIdentity\": {\n    \"config\": {\n      \"cliPath\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"computeJobRole\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"computeQueue\": \"<string>\",\n      \"dragenInstanceType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenQueue\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"executionRole\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"forge\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"forgedResources\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fusion2Enabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fusionSnapshots\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobCpus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobMemoryMb\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobRole\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headQueue\": \"<string>\",\n      \"logGroup\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"lustreId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"nvnmeStorageEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"region\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"storageType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"volumes\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"waveEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobOptions\": \"<string>\",\n      \"hostName\": \"<string>\",\n      \"launchDir\": \"<string>\",\n      \"maxQueueSize\": \"<integer>\",\n      \"port\": \"<integer>\",\n      \"propagateHeadJobOptions\": \"<boolean>\",\n      \"userName\": \"<string>\"\n    },\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"platform\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1eb5a481-e1fd-4915-aa3b-a3cf3a8a3948",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"managedIdentity\": {\n    \"config\": {\n      \"cliPath\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"computeJobRole\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"computeQueue\": \"<string>\",\n      \"dragenInstanceType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"dragenQueue\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"executionRole\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"forge\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"forgedResources\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fusion2Enabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"fusionSnapshots\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobCpus\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobMemoryMb\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobRole\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headQueue\": \"<string>\",\n      \"logGroup\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"lustreId\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"nvnmeStorageEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"region\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"storageType\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"volumes\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"waveEnabled\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"headJobOptions\": \"<string>\",\n      \"hostName\": \"<string>\",\n      \"launchDir\": \"<string>\",\n      \"maxQueueSize\": \"<integer>\",\n      \"port\": \"<integer>\",\n      \"propagateHeadJobOptions\": \"<boolean>\",\n      \"userName\": \"<string>\"\n    },\n    \"id\": \"<long>\",\n    \"name\": \"<string>\",\n    \"platform\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e840fab9-d558-4936-820e-ce833d6ff726",
+          "name": "List Managed Credentials",
+          "request": {
+            "name": "List Managed Credentials",
+            "description": {
+              "content": "List Managed Credentials belonging to a Managed Identity.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":managedIdentityId",
+                "credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orgId",
+                  "value": "<long>",
+                  "description": "Organization numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<long>",
+                  "description": "User numeric identifier to filter records by"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Optional filtering on Managed Credentials for the given Managed Identity:                                              Allows free text search on `userName` or `firstName + lastName`.                                              Accepts keywords: `is:missing` or `is:added` to filter on credentials status.                                              If not provided (or both provided), all are returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>",
+                  "description": "Pagination max results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "managedIdentityId",
+                  "description": "(Required) Managed Identity numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a98dd8d1-231a-4e5e-94ac-c58b9aac445b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"managedCredentials\": [\n    {\n      \"avatarUrl\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"managedCredentialsId\": 2246,\n      \"metadata\": {\n        \"discriminator\": \"string\"\n      },\n      \"provider\": \"ssh\",\n      \"userId\": 7073,\n      \"userName\": \"string\"\n    },\n    {\n      \"avatarUrl\": \"string\",\n      \"firstName\": \"string\",\n      \"lastName\": \"string\",\n      \"managedCredentialsId\": 5592,\n      \"metadata\": {\n        \"discriminator\": \"string\"\n      },\n      \"provider\": \"ssh\",\n      \"userId\": 5775,\n      \"userName\": \"string\"\n    }\n  ],\n  \"totalSize\": 6657\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5f30ef5-31f5-49f6-8d99-97e74df05cfe",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f7c7199-da09-4c8d-9423-589611af0d1f",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95ddefcf-8fd0-4b72-83e5-7f521e192c24",
+          "name": "Creates Managed Credentials",
+          "request": {
+            "name": "Creates Managed Credentials",
+            "description": {
+              "content": "Creates Managed Credentials for the given Managed Identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":managedIdentityId",
+                "credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orgId",
+                  "value": "<long>",
+                  "description": "Organization numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<long>",
+                  "description": "User numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "managedIdentityId",
+                  "description": "(Required) Managed Identity numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"credentials\": {\n    \"name\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"baseUrl\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"keys\": \"<object>\"\n  },\n  \"metadata\": {},\n  \"provider\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d166b20-042a-4e0c-9dbe-5b550674fe5b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"credentials\": {\n    \"name\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"baseUrl\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"keys\": {\n      \"accessKey\": \"<string>\",\n      \"assumeRoleArn\": \"<string>\",\n      \"discriminator\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"secretKey\": \"<string>\"\n    }\n  },\n  \"metadata\": {},\n  \"provider\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"managedCredentials\": {\n    \"id\": 4839\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fcac12e5-993b-4d3c-a825-ebc5fec37caf",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"credentials\": {\n    \"name\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"baseUrl\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"keys\": {\n      \"accessKey\": \"<string>\",\n      \"assumeRoleArn\": \"<string>\",\n      \"discriminator\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"secretKey\": \"<string>\"\n    }\n  },\n  \"metadata\": {},\n  \"provider\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6c721a1-c794-4227-a01b-a83bdc9d08e0",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"credentials\": {\n    \"name\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"baseUrl\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"keys\": {\n      \"accessKey\": \"<string>\",\n      \"assumeRoleArn\": \"<string>\",\n      \"discriminator\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"secretKey\": \"<string>\"\n    }\n  },\n  \"metadata\": {},\n  \"provider\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fbe529fa-f2f9-4c40-b053-6f098803e618",
+          "name": "Delete a user's Managed Credentials record belonging to a Managed Identity",
+          "request": {
+            "name": "Delete a user's Managed Credentials record belonging to a Managed Identity",
+            "description": {
+              "content": "Delete Managed Credentials",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":managedIdentityId",
+                "credentials",
+                ":managedCredentialsId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orgId",
+                  "value": "<long>",
+                  "description": "Organization numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "checked",
+                  "value": "<boolean>",
+                  "description": "If Managed Credentials deletion will be blocked by running jobs that depend on them"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "managedIdentityId",
+                  "description": "(Required) Managed Identity numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "managedCredentialsId",
+                  "description": "(Required) Managed Credentials numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "41134fa3-1a74-4f39-8743-9cba8f0c1945",
+              "name": "OK - No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials",
+                    ":managedCredentialsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedCredentialsId",
+                      "description": "(Required) Managed Credentials numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e42cebde-6fbd-4bdf-876c-ed937754f8c8",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials",
+                    ":managedCredentialsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedCredentialsId",
+                      "description": "(Required) Managed Credentials numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ad384450-b072-4ed9-adb9-37dc58007013",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials",
+                    ":managedCredentialsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedCredentialsId",
+                      "description": "(Required) Managed Credentials numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8bfa2fce-e789-4ce7-84d5-0422d01abbe5",
+              "name": "Running jobs block the deletion of this Managed Credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials",
+                    ":managedCredentialsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "checked",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedCredentialsId",
+                      "description": "(Required) Managed Credentials numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"conflicts\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"url\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"type\": \"string\",\n      \"url\": \"string\"\n    }\n  ],\n  \"managedCredentialsId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "03ce1c37-dade-4b17-9c20-5d161244d24d",
+          "name": "Updates Managed Credentials",
+          "request": {
+            "name": "Updates Managed Credentials",
+            "description": {
+              "content": "Update Managed Credentials for the given Managed Identity",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "identities",
+                ":managedIdentityId",
+                "credentials",
+                ":managedCredentialsId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orgId",
+                  "value": "<long>",
+                  "description": "Organization numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "managedIdentityId",
+                  "description": "(Required) Managed Identity numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "managedCredentialsId",
+                  "description": "(Required) Managed Credentials numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"credentials\": {\n    \"name\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"baseUrl\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"keys\": \"<object>\"\n  },\n  \"metadata\": {},\n  \"provider\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "495b6460-b8da-40c0-ae97-f53a85e09a34",
+              "name": "OK - No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials",
+                    ":managedCredentialsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedCredentialsId",
+                      "description": "(Required) Managed Credentials numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"credentials\": {\n    \"name\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"baseUrl\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"keys\": {\n      \"accessKey\": \"<string>\",\n      \"assumeRoleArn\": \"<string>\",\n      \"discriminator\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"secretKey\": \"<string>\"\n    }\n  },\n  \"metadata\": {},\n  \"provider\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "aec0260d-5c80-4f11-b933-94700d7b2d1b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials",
+                    ":managedCredentialsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedCredentialsId",
+                      "description": "(Required) Managed Credentials numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"credentials\": {\n    \"name\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"baseUrl\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"keys\": {\n      \"accessKey\": \"<string>\",\n      \"assumeRoleArn\": \"<string>\",\n      \"discriminator\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"secretKey\": \"<string>\"\n    }\n  },\n  \"metadata\": {},\n  \"provider\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "373f7c57-1dff-4b82-8d68-35d26f5a44e4",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "identities",
+                    ":managedIdentityId",
+                    "credentials",
+                    ":managedCredentialsId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedIdentityId",
+                      "description": "(Required) Managed Identity numeric identifier"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "managedCredentialsId",
+                      "description": "(Required) Managed Credentials numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"credentials\": {\n    \"name\": \"<string>\",\n    \"provider\": \"<string>\",\n    \"baseUrl\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\",\n    \"id\": \"<string>\",\n    \"keys\": {\n      \"accessKey\": \"<string>\",\n      \"assumeRoleArn\": \"<string>\",\n      \"discriminator\": \"<string>\",\n      \"externalId\": \"<string>\",\n      \"mode\": \"<string>\",\n      \"secretKey\": \"<string>\"\n    }\n  },\n  \"metadata\": {},\n  \"provider\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c8d5078e-4475-4dd2-8e2c-f23c1ea9a067",
+    "name": "Seqera actions identities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+      "type": "text/plain"
+    }
+  }
+}

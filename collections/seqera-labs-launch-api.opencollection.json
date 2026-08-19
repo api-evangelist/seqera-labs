@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions launch API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "launch",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Describe Launch record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/launch/:launchId",
+            "params": [
+              {
+                "name": "launchId",
+                "value": "",
+                "type": "path",
+                "description": "Launch string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the details of the launch identified by the given `launchId`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

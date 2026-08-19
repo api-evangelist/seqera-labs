@@ -1,0 +1,134 @@
+{
+  "item": [
+    {
+      "id": "632539b2-b4d5-4443-acf4-2e57d2cd0605",
+      "name": "service-info",
+      "description": {
+        "content": "Seqera Platform API service information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "022b8796-b044-454a-93fb-82c7ba69a801",
+          "name": "General Seqera service features and version.",
+          "request": {
+            "name": "General Seqera service features and version.",
+            "description": {},
+            "url": {
+              "path": [
+                "service-info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7504953e-b543-4f14-8031-5c85460bc911",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"serviceInfo\": {\n    \"allowInstanceCredentials\": true,\n    \"allowLocalRepos\": false,\n    \"allowNextflowCliLogs\": false,\n    \"analytics\": {\n      \"hubspotId\": \"string\",\n      \"posthogApiHost\": \"string\",\n      \"posthogApiKey\": \"string\"\n    },\n    \"apiVersion\": \"string\",\n    \"authTypes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"commitId\": \"string\",\n    \"contactEmail\": \"string\",\n    \"contentMaxFileSize\": 886,\n    \"contentUrl\": \"string\",\n    \"evalWorkspaceIds\": [\n      7311,\n      3774\n    ],\n    \"forgePrefix\": \"string\",\n    \"groundswellAllowedWorkspaces\": [\n      6386,\n      469\n    ],\n    \"groundswellEnabled\": true,\n    \"heartbeatInterval\": 3455,\n    \"landingUrl\": \"string\",\n    \"launchConfigTextMaxSize\": 7499,\n    \"launchParamsTextMaxSize\": 4693,\n    \"llmEnabled\": false,\n    \"loginPath\": \"string\",\n    \"logoutUrl\": \"string\",\n    \"navbar\": {\n      \"menus\": [\n        {\n          \"label\": \"string\",\n          \"url\": \"string\"\n        },\n        {\n          \"label\": \"string\",\n          \"url\": \"string\"\n        }\n      ]\n    },\n    \"seqeraAgentBackendUrl\": \"string\",\n    \"seqeraAiBaseUrl\": \"string\",\n    \"seqeraCloud\": false,\n    \"seqeraComputeEnabled\": false,\n    \"termsOfUseUrl\": \"string\",\n    \"userWorkspaceEnabled\": false,\n    \"version\": \"string\",\n    \"waveEnabled\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a278b477-df65-48e8-96d0-2627f9262ad1",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "service-info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d7935b55-ef97-485b-a6aa-0cf82a2b74cd",
+    "name": "Seqera actions service-info API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+      "type": "text/plain"
+    }
+  }
+}

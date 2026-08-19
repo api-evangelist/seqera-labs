@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions ga4gh API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ga4gh",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GA4GH: List runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ga4gh/wes/v1/runs",
+            "params": [
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Page size"
+              },
+              {
+                "name": "page_token",
+                "value": "",
+                "type": "query",
+                "description": "Page token"
+              }
+            ]
+          },
+          "docs": "Uses the GA4GH workflow execution service API to list all run records."
+        },
+        {
+          "info": {
+            "name": "GA4GH: Launch run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ga4gh/wes/v1/runs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uses the GA4GH workflow execution service API to launch a new run. Runs are launched in the user workspace context by default. To launch in an organization workspace context, include the `workspaceId` in `workflow_engine_parameters`. Runs are launched with the workspace primary compute environment by default. To launch with a different compute environment, include the `computeEnvId` in `workflow_engine_parameters`."
+        },
+        {
+          "info": {
+            "name": "GA4GH: Describe run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ga4gh/wes/v1/runs/:run_id",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "Run string identifier"
+              }
+            ]
+          },
+          "docs": "Uses the GA4GH workflow execution service API to retrieve the details of the run assoiated with the given `run_id`."
+        },
+        {
+          "info": {
+            "name": "GA4GH: Cancel run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/ga4gh/wes/v1/runs/:run_id/cancel",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "Run string identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uses the GA4GH workflow execution service API to cancel the run associated with the given `run_id`."
+        },
+        {
+          "info": {
+            "name": "GA4GH: Retrieve run status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ga4gh/wes/v1/runs/:run_id/status",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path",
+                "description": "Run string identifier"
+              }
+            ]
+          },
+          "docs": "Uses the GA4GH workflow execution service API to retrieve the status of the run associated with the given `run_id`."
+        },
+        {
+          "info": {
+            "name": "GA4GH workflow execution service API info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/ga4gh/wes/v1/service-info"
+          },
+          "docs": "GA4GH workflow execution service API info"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions admin API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "admin",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List audit logs (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/audit-logs-v2",
+            "params": [
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Additional attribute values to include in the response (`state` for pre/post image payloads)."
+              },
+              {
+                "name": "nextPageToken",
+                "value": "",
+                "type": "query",
+                "description": "Token for retrieving the next page of results"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return in the page"
+              },
+              {
+                "name": "timestampAfterOrEqual",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs with timestamp on or after this date"
+              },
+              {
+                "name": "timestampBeforeOrEqual",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs with timestamp on or before this date"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists audit logs with token-based pagination, ordered by timestamp (descending). Supports filtering by timestamp range."
+        },
+        {
+          "info": {
+            "name": "Export audit logs (v2) as CSV",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/audit-logs-v2/export-csv",
+            "params": [
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Additional attribute values to include in the response (`state` for pre/post image payloads)."
+              },
+              {
+                "name": "timestampAfterOrEqual",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs with timestamp on or after this date"
+              },
+              {
+                "name": "timestampBeforeOrEqual",
+                "value": "",
+                "type": "query",
+                "description": "Filter logs with timestamp on or before this date"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Exports audit log entries as a CSV file. Supports filtering by timestamp range. Fails if the number of matching logs exceeds a certain maximum."
+        },
+        {
+          "info": {
+            "name": "Describe a single audit log (v2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/admin/audit-logs-v2/:auditLogId",
+            "params": [
+              {
+                "name": "auditLogId",
+                "value": "",
+                "type": "path",
+                "description": "Audit log V2 record ID"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Additional attribute values to include in the response (`state` for pre/post change images). Returns an empty value if omitted."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the pre/post change images associated with a specific audit log V2 record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

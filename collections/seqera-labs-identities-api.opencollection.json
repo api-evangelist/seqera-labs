@@ -1,0 +1,355 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions identities API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "identities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Managed Identities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/identities",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Optional search criteria, allowing free text search on name and keywords: `platform:`"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all Managed Identities in an organization."
+        },
+        {
+          "info": {
+            "name": "Create Managed Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/identities",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Organization numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new Managed Identity in an organization."
+        },
+        {
+          "info": {
+            "name": "Describe a Managed Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/identities/:managedIdentityId",
+            "params": [
+              {
+                "name": "managedIdentityId",
+                "value": "",
+                "type": "path",
+                "description": "Managed Identity numeric identifier"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Organization numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe a Managed Identity in an organization."
+        },
+        {
+          "info": {
+            "name": "Update a Managed Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/identities/:managedIdentityId",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "managedIdentityId",
+                "value": "",
+                "type": "path",
+                "description": "Managed Identity numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a Managed Identity identified by the given ID."
+        },
+        {
+          "info": {
+            "name": "Delete a Managed Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/identities/:managedIdentityId",
+            "params": [
+              {
+                "name": "managedIdentityId",
+                "value": "",
+                "type": "path",
+                "description": "Managed Identity numeric identifier"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "checked",
+                "value": "",
+                "type": "query",
+                "description": "If deletion of associated Managed Credentials will be blocked by running jobs that depend on them"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a Managed Identity identified by the given ID."
+        },
+        {
+          "info": {
+            "name": "List Managed Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/identities/:managedIdentityId/credentials",
+            "params": [
+              {
+                "name": "managedIdentityId",
+                "value": "",
+                "type": "path",
+                "description": "Managed Identity numeric identifier"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "User numeric identifier to filter records by"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Optional filtering on Managed Credentials for the given Managed Identity:                                              Allows free text search on `userName` or `firstName + lastName`.                                              Accepts keywords: `is:missing` or `is:added` to filter on credentials status.                                              If not provided (or both provided), all are returned."
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Managed Credentials belonging to a Managed Identity."
+        },
+        {
+          "info": {
+            "name": "Creates Managed Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/identities/:managedIdentityId/credentials",
+            "params": [
+              {
+                "name": "managedIdentityId",
+                "value": "",
+                "type": "path",
+                "description": "Managed Identity numeric identifier"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "userId",
+                "value": "",
+                "type": "query",
+                "description": "User numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates Managed Credentials for the given Managed Identity"
+        },
+        {
+          "info": {
+            "name": "Updates Managed Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/identities/:managedIdentityId/credentials/:managedCredentialsId",
+            "params": [
+              {
+                "name": "managedIdentityId",
+                "value": "",
+                "type": "path",
+                "description": "Managed Identity numeric identifier"
+              },
+              {
+                "name": "managedCredentialsId",
+                "value": "",
+                "type": "path",
+                "description": "Managed Credentials numeric identifier"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Organization numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Managed Credentials for the given Managed Identity"
+        },
+        {
+          "info": {
+            "name": "Delete a user's Managed Credentials record belonging to a Managed Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/identities/:managedIdentityId/credentials/:managedCredentialsId",
+            "params": [
+              {
+                "name": "managedIdentityId",
+                "value": "",
+                "type": "path",
+                "description": "Managed Identity numeric identifier"
+              },
+              {
+                "name": "managedCredentialsId",
+                "value": "",
+                "type": "path",
+                "description": "Managed Credentials numeric identifier"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "checked",
+                "value": "",
+                "type": "query",
+                "description": "If Managed Credentials deletion will be blocked by running jobs that depend on them"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Managed Credentials"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,350 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions compute-envs API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "compute-envs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List compute environments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/compute-envs",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Compute environment status"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Additional attribute values to include in the response (`labels`, `resources`). Returns an empty value (ex. `labels: null`) if omitted."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all available compute environments in a user context. Append `?workspaceId` to list compute environments in a workspace context, and `?status` to filter by compute environment status."
+        },
+        {
+          "info": {
+            "name": "Create compute environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/compute-envs",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new compute environment. Append `?workspaceId` to create the environment in a workspace context."
+        },
+        {
+          "info": {
+            "name": "Validate compute environment name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/compute-envs/validate",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Compute environment name to validate"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Confirms the validity of the given compute environment name in a user context. Append `?name=<your_ce_name>`."
+        },
+        {
+          "info": {
+            "name": "Describe compute environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/compute-envs/:computeEnvId",
+            "params": [
+              {
+                "name": "computeEnvId",
+                "value": "",
+                "type": "path",
+                "description": "Compute environment string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Additional attribute values to include in the response (`labels`). Returns an empty value (`labels: null`) if omitted."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the details of the compute environment identified by the given `computeEnvId`."
+        },
+        {
+          "info": {
+            "name": "Update compute environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/compute-envs/:computeEnvId",
+            "params": [
+              {
+                "name": "computeEnvId",
+                "value": "",
+                "type": "path",
+                "description": "Compute environment string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the details of the compute environment identified by the given `computeEnvId`."
+        },
+        {
+          "info": {
+            "name": "Delete compute environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/compute-envs/:computeEnvId",
+            "params": [
+              {
+                "name": "computeEnvId",
+                "value": "",
+                "type": "path",
+                "description": "Compute environment string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force-delete a stuck compute environment, bypassing active-job checks. Only valid for environments in ERRORED, INVALID, or DELETING status."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the compute environment identified by the given `computeEnvId`. When `force=true`, bypasses active-job checks and SCMS/forge cleanup; only allowed for environments in ERRORED, INVALID, or DELETING status."
+        },
+        {
+          "info": {
+            "name": "Disable compute environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/compute-envs/:computeEnvId/disable",
+            "params": [
+              {
+                "name": "computeEnvId",
+                "value": "",
+                "type": "path",
+                "description": "Compute environment string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Disables the compute environment identified by the given `computeEnvId`. A disabled compute environment cannot be used to launch workflows. If the compute environment is primary, it will be automatically unset as primary."
+        },
+        {
+          "info": {
+            "name": "Enable compute environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/compute-envs/:computeEnvId/enable",
+            "params": [
+              {
+                "name": "computeEnvId",
+                "value": "",
+                "type": "path",
+                "description": "Compute environment string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Enables the compute environment identified by the given `computeEnvId`. An enabled compute environment can be used to launch workflows."
+        },
+        {
+          "info": {
+            "name": "Define primary compute environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/compute-envs/:computeEnvId/primary",
+            "params": [
+              {
+                "name": "computeEnvId",
+                "value": "",
+                "type": "path",
+                "description": "Compute environment string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Selects the compute environment identified by the given `computeEnvId` as the primary compute environment in the given workspace context."
+        },
+        {
+          "info": {
+            "name": "Validate a compute environment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/compute-envs/:computeEnvId/validate",
+            "params": [
+              {
+                "name": "computeEnvId",
+                "value": "",
+                "type": "path",
+                "description": "Compute environment string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "When true, skip the credential and work-dir checks and force the compute environment (INVALID only, with an AVAILABLE credential) to AVAILABLE. Rejected with 409 otherwise."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Re-runs the pre-flight checks (associated-credential validation and work-directory accessibility) for the compute environment identified by the given `computeEnvId` and persists the outcome to the compute environment and its credential. Intended to recover a compute environment marked `INVALID` after the underlying problem has been fixed. Available only while the pre-flight feature is enabled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,241 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions roles API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/roles",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Numeric identifier of the organization"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Search by name parameter"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by role type (predefined, custom)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all roles"
+        },
+        {
+          "info": {
+            "name": "Create a role with the given name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/roles",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Numeric identifier of the organization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a role with the given name"
+        },
+        {
+          "info": {
+            "name": "List all role permissions available in the system",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/roles/permissions",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Numeric identifier of the organization"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Search query for name filtering"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all role permissions available in the system"
+        },
+        {
+          "info": {
+            "name": "Validate if a role name is available within the organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/roles/validate",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The role name"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Numeric identifier of the organization"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Validate if a role name is available within the organization"
+        },
+        {
+          "info": {
+            "name": "Describe role and its permissions fetching by role name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/roles/:roleName",
+            "params": [
+              {
+                "name": "roleName",
+                "value": "",
+                "type": "path",
+                "description": "The role name"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Numeric identifier of the organization"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Describe role and its permissions fetching by role name"
+        },
+        {
+          "info": {
+            "name": "Update a role with the given name",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/roles/:roleName",
+            "params": [
+              {
+                "name": "roleName",
+                "value": "",
+                "type": "path",
+                "description": "The role name"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Numeric identifier of the organization"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update a role with the given name"
+        },
+        {
+          "info": {
+            "name": "Delete a role with the given name",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/roles/:roleName",
+            "params": [
+              {
+                "name": "roleName",
+                "value": "",
+                "type": "path",
+                "description": "The role name"
+              },
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Numeric identifier of the organization"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a role with the given name"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

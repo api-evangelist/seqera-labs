@@ -1,0 +1,367 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions teams API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "teams",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List organization teams",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orgs/:orgId/teams",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter search parameter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all teams in the organization identified by the given `orgId`."
+        },
+        {
+          "info": {
+            "name": "Create team",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/orgs/:orgId/teams",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "Organization numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new team in the organization identified by the given `orgId`."
+        },
+        {
+          "info": {
+            "name": "Validate team name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orgs/:orgId/teams/validate",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Team name to validate"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Confirms the validity of the given team name. Append `?name=<your_team_name>`."
+        },
+        {
+          "info": {
+            "name": "Describe team",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orgs/:orgId/teams/:teamId",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "Team numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the details of the team identified by the given `teamId`."
+        },
+        {
+          "info": {
+            "name": "Update team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/orgs/:orgId/teams/:teamId",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "Team numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the details of the team identified by the given `teamId`."
+        },
+        {
+          "info": {
+            "name": "Delete team",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/orgs/:orgId/teams/:teamId",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "Team numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the team identified by the given `teamId`."
+        },
+        {
+          "info": {
+            "name": "List team members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orgs/:orgId/teams/:teamId/members",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "Team numeric identifier"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists the team members associated with the given `teamId`."
+        },
+        {
+          "info": {
+            "name": "Create team member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/orgs/:orgId/teams/:teamId/members",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "Team numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Adds a new member to the team identified by the given `teamId`."
+        },
+        {
+          "info": {
+            "name": "Delete team member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/orgs/:orgId/teams/:teamId/members/:memberId/delete",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "Team numeric identifier"
+              },
+              {
+                "name": "memberId",
+                "value": "",
+                "type": "path",
+                "description": "Member numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the team member identified by the given `memberId`."
+        },
+        {
+          "info": {
+            "name": "List team workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/orgs/:orgId/teams/:teamId/workspaces",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "teamId",
+                "value": "",
+                "type": "path",
+                "description": "Team numeric identifier"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search criteria"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all the workspaces of which the given `teamId` is a participant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

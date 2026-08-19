@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions pipeline-versions API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pipeline-versions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List pipeline versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/pipelines/:pipelineId/versions",
+            "params": [
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Pipeline numeric identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Filter search parameter"
+              },
+              {
+                "name": "isPublished",
+                "value": "",
+                "type": "query",
+                "description": "Set to true to retrieve published versions, false to fetch draft versions"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all available pipeline versions in a user context. Append `workspaceId` to list pipeline versions in a workspace context."
+        },
+        {
+          "info": {
+            "name": "Validate pipeline version name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/pipelines/:pipelineId/versions/validate",
+            "params": [
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Pipeline numeric identifier"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Pipeline name to validate"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace Identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Confirms the validity of the given pipeline version `name` in a user context."
+        },
+        {
+          "info": {
+            "name": "Update pipeline version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/pipelines/:pipelineId/versions/:versionId",
+            "params": [
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Pipeline numeric identifier"
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "path",
+                "description": "Pipeline version string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the details of the pipeline version identified by the given `pipelineId` and `versionId`. \n            **Note**: If `labelIds` is `null`, empty, or omitted, existing pipeline labels are removed.\n            Include `labelIds: [<label-id-1>,<label-id-2>]` to override existing labels. Labels to be preserved must be included.\n            To append a list of labels to multiple pipelines, use `/pipelines/labels/add`."
+        },
+        {
+          "info": {
+            "name": "Update pipeline version name and default flag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/pipelines/:pipelineId/versions/:versionId/manage",
+            "params": [
+              {
+                "name": "pipelineId",
+                "value": "",
+                "type": "path",
+                "description": "Pipeline numeric identifier"
+              },
+              {
+                "name": "versionId",
+                "value": "",
+                "type": "path",
+                "description": "Pipeline Version identifier (Launch ID)"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace Identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a pipeline version's name and/or marks it as the default version.\n                             When setting a version as default, any previously default version is automatically unset.\n                             Version names cannot be changed if the version is already referenced by workflow runs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

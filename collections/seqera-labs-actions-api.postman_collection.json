@@ -1,0 +1,2332 @@
+{
+  "item": [
+    {
+      "id": "8e082ef9-01da-4827-8d3b-602f39eeda4b",
+      "name": "actions",
+      "description": {
+        "content": "Pipeline actions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3362edf2-77fe-47e0-9f96-d0e2211553d7",
+          "name": "List actions",
+          "request": {
+            "name": "List actions",
+            "description": {
+              "content": "Lists all available actions in a user context, enriched by `attributes`. Append `?workspaceId` to list actions in a workspace context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Additional attribute values to include in the response (`labels`). Returns an empty value (`labels: null`) if omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Additional attribute values to include in the response (`labels`). Returns an empty value (`labels: null`) if omitted."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "342d8310-6a60-4cd6-970e-65b05244fdc9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"actions\": [\n    {\n      \"config\": {\n        \"discriminator\": \"string\"\n      },\n      \"dateCreated\": \"2020-02-09T14:04:50.187Z\",\n      \"endpoint\": \"string\",\n      \"error\": \"string\",\n      \"event\": {\n        \"commitId\": \"string\",\n        \"commitMessage\": \"string\",\n        \"pusherEmail\": \"string\",\n        \"pusherName\": \"string\",\n        \"ref\": \"string\"\n      },\n      \"hint\": \"string\",\n      \"id\": \"string\",\n      \"labels\": [\n        {\n          \"dateCreated\": \"2021-01-20T01:49:58.687Z\",\n          \"id\": 1614,\n          \"isDefault\": true,\n          \"isDynamic\": false,\n          \"isInterpolated\": false,\n          \"name\": \"string\",\n          \"resource\": true,\n          \"value\": \"string\"\n        },\n        {\n          \"dateCreated\": \"2001-03-07T21:03:38.898Z\",\n          \"id\": 9140,\n          \"isDefault\": false,\n          \"isDynamic\": true,\n          \"isInterpolated\": true,\n          \"name\": \"string\",\n          \"resource\": false,\n          \"value\": \"string\"\n        }\n      ],\n      \"lastSeen\": \"2026-04-21T18:12:00.306Z\",\n      \"name\": \"string\",\n      \"nextExecution\": \"2009-04-25T18:42:59.841Z\",\n      \"pipeline\": \"string\",\n      \"source\": \"tower\",\n      \"status\": \"ACTIVE\",\n      \"usageCmd\": \"string\"\n    },\n    {\n      \"config\": {\n        \"discriminator\": \"string\"\n      },\n      \"dateCreated\": \"2001-03-02T05:53:07.697Z\",\n      \"endpoint\": \"string\",\n      \"error\": \"string\",\n      \"event\": {\n        \"commitId\": \"string\",\n        \"commitMessage\": \"string\",\n        \"pusherEmail\": \"string\",\n        \"pusherName\": \"string\",\n        \"ref\": \"string\"\n      },\n      \"hint\": \"string\",\n      \"id\": \"string\",\n      \"labels\": [\n        {\n          \"dateCreated\": \"1950-05-08T20:28:37.403Z\",\n          \"id\": 6250,\n          \"isDefault\": true,\n          \"isDynamic\": false,\n          \"isInterpolated\": false,\n          \"name\": \"string\",\n          \"resource\": false,\n          \"value\": \"string\"\n        },\n        {\n          \"dateCreated\": \"1974-03-24T09:45:45.482Z\",\n          \"id\": 2987,\n          \"isDefault\": false,\n          \"isDynamic\": false,\n          \"isInterpolated\": false,\n          \"name\": \"string\",\n          \"resource\": false,\n          \"value\": \"string\"\n        }\n      ],\n      \"lastSeen\": \"1978-08-22T07:30:51.973Z\",\n      \"name\": \"string\",\n      \"nextExecution\": \"1991-07-31T00:47:00.994Z\",\n      \"pipeline\": \"string\",\n      \"source\": \"github\",\n      \"status\": \"ACTIVE\",\n      \"usageCmd\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84a6b169-037b-42a4-9f19-1a09d7c0e185",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f53be67a-5a90-4e0a-889f-fa71d30cb75a",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07a940fb-727f-4e84-b1ed-853b69d79fb3",
+          "name": "Create action",
+          "request": {
+            "name": "Create action",
+            "description": {
+              "content": "Creates a new pipeline action. Append `?workspaceId` to associate the action with the given workspace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bucket\": {\n    \"dataLinkId\": \"<string>\",\n    \"datasetId\": \"<string>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"filter\": \"<string>\",\n    \"markerFile\": \"<string>\"\n  },\n  \"cron\": {\n    \"expression\": \"<string>\",\n    \"preset\": \"<string>\",\n    \"timezone\": \"<string>\"\n  },\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1c8c5b8c-961b-442b-85de-eda65f95d7e8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": {\n    \"dataLinkId\": \"<string>\",\n    \"datasetId\": \"<string>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"filter\": \"<string>\",\n    \"markerFile\": \"<string>\"\n  },\n  \"cron\": {\n    \"expression\": \"<string>\",\n    \"preset\": \"<string>\",\n    \"timezone\": \"<string>\"\n  },\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"actionId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2e3cf5b-e17b-4a3c-9800-5e96ac75eebb",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": {\n    \"dataLinkId\": \"<string>\",\n    \"datasetId\": \"<string>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"filter\": \"<string>\",\n    \"markerFile\": \"<string>\"\n  },\n  \"cron\": {\n    \"expression\": \"<string>\",\n    \"preset\": \"<string>\",\n    \"timezone\": \"<string>\"\n  },\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d6b491ca-5309-4240-87fe-1e5f497e60c2",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": {\n    \"dataLinkId\": \"<string>\",\n    \"datasetId\": \"<string>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"filter\": \"<string>\",\n    \"markerFile\": \"<string>\"\n  },\n  \"cron\": {\n    \"expression\": \"<string>\",\n    \"preset\": \"<string>\",\n    \"timezone\": \"<string>\"\n  },\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9beaa545-0769-4061-adf7-c25c9481ebdf",
+          "name": "Resolve a schedule description to a cron expression",
+          "request": {
+            "name": "Resolve a schedule description to a cron expression",
+            "description": {},
+            "url": {
+              "path": [
+                "actions",
+                "cron",
+                "resolve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": \"<string>\",\n  \"key_1\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "13d22522-756a-4f60-826f-d251b7e21273",
+              "name": "ResolveCronExpression 200 response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    "cron",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebf17818-e7c7-4eae-85a0-61e1afc16140",
+          "name": "List action event types",
+          "request": {
+            "name": "List action event types",
+            "description": {
+              "content": "Lists the supported event types that trigger a pipeline action. Append `?workspaceId` to list event types in a workspace context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "actions",
+                "types"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "444bb340-671e-4a98-9a7e-8bf4710c8f31",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"eventTypes\": [\n    {\n      \"description\": \"string\",\n      \"display\": \"string\",\n      \"enabled\": true,\n      \"source\": \"string\"\n    },\n    {\n      \"description\": \"string\",\n      \"display\": \"string\",\n      \"enabled\": true,\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01a16810-e8dc-4905-a961-3e8e7fc68377",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7668b9fc-fe33-4264-97ad-6e096403b03b",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    "types"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ed99ac8-cb61-49b1-b86b-bc02883e9c7c",
+          "name": "Validate action name",
+          "request": {
+            "name": "Validate action name",
+            "description": {
+              "content": "Confirms the validity of the given action name. Append `?name=<your_action_name>`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "actions",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Action name to validate"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "02d7b1f6-7431-4c3d-b9f8-2bdfc4fcbbf9",
+              "name": "OK - No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "335dfbfa-6002-4868-ad97-98de01361e47",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07afa46a-c40b-4e48-a632-4f83966a3e2c",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d3c0a30-1e0a-4344-acbc-789daea12cd2",
+              "name": "Duplicate element",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3b2c3d48-e844-4108-addd-e90c7ed88a15",
+          "name": "Delete action",
+          "request": {
+            "name": "Delete action",
+            "description": {
+              "content": "Deletes the pipeline action identified by the given `actionId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "actions",
+                ":actionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "actionId",
+                  "description": "(Required) Action string identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "37c57b43-d7ab-4b90-bfc1-ed9b39515555",
+              "name": "OK - No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fa960933-fa85-4c90-9d84-78af1e78f1bf",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdc2ed66-2ca9-437e-8907-189f5c7614cb",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "989b0c46-95b7-4366-9c8b-2d80226aa1af",
+          "name": "Describe action",
+          "request": {
+            "name": "Describe action",
+            "description": {
+              "content": "Retrieves the details of the action identified by the given `actionId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "actions",
+                ":actionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Additional attribute values to include in the response (`labels`). Returns an empty value (`labels: null`) if omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>",
+                  "description": "Additional attribute values to include in the response (`labels`). Returns an empty value (`labels: null`) if omitted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "actionId",
+                  "description": "(Required) Action string identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "45fa3df8-33be-41b1-ab40-9f6de418b86d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"action\": {\n    \"config\": {\n      \"discriminator\": \"string\"\n    },\n    \"dateCreated\": \"1967-04-28T06:26:02.886Z\",\n    \"error\": \"string\",\n    \"event\": {\n      \"commitId\": \"string\",\n      \"commitMessage\": \"string\",\n      \"pusherEmail\": \"string\",\n      \"pusherName\": \"string\",\n      \"ref\": \"string\"\n    },\n    \"hookId\": \"string\",\n    \"hookUrl\": \"string\",\n    \"id\": \"string\",\n    \"labels\": [\n      {\n        \"dateCreated\": \"1967-10-26T20:26:31.236Z\",\n        \"id\": 8414,\n        \"isDefault\": true,\n        \"isDynamic\": true,\n        \"isInterpolated\": false,\n        \"name\": \"string\",\n        \"resource\": true,\n        \"value\": \"string\"\n      },\n      {\n        \"dateCreated\": \"1947-12-24T13:48:46.071Z\",\n        \"id\": 7443,\n        \"isDefault\": false,\n        \"isDynamic\": false,\n        \"isInterpolated\": true,\n        \"name\": \"string\",\n        \"resource\": true,\n        \"value\": \"string\"\n      }\n    ],\n    \"lastSeen\": \"1996-10-01T19:59:36.275Z\",\n    \"lastUpdated\": \"2004-04-06T22:43:26.676Z\",\n    \"launch\": {\n      \"commitId\": \"string\",\n      \"computeEnv\": {\n        \"config\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"name\": \"string\",\n        \"platform\": \"google-cloud\",\n        \"credentialsId\": \"string\",\n        \"dateCreated\": \"2010-07-21T16:35:00.398Z\",\n        \"deleted\": false,\n        \"description\": \"string\",\n        \"fusionMetricsCollectionEnabled\": false,\n        \"id\": \"string\",\n        \"lastUpdated\": \"2000-05-01T13:47:32.158Z\",\n        \"lastUsed\": \"1971-11-09T14:43:28.432Z\",\n        \"message\": \"string\",\n        \"orgId\": 3590,\n        \"primary\": true,\n        \"status\": \"DELETING\",\n        \"workspaceId\": 6064\n      },\n      \"configProfiles\": [\n        \"string\",\n        \"string\"\n      ],\n      \"configText\": \"string\",\n      \"dateCreated\": \"2021-10-06T19:12:09.275Z\",\n      \"entryName\": \"string\",\n      \"headJobCpus\": 3906,\n      \"headJobMemoryMb\": 7069,\n      \"id\": \"string\",\n      \"lastUpdated\": \"1990-11-27T08:03:56.812Z\",\n      \"launchContainer\": \"string\",\n      \"mainScript\": \"string\",\n      \"optimizationId\": \"string\",\n      \"optimizationTargets\": \"string\",\n      \"outputDir\": \"string\",\n      \"paramsText\": \"string\",\n      \"pipeline\": \"string\",\n      \"pipelineSchemaId\": 6216,\n      \"postRunScript\": \"string\",\n      \"preRunScript\": \"string\",\n      \"pullLatest\": false,\n      \"resume\": false,\n      \"resumeLaunchId\": \"string\",\n      \"revision\": \"string\",\n      \"runName\": \"string\",\n      \"schemaName\": \"string\",\n      \"sessionId\": \"string\",\n      \"stubRun\": false,\n      \"syntaxParser\": \"v2\",\n      \"towerConfig\": \"string\",\n      \"userSecrets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"workDir\": \"string\",\n      \"workspaceId\": 416,\n      \"workspaceSecrets\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"name\": \"string\",\n    \"nextExecution\": \"1948-08-05T12:13:34.380Z\",\n    \"source\": \"<string>\",\n    \"status\": \"CREATING\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "703b628b-9b3d-44f4-b681-a1362584e802",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5dd47da-4310-4082-8140-ce7a258b481e",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b93df12-fa3c-4610-8c6f-7dc73be94c7e",
+          "name": "Update action",
+          "request": {
+            "name": "Update action",
+            "description": {
+              "content": "Updates the details of the action identified by the given `actionId`. The `source` of an existing action cannot be changed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "actions",
+                ":actionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "actionId",
+                  "description": "(Required) Action string identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bucket\": {\n    \"dataLinkId\": \"<string>\",\n    \"datasetId\": \"<string>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"filter\": \"<string>\",\n    \"markerFile\": \"<string>\"\n  },\n  \"cron\": {\n    \"expression\": \"<string>\",\n    \"preset\": \"<string>\",\n    \"timezone\": \"<string>\"\n  },\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "37aea349-446f-496e-ac7d-fe607855f22e",
+              "name": "OK - No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": {\n    \"dataLinkId\": \"<string>\",\n    \"datasetId\": \"<string>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"filter\": \"<string>\",\n    \"markerFile\": \"<string>\"\n  },\n  \"cron\": {\n    \"expression\": \"<string>\",\n    \"preset\": \"<string>\",\n    \"timezone\": \"<string>\"\n  },\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "10aba6af-a434-402c-ae04-ffb956ec123b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": {\n    \"dataLinkId\": \"<string>\",\n    \"datasetId\": \"<string>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"filter\": \"<string>\",\n    \"markerFile\": \"<string>\"\n  },\n  \"cron\": {\n    \"expression\": \"<string>\",\n    \"preset\": \"<string>\",\n    \"timezone\": \"<string>\"\n  },\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d52fa09-7b7b-4313-8c0d-94de08ac64e5",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bucket\": {\n    \"dataLinkId\": \"<string>\",\n    \"datasetId\": \"<string>\",\n    \"events\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"filter\": \"<string>\",\n    \"markerFile\": \"<string>\"\n  },\n  \"cron\": {\n    \"expression\": \"<string>\",\n    \"preset\": \"<string>\",\n    \"timezone\": \"<string>\"\n  },\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7e2f4b51-8a4c-45bf-b6e9-5e270fdcd7df",
+          "name": "Trigger Tower Launch action",
+          "request": {
+            "name": "Trigger Tower Launch action",
+            "description": {
+              "content": "Triggers the execution of the Tower Launch action identified by the given `actionId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "actions",
+                ":actionId",
+                "launch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "actionId",
+                  "description": "(Required) Action string identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"params\": {\n    \"key_0\": \"<object>\",\n    \"key_1\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b556ca58-2b38-4345-80b3-08fb22ebc343",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId",
+                    "launch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"params\": {\n    \"key_0\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"workflowId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a8e880a-ec05-4edb-9b7b-578182122a81",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId",
+                    "launch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"params\": {\n    \"key_0\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15a6c5b6-a53d-4da5-9906-3773df17c0ba",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId",
+                    "launch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"params\": {\n    \"key_0\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d62fe94-f254-494e-acc9-143df6e31383",
+          "name": "Pause or resume action",
+          "request": {
+            "name": "Pause or resume action",
+            "description": {
+              "content": "Pauses or resumes the pipeline action identified by the given `actionId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "actions",
+                ":actionId",
+                "pause"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "actionId",
+                  "description": "(Required) Action string identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e53ae0fd-0abf-4c22-9810-feaeb6a82844",
+              "name": "OK - No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "55e302ba-dba8-40f7-b940-eebc9742a1af",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "780a49cd-7b56-4520-ad80-2701837449a4",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "actions",
+                    ":actionId",
+                    "pause"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "actionId",
+                      "description": "(Required) Action string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2619ae7c-237c-491b-89dc-6ba3dff753f7",
+    "name": "Seqera actions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+      "type": "text/plain"
+    }
+  }
+}

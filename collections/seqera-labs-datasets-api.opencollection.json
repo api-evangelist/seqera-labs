@@ -1,0 +1,883 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions datasets API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/datasets",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search query"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort field supports (`name`, `modified`), defaults to `name`"
+              },
+              {
+                "name": "sortDir",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction supports (`asc`, `desc`), defaults to `asc`"
+              },
+              {
+                "name": "visibility",
+                "value": "",
+                "type": "query",
+                "description": "Visibility option supports (`visible`, `hidden`, `all`), defaults to `visible`"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Additional attribute values to include in the response (`labels`). Returns an empty value (`labels: null`) if omitted."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all available datasets in a user context. Append `?workspaceId` to list datasets in a workspace context."
+        },
+        {
+          "info": {
+            "name": "Create dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/datasets",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new dataset in the user context. Include the dataset file and details in your request body. Append `?workspaceId` to create the dataset in a workspace context."
+        },
+        {
+          "info": {
+            "name": "Delete dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/datasets",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the dataset identified by the given `datasetId`."
+        },
+        {
+          "info": {
+            "name": "Hide dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/datasets/hide",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Hide the given `datasetIds`"
+        },
+        {
+          "info": {
+            "name": "Preview content from a URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/datasets/preview-url",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetches a partial content preview from an arbitrary HTTP/HTTPS URL, without creating a dataset. Intended for the dataset form preview after URL validation."
+        },
+        {
+          "info": {
+            "name": "Show dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/datasets/show",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Show the given `datasetIds`"
+        },
+        {
+          "info": {
+            "name": "Validate URL for dataset linking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/datasets/validate-url",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Validates that a remote dataset URL is accessible and returns a supported CSV/TSV format, without creating a dataset."
+        },
+        {
+          "info": {
+            "name": "List latest dataset versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/datasets/versions",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "mimeType",
+                "value": "",
+                "type": "query",
+                "description": "Dataset MIME type"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists the latest version of each dataset in the user context. Append `?workspaceId` to list latest versions in a workspace context."
+        },
+        {
+          "info": {
+            "name": "Update dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/datasets/:datasetId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the details of the dataset identified by the given `datasetId`."
+        },
+        {
+          "info": {
+            "name": "Delete dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/datasets/:datasetId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the dataset identified by the given `datasetId`."
+        },
+        {
+          "info": {
+            "name": "Link external URL as dataset version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/datasets/:datasetId/link",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new linked DatasetVersion for an existing LINKED dataset by supplying a public HTTP/HTTPS URL."
+        },
+        {
+          "info": {
+            "name": "Describe dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/datasets/:datasetId/metadata",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Additional attribute values to include in the response (`labels`). Returns an empty value (`labels: null`) if omitted."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the metadata of the dataset identified by the given `datasetId`."
+        },
+        {
+          "info": {
+            "name": "Upload new dataset version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/datasets/:datasetId/upload",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              },
+              {
+                "name": "header",
+                "value": "",
+                "type": "query",
+                "description": "Uploaded file has header"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Uploads the CSV or TSV content to create a new version of the dataset identified by the given `datasetId`."
+        },
+        {
+          "info": {
+            "name": "Download dataset content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/datasets/:datasetId/v/:version/n/:fileName",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Version number to download"
+              },
+              {
+                "name": "fileName",
+                "value": "",
+                "type": "path",
+                "description": "File name for the downloaded dataset content"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Downloads the content of the dataset identified by the given `datasetId` and `version`."
+        },
+        {
+          "info": {
+            "name": "Preview linked dataset content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/datasets/:datasetId/v/:version/preview",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "Dataset version number"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetches a partial preview of the content for a linked dataset version."
+        },
+        {
+          "info": {
+            "name": "List all dataset versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/datasets/:datasetId/versions",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              },
+              {
+                "name": "mimeType",
+                "value": "",
+                "type": "query",
+                "description": "Optional MIME type filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all versions of the given `datasetId`."
+        },
+        {
+          "info": {
+            "name": "Disable a dataset version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/datasets/:datasetId/versions/:version/disable",
+            "params": [
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "The dataset string id the version belongs to"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "The version number to disable"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Disable a dataset version, the dataset version cannot be used for runs, and cannot be enabled again"
+        },
+        {
+          "info": {
+            "name": "Describe launch datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/launch/:launchId/datasets",
+            "params": [
+              {
+                "name": "launchId",
+                "value": "",
+                "type": "path",
+                "description": "Launch string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the details of the datasets used in the launch identified by the given `launchId`."
+        },
+        {
+          "info": {
+            "name": "List available datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/workspaces/:workspaceId/datasets",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all available datasets in the workspace context identified by the given `workspaceId`."
+        },
+        {
+          "info": {
+            "name": "Create dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/workspaces/:workspaceId/datasets",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new dataset in the given workspace context. Include the dataset file and details in your request body."
+        },
+        {
+          "info": {
+            "name": "List latest dataset versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/workspaces/:workspaceId/datasets/versions",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "mimeType",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists the latest version of each dataset associated with the given `workspaceId`."
+        },
+        {
+          "info": {
+            "name": "Update dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/workspaces/:workspaceId/datasets/:datasetId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the details of the dataset identified by the given `datasetId`."
+        },
+        {
+          "info": {
+            "name": "Delete dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/workspaces/:workspaceId/datasets/:datasetId",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the dataset identified by the given `datasetId`."
+        },
+        {
+          "info": {
+            "name": "Describe dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/workspaces/:workspaceId/datasets/:datasetId/metadata",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              },
+              {
+                "name": "attributes",
+                "value": "",
+                "type": "query",
+                "description": "Additional attribute values to include in the response (`labels`). Returns an empty value (`labels: null`) if omitted."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the metadata of the dataset identified by the given `datasetId`."
+        },
+        {
+          "info": {
+            "name": "Upload new dataset version",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/workspaces/:workspaceId/datasets/:datasetId/upload",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              },
+              {
+                "name": "header",
+                "value": "",
+                "type": "query",
+                "description": "Uploaded file has header"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Uploads the CSV or TSV content to create a new version of the dataset identified by the given `datasetId`."
+        },
+        {
+          "info": {
+            "name": "List all dataset versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/workspaces/:workspaceId/datasets/:datasetId/versions",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "path",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "datasetId",
+                "value": "",
+                "type": "path",
+                "description": "Dataset string identifier"
+              },
+              {
+                "name": "mimeType",
+                "value": "",
+                "type": "query",
+                "description": "MIME type filter"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all versions of the given `datasetId`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

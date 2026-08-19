@@ -1,0 +1,1331 @@
+{
+  "item": [
+    {
+      "id": "2f8231b6-958c-43bc-a7bd-d0e848447292",
+      "name": "trace",
+      "description": {
+        "content": "Workflow execution traces",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "513783ee-1c8c-40d2-836a-0779194f3e06",
+          "name": "Create workflow execution trace",
+          "request": {
+            "name": "Create workflow execution trace",
+            "description": {
+              "content": "Creates a new workflow execution trace.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trace",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"launchId\": \"<string>\",\n  \"projectName\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"runName\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"workflowId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eabd76c6-21bb-4542-9233-91f9b236a9bb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"launchId\": \"<string>\",\n  \"projectName\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"runName\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"workflowId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"metadata\": {\n    \"commitId\": \"string\",\n    \"computeEnvId\": \"string\",\n    \"computeEnvName\": \"string\",\n    \"computeEnvPlatform\": \"string\",\n    \"labels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"orgName\": \"string\",\n    \"pipelineId\": 9891,\n    \"pipelineName\": \"string\",\n    \"revision\": \"string\",\n    \"userId\": 8715,\n    \"userName\": \"string\",\n    \"userOrganization\": \"string\",\n    \"workspaceFullName\": \"string\",\n    \"workspaceId\": 2557,\n    \"workspaceName\": \"string\"\n  },\n  \"watchUrl\": \"string\",\n  \"workflowId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "342452c1-d9f8-4eb4-bbc5-f7fff7c648b5",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"launchId\": \"<string>\",\n  \"projectName\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"runName\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"workflowId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9f52bc6-58ab-47aa-a644-8952288cdc65",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"launchId\": \"<string>\",\n  \"projectName\": \"<string>\",\n  \"repository\": \"<string>\",\n  \"runName\": \"<string>\",\n  \"sessionId\": \"<string>\",\n  \"workflowId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22ec5660-32d9-4636-a108-cf8d1ce240a6",
+          "name": "Signal workflow execution start",
+          "request": {
+            "name": "Signal workflow execution start",
+            "description": {
+              "content": "Updates the workflow execution trace for the given `workflowId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trace",
+                ":workflowId",
+                "begin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workflowId",
+                  "description": "(Required) Workflow string identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"launchId\": \"<string>\",\n  \"processNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"towerLaunch\": \"<boolean>\",\n  \"workflow\": {\n    \"commandLine\": \"<string>\",\n    \"projectName\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"submit\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"workDir\": \"<string>\",\n    \"commitId\": \"<string>\",\n    \"complete\": \"<dateTime>\",\n    \"configFiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"container\": \"<string>\",\n    \"containerEngine\": \"<string>\",\n    \"duration\": \"<long>\",\n    \"errorMessage\": \"<string>\",\n    \"errorReport\": \"<string>\",\n    \"exitStatus\": \"<integer>\",\n    \"fusion\": {\n      \"enabled\": \"<boolean>\",\n      \"version\": \"<string>\"\n    },\n    \"homeDir\": \"<string>\",\n    \"id\": \"<string>\",\n    \"launchDir\": \"<string>\",\n    \"launchId\": \"<string>\",\n    \"logFile\": \"<string>\",\n    \"manifest\": {\n      \"author\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"description\": \"<string>\",\n      \"gitmodules\": \"<string>\",\n      \"homePage\": \"<string>\",\n      \"icon\": \"<string>\",\n      \"mainScript\": \"<string>\",\n      \"name\": \"<string>\",\n      \"nextflowVersion\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"nextflow\": {\n      \"build\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"version\": \"<string>\"\n    },\n    \"operationId\": \"<string>\",\n    \"outFile\": \"<string>\",\n    \"params\": {\n      \"key_0\": \"<object>\"\n    },\n    \"profile\": \"<string>\",\n    \"projectDir\": \"<string>\",\n    \"repository\": \"<string>\",\n    \"requiresAttention\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"sched\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"scriptFile\": \"<string>\",\n    \"scriptId\": \"<string>\",\n    \"scriptName\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"stats\": {\n      \"cachedCount\": \"<integer>\",\n      \"cachedCountFmt\": \"<string>\",\n      \"cachedDuration\": \"<long>\",\n      \"cachedPct\": \"<float>\",\n      \"computeTimeFmt\": \"<string>\",\n      \"failedCount\": \"<integer>\",\n      \"failedCountFmt\": \"<string>\",\n      \"failedDuration\": \"<long>\",\n      \"failedPct\": \"<float>\",\n      \"ignoredCount\": \"<integer>\",\n      \"ignoredCountFmt\": \"<string>\",\n      \"ignoredPct\": \"<float>\",\n      \"succeedCount\": \"<integer>\",\n      \"succeedCountFmt\": \"<string>\",\n      \"succeedDuration\": \"<long>\",\n      \"succeedPct\": \"<float>\"\n    },\n    \"status\": \"<string>\",\n    \"success\": \"<boolean>\",\n    \"wave\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d05632ea-91fb-4804-b0a8-a1dfaea51601",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "begin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"launchId\": \"<string>\",\n  \"processNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"towerLaunch\": \"<boolean>\",\n  \"workflow\": {\n    \"commandLine\": \"<string>\",\n    \"projectName\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"submit\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"workDir\": \"<string>\",\n    \"commitId\": \"<string>\",\n    \"complete\": \"<dateTime>\",\n    \"configFiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"container\": \"<string>\",\n    \"containerEngine\": \"<string>\",\n    \"duration\": \"<long>\",\n    \"errorMessage\": \"<string>\",\n    \"errorReport\": \"<string>\",\n    \"exitStatus\": \"<integer>\",\n    \"fusion\": {\n      \"enabled\": \"<boolean>\",\n      \"version\": \"<string>\"\n    },\n    \"homeDir\": \"<string>\",\n    \"id\": \"<string>\",\n    \"launchDir\": \"<string>\",\n    \"launchId\": \"<string>\",\n    \"logFile\": \"<string>\",\n    \"manifest\": {\n      \"author\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"description\": \"<string>\",\n      \"gitmodules\": \"<string>\",\n      \"homePage\": \"<string>\",\n      \"icon\": \"<string>\",\n      \"mainScript\": \"<string>\",\n      \"name\": \"<string>\",\n      \"nextflowVersion\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"nextflow\": {\n      \"build\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"version\": \"<string>\"\n    },\n    \"operationId\": \"<string>\",\n    \"outFile\": \"<string>\",\n    \"params\": {\n      \"key_0\": \"<object>\"\n    },\n    \"profile\": \"<string>\",\n    \"projectDir\": \"<string>\",\n    \"repository\": \"<string>\",\n    \"requiresAttention\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"sched\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"scriptFile\": \"<string>\",\n    \"scriptId\": \"<string>\",\n    \"scriptName\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"stats\": {\n      \"cachedCount\": \"<integer>\",\n      \"cachedCountFmt\": \"<string>\",\n      \"cachedDuration\": \"<long>\",\n      \"cachedPct\": \"<float>\",\n      \"computeTimeFmt\": \"<string>\",\n      \"failedCount\": \"<integer>\",\n      \"failedCountFmt\": \"<string>\",\n      \"failedDuration\": \"<long>\",\n      \"failedPct\": \"<float>\",\n      \"ignoredCount\": \"<integer>\",\n      \"ignoredCountFmt\": \"<string>\",\n      \"ignoredPct\": \"<float>\",\n      \"succeedCount\": \"<integer>\",\n      \"succeedCountFmt\": \"<string>\",\n      \"succeedDuration\": \"<long>\",\n      \"succeedPct\": \"<float>\"\n    },\n    \"status\": \"<string>\",\n    \"success\": \"<boolean>\",\n    \"wave\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"OK\",\n  \"watchUrl\": \"string\",\n  \"workflowId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0739a859-0f28-4be0-a9a6-1851bb9e4348",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "begin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"launchId\": \"<string>\",\n  \"processNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"towerLaunch\": \"<boolean>\",\n  \"workflow\": {\n    \"commandLine\": \"<string>\",\n    \"projectName\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"submit\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"workDir\": \"<string>\",\n    \"commitId\": \"<string>\",\n    \"complete\": \"<dateTime>\",\n    \"configFiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"container\": \"<string>\",\n    \"containerEngine\": \"<string>\",\n    \"duration\": \"<long>\",\n    \"errorMessage\": \"<string>\",\n    \"errorReport\": \"<string>\",\n    \"exitStatus\": \"<integer>\",\n    \"fusion\": {\n      \"enabled\": \"<boolean>\",\n      \"version\": \"<string>\"\n    },\n    \"homeDir\": \"<string>\",\n    \"id\": \"<string>\",\n    \"launchDir\": \"<string>\",\n    \"launchId\": \"<string>\",\n    \"logFile\": \"<string>\",\n    \"manifest\": {\n      \"author\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"description\": \"<string>\",\n      \"gitmodules\": \"<string>\",\n      \"homePage\": \"<string>\",\n      \"icon\": \"<string>\",\n      \"mainScript\": \"<string>\",\n      \"name\": \"<string>\",\n      \"nextflowVersion\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"nextflow\": {\n      \"build\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"version\": \"<string>\"\n    },\n    \"operationId\": \"<string>\",\n    \"outFile\": \"<string>\",\n    \"params\": {\n      \"key_0\": \"<object>\"\n    },\n    \"profile\": \"<string>\",\n    \"projectDir\": \"<string>\",\n    \"repository\": \"<string>\",\n    \"requiresAttention\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"sched\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"scriptFile\": \"<string>\",\n    \"scriptId\": \"<string>\",\n    \"scriptName\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"stats\": {\n      \"cachedCount\": \"<integer>\",\n      \"cachedCountFmt\": \"<string>\",\n      \"cachedDuration\": \"<long>\",\n      \"cachedPct\": \"<float>\",\n      \"computeTimeFmt\": \"<string>\",\n      \"failedCount\": \"<integer>\",\n      \"failedCountFmt\": \"<string>\",\n      \"failedDuration\": \"<long>\",\n      \"failedPct\": \"<float>\",\n      \"ignoredCount\": \"<integer>\",\n      \"ignoredCountFmt\": \"<string>\",\n      \"ignoredPct\": \"<float>\",\n      \"succeedCount\": \"<integer>\",\n      \"succeedCountFmt\": \"<string>\",\n      \"succeedDuration\": \"<long>\",\n      \"succeedPct\": \"<float>\"\n    },\n    \"status\": \"<string>\",\n    \"success\": \"<boolean>\",\n    \"wave\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54913dd5-0560-4043-975d-64c9cc30d7d3",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "begin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"launchId\": \"<string>\",\n  \"processNames\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"towerLaunch\": \"<boolean>\",\n  \"workflow\": {\n    \"commandLine\": \"<string>\",\n    \"projectName\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"submit\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"workDir\": \"<string>\",\n    \"commitId\": \"<string>\",\n    \"complete\": \"<dateTime>\",\n    \"configFiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"container\": \"<string>\",\n    \"containerEngine\": \"<string>\",\n    \"duration\": \"<long>\",\n    \"errorMessage\": \"<string>\",\n    \"errorReport\": \"<string>\",\n    \"exitStatus\": \"<integer>\",\n    \"fusion\": {\n      \"enabled\": \"<boolean>\",\n      \"version\": \"<string>\"\n    },\n    \"homeDir\": \"<string>\",\n    \"id\": \"<string>\",\n    \"launchDir\": \"<string>\",\n    \"launchId\": \"<string>\",\n    \"logFile\": \"<string>\",\n    \"manifest\": {\n      \"author\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"description\": \"<string>\",\n      \"gitmodules\": \"<string>\",\n      \"homePage\": \"<string>\",\n      \"icon\": \"<string>\",\n      \"mainScript\": \"<string>\",\n      \"name\": \"<string>\",\n      \"nextflowVersion\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"nextflow\": {\n      \"build\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"version\": \"<string>\"\n    },\n    \"operationId\": \"<string>\",\n    \"outFile\": \"<string>\",\n    \"params\": {\n      \"key_0\": \"<object>\"\n    },\n    \"profile\": \"<string>\",\n    \"projectDir\": \"<string>\",\n    \"repository\": \"<string>\",\n    \"requiresAttention\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"sched\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"scriptFile\": \"<string>\",\n    \"scriptId\": \"<string>\",\n    \"scriptName\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"stats\": {\n      \"cachedCount\": \"<integer>\",\n      \"cachedCountFmt\": \"<string>\",\n      \"cachedDuration\": \"<long>\",\n      \"cachedPct\": \"<float>\",\n      \"computeTimeFmt\": \"<string>\",\n      \"failedCount\": \"<integer>\",\n      \"failedCountFmt\": \"<string>\",\n      \"failedDuration\": \"<long>\",\n      \"failedPct\": \"<float>\",\n      \"ignoredCount\": \"<integer>\",\n      \"ignoredCountFmt\": \"<string>\",\n      \"ignoredPct\": \"<float>\",\n      \"succeedCount\": \"<integer>\",\n      \"succeedCountFmt\": \"<string>\",\n      \"succeedDuration\": \"<long>\",\n      \"succeedPct\": \"<float>\"\n    },\n    \"status\": \"<string>\",\n    \"success\": \"<boolean>\",\n    \"wave\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b876dd81-70e0-41b0-9c2c-32ca683a3e4e",
+          "name": "Signal workflow execution completion",
+          "request": {
+            "name": "Signal workflow execution completion",
+            "description": {
+              "content": "Updates the workflow execution trace for the given `workflowId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trace",
+                ":workflowId",
+                "complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workflowId",
+                  "description": "(Required) Workflow string identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metrics\": [\n    {\n      \"process\": \"<string>\",\n      \"cpu\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"cpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemAvg\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemPeak\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<long>\",\n      \"mem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"memUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"reads\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"time\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"timeUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"vmem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"writes\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"process\": \"<string>\",\n      \"cpu\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"cpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemAvg\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemPeak\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<long>\",\n      \"mem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"memUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"reads\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"time\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"timeUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"vmem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"writes\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  },\n  \"workflow\": {\n    \"commandLine\": \"<string>\",\n    \"projectName\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"submit\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"workDir\": \"<string>\",\n    \"commitId\": \"<string>\",\n    \"complete\": \"<dateTime>\",\n    \"configFiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"container\": \"<string>\",\n    \"containerEngine\": \"<string>\",\n    \"duration\": \"<long>\",\n    \"errorMessage\": \"<string>\",\n    \"errorReport\": \"<string>\",\n    \"exitStatus\": \"<integer>\",\n    \"fusion\": {\n      \"enabled\": \"<boolean>\",\n      \"version\": \"<string>\"\n    },\n    \"homeDir\": \"<string>\",\n    \"id\": \"<string>\",\n    \"launchDir\": \"<string>\",\n    \"launchId\": \"<string>\",\n    \"logFile\": \"<string>\",\n    \"manifest\": {\n      \"author\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"description\": \"<string>\",\n      \"gitmodules\": \"<string>\",\n      \"homePage\": \"<string>\",\n      \"icon\": \"<string>\",\n      \"mainScript\": \"<string>\",\n      \"name\": \"<string>\",\n      \"nextflowVersion\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"nextflow\": {\n      \"build\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"version\": \"<string>\"\n    },\n    \"operationId\": \"<string>\",\n    \"outFile\": \"<string>\",\n    \"params\": {\n      \"key_0\": \"<object>\",\n      \"key_1\": \"<object>\"\n    },\n    \"profile\": \"<string>\",\n    \"projectDir\": \"<string>\",\n    \"repository\": \"<string>\",\n    \"requiresAttention\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"sched\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"scriptFile\": \"<string>\",\n    \"scriptId\": \"<string>\",\n    \"scriptName\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"stats\": {\n      \"cachedCount\": \"<integer>\",\n      \"cachedCountFmt\": \"<string>\",\n      \"cachedDuration\": \"<long>\",\n      \"cachedPct\": \"<float>\",\n      \"computeTimeFmt\": \"<string>\",\n      \"failedCount\": \"<integer>\",\n      \"failedCountFmt\": \"<string>\",\n      \"failedDuration\": \"<long>\",\n      \"failedPct\": \"<float>\",\n      \"ignoredCount\": \"<integer>\",\n      \"ignoredCountFmt\": \"<string>\",\n      \"ignoredPct\": \"<float>\",\n      \"succeedCount\": \"<integer>\",\n      \"succeedCountFmt\": \"<string>\",\n      \"succeedDuration\": \"<long>\",\n      \"succeedPct\": \"<float>\"\n    },\n    \"status\": \"<string>\",\n    \"success\": \"<boolean>\",\n    \"wave\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "285fd217-e11e-4ccb-9048-5b23ec5d24b8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metrics\": [\n    {\n      \"process\": \"<string>\",\n      \"cpu\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"cpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemAvg\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemPeak\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<long>\",\n      \"mem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"memUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"reads\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"time\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"timeUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"vmem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"writes\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"process\": \"<string>\",\n      \"cpu\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"cpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemAvg\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemPeak\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<long>\",\n      \"mem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"memUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"reads\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"time\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"timeUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"vmem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"writes\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  },\n  \"workflow\": {\n    \"commandLine\": \"<string>\",\n    \"projectName\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"submit\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"workDir\": \"<string>\",\n    \"commitId\": \"<string>\",\n    \"complete\": \"<dateTime>\",\n    \"configFiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"container\": \"<string>\",\n    \"containerEngine\": \"<string>\",\n    \"duration\": \"<long>\",\n    \"errorMessage\": \"<string>\",\n    \"errorReport\": \"<string>\",\n    \"exitStatus\": \"<integer>\",\n    \"fusion\": {\n      \"enabled\": \"<boolean>\",\n      \"version\": \"<string>\"\n    },\n    \"homeDir\": \"<string>\",\n    \"id\": \"<string>\",\n    \"launchDir\": \"<string>\",\n    \"launchId\": \"<string>\",\n    \"logFile\": \"<string>\",\n    \"manifest\": {\n      \"author\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"description\": \"<string>\",\n      \"gitmodules\": \"<string>\",\n      \"homePage\": \"<string>\",\n      \"icon\": \"<string>\",\n      \"mainScript\": \"<string>\",\n      \"name\": \"<string>\",\n      \"nextflowVersion\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"nextflow\": {\n      \"build\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"version\": \"<string>\"\n    },\n    \"operationId\": \"<string>\",\n    \"outFile\": \"<string>\",\n    \"params\": {\n      \"key_0\": \"<object>\",\n      \"key_1\": \"<object>\",\n      \"key_2\": \"<object>\",\n      \"key_3\": \"<object>\",\n      \"key_4\": \"<object>\"\n    },\n    \"profile\": \"<string>\",\n    \"projectDir\": \"<string>\",\n    \"repository\": \"<string>\",\n    \"requiresAttention\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"sched\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"scriptFile\": \"<string>\",\n    \"scriptId\": \"<string>\",\n    \"scriptName\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"stats\": {\n      \"cachedCount\": \"<integer>\",\n      \"cachedCountFmt\": \"<string>\",\n      \"cachedDuration\": \"<long>\",\n      \"cachedPct\": \"<float>\",\n      \"computeTimeFmt\": \"<string>\",\n      \"failedCount\": \"<integer>\",\n      \"failedCountFmt\": \"<string>\",\n      \"failedDuration\": \"<long>\",\n      \"failedPct\": \"<float>\",\n      \"ignoredCount\": \"<integer>\",\n      \"ignoredCountFmt\": \"<string>\",\n      \"ignoredPct\": \"<float>\",\n      \"succeedCount\": \"<integer>\",\n      \"succeedCountFmt\": \"<string>\",\n      \"succeedDuration\": \"<long>\",\n      \"succeedPct\": \"<float>\"\n    },\n    \"status\": \"<string>\",\n    \"success\": \"<boolean>\",\n    \"wave\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"OK\",\n  \"workflowId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e78e39b-4478-4800-9fc9-06b8003aa364",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metrics\": [\n    {\n      \"process\": \"<string>\",\n      \"cpu\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"cpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemAvg\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemPeak\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<long>\",\n      \"mem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"memUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"reads\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"time\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"timeUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"vmem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"writes\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"process\": \"<string>\",\n      \"cpu\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"cpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemAvg\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemPeak\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<long>\",\n      \"mem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"memUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"reads\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"time\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"timeUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"vmem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"writes\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  },\n  \"workflow\": {\n    \"commandLine\": \"<string>\",\n    \"projectName\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"submit\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"workDir\": \"<string>\",\n    \"commitId\": \"<string>\",\n    \"complete\": \"<dateTime>\",\n    \"configFiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"container\": \"<string>\",\n    \"containerEngine\": \"<string>\",\n    \"duration\": \"<long>\",\n    \"errorMessage\": \"<string>\",\n    \"errorReport\": \"<string>\",\n    \"exitStatus\": \"<integer>\",\n    \"fusion\": {\n      \"enabled\": \"<boolean>\",\n      \"version\": \"<string>\"\n    },\n    \"homeDir\": \"<string>\",\n    \"id\": \"<string>\",\n    \"launchDir\": \"<string>\",\n    \"launchId\": \"<string>\",\n    \"logFile\": \"<string>\",\n    \"manifest\": {\n      \"author\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"description\": \"<string>\",\n      \"gitmodules\": \"<string>\",\n      \"homePage\": \"<string>\",\n      \"icon\": \"<string>\",\n      \"mainScript\": \"<string>\",\n      \"name\": \"<string>\",\n      \"nextflowVersion\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"nextflow\": {\n      \"build\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"version\": \"<string>\"\n    },\n    \"operationId\": \"<string>\",\n    \"outFile\": \"<string>\",\n    \"params\": {\n      \"key_0\": \"<object>\",\n      \"key_1\": \"<object>\",\n      \"key_2\": \"<object>\",\n      \"key_3\": \"<object>\",\n      \"key_4\": \"<object>\"\n    },\n    \"profile\": \"<string>\",\n    \"projectDir\": \"<string>\",\n    \"repository\": \"<string>\",\n    \"requiresAttention\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"sched\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"scriptFile\": \"<string>\",\n    \"scriptId\": \"<string>\",\n    \"scriptName\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"stats\": {\n      \"cachedCount\": \"<integer>\",\n      \"cachedCountFmt\": \"<string>\",\n      \"cachedDuration\": \"<long>\",\n      \"cachedPct\": \"<float>\",\n      \"computeTimeFmt\": \"<string>\",\n      \"failedCount\": \"<integer>\",\n      \"failedCountFmt\": \"<string>\",\n      \"failedDuration\": \"<long>\",\n      \"failedPct\": \"<float>\",\n      \"ignoredCount\": \"<integer>\",\n      \"ignoredCountFmt\": \"<string>\",\n      \"ignoredPct\": \"<float>\",\n      \"succeedCount\": \"<integer>\",\n      \"succeedCountFmt\": \"<string>\",\n      \"succeedDuration\": \"<long>\",\n      \"succeedPct\": \"<float>\"\n    },\n    \"status\": \"<string>\",\n    \"success\": \"<boolean>\",\n    \"wave\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89b28a8c-11a2-4057-99c5-7653b28cf4a1",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metrics\": [\n    {\n      \"process\": \"<string>\",\n      \"cpu\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"cpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemAvg\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemPeak\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<long>\",\n      \"mem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"memUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"reads\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"time\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"timeUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"vmem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"writes\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    },\n    {\n      \"process\": \"<string>\",\n      \"cpu\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"cpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemAvg\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuMemPeak\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"gpuUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"id\": \"<long>\",\n      \"mem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"memUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"reads\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"time\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"timeUsage\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"vmem\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"writes\": {\n        \"max\": \"<float>\",\n        \"maxLabel\": \"<string>\",\n        \"mean\": \"<float>\",\n        \"min\": \"<float>\",\n        \"minLabel\": \"<string>\",\n        \"q1\": \"<float>\",\n        \"q1Label\": \"<string>\",\n        \"q2\": \"<float>\",\n        \"q2Label\": \"<string>\",\n        \"q3\": \"<float>\",\n        \"q3Label\": \"<string>\",\n        \"warnings\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    }\n  ],\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  },\n  \"workflow\": {\n    \"commandLine\": \"<string>\",\n    \"projectName\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"submit\": \"<dateTime>\",\n    \"userName\": \"<string>\",\n    \"workDir\": \"<string>\",\n    \"commitId\": \"<string>\",\n    \"complete\": \"<dateTime>\",\n    \"configFiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"container\": \"<string>\",\n    \"containerEngine\": \"<string>\",\n    \"duration\": \"<long>\",\n    \"errorMessage\": \"<string>\",\n    \"errorReport\": \"<string>\",\n    \"exitStatus\": \"<integer>\",\n    \"fusion\": {\n      \"enabled\": \"<boolean>\",\n      \"version\": \"<string>\"\n    },\n    \"homeDir\": \"<string>\",\n    \"id\": \"<string>\",\n    \"launchDir\": \"<string>\",\n    \"launchId\": \"<string>\",\n    \"logFile\": \"<string>\",\n    \"manifest\": {\n      \"author\": \"<string>\",\n      \"defaultBranch\": \"<string>\",\n      \"description\": \"<string>\",\n      \"gitmodules\": \"<string>\",\n      \"homePage\": \"<string>\",\n      \"icon\": \"<string>\",\n      \"mainScript\": \"<string>\",\n      \"name\": \"<string>\",\n      \"nextflowVersion\": \"<string>\",\n      \"version\": \"<string>\"\n    },\n    \"nextflow\": {\n      \"build\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"version\": \"<string>\"\n    },\n    \"operationId\": \"<string>\",\n    \"outFile\": \"<string>\",\n    \"params\": {\n      \"key_0\": \"<object>\",\n      \"key_1\": \"<object>\",\n      \"key_2\": \"<object>\",\n      \"key_3\": \"<object>\",\n      \"key_4\": \"<object>\"\n    },\n    \"profile\": \"<string>\",\n    \"projectDir\": \"<string>\",\n    \"repository\": \"<string>\",\n    \"requiresAttention\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"sched\": {\n      \"enabled\": \"<boolean>\"\n    },\n    \"scriptFile\": \"<string>\",\n    \"scriptId\": \"<string>\",\n    \"scriptName\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"stats\": {\n      \"cachedCount\": \"<integer>\",\n      \"cachedCountFmt\": \"<string>\",\n      \"cachedDuration\": \"<long>\",\n      \"cachedPct\": \"<float>\",\n      \"computeTimeFmt\": \"<string>\",\n      \"failedCount\": \"<integer>\",\n      \"failedCountFmt\": \"<string>\",\n      \"failedDuration\": \"<long>\",\n      \"failedPct\": \"<float>\",\n      \"ignoredCount\": \"<integer>\",\n      \"ignoredCountFmt\": \"<string>\",\n      \"ignoredPct\": \"<float>\",\n      \"succeedCount\": \"<integer>\",\n      \"succeedCountFmt\": \"<string>\",\n      \"succeedDuration\": \"<long>\",\n      \"succeedPct\": \"<float>\"\n    },\n    \"status\": \"<string>\",\n    \"success\": \"<boolean>\",\n    \"wave\": {\n      \"enabled\": \"<boolean>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "095cf341-4f88-4cc0-99a1-36263deffd2c",
+          "name": "Signal workflow execution heartbeat",
+          "request": {
+            "name": "Signal workflow execution heartbeat",
+            "description": {
+              "content": "Update the workflow execution trace heartbeat for the given `workflowId` to signal that execution is ongoing.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trace",
+                ":workflowId",
+                "heartbeat"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workflowId",
+                  "description": "(Required) Workflow string identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1200b1fe-ec23-4b93-9a08-049a1a437684",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23db5793-4c0a-457c-9c69-165eeba92ada",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b146f16a-6899-4c20-bd51-7f7025b78d27",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "heartbeat"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88752576-bc16-4e55-a7dc-7ad5afb289af",
+          "name": "Store workflow task execution metadata",
+          "request": {
+            "name": "Store workflow task execution metadata",
+            "description": {
+              "content": "Store the execution metadata for one or more tasks in the given `workflowId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "trace",
+                ":workflowId",
+                "progress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workflowId",
+                  "description": "(Required) Workflow string identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"containers\": [\n    {\n      \"targetImage\": \"<string>\",\n      \"buildId\": \"<string>\",\n      \"cached\": \"<boolean>\",\n      \"freeze\": \"<boolean>\",\n      \"mirrorId\": \"<string>\",\n      \"requestId\": \"<string>\",\n      \"requestTime\": \"<dateTime>\",\n      \"scanId\": \"<string>\",\n      \"sourceImage\": \"<string>\"\n    },\n    {\n      \"targetImage\": \"<string>\",\n      \"buildId\": \"<string>\",\n      \"cached\": \"<boolean>\",\n      \"freeze\": \"<boolean>\",\n      \"mirrorId\": \"<string>\",\n      \"requestId\": \"<string>\",\n      \"requestTime\": \"<dateTime>\",\n      \"scanId\": \"<string>\",\n      \"sourceImage\": \"<string>\"\n    }\n  ],\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  },\n  \"tasks\": [\n    {\n      \"status\": \"<string>\",\n      \"taskId\": \"<long>\",\n      \"attempt\": \"<integer>\",\n      \"cloudZone\": \"<string>\",\n      \"complete\": \"<dateTime>\",\n      \"container\": \"<string>\",\n      \"cost\": \"<number>\",\n      \"cpus\": \"<integer>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"disk\": \"<long>\",\n      \"duration\": \"<long>\",\n      \"env\": \"<string>\",\n      \"errorAction\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"executor\": \"<string>\",\n      \"exit\": \"<integer>\",\n      \"exitStatus\": \"<integer>\",\n      \"gpuMetrics\": {\n        \"active_time\": \"<long>\",\n        \"avg_mem\": \"<long>\",\n        \"avg_mem_bw_util\": \"<double>\",\n        \"driver\": \"<string>\",\n        \"mem\": \"<long>\",\n        \"name\": \"<string>\",\n        \"pct\": \"<double>\",\n        \"pct_mem\": \"<double>\",\n        \"peak\": \"<double>\",\n        \"peak_mem\": \"<double>\",\n        \"peak_mem_bw_util\": \"<double>\",\n        \"peak_mem_used\": \"<long>\"\n      },\n      \"hash\": \"<string>\",\n      \"id\": \"<long>\",\n      \"invCtxt\": \"<long>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"logStreamId\": \"<string>\",\n      \"machineType\": \"<string>\",\n      \"memory\": \"<long>\",\n      \"module\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"nativeId\": \"<string>\",\n      \"numSpotInterruptions\": \"<integer>\",\n      \"pcpu\": \"<double>\",\n      \"peakRss\": \"<long>\",\n      \"peakVmem\": \"<long>\",\n      \"pmem\": \"<double>\",\n      \"priceModel\": \"<string>\",\n      \"process\": \"<string>\",\n      \"queue\": \"<string>\",\n      \"rchar\": \"<long>\",\n      \"readBytes\": \"<long>\",\n      \"realtime\": \"<long>\",\n      \"resourceAllocation\": {\n        \"acceleratorCount\": \"<integer>\",\n        \"acceleratorName\": \"<string>\",\n        \"acceleratorType\": \"<string>\",\n        \"cpuShares\": \"<integer>\",\n        \"memoryMiB\": \"<integer>\",\n        \"time\": \"<string>\"\n      },\n      \"rss\": \"<long>\",\n      \"scratch\": \"<string>\",\n      \"script\": \"<string>\",\n      \"start\": \"<dateTime>\",\n      \"submit\": \"<dateTime>\",\n      \"syscr\": \"<long>\",\n      \"syscw\": \"<long>\",\n      \"tag\": \"<string>\",\n      \"time\": \"<long>\",\n      \"vmem\": \"<long>\",\n      \"volCtxt\": \"<long>\",\n      \"wchar\": \"<long>\",\n      \"workdir\": \"<string>\",\n      \"writeBytes\": \"<long>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"taskId\": \"<long>\",\n      \"attempt\": \"<integer>\",\n      \"cloudZone\": \"<string>\",\n      \"complete\": \"<dateTime>\",\n      \"container\": \"<string>\",\n      \"cost\": \"<number>\",\n      \"cpus\": \"<integer>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"disk\": \"<long>\",\n      \"duration\": \"<long>\",\n      \"env\": \"<string>\",\n      \"errorAction\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"executor\": \"<string>\",\n      \"exit\": \"<integer>\",\n      \"exitStatus\": \"<integer>\",\n      \"gpuMetrics\": {\n        \"active_time\": \"<long>\",\n        \"avg_mem\": \"<long>\",\n        \"avg_mem_bw_util\": \"<double>\",\n        \"driver\": \"<string>\",\n        \"mem\": \"<long>\",\n        \"name\": \"<string>\",\n        \"pct\": \"<double>\",\n        \"pct_mem\": \"<double>\",\n        \"peak\": \"<double>\",\n        \"peak_mem\": \"<double>\",\n        \"peak_mem_bw_util\": \"<double>\",\n        \"peak_mem_used\": \"<long>\"\n      },\n      \"hash\": \"<string>\",\n      \"id\": \"<long>\",\n      \"invCtxt\": \"<long>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"logStreamId\": \"<string>\",\n      \"machineType\": \"<string>\",\n      \"memory\": \"<long>\",\n      \"module\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"nativeId\": \"<string>\",\n      \"numSpotInterruptions\": \"<integer>\",\n      \"pcpu\": \"<double>\",\n      \"peakRss\": \"<long>\",\n      \"peakVmem\": \"<long>\",\n      \"pmem\": \"<double>\",\n      \"priceModel\": \"<string>\",\n      \"process\": \"<string>\",\n      \"queue\": \"<string>\",\n      \"rchar\": \"<long>\",\n      \"readBytes\": \"<long>\",\n      \"realtime\": \"<long>\",\n      \"resourceAllocation\": {\n        \"acceleratorCount\": \"<integer>\",\n        \"acceleratorName\": \"<string>\",\n        \"acceleratorType\": \"<string>\",\n        \"cpuShares\": \"<integer>\",\n        \"memoryMiB\": \"<integer>\",\n        \"time\": \"<string>\"\n      },\n      \"rss\": \"<long>\",\n      \"scratch\": \"<string>\",\n      \"script\": \"<string>\",\n      \"start\": \"<dateTime>\",\n      \"submit\": \"<dateTime>\",\n      \"syscr\": \"<long>\",\n      \"syscw\": \"<long>\",\n      \"tag\": \"<string>\",\n      \"time\": \"<long>\",\n      \"vmem\": \"<long>\",\n      \"volCtxt\": \"<long>\",\n      \"wchar\": \"<long>\",\n      \"workdir\": \"<string>\",\n      \"writeBytes\": \"<long>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b1ebb47e-ad64-4ca3-b273-626d64a44172",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"containers\": [\n    {\n      \"targetImage\": \"<string>\",\n      \"buildId\": \"<string>\",\n      \"cached\": \"<boolean>\",\n      \"freeze\": \"<boolean>\",\n      \"mirrorId\": \"<string>\",\n      \"requestId\": \"<string>\",\n      \"requestTime\": \"<dateTime>\",\n      \"scanId\": \"<string>\",\n      \"sourceImage\": \"<string>\"\n    },\n    {\n      \"targetImage\": \"<string>\",\n      \"buildId\": \"<string>\",\n      \"cached\": \"<boolean>\",\n      \"freeze\": \"<boolean>\",\n      \"mirrorId\": \"<string>\",\n      \"requestId\": \"<string>\",\n      \"requestTime\": \"<dateTime>\",\n      \"scanId\": \"<string>\",\n      \"sourceImage\": \"<string>\"\n    }\n  ],\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  },\n  \"tasks\": [\n    {\n      \"status\": \"<string>\",\n      \"taskId\": \"<long>\",\n      \"attempt\": \"<integer>\",\n      \"cloudZone\": \"<string>\",\n      \"complete\": \"<dateTime>\",\n      \"container\": \"<string>\",\n      \"cost\": \"<number>\",\n      \"cpus\": \"<integer>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"disk\": \"<long>\",\n      \"duration\": \"<long>\",\n      \"env\": \"<string>\",\n      \"errorAction\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"executor\": \"<string>\",\n      \"exit\": \"<integer>\",\n      \"exitStatus\": \"<integer>\",\n      \"gpuMetrics\": {\n        \"active_time\": \"<long>\",\n        \"avg_mem\": \"<long>\",\n        \"avg_mem_bw_util\": \"<double>\",\n        \"driver\": \"<string>\",\n        \"mem\": \"<long>\",\n        \"name\": \"<string>\",\n        \"pct\": \"<double>\",\n        \"pct_mem\": \"<double>\",\n        \"peak\": \"<double>\",\n        \"peak_mem\": \"<double>\",\n        \"peak_mem_bw_util\": \"<double>\",\n        \"peak_mem_used\": \"<long>\"\n      },\n      \"hash\": \"<string>\",\n      \"id\": \"<long>\",\n      \"invCtxt\": \"<long>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"logStreamId\": \"<string>\",\n      \"machineType\": \"<string>\",\n      \"memory\": \"<long>\",\n      \"module\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"nativeId\": \"<string>\",\n      \"numSpotInterruptions\": \"<integer>\",\n      \"pcpu\": \"<double>\",\n      \"peakRss\": \"<long>\",\n      \"peakVmem\": \"<long>\",\n      \"pmem\": \"<double>\",\n      \"priceModel\": \"<string>\",\n      \"process\": \"<string>\",\n      \"queue\": \"<string>\",\n      \"rchar\": \"<long>\",\n      \"readBytes\": \"<long>\",\n      \"realtime\": \"<long>\",\n      \"resourceAllocation\": {\n        \"acceleratorCount\": \"<integer>\",\n        \"acceleratorName\": \"<string>\",\n        \"acceleratorType\": \"<string>\",\n        \"cpuShares\": \"<integer>\",\n        \"memoryMiB\": \"<integer>\",\n        \"time\": \"<string>\"\n      },\n      \"rss\": \"<long>\",\n      \"scratch\": \"<string>\",\n      \"script\": \"<string>\",\n      \"start\": \"<dateTime>\",\n      \"submit\": \"<dateTime>\",\n      \"syscr\": \"<long>\",\n      \"syscw\": \"<long>\",\n      \"tag\": \"<string>\",\n      \"time\": \"<long>\",\n      \"vmem\": \"<long>\",\n      \"volCtxt\": \"<long>\",\n      \"wchar\": \"<long>\",\n      \"workdir\": \"<string>\",\n      \"writeBytes\": \"<long>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"taskId\": \"<long>\",\n      \"attempt\": \"<integer>\",\n      \"cloudZone\": \"<string>\",\n      \"complete\": \"<dateTime>\",\n      \"container\": \"<string>\",\n      \"cost\": \"<number>\",\n      \"cpus\": \"<integer>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"disk\": \"<long>\",\n      \"duration\": \"<long>\",\n      \"env\": \"<string>\",\n      \"errorAction\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"executor\": \"<string>\",\n      \"exit\": \"<integer>\",\n      \"exitStatus\": \"<integer>\",\n      \"gpuMetrics\": {\n        \"active_time\": \"<long>\",\n        \"avg_mem\": \"<long>\",\n        \"avg_mem_bw_util\": \"<double>\",\n        \"driver\": \"<string>\",\n        \"mem\": \"<long>\",\n        \"name\": \"<string>\",\n        \"pct\": \"<double>\",\n        \"pct_mem\": \"<double>\",\n        \"peak\": \"<double>\",\n        \"peak_mem\": \"<double>\",\n        \"peak_mem_bw_util\": \"<double>\",\n        \"peak_mem_used\": \"<long>\"\n      },\n      \"hash\": \"<string>\",\n      \"id\": \"<long>\",\n      \"invCtxt\": \"<long>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"logStreamId\": \"<string>\",\n      \"machineType\": \"<string>\",\n      \"memory\": \"<long>\",\n      \"module\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"nativeId\": \"<string>\",\n      \"numSpotInterruptions\": \"<integer>\",\n      \"pcpu\": \"<double>\",\n      \"peakRss\": \"<long>\",\n      \"peakVmem\": \"<long>\",\n      \"pmem\": \"<double>\",\n      \"priceModel\": \"<string>\",\n      \"process\": \"<string>\",\n      \"queue\": \"<string>\",\n      \"rchar\": \"<long>\",\n      \"readBytes\": \"<long>\",\n      \"realtime\": \"<long>\",\n      \"resourceAllocation\": {\n        \"acceleratorCount\": \"<integer>\",\n        \"acceleratorName\": \"<string>\",\n        \"acceleratorType\": \"<string>\",\n        \"cpuShares\": \"<integer>\",\n        \"memoryMiB\": \"<integer>\",\n        \"time\": \"<string>\"\n      },\n      \"rss\": \"<long>\",\n      \"scratch\": \"<string>\",\n      \"script\": \"<string>\",\n      \"start\": \"<dateTime>\",\n      \"submit\": \"<dateTime>\",\n      \"syscr\": \"<long>\",\n      \"syscw\": \"<long>\",\n      \"tag\": \"<string>\",\n      \"time\": \"<long>\",\n      \"vmem\": \"<long>\",\n      \"volCtxt\": \"<long>\",\n      \"wchar\": \"<long>\",\n      \"workdir\": \"<string>\",\n      \"writeBytes\": \"<long>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"OK\",\n  \"workflowId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0cf126de-83bf-4122-8f61-2ca90be94df6",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"containers\": [\n    {\n      \"targetImage\": \"<string>\",\n      \"buildId\": \"<string>\",\n      \"cached\": \"<boolean>\",\n      \"freeze\": \"<boolean>\",\n      \"mirrorId\": \"<string>\",\n      \"requestId\": \"<string>\",\n      \"requestTime\": \"<dateTime>\",\n      \"scanId\": \"<string>\",\n      \"sourceImage\": \"<string>\"\n    },\n    {\n      \"targetImage\": \"<string>\",\n      \"buildId\": \"<string>\",\n      \"cached\": \"<boolean>\",\n      \"freeze\": \"<boolean>\",\n      \"mirrorId\": \"<string>\",\n      \"requestId\": \"<string>\",\n      \"requestTime\": \"<dateTime>\",\n      \"scanId\": \"<string>\",\n      \"sourceImage\": \"<string>\"\n    }\n  ],\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  },\n  \"tasks\": [\n    {\n      \"status\": \"<string>\",\n      \"taskId\": \"<long>\",\n      \"attempt\": \"<integer>\",\n      \"cloudZone\": \"<string>\",\n      \"complete\": \"<dateTime>\",\n      \"container\": \"<string>\",\n      \"cost\": \"<number>\",\n      \"cpus\": \"<integer>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"disk\": \"<long>\",\n      \"duration\": \"<long>\",\n      \"env\": \"<string>\",\n      \"errorAction\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"executor\": \"<string>\",\n      \"exit\": \"<integer>\",\n      \"exitStatus\": \"<integer>\",\n      \"gpuMetrics\": {\n        \"active_time\": \"<long>\",\n        \"avg_mem\": \"<long>\",\n        \"avg_mem_bw_util\": \"<double>\",\n        \"driver\": \"<string>\",\n        \"mem\": \"<long>\",\n        \"name\": \"<string>\",\n        \"pct\": \"<double>\",\n        \"pct_mem\": \"<double>\",\n        \"peak\": \"<double>\",\n        \"peak_mem\": \"<double>\",\n        \"peak_mem_bw_util\": \"<double>\",\n        \"peak_mem_used\": \"<long>\"\n      },\n      \"hash\": \"<string>\",\n      \"id\": \"<long>\",\n      \"invCtxt\": \"<long>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"logStreamId\": \"<string>\",\n      \"machineType\": \"<string>\",\n      \"memory\": \"<long>\",\n      \"module\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"nativeId\": \"<string>\",\n      \"numSpotInterruptions\": \"<integer>\",\n      \"pcpu\": \"<double>\",\n      \"peakRss\": \"<long>\",\n      \"peakVmem\": \"<long>\",\n      \"pmem\": \"<double>\",\n      \"priceModel\": \"<string>\",\n      \"process\": \"<string>\",\n      \"queue\": \"<string>\",\n      \"rchar\": \"<long>\",\n      \"readBytes\": \"<long>\",\n      \"realtime\": \"<long>\",\n      \"resourceAllocation\": {\n        \"acceleratorCount\": \"<integer>\",\n        \"acceleratorName\": \"<string>\",\n        \"acceleratorType\": \"<string>\",\n        \"cpuShares\": \"<integer>\",\n        \"memoryMiB\": \"<integer>\",\n        \"time\": \"<string>\"\n      },\n      \"rss\": \"<long>\",\n      \"scratch\": \"<string>\",\n      \"script\": \"<string>\",\n      \"start\": \"<dateTime>\",\n      \"submit\": \"<dateTime>\",\n      \"syscr\": \"<long>\",\n      \"syscw\": \"<long>\",\n      \"tag\": \"<string>\",\n      \"time\": \"<long>\",\n      \"vmem\": \"<long>\",\n      \"volCtxt\": \"<long>\",\n      \"wchar\": \"<long>\",\n      \"workdir\": \"<string>\",\n      \"writeBytes\": \"<long>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"taskId\": \"<long>\",\n      \"attempt\": \"<integer>\",\n      \"cloudZone\": \"<string>\",\n      \"complete\": \"<dateTime>\",\n      \"container\": \"<string>\",\n      \"cost\": \"<number>\",\n      \"cpus\": \"<integer>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"disk\": \"<long>\",\n      \"duration\": \"<long>\",\n      \"env\": \"<string>\",\n      \"errorAction\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"executor\": \"<string>\",\n      \"exit\": \"<integer>\",\n      \"exitStatus\": \"<integer>\",\n      \"gpuMetrics\": {\n        \"active_time\": \"<long>\",\n        \"avg_mem\": \"<long>\",\n        \"avg_mem_bw_util\": \"<double>\",\n        \"driver\": \"<string>\",\n        \"mem\": \"<long>\",\n        \"name\": \"<string>\",\n        \"pct\": \"<double>\",\n        \"pct_mem\": \"<double>\",\n        \"peak\": \"<double>\",\n        \"peak_mem\": \"<double>\",\n        \"peak_mem_bw_util\": \"<double>\",\n        \"peak_mem_used\": \"<long>\"\n      },\n      \"hash\": \"<string>\",\n      \"id\": \"<long>\",\n      \"invCtxt\": \"<long>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"logStreamId\": \"<string>\",\n      \"machineType\": \"<string>\",\n      \"memory\": \"<long>\",\n      \"module\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"nativeId\": \"<string>\",\n      \"numSpotInterruptions\": \"<integer>\",\n      \"pcpu\": \"<double>\",\n      \"peakRss\": \"<long>\",\n      \"peakVmem\": \"<long>\",\n      \"pmem\": \"<double>\",\n      \"priceModel\": \"<string>\",\n      \"process\": \"<string>\",\n      \"queue\": \"<string>\",\n      \"rchar\": \"<long>\",\n      \"readBytes\": \"<long>\",\n      \"realtime\": \"<long>\",\n      \"resourceAllocation\": {\n        \"acceleratorCount\": \"<integer>\",\n        \"acceleratorName\": \"<string>\",\n        \"acceleratorType\": \"<string>\",\n        \"cpuShares\": \"<integer>\",\n        \"memoryMiB\": \"<integer>\",\n        \"time\": \"<string>\"\n      },\n      \"rss\": \"<long>\",\n      \"scratch\": \"<string>\",\n      \"script\": \"<string>\",\n      \"start\": \"<dateTime>\",\n      \"submit\": \"<dateTime>\",\n      \"syscr\": \"<long>\",\n      \"syscw\": \"<long>\",\n      \"tag\": \"<string>\",\n      \"time\": \"<long>\",\n      \"vmem\": \"<long>\",\n      \"volCtxt\": \"<long>\",\n      \"wchar\": \"<long>\",\n      \"workdir\": \"<string>\",\n      \"writeBytes\": \"<long>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e0fde57-046a-4b32-a260-037899b5787f",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "trace",
+                    ":workflowId",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workflowId",
+                      "description": "(Required) Workflow string identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"containers\": [\n    {\n      \"targetImage\": \"<string>\",\n      \"buildId\": \"<string>\",\n      \"cached\": \"<boolean>\",\n      \"freeze\": \"<boolean>\",\n      \"mirrorId\": \"<string>\",\n      \"requestId\": \"<string>\",\n      \"requestTime\": \"<dateTime>\",\n      \"scanId\": \"<string>\",\n      \"sourceImage\": \"<string>\"\n    },\n    {\n      \"targetImage\": \"<string>\",\n      \"buildId\": \"<string>\",\n      \"cached\": \"<boolean>\",\n      \"freeze\": \"<boolean>\",\n      \"mirrorId\": \"<string>\",\n      \"requestId\": \"<string>\",\n      \"requestTime\": \"<dateTime>\",\n      \"scanId\": \"<string>\",\n      \"sourceImage\": \"<string>\"\n    }\n  ],\n  \"progress\": {\n    \"aborted\": \"<integer>\",\n    \"cached\": \"<integer>\",\n    \"failed\": \"<integer>\",\n    \"ignored\": \"<integer>\",\n    \"loadCpus\": \"<long>\",\n    \"loadMemory\": \"<long>\",\n    \"numSpotInterruptions\": \"<integer>\",\n    \"peakCpus\": \"<long>\",\n    \"peakMemory\": \"<long>\",\n    \"peakRunning\": \"<integer>\",\n    \"pending\": \"<integer>\",\n    \"processes\": [\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      },\n      {\n        \"aborted\": \"<integer>\",\n        \"cached\": \"<integer>\",\n        \"failed\": \"<integer>\",\n        \"ignored\": \"<integer>\",\n        \"index\": \"<integer>\",\n        \"loadCpus\": \"<long>\",\n        \"loadMemory\": \"<long>\",\n        \"name\": \"<string>\",\n        \"peakCpus\": \"<long>\",\n        \"peakMemory\": \"<long>\",\n        \"peakRunning\": \"<integer>\",\n        \"pending\": \"<integer>\",\n        \"retries\": \"<integer>\",\n        \"running\": \"<integer>\",\n        \"stored\": \"<integer>\",\n        \"submitted\": \"<integer>\",\n        \"succeeded\": \"<integer>\",\n        \"terminated\": \"<boolean>\"\n      }\n    ],\n    \"retries\": \"<integer>\",\n    \"running\": \"<integer>\",\n    \"stored\": \"<integer>\",\n    \"submitted\": \"<integer>\",\n    \"succeeded\": \"<integer>\"\n  },\n  \"tasks\": [\n    {\n      \"status\": \"<string>\",\n      \"taskId\": \"<long>\",\n      \"attempt\": \"<integer>\",\n      \"cloudZone\": \"<string>\",\n      \"complete\": \"<dateTime>\",\n      \"container\": \"<string>\",\n      \"cost\": \"<number>\",\n      \"cpus\": \"<integer>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"disk\": \"<long>\",\n      \"duration\": \"<long>\",\n      \"env\": \"<string>\",\n      \"errorAction\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"executor\": \"<string>\",\n      \"exit\": \"<integer>\",\n      \"exitStatus\": \"<integer>\",\n      \"gpuMetrics\": {\n        \"active_time\": \"<long>\",\n        \"avg_mem\": \"<long>\",\n        \"avg_mem_bw_util\": \"<double>\",\n        \"driver\": \"<string>\",\n        \"mem\": \"<long>\",\n        \"name\": \"<string>\",\n        \"pct\": \"<double>\",\n        \"pct_mem\": \"<double>\",\n        \"peak\": \"<double>\",\n        \"peak_mem\": \"<double>\",\n        \"peak_mem_bw_util\": \"<double>\",\n        \"peak_mem_used\": \"<long>\"\n      },\n      \"hash\": \"<string>\",\n      \"id\": \"<long>\",\n      \"invCtxt\": \"<long>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"logStreamId\": \"<string>\",\n      \"machineType\": \"<string>\",\n      \"memory\": \"<long>\",\n      \"module\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"nativeId\": \"<string>\",\n      \"numSpotInterruptions\": \"<integer>\",\n      \"pcpu\": \"<double>\",\n      \"peakRss\": \"<long>\",\n      \"peakVmem\": \"<long>\",\n      \"pmem\": \"<double>\",\n      \"priceModel\": \"<string>\",\n      \"process\": \"<string>\",\n      \"queue\": \"<string>\",\n      \"rchar\": \"<long>\",\n      \"readBytes\": \"<long>\",\n      \"realtime\": \"<long>\",\n      \"resourceAllocation\": {\n        \"acceleratorCount\": \"<integer>\",\n        \"acceleratorName\": \"<string>\",\n        \"acceleratorType\": \"<string>\",\n        \"cpuShares\": \"<integer>\",\n        \"memoryMiB\": \"<integer>\",\n        \"time\": \"<string>\"\n      },\n      \"rss\": \"<long>\",\n      \"scratch\": \"<string>\",\n      \"script\": \"<string>\",\n      \"start\": \"<dateTime>\",\n      \"submit\": \"<dateTime>\",\n      \"syscr\": \"<long>\",\n      \"syscw\": \"<long>\",\n      \"tag\": \"<string>\",\n      \"time\": \"<long>\",\n      \"vmem\": \"<long>\",\n      \"volCtxt\": \"<long>\",\n      \"wchar\": \"<long>\",\n      \"workdir\": \"<string>\",\n      \"writeBytes\": \"<long>\"\n    },\n    {\n      \"status\": \"<string>\",\n      \"taskId\": \"<long>\",\n      \"attempt\": \"<integer>\",\n      \"cloudZone\": \"<string>\",\n      \"complete\": \"<dateTime>\",\n      \"container\": \"<string>\",\n      \"cost\": \"<number>\",\n      \"cpus\": \"<integer>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"disk\": \"<long>\",\n      \"duration\": \"<long>\",\n      \"env\": \"<string>\",\n      \"errorAction\": \"<string>\",\n      \"errorMessage\": \"<string>\",\n      \"executor\": \"<string>\",\n      \"exit\": \"<integer>\",\n      \"exitStatus\": \"<integer>\",\n      \"gpuMetrics\": {\n        \"active_time\": \"<long>\",\n        \"avg_mem\": \"<long>\",\n        \"avg_mem_bw_util\": \"<double>\",\n        \"driver\": \"<string>\",\n        \"mem\": \"<long>\",\n        \"name\": \"<string>\",\n        \"pct\": \"<double>\",\n        \"pct_mem\": \"<double>\",\n        \"peak\": \"<double>\",\n        \"peak_mem\": \"<double>\",\n        \"peak_mem_bw_util\": \"<double>\",\n        \"peak_mem_used\": \"<long>\"\n      },\n      \"hash\": \"<string>\",\n      \"id\": \"<long>\",\n      \"invCtxt\": \"<long>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"logStreamId\": \"<string>\",\n      \"machineType\": \"<string>\",\n      \"memory\": \"<long>\",\n      \"module\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"name\": \"<string>\",\n      \"nativeId\": \"<string>\",\n      \"numSpotInterruptions\": \"<integer>\",\n      \"pcpu\": \"<double>\",\n      \"peakRss\": \"<long>\",\n      \"peakVmem\": \"<long>\",\n      \"pmem\": \"<double>\",\n      \"priceModel\": \"<string>\",\n      \"process\": \"<string>\",\n      \"queue\": \"<string>\",\n      \"rchar\": \"<long>\",\n      \"readBytes\": \"<long>\",\n      \"realtime\": \"<long>\",\n      \"resourceAllocation\": {\n        \"acceleratorCount\": \"<integer>\",\n        \"acceleratorName\": \"<string>\",\n        \"acceleratorType\": \"<string>\",\n        \"cpuShares\": \"<integer>\",\n        \"memoryMiB\": \"<integer>\",\n        \"time\": \"<string>\"\n      },\n      \"rss\": \"<long>\",\n      \"scratch\": \"<string>\",\n      \"script\": \"<string>\",\n      \"start\": \"<dateTime>\",\n      \"submit\": \"<dateTime>\",\n      \"syscr\": \"<long>\",\n      \"syscw\": \"<long>\",\n      \"tag\": \"<string>\",\n      \"time\": \"<long>\",\n      \"vmem\": \"<long>\",\n      \"volCtxt\": \"<long>\",\n      \"wchar\": \"<long>\",\n      \"workdir\": \"<string>\",\n      \"writeBytes\": \"<long>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2743f665-6319-4921-830c-2b424a3c2638",
+    "name": "Seqera actions trace API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+      "type": "text/plain"
+    }
+  }
+}

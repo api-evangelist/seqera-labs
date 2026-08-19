@@ -1,0 +1,762 @@
+{
+  "item": [
+    {
+      "id": "936922fb-d1e1-4931-8070-95448102b4dc",
+      "name": "admin",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c37d7791-217b-4b21-ae71-68dc2569cfde",
+          "name": "List audit logs (v2)",
+          "request": {
+            "name": "List audit logs (v2)",
+            "description": {
+              "content": "Lists audit logs with token-based pagination, ordered by timestamp (descending). Supports filtering by timestamp range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "audit-logs-v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>,<string>",
+                  "description": "Additional attribute values to include in the response (`state` for pre/post image payloads)."
+                },
+                {
+                  "disabled": false,
+                  "key": "nextPageToken",
+                  "value": "<string>",
+                  "description": "Token for retrieving the next page of results"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>",
+                  "description": "Maximum number of records to return in the page"
+                },
+                {
+                  "disabled": false,
+                  "key": "timestampAfterOrEqual",
+                  "value": "<dateTime>",
+                  "description": "Filter logs with timestamp on or after this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "timestampBeforeOrEqual",
+                  "value": "<dateTime>",
+                  "description": "Filter logs with timestamp on or before this date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "94ea4009-5000-4351-82f2-d739551163e6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "audit-logs-v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "nextPageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "timestampAfterOrEqual",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "timestampBeforeOrEqual",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"auditLogs\": [\n    {\n      \"actor\": {\n        \"email\": \"string\",\n        \"firstName\": \"string\",\n        \"isRoot\": false,\n        \"lastName\": \"string\",\n        \"type\": \"user\",\n        \"userId\": 4310,\n        \"userName\": \"string\"\n      },\n      \"client\": {\n        \"accessTokenId\": 9110,\n        \"ip\": \"string\",\n        \"userAgent\": \"string\"\n      },\n      \"correlationId\": \"string\",\n      \"event\": \"organization_deleted\",\n      \"id\": \"string\",\n      \"target\": {\n        \"context\": \"Workspace\",\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"organization\": {\n          \"id\": 4921,\n          \"name\": \"string\"\n        },\n        \"state\": {\n          \"metadata\": {\n            \"contentRequested\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postStateStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"preStateStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"newState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"previousState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"type\": \"string\",\n        \"user\": {\n          \"id\": 1123,\n          \"name\": \"string\"\n        },\n        \"workspace\": {\n          \"id\": 8971,\n          \"name\": \"string\"\n        }\n      },\n      \"timestamp\": \"1977-09-20T10:54:12.722Z\"\n    },\n    {\n      \"actor\": {\n        \"email\": \"string\",\n        \"firstName\": \"string\",\n        \"isRoot\": false,\n        \"lastName\": \"string\",\n        \"type\": \"system\",\n        \"userId\": 2851,\n        \"userName\": \"string\"\n      },\n      \"client\": {\n        \"accessTokenId\": 99,\n        \"ip\": \"string\",\n        \"userAgent\": \"string\"\n      },\n      \"correlationId\": \"string\",\n      \"event\": \"compute_environment_created\",\n      \"id\": \"string\",\n      \"target\": {\n        \"context\": \"System\",\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"organization\": {\n          \"id\": 2732,\n          \"name\": \"string\"\n        },\n        \"state\": {\n          \"metadata\": {\n            \"contentRequested\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"postStateStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"preStateStatus\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"newState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"previousState\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"type\": \"string\",\n        \"user\": {\n          \"id\": 6029,\n          \"name\": \"string\"\n        },\n        \"workspace\": {\n          \"id\": 3259,\n          \"name\": \"string\"\n        }\n      },\n      \"timestamp\": \"1980-01-09T20:14:21.323Z\"\n    }\n  ],\n  \"nextPageToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b49726b-618d-4da6-a765-1f27ff1c7035",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "audit-logs-v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "nextPageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "timestampAfterOrEqual",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "timestampBeforeOrEqual",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c4bd7e8-19f9-494f-87af-7343e703ec84",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "audit-logs-v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "nextPageToken",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "timestampAfterOrEqual",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "timestampBeforeOrEqual",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c6d6a61-d28d-4588-88f6-0738b8ad3ec5",
+          "name": "Export audit logs (v2) as CSV",
+          "request": {
+            "name": "Export audit logs (v2) as CSV",
+            "description": {
+              "content": "Exports audit log entries as a CSV file. Supports filtering by timestamp range. Fails if the number of matching logs exceeds a certain maximum.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "audit-logs-v2",
+                "export-csv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>,<string>",
+                  "description": "Additional attribute values to include in the response (`state` for pre/post image payloads)."
+                },
+                {
+                  "disabled": false,
+                  "key": "timestampAfterOrEqual",
+                  "value": "<dateTime>",
+                  "description": "Filter logs with timestamp on or after this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "timestampBeforeOrEqual",
+                  "value": "<dateTime>",
+                  "description": "Filter logs with timestamp on or before this date"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/csv"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5e74cf58-c66b-48a7-931d-5d962e879f23",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "audit-logs-v2",
+                    "export-csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "timestampAfterOrEqual",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "timestampBeforeOrEqual",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/csv"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/csv"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1cb1580c-4ab2-4335-9909-2d8e4f1537bd",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "audit-logs-v2",
+                    "export-csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "timestampAfterOrEqual",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "timestampBeforeOrEqual",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d83cc4af-c973-4fd4-b36d-13a9ecb67432",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "audit-logs-v2",
+                    "export-csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "timestampAfterOrEqual",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "timestampBeforeOrEqual",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f063cccb-0d0f-437f-a2dc-ec5eb18ca804",
+          "name": "Describe a single audit log (v2)",
+          "request": {
+            "name": "Describe a single audit log (v2)",
+            "description": {
+              "content": "Retrieves the pre/post change images associated with a specific audit log V2 record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "admin",
+                "audit-logs-v2",
+                ":auditLogId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>,<string>",
+                  "description": "Additional attribute values to include in the response (`state` for pre/post change images). Returns an empty value if omitted."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "auditLogId",
+                  "description": "(Required) Audit log V2 record ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ad2a8f22-1b99-4852-b8ee-97bcd1a164c9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "audit-logs-v2",
+                    ":auditLogId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "auditLogId",
+                      "description": "(Required) Audit log V2 record ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"actor\": {\n    \"email\": \"string\",\n    \"firstName\": \"string\",\n    \"isRoot\": false,\n    \"lastName\": \"string\",\n    \"type\": \"user\",\n    \"userId\": 7977,\n    \"userName\": \"string\"\n  },\n  \"client\": {\n    \"accessTokenId\": 1746,\n    \"ip\": \"string\",\n    \"userAgent\": \"string\"\n  },\n  \"correlationId\": \"string\",\n  \"event\": \"participant_added\",\n  \"id\": \"string\",\n  \"target\": {\n    \"context\": \"Workspace\",\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"organization\": {\n      \"id\": 9745,\n      \"name\": \"string\"\n    },\n    \"state\": {\n      \"metadata\": {\n        \"contentRequested\": true,\n        \"postStateStatus\": \"UNAPPLICABLE\",\n        \"preStateStatus\": \"UNRECORDED\"\n      },\n      \"newState\": {\n        \"auditImageType\": \"pipeline\",\n        \"lastUsed\": \"2006-03-21T12:30:32.470Z\",\n        \"name\": \"string\"\n      },\n      \"previousState\": {\n        \"auditImageType\": \"organization\",\n        \"lastUsed\": \"2002-01-29T10:42:34.594Z\",\n        \"name\": \"string\"\n      }\n    },\n    \"type\": \"string\",\n    \"user\": {\n      \"id\": 3335,\n      \"name\": \"string\"\n    },\n    \"workspace\": {\n      \"id\": 5733,\n      \"name\": \"string\"\n    }\n  },\n  \"timestamp\": \"2019-11-19T10:56:11.773Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d0cdc99-05cb-45bb-ad51-1d11a50e3869",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "audit-logs-v2",
+                    ":auditLogId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "auditLogId",
+                      "description": "(Required) Audit log V2 record ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c5166a42-a096-407e-81e7-29a294fc1c91",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "admin",
+                    "audit-logs-v2",
+                    ":auditLogId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "auditLogId",
+                      "description": "(Required) Audit log V2 record ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7a194cde-4685-445c-8fc5-a3a74f4d5083",
+    "name": "Seqera actions admin API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+      "type": "text/plain"
+    }
+  }
+}

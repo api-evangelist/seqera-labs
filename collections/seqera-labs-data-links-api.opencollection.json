@@ -1,0 +1,737 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions data-links API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "data-links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List data-links",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/data-links",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials identifier"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Free text search criteria — data-link name and keywords: `region`, `provider`."
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Pagination max results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              },
+              {
+                "name": "visibility",
+                "value": "",
+                "type": "query",
+                "description": "Filter results by visibility"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves all available data-links in a user context. Append `?workspaceId={your-workspace-id}` to retrieve data-links in a workspace context.\n"
+        },
+        {
+          "info": {
+            "name": "Create data-link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/data-links",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new data-link in a user context. Append `?workspaceId=` to create the data-link in a workspace context."
+        },
+        {
+          "info": {
+            "name": "Refresh data-link cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/data-links/cache/refresh",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Refreshes the data-link cache for the given `workspaceId` or `credentialsId`"
+        },
+        {
+          "info": {
+            "name": "Describe data-link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/data-links/:dataLinkId",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the details of the data-link associated with the given `dataLinkId`."
+        },
+        {
+          "info": {
+            "name": "Update data-link",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/data-links/:dataLinkId",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the data-link associated with the given `dataLinkId`."
+        },
+        {
+          "info": {
+            "name": "Delete data-link",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/data-links/:dataLinkId",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the data-link associated with the given `dataLinkId`."
+        },
+        {
+          "info": {
+            "name": "Explore data-link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/data-links/:dataLinkId/browse",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Prefix search of data-link content"
+              },
+              {
+                "name": "nextPageToken",
+                "value": "",
+                "type": "query",
+                "description": "Token used to fetch the next page of items"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page. If ommitted, a default maximum value is returned."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the content of the data-link associated with the given `dataLinkId`"
+        },
+        {
+          "info": {
+            "name": "Explore a data-link tree",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/data-links/:dataLinkId/browse-tree",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              },
+              {
+                "name": "paths",
+                "value": "",
+                "type": "query",
+                "description": "List of paths"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Provides a list of all files in the provided paths (including files in sub-paths)."
+        },
+        {
+          "info": {
+            "name": "Explore data-link path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/data-links/:dataLinkId/browse/:path",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path",
+                "description": "Content path"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Prefix search of data-link content"
+              },
+              {
+                "name": "nextPageToken",
+                "value": "",
+                "type": "query",
+                "description": "Token used to fetch the next page of items"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items to return per page. If ommitted, a default maximum value is returned."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the content of the data-link associated with the given `dataLinkId`, at the given `path`."
+        },
+        {
+          "info": {
+            "name": "Delete data-link content",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/data-links/:dataLinkId/content",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the content of the data-link associated with the given `dataLinkId`. The data-link itself is preserved."
+        },
+        {
+          "info": {
+            "name": "Download data-link file at path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/data-links/:dataLinkId/download/:filePath",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "filePath",
+                "value": "",
+                "type": "path",
+                "description": "File path to download"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Downloads the content at the given `filePath` in the data-link associated with the given `dataLinkId`."
+        },
+        {
+          "info": {
+            "name": "Generate data-link file download URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/data-links/:dataLinkId/generate-download-url",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "filePath",
+                "value": "",
+                "type": "query",
+                "description": "File path to download"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "preview",
+                "value": "",
+                "type": "query",
+                "description": "Whether to generate the URL for preview purposes or direct download (default: false)"
+              },
+              {
+                "name": "resolveSymlink",
+                "value": "",
+                "type": "query",
+                "description": "When true, treats the file as a Fusion symlink and resolves its target (default: false)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a URL to download files from the data-link associated with the given `dataLinkId`."
+        },
+        {
+          "info": {
+            "name": "Generate download script",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/data-links/:dataLinkId/script/download",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              },
+              {
+                "name": "dirs",
+                "value": "",
+                "type": "query",
+                "description": "List of paths to directories to download"
+              },
+              {
+                "name": "files",
+                "value": "",
+                "type": "query",
+                "description": "List of paths to files to download"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a script to download files from the data-link associated with the given `dataLinkId`. Append `?dirs` or `?files` to specify a list of files or paths to download within the data-link."
+        },
+        {
+          "info": {
+            "name": "Generate data-link file upload URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/data-links/:dataLinkId/upload",
+            "headers": [
+              {
+                "name": "Origin",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a URL to upload files to the data-link associated with the given `dataLinkId`.\nFor AWS S3 data-links, an additional follow-up request must be sent after your file upload has completed (or encountered an error) to finalize the upload - see the `/upload/finish` endpoint."
+        },
+        {
+          "info": {
+            "name": "Finish data-link file upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/data-links/:dataLinkId/upload/finish",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finish upload of a data-link file. This is necessary for AWS S3 data-links (`DataLinkProvider=aws`) to finalize a successful file upload, or abort an upload if an error was encountered while uploading a file using an upload URL from the `/upload` endpoint."
+        },
+        {
+          "info": {
+            "name": "Finish data-link file upload to given path",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/data-links/:dataLinkId/upload/finish/:dirPath",
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "dirPath",
+                "value": "",
+                "type": "path",
+                "description": "Path to the destination directory"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Finish upload of a data-link file, specifying a file path (`dirPath`). This is necessary for AWS S3 data-links (`DataLinkProvider=aws`) to finalize a successful file upload, or abort an upload if an error was encountered while uploading a file using an upload URL from the `/upload` endpoint."
+        },
+        {
+          "info": {
+            "name": "Generate data-link file upload URL (to given path)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/data-links/:dataLinkId/upload/:dirPath",
+            "headers": [
+              {
+                "name": "Origin",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "dataLinkId",
+                "value": "",
+                "type": "path",
+                "description": "Data-link string identifier"
+              },
+              {
+                "name": "dirPath",
+                "value": "",
+                "type": "path",
+                "description": "Path to the destination directory"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query",
+                "description": "Credentials string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a URL to upload files to the data-link associated with the given `dataLinkId`, specifying a file path (`dirPath`).\nFor AWS S3 data-links, an additional follow-up request must be sent after your file upload has completed (or encountered an error) to finalize the upload - see the `/upload/finish` endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

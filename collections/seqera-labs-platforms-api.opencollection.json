@@ -1,0 +1,127 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions platforms API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "platforms",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List platforms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/platforms",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "query",
+                "description": "Organization numeric identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists all available computing platforms in a user context. Append `?workspaceId` to list platforms in a workspace context."
+        },
+        {
+          "info": {
+            "name": "Describe platform",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/platforms/:platformId",
+            "params": [
+              {
+                "name": "platformId",
+                "value": "",
+                "type": "path",
+                "description": "Platform string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              },
+              {
+                "name": "sched",
+                "value": "",
+                "type": "query",
+                "description": "When true, narrow the catalog to Scheduler-compatible instance types (AWS only)."
+              },
+              {
+                "name": "nvme",
+                "value": "",
+                "type": "query",
+                "description": "When true, narrow the catalog to NVMe-equipped instance types (AWS only)."
+              },
+              {
+                "name": "regionId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "credentialsId",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the details of the computing platform identified by the given `platformId`."
+        },
+        {
+          "info": {
+            "name": "List platform regions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/platforms/:platformId/regions",
+            "params": [
+              {
+                "name": "platformId",
+                "value": "",
+                "type": "path",
+                "description": "Platform string identifier"
+              },
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists the available regions for the computing platform identified by the given `platformId`."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

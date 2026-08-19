@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions pipeline-schemas API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pipeline-schemas",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create pipeline schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/pipeline-schemas",
+            "params": [
+              {
+                "name": "workspaceId",
+                "value": "",
+                "type": "query",
+                "description": "Workspace numeric identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new pipeline schema in a user context. Append `?workspaceId` to create the schema in a workspace context."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

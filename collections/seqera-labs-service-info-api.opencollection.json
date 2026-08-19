@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions service-info API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "service-info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "General Seqera service features and version.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/service-info"
+          },
+          "docs": "General Seqera service features and version."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

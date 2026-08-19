@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Seqera actions avatars API",
+    "version": "1.181.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "avatars",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create the avatar image",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/avatars",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "image",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create the avatar image"
+        },
+        {
+          "info": {
+            "name": "Download the avatar image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/avatars/:avatarId",
+            "params": [
+              {
+                "name": "avatarId",
+                "value": "",
+                "type": "path",
+                "description": "Avatar string identifier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download the avatar image"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

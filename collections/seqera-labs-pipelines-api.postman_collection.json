@@ -1,0 +1,2784 @@
+{
+  "item": [
+    {
+      "id": "09996b12-5952-4d7f-8592-360415219d11",
+      "name": "pipelines",
+      "description": {
+        "content": "Pipelines",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2cb8f840-6531-4ba5-9c89-ed31cd23d86b",
+          "name": "List pipelines",
+          "request": {
+            "name": "List pipelines",
+            "description": {
+              "content": "Lists all available pipelines in a user context, enriched by `attributes`. Append `workspaceId` to list pipelines in a workspace context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>,<string>",
+                  "description": "Additional attribute values to include in the response (`labels`, `optimized` status, `computeEnv`). Returns an empty value (`labels: null`, etc.) if omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "max",
+                  "value": "<integer>",
+                  "description": "Pagination max results"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Pagination offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>",
+                  "description": "Sort field (`NAME` by default)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortDir",
+                  "value": "<string>",
+                  "description": "Sort direction (`ASCENDING` by default)"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Filter search parameter"
+                },
+                {
+                  "disabled": false,
+                  "key": "visibility",
+                  "value": "<string>",
+                  "description": "Filter visibility parameter"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "73dd2904-2737-4f64-acf5-2772cf4490e9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pipelines\": [\n    {\n      \"computeEnv\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"platform\": \"string\",\n        \"region\": \"string\"\n      },\n      \"deleted\": true,\n      \"description\": \"string\",\n      \"icon\": \"string\",\n      \"labels\": [\n        {\n          \"dateCreated\": \"2007-08-06T00:32:13.520Z\",\n          \"id\": 6710,\n          \"isDefault\": false,\n          \"isDynamic\": true,\n          \"isInterpolated\": false,\n          \"name\": \"string\",\n          \"resource\": false,\n          \"value\": \"string\"\n        },\n        {\n          \"dateCreated\": \"2018-01-09T16:52:46.130Z\",\n          \"id\": 4051,\n          \"isDefault\": false,\n          \"isDynamic\": true,\n          \"isInterpolated\": true,\n          \"name\": \"string\",\n          \"resource\": false,\n          \"value\": \"string\"\n        }\n      ],\n      \"lastUpdated\": \"1959-09-25T18:09:37.790Z\",\n      \"name\": \"string\",\n      \"optimizationId\": \"string\",\n      \"optimizationStatus\": \"OPTIMIZABLE\",\n      \"optimizationTargets\": \"string\",\n      \"orgId\": 5342,\n      \"orgName\": \"string\",\n      \"pipelineId\": 2149,\n      \"repository\": \"string\",\n      \"userFirstName\": \"string\",\n      \"userId\": 7776,\n      \"userLastName\": \"string\",\n      \"userName\": \"string\",\n      \"version\": {\n        \"creatorAvatarUrl\": \"string\",\n        \"creatorFirstName\": \"string\",\n        \"creatorLastName\": \"string\",\n        \"creatorUserId\": 1987,\n        \"creatorUserName\": \"string\",\n        \"dateCreated\": \"1991-04-29T17:05:51.712Z\",\n        \"hash\": \"string\",\n        \"id\": \"string\",\n        \"isDefault\": true,\n        \"lastUpdated\": \"2017-01-31T02:26:29.340Z\",\n        \"name\": \"string\"\n      },\n      \"visibility\": \"string\",\n      \"workspaceId\": 5739,\n      \"workspaceName\": \"string\"\n    },\n    {\n      \"computeEnv\": {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"platform\": \"string\",\n        \"region\": \"string\"\n      },\n      \"deleted\": false,\n      \"description\": \"string\",\n      \"icon\": \"string\",\n      \"labels\": [\n        {\n          \"dateCreated\": \"2014-11-13T14:16:49.625Z\",\n          \"id\": 3594,\n          \"isDefault\": false,\n          \"isDynamic\": false,\n          \"isInterpolated\": true,\n          \"name\": \"string\",\n          \"resource\": true,\n          \"value\": \"string\"\n        },\n        {\n          \"dateCreated\": \"1992-04-02T21:30:03.559Z\",\n          \"id\": 8517,\n          \"isDefault\": false,\n          \"isDynamic\": false,\n          \"isInterpolated\": true,\n          \"name\": \"string\",\n          \"resource\": true,\n          \"value\": \"string\"\n        }\n      ],\n      \"lastUpdated\": \"1987-03-15T06:41:19.334Z\",\n      \"name\": \"string\",\n      \"optimizationId\": \"string\",\n      \"optimizationStatus\": \"UNAVAILABLE\",\n      \"optimizationTargets\": \"string\",\n      \"orgId\": 6719,\n      \"orgName\": \"string\",\n      \"pipelineId\": 9952,\n      \"repository\": \"string\",\n      \"userFirstName\": \"string\",\n      \"userId\": 3849,\n      \"userLastName\": \"string\",\n      \"userName\": \"string\",\n      \"version\": {\n        \"creatorAvatarUrl\": \"string\",\n        \"creatorFirstName\": \"string\",\n        \"creatorLastName\": \"string\",\n        \"creatorUserId\": 5632,\n        \"creatorUserName\": \"string\",\n        \"dateCreated\": \"1969-04-10T20:13:36.514Z\",\n        \"hash\": \"string\",\n        \"id\": \"string\",\n        \"isDefault\": true,\n        \"lastUpdated\": \"2009-12-04T09:22:16.286Z\",\n        \"name\": \"string\"\n      },\n      \"visibility\": \"string\",\n      \"workspaceId\": 9332,\n      \"workspaceName\": \"string\"\n    }\n  ],\n  \"totalSize\": 7323\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a35e0a4-d751-4e00-ad94-d18596f5db36",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b2e9130-945d-40f1-8e15-c7b0a17cd97a",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "visibility",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e4cbb5f-5d06-473c-950d-2f0f32503a5b",
+          "name": "Create pipeline",
+          "request": {
+            "name": "Create pipeline",
+            "description": {
+              "content": "Creates a new pipeline in a user context. Append `?workspaceId` to create the pipeline in a workspace context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"labelIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"version\": {\n    \"name\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "341eee1d-570d-427d-83fd-ea84d5ba6a93",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"labelIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"version\": {\n    \"name\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pipeline\": {\n    \"computeEnv\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"region\": \"string\"\n    },\n    \"deleted\": true,\n    \"description\": \"string\",\n    \"icon\": \"string\",\n    \"labels\": [\n      {\n        \"dateCreated\": \"2005-01-06T19:20:41.563Z\",\n        \"id\": 7960,\n        \"isDefault\": true,\n        \"isDynamic\": false,\n        \"isInterpolated\": true,\n        \"name\": \"string\",\n        \"resource\": true,\n        \"value\": \"string\"\n      },\n      {\n        \"dateCreated\": \"2026-07-11T01:48:46.182Z\",\n        \"id\": 6352,\n        \"isDefault\": false,\n        \"isDynamic\": true,\n        \"isInterpolated\": true,\n        \"name\": \"string\",\n        \"resource\": true,\n        \"value\": \"string\"\n      }\n    ],\n    \"lastUpdated\": \"1998-08-18T17:20:01.222Z\",\n    \"name\": \"string\",\n    \"optimizationId\": \"string\",\n    \"optimizationStatus\": \"OPTIMIZABLE\",\n    \"optimizationTargets\": \"string\",\n    \"orgId\": 8615,\n    \"orgName\": \"string\",\n    \"pipelineId\": 4357,\n    \"repository\": \"string\",\n    \"userFirstName\": \"string\",\n    \"userId\": 4981,\n    \"userLastName\": \"string\",\n    \"userName\": \"string\",\n    \"version\": {\n      \"creatorAvatarUrl\": \"string\",\n      \"creatorFirstName\": \"string\",\n      \"creatorLastName\": \"string\",\n      \"creatorUserId\": 7444,\n      \"creatorUserName\": \"string\",\n      \"dateCreated\": \"2009-01-15T17:25:55.284Z\",\n      \"hash\": \"string\",\n      \"id\": \"string\",\n      \"isDefault\": true,\n      \"lastUpdated\": \"1975-09-02T00:51:58.007Z\",\n      \"name\": \"string\"\n    },\n    \"visibility\": \"string\",\n    \"workspaceId\": 2066,\n    \"workspaceName\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8ebe929-21c6-49d7-95a8-fb137759e609",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"labelIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"version\": {\n    \"name\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "edd7e895-5d0c-4919-acfa-fb51b4aed516",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"labelIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"version\": {\n    \"name\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ea74d6c9-44fa-4e92-806f-6913e0c60ee3",
+              "name": "Duplicate element",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"labelIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\",\n  \"version\": {\n    \"name\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d36d7fe8-ec5e-455a-b403-b70ea8c0d97f",
+          "name": "Describe remote pipeline repository",
+          "request": {
+            "name": "Describe remote pipeline repository",
+            "description": {
+              "content": "Retrieves the details of a remote Nextflow pipeline Git repository. Append the repository name or full URL with `?name`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Pipeline repository name or URL"
+                },
+                {
+                  "disabled": false,
+                  "key": "revision",
+                  "value": "<string>",
+                  "description": "Pipeline revision"
+                },
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "mainScript",
+                  "value": "<string>",
+                  "description": "Pipeline alternative main.nf"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a79e7a06-68b9-430b-8916-3d3a4498ea35",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "mainScript",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pipelineInfo\": {\n    \"cloneUrl\": \"string\",\n    \"commitId\": \"string\",\n    \"configFiles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"manifest\": {\n      \"author\": \"string\",\n      \"defaultBranch\": \"string\",\n      \"description\": \"string\",\n      \"gitmodules\": \"string\",\n      \"homePage\": \"string\",\n      \"icon\": \"string\",\n      \"mainScript\": \"string\",\n      \"name\": \"string\",\n      \"nextflowVersion\": \"string\",\n      \"version\": \"string\"\n    },\n    \"profiles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"projectName\": \"string\",\n    \"provider\": \"string\",\n    \"repositoryUrl\": \"string\",\n    \"revisionName\": \"string\",\n    \"revisions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"simpleName\": \"string\",\n    \"warnings\": [\n      \"string\",\n      \"string\"\n    ],\n    \"workDirs\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31972aff-3922-45ae-82cf-9db27095f7b9",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "mainScript",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e3e65cf-773a-4f1a-a8a8-16c3ba0b69e0",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "revision",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "mainScript",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "def0f8b9-2b6b-4123-8122-5609f6184b28",
+          "name": "List user pipeline repositories",
+          "request": {
+            "name": "List user pipeline repositories",
+            "description": {
+              "content": "Lists known Nextflow pipeline Git repositories, extracted from existing runs. Append `?workspaceId` to list repositories in a workspace context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                "repositories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "591f6e8c-04bb-4a8f-a11f-0825c6316b2a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    "repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pipelines\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0decac9a-1e80-4ccc-a46d-23ea12e779de",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    "repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f14185c-1ef6-4af7-8cd1-d1d4ab2e3be9",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    "repositories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1ba9d80-dab7-4690-b800-5609b64a214d",
+          "name": "Validate pipeline name",
+          "request": {
+            "name": "Validate pipeline name",
+            "description": {
+              "content": "Confirms the validity of the given pipeline `name` in a user context. Append `?name=<your_pipeline_name>`. Append `?workspaceId` to validate the name in a workspace context.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "orgId",
+                  "value": "<long>",
+                  "description": "Organization numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Pipeline name to validate"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "77559aa1-ea4e-473f-afe5-7b06d6d44b96",
+              "name": "OK - No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5e756f4c-32ea-461f-afbc-6604449fb11e",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7ff7c5b-61a6-4dc9-99f0-761ecb82a643",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1d259b69-c651-4f1b-8b04-cf8b672db00e",
+              "name": "Duplicate element",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fcadea30-e2e8-420c-aae4-7e6801b85a29",
+          "name": "Delete pipeline",
+          "request": {
+            "name": "Delete pipeline",
+            "description": {
+              "content": "Deletes the pipeline identified by the given `pipelineId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":pipelineId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "pipelineId",
+                  "description": "(Required) Pipeline numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bff489d0-c5d1-4441-a188-bb585b0466bc",
+              "name": "OK - No content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6d37ab2f-8a68-4b7b-a248-ad41f30ff324",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "467db944-d229-4f30-8f11-3dc25a80c127",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea1f1d74-dfda-4932-8420-e1b9ab1c61a5",
+          "name": "Describe pipeline",
+          "request": {
+            "name": "Describe pipeline",
+            "description": {
+              "content": "Retrieves the details of the pipeline identified by the given `pipelineId`, enriched by `attributes`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":pipelineId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>,<string>",
+                  "description": "Additional attribute values to include in the response (`labels`, `optimized` status, `computeEnv`). Returns an empty value (`labels: null`, etc.) if omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "sourceWorkspaceId",
+                  "value": "<long>",
+                  "description": "Source workspace numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "pipelineId",
+                  "description": "(Required) Pipeline numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c352cd8d-e3dc-4c23-abc8-b6672b6c79d1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "sourceWorkspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pipeline\": {\n    \"computeEnv\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"region\": \"string\"\n    },\n    \"deleted\": true,\n    \"description\": \"string\",\n    \"icon\": \"string\",\n    \"labels\": [\n      {\n        \"dateCreated\": \"2005-01-06T19:20:41.563Z\",\n        \"id\": 7960,\n        \"isDefault\": true,\n        \"isDynamic\": false,\n        \"isInterpolated\": true,\n        \"name\": \"string\",\n        \"resource\": true,\n        \"value\": \"string\"\n      },\n      {\n        \"dateCreated\": \"2026-07-11T01:48:46.182Z\",\n        \"id\": 6352,\n        \"isDefault\": false,\n        \"isDynamic\": true,\n        \"isInterpolated\": true,\n        \"name\": \"string\",\n        \"resource\": true,\n        \"value\": \"string\"\n      }\n    ],\n    \"lastUpdated\": \"1998-08-18T17:20:01.222Z\",\n    \"name\": \"string\",\n    \"optimizationId\": \"string\",\n    \"optimizationStatus\": \"OPTIMIZABLE\",\n    \"optimizationTargets\": \"string\",\n    \"orgId\": 8615,\n    \"orgName\": \"string\",\n    \"pipelineId\": 4357,\n    \"repository\": \"string\",\n    \"userFirstName\": \"string\",\n    \"userId\": 4981,\n    \"userLastName\": \"string\",\n    \"userName\": \"string\",\n    \"version\": {\n      \"creatorAvatarUrl\": \"string\",\n      \"creatorFirstName\": \"string\",\n      \"creatorLastName\": \"string\",\n      \"creatorUserId\": 7444,\n      \"creatorUserName\": \"string\",\n      \"dateCreated\": \"2009-01-15T17:25:55.284Z\",\n      \"hash\": \"string\",\n      \"id\": \"string\",\n      \"isDefault\": true,\n      \"lastUpdated\": \"1975-09-02T00:51:58.007Z\",\n      \"name\": \"string\"\n    },\n    \"visibility\": \"string\",\n    \"workspaceId\": 2066,\n    \"workspaceName\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d27e43d-6692-4844-8823-b405010f9b27",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "sourceWorkspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9760e48-a92e-4c06-8218-4b24bd8da3cf",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "sourceWorkspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5dfe32b1-4da0-4de5-bf25-e942cc835126",
+          "name": "Update pipeline (default version)",
+          "request": {
+            "name": "Update pipeline (default version)",
+            "description": {
+              "content": "Updates the details of the pipeline identified by the given `pipelineId`.\n            **Note**: If `labelIds` is `null`, empty, or omitted, existing pipeline labels are removed.\n            Include `labelIds: [<label-id-1>,<label-id-2>]` to override existing labels. Labels to be preserved must be included.\n            To append a list of labels to multiple pipelines, use `/pipelines/labels/add`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":pipelineId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "pipelineId",
+                  "description": "(Required) Pipeline numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"labelIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2efb6d7e-1161-443d-85f5-07d11b95c3b0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"labelIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pipeline\": {\n    \"computeEnv\": {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"platform\": \"string\",\n      \"region\": \"string\"\n    },\n    \"deleted\": true,\n    \"description\": \"string\",\n    \"icon\": \"string\",\n    \"labels\": [\n      {\n        \"dateCreated\": \"2005-01-06T19:20:41.563Z\",\n        \"id\": 7960,\n        \"isDefault\": true,\n        \"isDynamic\": false,\n        \"isInterpolated\": true,\n        \"name\": \"string\",\n        \"resource\": true,\n        \"value\": \"string\"\n      },\n      {\n        \"dateCreated\": \"2026-07-11T01:48:46.182Z\",\n        \"id\": 6352,\n        \"isDefault\": false,\n        \"isDynamic\": true,\n        \"isInterpolated\": true,\n        \"name\": \"string\",\n        \"resource\": true,\n        \"value\": \"string\"\n      }\n    ],\n    \"lastUpdated\": \"1998-08-18T17:20:01.222Z\",\n    \"name\": \"string\",\n    \"optimizationId\": \"string\",\n    \"optimizationStatus\": \"OPTIMIZABLE\",\n    \"optimizationTargets\": \"string\",\n    \"orgId\": 8615,\n    \"orgName\": \"string\",\n    \"pipelineId\": 4357,\n    \"repository\": \"string\",\n    \"userFirstName\": \"string\",\n    \"userId\": 4981,\n    \"userLastName\": \"string\",\n    \"userName\": \"string\",\n    \"version\": {\n      \"creatorAvatarUrl\": \"string\",\n      \"creatorFirstName\": \"string\",\n      \"creatorLastName\": \"string\",\n      \"creatorUserId\": 7444,\n      \"creatorUserName\": \"string\",\n      \"dateCreated\": \"2009-01-15T17:25:55.284Z\",\n      \"hash\": \"string\",\n      \"id\": \"string\",\n      \"isDefault\": true,\n      \"lastUpdated\": \"1975-09-02T00:51:58.007Z\",\n      \"name\": \"string\"\n    },\n    \"visibility\": \"string\",\n    \"workspaceId\": 2066,\n    \"workspaceName\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb4c94da-02bc-49d6-b1e6-f7635807ae5c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"labelIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b6c8219-479d-4ff9-9160-408ab174782a",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"labelIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9644e96f-dd84-4a69-bfd5-f775971d79ca",
+              "name": "Duplicate element",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"icon\": \"<string>\",\n  \"labelIds\": [\n    \"<long>\",\n    \"<long>\"\n  ],\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnvId\": \"<string>\",\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"labelIds\": [\n      \"<long>\",\n      \"<long>\"\n    ],\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"<string>\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "324141df-ea47-4eef-b763-aa2dcbff25f9",
+          "name": "Describe pipeline launch",
+          "request": {
+            "name": "Describe pipeline launch",
+            "description": {
+              "content": "Retrieves the launch details of the pipeline identified by the given `pipelineId`.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":pipelineId",
+                "launch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "sourceWorkspaceId",
+                  "value": "<long>",
+                  "description": "Source workspace numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "versionId",
+                  "value": "<string>",
+                  "description": "Pipeline version identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "pipelineId",
+                  "description": "(Required) Pipeline numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e13f34ed-0403-4dc1-9377-19f4c9cff22b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId",
+                    "launch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "sourceWorkspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"launch\": {\n    \"commitId\": \"string\",\n    \"computeEnv\": {\n      \"config\": {\n        \"cliPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"computeJobRole\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"computeQueue\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedResources\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dragenInstanceType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dragenQueue\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"executionRole\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"forge\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"forgedResources\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fusion2Enabled\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fusionSnapshots\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headJobCpus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headJobMemoryMb\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headJobRole\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headQueue\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"logGroup\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"lustreId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"nvnmeStorageEnabled\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"storageType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"volumes\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"waveEnabled\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"name\": \"string\",\n      \"platform\": \"azure-cloud\",\n      \"credentialsId\": \"string\",\n      \"dateCreated\": \"1993-03-17T00:51:14.921Z\",\n      \"deleted\": true,\n      \"description\": \"string\",\n      \"fusionMetricsCollectionEnabled\": true,\n      \"id\": \"string\",\n      \"lastUpdated\": \"1993-02-16T12:08:58.158Z\",\n      \"lastUsed\": \"1962-12-14T17:28:03.637Z\",\n      \"message\": \"string\",\n      \"orgId\": 3131,\n      \"primary\": false,\n      \"status\": \"DELETED\",\n      \"workspaceId\": 9903\n    },\n    \"configProfiles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"configText\": \"string\",\n    \"dateCreated\": \"2003-06-07T22:18:22.863Z\",\n    \"entryName\": \"string\",\n    \"headJobCpus\": 1202,\n    \"headJobMemoryMb\": 9135,\n    \"id\": \"string\",\n    \"lastUpdated\": \"1992-03-28T19:07:09.543Z\",\n    \"launchContainer\": \"string\",\n    \"mainScript\": \"string\",\n    \"optimizationId\": \"string\",\n    \"optimizationTargets\": \"string\",\n    \"outputDir\": \"string\",\n    \"paramsText\": \"string\",\n    \"pipeline\": \"string\",\n    \"pipelineSchemaId\": 4717,\n    \"postRunScript\": \"string\",\n    \"preRunScript\": \"string\",\n    \"pullLatest\": true,\n    \"resume\": true,\n    \"resumeLaunchId\": \"string\",\n    \"revision\": \"string\",\n    \"runName\": \"string\",\n    \"schemaName\": \"string\",\n    \"sessionId\": \"string\",\n    \"stubRun\": false,\n    \"syntaxParser\": \"v2\",\n    \"towerConfig\": \"string\",\n    \"userSecrets\": [\n      \"string\",\n      \"string\"\n    ],\n    \"workDir\": \"string\",\n    \"workspaceId\": 560,\n    \"workspaceSecrets\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48243a6e-f08d-4a42-b3b5-dbad460318bc",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId",
+                    "launch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "sourceWorkspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "771c8f18-3b28-4f13-adeb-f86019af5c11",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId",
+                    "launch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "sourceWorkspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e5e2d9e-63e3-45d9-9741-96b8ae83fa48",
+          "name": "Describe pipeline schema",
+          "request": {
+            "name": "Describe pipeline schema",
+            "description": {
+              "content": "Retrieves the pipeline schema of the pipeline identified by the given `pipelineId`, enriched by `attributes`.\n            `200 - OK` responses include the pipeline schema.\n            `204 - OK` responses indicate a successful request, with no saved schema found for the given pipeline ID.\n            ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "pipelines",
+                ":pipelineId",
+                "schema"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "workspaceId",
+                  "value": "<long>",
+                  "description": "Workspace numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "sourceWorkspaceId",
+                  "value": "<long>",
+                  "description": "Source workspace numeric identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "attributes",
+                  "value": "<string>,<string>",
+                  "description": "Additional attribute values to include in the response: `schema` returns the pipeline schema, `params` returns the pipeline config. Returns all if `attributes` is omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "versionId",
+                  "value": "<string>",
+                  "description": "Pipeline version identifier"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "pipelineId",
+                  "description": "(Required) Pipeline numeric identifier"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d9ca5410-9416-49e3-810d-d752c5b5fe08",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "sourceWorkspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schema\": \"string\",\n  \"params\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ee76a1a-b05e-4ed0-92d5-eedbd1b545a9",
+              "name": "Request OK - No schema found for given pipeline ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "sourceWorkspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "667cedc5-33e5-4393-98d5-cc4e2780bbe4",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "sourceWorkspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e27c264-357e-41ac-90c7-916428808a16",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "pipelines",
+                    ":pipelineId",
+                    "schema"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "sourceWorkspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "attributes",
+                      "value": "<string>,<string>"
+                    },
+                    {
+                      "key": "versionId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "pipelineId",
+                      "description": "(Required) Pipeline numeric identifier"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "af4fbfd6-4daa-45af-9822-5e9b2f619afe",
+    "name": "Seqera actions pipelines API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+      "type": "text/plain"
+    }
+  }
+}
