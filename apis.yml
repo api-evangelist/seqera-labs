@@ -38,6 +38,17 @@ tags:
 - Company
 - Bioinformatics
 - Workflow Orchestration
+- Data Pipeline
+- Scientific Computing
+- Nextflow
+- Cloud Compute
+- Life Sciences
+- Containers
+- GA4GH
+tags_raw:
+- Company
+- Bioinformatics
+- Workflow Orchestration
 - Data Pipelines
 - Scientific Computing
 - Nextflow
@@ -52,6 +63,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Actions
+  tags_raw:
   - actions
   properties:
   - type: OpenAPI
@@ -72,6 +85,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Admin
+  tags_raw:
   - admin
   properties:
   - type: OpenAPI
@@ -92,6 +107,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Agents
+  tags_raw:
   - agents
   properties:
   - type: OpenAPI
@@ -112,6 +129,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Avatars
+  tags_raw:
   - avatars
   properties:
   - type: OpenAPI
@@ -152,6 +171,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Credentials
+  tags_raw:
   - credentials
   properties:
   - type: OpenAPI
@@ -172,6 +193,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Data links
+  tags_raw:
   - data-links
   properties:
   - type: OpenAPI
@@ -192,6 +215,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Datasets
+  tags_raw:
   - datasets
   properties:
   - type: OpenAPI
@@ -212,6 +237,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - GA4GH
+  tags_raw:
   - ga4gh
   properties:
   - type: OpenAPI
@@ -232,6 +259,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Identities
+  tags_raw:
   - identities
   properties:
   - type: OpenAPI
@@ -252,6 +281,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Labels
+  tags_raw:
   - labels
   properties:
   - type: OpenAPI
@@ -272,6 +303,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Launch
+  tags_raw:
   - launch
   properties:
   - type: OpenAPI
@@ -292,6 +325,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Organization
+  tags_raw:
   - orgs
   properties:
   - type: OpenAPI
@@ -352,6 +387,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - PipelineVersions
+  tags_raw:
   - pipeline-versions
   properties:
   - type: OpenAPI
@@ -372,6 +409,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Pipelines
+  tags_raw:
   - pipelines
   properties:
   - type: OpenAPI
@@ -392,6 +431,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Platforms
+  tags_raw:
   - platforms
   properties:
   - type: OpenAPI
@@ -412,6 +453,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Roles
+  tags_raw:
   - roles
   properties:
   - type: OpenAPI
@@ -452,6 +495,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - SSH Keys
+  tags_raw:
   - ssh-keys
   properties:
   - type: OpenAPI
@@ -472,6 +517,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Studios
+  tags_raw:
   - studios
   properties:
   - type: OpenAPI
@@ -492,6 +539,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Team
+  tags_raw:
   - teams
   properties:
   - type: OpenAPI
@@ -512,6 +561,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Tokens
+  tags_raw:
   - tokens
   properties:
   - type: OpenAPI
@@ -532,6 +583,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Trace
+  tags_raw:
   - trace
   properties:
   - type: OpenAPI
@@ -552,6 +605,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
@@ -572,6 +627,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Workflows
+  tags_raw:
   - workflows
   properties:
   - type: OpenAPI
@@ -592,6 +649,8 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
+  - Workspaces
+  tags_raw:
   - workspaces
   properties:
   - type: OpenAPI
