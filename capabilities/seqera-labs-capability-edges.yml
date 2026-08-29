@@ -1,0 +1,54 @@
+slug: seqera-labs
+provider: Seqera Labs
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Pharmaceuticals & Life Sciences
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: roles
+  spec_file: seqera-labs-roles-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.82
+  evidence: GET /roles/permissions ListRolePermissions 'List all role permissions available in the system';
+    CreateRole, UpdateRole, DescribeRole 'Describe role and its permissions'
+  reason: Full CRUD over roles and their permissions within an organization — authorisation/role administration,
+    i.e. identity and access management.
+- tag: compute-envs
+  spec_file: seqera-labs-compute-envs-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: POST /compute-envs  CreateComputeEnv  Create compute environment; schemas AwsBatchConfig,
+    AzBatchConfig, GkeComputeConfig, SlurmComputeConfig
+  reason: Operations provision, validate and manage cloud/HPC compute environments (AWS Batch, Azure Batch,
+    GKE, Slurm), which is management of compute infrastructure. Mapped to IT Infrastructure Management;
+    some overlap with environment provisioning for workloads keeps confidence below 0.8.
+- tag: ssh-keys
+  spec_file: seqera-labs-ssh-keys-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /ssh-keys CreateSshKey; GET /ssh-keys/validate/key ValidateSshKey; schema UserSshPublicKeyDto
+  reason: Lifecycle of user SSH public-key credentials used to authenticate access to compute resources
+    — credential/access management.
+- tag: tokens
+  spec_file: seqera-labs-tokens-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.7
+  evidence: POST /tokens CreateToken; DELETE /tokens/delete-all 'Delete all user tokens'; schemas AccessToken,
+    CreateAccessTokenRequest
+  reason: Issuance and revocation of API access tokens for users — authentication credential management.
