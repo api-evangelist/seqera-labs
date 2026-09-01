@@ -141,7 +141,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - avatars
+  - Avatars
   tags_raw:
   - avatars
   properties:
@@ -183,7 +183,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - credentials
+  - Credentials
   tags_raw:
   - credentials
   properties:
@@ -205,7 +205,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - data-links
+  - Data links
   tags_raw:
   - data-links
   properties:
@@ -249,7 +249,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - ga4gh
+  - GA4GH
   tags_raw:
   - ga4gh
   properties:
@@ -337,7 +337,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - orgs
+  - Organization
   tags_raw:
   - orgs
   properties:
@@ -399,7 +399,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - pipeline-versions
+  - PipelineVersions
   tags_raw:
   - pipeline-versions
   properties:
@@ -507,7 +507,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - ssh-keys
+  - SSH Keys
   tags_raw:
   - ssh-keys
   properties:
@@ -529,7 +529,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - studios
+  - Studios
   tags_raw:
   - studios
   properties:
@@ -595,7 +595,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - trace
+  - Trace
   tags_raw:
   - trace
   properties:
