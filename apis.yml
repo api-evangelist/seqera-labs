@@ -679,6 +679,8 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 common:
+- type: Website
+  url: https://www.seqera.io/
 - type: CapabilityMap
   url: capabilities/seqera-labs-capability-edges.yml
   name: Seqera Labs Business Capability Map
