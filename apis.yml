@@ -316,7 +316,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - Launch
+  - Launches
   tags_raw:
   - launch
   properties:
@@ -444,7 +444,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - Platforms
+  - Platform
   tags_raw:
   - platforms
   properties:
@@ -530,7 +530,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - Studios
+  - Studio
   tags_raw:
   - studios
   properties:
@@ -662,7 +662,7 @@ apis:
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
   tags:
-  - Workspaces
+  - Workspace
   tags_raw:
   - workspaces
   properties:
