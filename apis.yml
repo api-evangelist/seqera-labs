@@ -679,6 +679,8 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 common:
+- type: Plans
+  url: plans/seqera-labs-plans-pricing.yml
 - type: Website
   url: https://www.seqera.io/
 - type: CapabilityMap
