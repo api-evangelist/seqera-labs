@@ -11,6 +11,11 @@ provenance:
   grounding: every price_text was found verbatim in the fetched page text
 audience: business-product
 pricing_basis: usage-other
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-09-20'
+  evidence: Enterprise For teams with strict IT and security requirements.
 published: true
 note: Plan tiers are quote-based; page publishes usage-based resource rates (CPU/memory/storage). Academic
   Program offers free expanded access.
