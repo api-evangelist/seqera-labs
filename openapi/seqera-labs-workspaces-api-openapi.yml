@@ -1,14 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions workspaces API
+  title: Seqera Workspaces API
   version: 1.181.0
 tags:
 - description: Workspaces in an organization context
-  name: workspaces
+  name: Workspaces
 paths:
   /orgs/{orgId}/workspaces:
     get:
@@ -41,7 +41,7 @@ paths:
       - BearerAuth: []
       summary: List organization workspaces
       tags:
-      - workspaces
+      - Workspaces
     post:
       description: Creates a new organization workspace.
       operationId: CreateWorkspace
@@ -85,10 +85,10 @@ paths:
       - BearerAuth: []
       summary: Create workspace
       tags:
-      - workspaces
+      - Workspaces
   /orgs/{orgId}/workspaces/validate:
     get:
-      description: Confirms the validity of the given workspace name. Append `?name=<your_workspace_name>`.
+      description: Confirms the validity of the given workspace name. Append `?name=`.
       operationId: ValidateWorkspaceName
       parameters:
       - description: Organization numeric identifier
@@ -124,7 +124,7 @@ paths:
       - BearerAuth: []
       summary: Validate workspace name
       tags:
-      - workspaces
+      - Workspaces
   /orgs/{orgId}/workspaces/{workspaceId}:
     delete:
       description: Deletes the workspace identified by the given `workspaceId`.
@@ -159,7 +159,7 @@ paths:
       - BearerAuth: []
       summary: Delete workspace
       tags:
-      - workspaces
+      - Workspaces
     get:
       description: Retrieves the details of the workspace identified by the given `workspaceId`.
       operationId: DescribeWorkspace
@@ -197,7 +197,7 @@ paths:
       - BearerAuth: []
       summary: Describe workspace
       tags:
-      - workspaces
+      - Workspaces
     put:
       description: Updates the details of the workspace identified by the given `workspaceId`.
       operationId: UpdateWorkspace
@@ -248,7 +248,7 @@ paths:
       - BearerAuth: []
       summary: Update workspace
       tags:
-      - workspaces
+      - Workspaces
   /orgs/{orgId}/workspaces/{workspaceId}/participants:
     delete:
       description: Removes the requesting user from the given workspace.
@@ -283,7 +283,7 @@ paths:
       - BearerAuth: []
       summary: Leave workspace
       tags:
-      - workspaces
+      - Workspaces
     get:
       description: Lists the participants of the workspace identified by the given `workspaceId`.
       operationId: ListWorkspaceParticipants
@@ -338,7 +338,7 @@ paths:
       - BearerAuth: []
       summary: List workspace participants
       tags:
-      - workspaces
+      - Workspaces
   /orgs/{orgId}/workspaces/{workspaceId}/participants/add:
     put:
       description: Adds a new participant to the workspace identified by the given `workspaceId`.
@@ -390,7 +390,7 @@ paths:
       - BearerAuth: []
       summary: Create workspace participant
       tags:
-      - workspaces
+      - Workspaces
   /orgs/{orgId}/workspaces/{workspaceId}/participants/{participantId}:
     delete:
       description: Deletes the given participant from the given workspace.
@@ -432,7 +432,7 @@ paths:
       - BearerAuth: []
       summary: Delete workspace participant
       tags:
-      - workspaces
+      - Workspaces
   /orgs/{orgId}/workspaces/{workspaceId}/participants/{participantId}/role:
     put:
       description: Updates the role of the given participant in the given workspace.
@@ -481,7 +481,7 @@ paths:
       - BearerAuth: []
       summary: Update participant role
       tags:
-      - workspaces
+      - Workspaces
   /orgs/{orgId}/workspaces/{workspaceId}/settings/studios:
     get:
       description: Retrieves the Studios settings of the workspace identified by the given `workspaceId`.
@@ -532,7 +532,7 @@ paths:
       - BearerAuth: []
       summary: List workspace Studios settings
       tags:
-      - workspaces
+      - Workspaces
     put:
       description: Updates the Studios settings of the workspace identified by the given `workspaceId`.
       operationId: UpdateDataStudiosWorkspaceSettings
@@ -579,7 +579,7 @@ paths:
       - BearerAuth: []
       summary: Update workspace Studios settings
       tags:
-      - workspaces
+      - Workspaces
   /orgs/{orgId}/workspaces/{workspaceId}/users/{userId}:
     delete:
       description: Deletes the given user (member or collaborator) from the given workspace.
@@ -621,7 +621,7 @@ paths:
       - BearerAuth: []
       summary: Delete workspace user
       tags:
-      - workspaces
+      - Workspaces
   /user/{userId}/workspaces:
     get:
       description: Lists the workspaces and organizations to which the user identified by the given `userId` belongs.
@@ -653,9 +653,27 @@ paths:
       - BearerAuth: []
       summary: List user workspaces and organizations
       tags:
-      - workspaces
+      - Workspaces
 components:
   schemas:
+    Visibility:
+      enum:
+      - PRIVATE
+      - SHARED
+      type: string
+    ParticipantType:
+      enum:
+      - MEMBER
+      - TEAM
+      - COLLABORATOR
+      type: string
+    ListWorkspacesResponse:
+      properties:
+        workspaces:
+          items:
+            $ref: '#/components/schemas/WorkspaceDbDto'
+          type: array
+      type: object
     OrgAndWorkspaceDto:
       properties:
         orgId:
@@ -681,51 +699,90 @@ components:
         workspaceName:
           type: string
       type: object
+    ListWorkspacesAndOrgResponse:
+      properties:
+        orgsAndWorkspaces:
+          items:
+            $ref: '#/components/schemas/OrgAndWorkspaceDto'
+          type: array
+      type: object
+    OrgType:
+      enum:
+      - academic
+      - evaluating
+      - pro
+      - basic
+      - internal
+      type: string
+      x-enum-varnames:
+      - academic
+      - evaluating
+      - pro
+      - basic
+      - internal
+    AddParticipantResponse:
+      properties:
+        participant:
+          $ref: '#/components/schemas/ParticipantResponseDto'
+      type: object
+    WorkspaceDbDto:
+      properties:
+        description:
+          type: string
+        fullName:
+          type: string
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+      type: object
+    UpdateWorkspaceRequest:
+      properties:
+        description:
+          type: string
+        fullName:
+          type: string
+        name:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+      type: object
+    DescribeWorkspaceResponse:
+      properties:
+        workspace:
+          $ref: '#/components/schemas/Workspace'
+      type: object
     CreateWorkspaceResponse:
       properties:
         workspace:
           $ref: '#/components/schemas/Workspace'
       type: object
-    Workspace:
+    ListParticipantsResponse:
       properties:
-        dateCreated:
-          format: date-time
-          type: string
-        description:
-          maxLength: 1000
-          type: string
-        fullName:
-          maxLength: 100
-          type: string
-        id:
+        participants:
+          items:
+            $ref: '#/components/schemas/ParticipantResponseDto'
+          type: array
+        totalSize:
           format: int64
-          nullable: true
           type: integer
-        lastUpdated:
-          format: date-time
-          type: string
-        name:
-          maxLength: 40
-          pattern: ^[a-zA-Z\d](?:[a-zA-Z\d]|[-_](?=[a-zA-Z\d])){1,38}$
-          type: string
-        visibility:
-          $ref: '#/components/schemas/Visibility'
-      required:
-      - fullName
-      - name
-      - visibility
       type: object
     DataStudioWorkspaceSettingsResponse:
       properties:
         containerRepository:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         lifespanHours:
           format: int32
           type: integer
         nameStrategy:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         orgId:
           format: int64
           type: integer
@@ -767,41 +824,6 @@ components:
         wspRole:
           type: string
       type: object
-    AddParticipantResponse:
-      properties:
-        participant:
-          $ref: '#/components/schemas/ParticipantResponseDto'
-      type: object
-    ListWorkspacesResponse:
-      properties:
-        workspaces:
-          items:
-            $ref: '#/components/schemas/WorkspaceDbDto'
-          type: array
-      type: object
-    UpdateParticipantRoleRequest:
-      properties:
-        role:
-          type: string
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    ParticipantType:
-      enum:
-      - MEMBER
-      - TEAM
-      - COLLABORATOR
-      type: string
-    Visibility:
-      enum:
-      - PRIVATE
-      - SHARED
-      type: string
     OrgRole:
       enum:
       - owner
@@ -812,15 +834,76 @@ components:
       - owner
       - member
       - collaborator
-    ListParticipantsResponse:
+    CreateWorkspaceRequest:
       properties:
-        participants:
-          items:
-            $ref: '#/components/schemas/ParticipantResponseDto'
-          type: array
-        totalSize:
+        workspace:
+          $ref: '#/components/schemas/Workspace'
+      type: object
+    Workspace:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        description:
+          maxLength: 1000
+          type: string
+        fullName:
+          maxLength: 100
+          type: string
+        id:
           format: int64
+          type:
+          - integer
+          - 'null'
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
+          maxLength: 40
+          pattern: ^[a-zA-Z\d](?:[a-zA-Z\d]|[-_](?=[a-zA-Z\d])){1,38}$
+          type: string
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+      required:
+      - fullName
+      - name
+      - visibility
+      type: object
+    UpdateParticipantRoleRequest:
+      properties:
+        role:
+          type: string
+      type: object
+    DataStudioWorkspaceSettingsRequest:
+      properties:
+        containerRepository:
+          description: Container repository where Wave pushes images built for Studios in this workspace (e.g. 'cr.seqera.io/my-org/studios'). When null, the platform default is used.
+          type:
+          - string
+          - 'null'
+        lifespanHours:
+          description: Maximum number of hours a Studio session may run before it is automatically stopped. Use 0 for unlimited lifespan.
+          format: int32
           type: integer
+        nameStrategy:
+          description: Wave image naming strategy applied to container images built for Studios in this workspace. When null, the platform default strategy is used.
+          enum:
+          - none
+          - tagPrefix
+          - imageSuffix
+          type:
+          - string
+          - 'null'
+        privateStudioByDefault:
+          description: When true, newly created Studio sessions are private by default and only accessible to their creator.
+          type: boolean
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
       type: object
     AddParticipantRequest:
       properties:
@@ -832,84 +915,6 @@ components:
           type: integer
         userNameOrEmail:
           type: string
-      type: object
-    ListWorkspacesAndOrgResponse:
-      properties:
-        orgsAndWorkspaces:
-          items:
-            $ref: '#/components/schemas/OrgAndWorkspaceDto'
-          type: array
-      type: object
-    CreateWorkspaceRequest:
-      properties:
-        workspace:
-          $ref: '#/components/schemas/Workspace'
-      type: object
-    OrgType:
-      enum:
-      - academic
-      - evaluating
-      - pro
-      - basic
-      - internal
-      type: string
-      x-enum-varnames:
-      - academic
-      - evaluating
-      - pro
-      - basic
-      - internal
-    DescribeWorkspaceResponse:
-      properties:
-        workspace:
-          $ref: '#/components/schemas/Workspace'
-      type: object
-    WorkspaceDbDto:
-      properties:
-        description:
-          type: string
-        fullName:
-          type: string
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-        visibility:
-          $ref: '#/components/schemas/Visibility'
-      type: object
-    DataStudioWorkspaceSettingsRequest:
-      properties:
-        containerRepository:
-          description: Container repository where Wave pushes images built for Studios in this workspace (e.g. 'cr.seqera.io/my-org/studios'). When null, the platform default is used.
-          nullable: true
-          type: string
-        lifespanHours:
-          description: Maximum number of hours a Studio session may run before it is automatically stopped. Use 0 for unlimited lifespan.
-          format: int32
-          type: integer
-        nameStrategy:
-          description: Wave image naming strategy applied to container images built for Studios in this workspace. When null, the platform default strategy is used.
-          enum:
-          - none
-          - tagPrefix
-          - imageSuffix
-          nullable: true
-          type: string
-        privateStudioByDefault:
-          description: When true, newly created Studio sessions are private by default and only accessible to their creator.
-          type: boolean
-      type: object
-    UpdateWorkspaceRequest:
-      properties:
-        description:
-          type: string
-        fullName:
-          type: string
-        name:
-          type: string
-        visibility:
-          $ref: '#/components/schemas/Visibility'
       type: object
   securitySchemes:
     BearerAuth:

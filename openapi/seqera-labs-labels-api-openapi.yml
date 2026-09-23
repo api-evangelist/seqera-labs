@@ -1,14 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions labels API
+  title: Seqera Labels API
   version: 1.181.0
 tags:
 - description: Labels and resource labels
-  name: labels
+  name: Labels
 paths:
   /actions/labels/add:
     post:
@@ -37,7 +37,7 @@ paths:
       - BearerAuth: []
       summary: Add labels to actions
       tags:
-      - labels
+      - Labels
   /actions/labels/apply:
     post:
       description: Applies the given list of labels to the given pipeline actions. Existing labels are replaced — include labels to be preserved in `labelIds`.
@@ -65,7 +65,7 @@ paths:
       - BearerAuth: []
       summary: Replace action labels
       tags:
-      - labels
+      - Labels
   /actions/labels/remove:
     post:
       description: Removes the given list of labels from the given pipeline actions.
@@ -93,7 +93,7 @@ paths:
       - BearerAuth: []
       summary: Remove labels from actions
       tags:
-      - labels
+      - Labels
   /datasets/labels/add:
     post:
       description: Adds the given list of labels to the given datasets. Existing labels are preserved.
@@ -121,7 +121,7 @@ paths:
       - BearerAuth: []
       summary: Add labels to datasets
       tags:
-      - labels
+      - Labels
   /datasets/labels/apply:
     post:
       description: Applies the given list of labels to the given datasets. Existing labels are replaced - include labels to be preserved in `labelIds`. Only simple labels can be attached to datasets
@@ -151,7 +151,7 @@ paths:
       - BearerAuth: []
       summary: Replace datasets labels
       tags:
-      - labels
+      - Labels
   /datasets/labels/remove:
     post:
       description: Removes the given list of labels from the given datasets.
@@ -179,7 +179,7 @@ paths:
       - BearerAuth: []
       summary: Remove labels from datasets
       tags:
-      - labels
+      - Labels
   /labels:
     get:
       description: Lists all available labels in a user context. Append `?workspaceId` to list labels in a workspace context.
@@ -237,7 +237,7 @@ paths:
       - BearerAuth: []
       summary: List labels
       tags:
-      - labels
+      - Labels
     post:
       description: 'Creates a new label or returns an existing label based on name/value. By default the operation works in a user context, append `?workspaceId` to create/retrieve a label in a workspace context. Resource labels include `resource: true` and a `value`.'
       operationId: CreateLabel
@@ -274,7 +274,7 @@ paths:
       - BearerAuth: []
       summary: Create label
       tags:
-      - labels
+      - Labels
   /labels/dynamic/allowed:
     get:
       operationId: GetAllowedDynamicLabels
@@ -294,7 +294,9 @@ paths:
       security:
       - BearerAuth: []
       tags:
-      - labels
+      - Labels
+      summary: Get allowed dynamic labels
+      x-summary-source: derived
   /labels/{labelId}:
     delete:
       description: Deletes the label identified by the given `labelId`.
@@ -328,7 +330,7 @@ paths:
       - BearerAuth: []
       summary: Delete label
       tags:
-      - labels
+      - Labels
     put:
       description: Updates the label identified by the given `labelId`.
       operationId: UpdateLabel
@@ -372,7 +374,7 @@ paths:
       - BearerAuth: []
       summary: Update label
       tags:
-      - labels
+      - Labels
   /pipelines/labels/add:
     post:
       description: Adds the given list of labels to the given pipelines. Existing labels are preserved.
@@ -400,7 +402,7 @@ paths:
       - BearerAuth: []
       summary: Add labels to pipelines
       tags:
-      - labels
+      - Labels
   /pipelines/labels/apply:
     post:
       description: Applies the given list of labels to the given pipelines. Existing labels are replaced — include labels to be preserved in `labelIds`.
@@ -428,7 +430,7 @@ paths:
       - BearerAuth: []
       summary: Replace pipeline labels
       tags:
-      - labels
+      - Labels
   /pipelines/labels/remove:
     post:
       description: Removes the given list of labels from the given pipelines.
@@ -456,7 +458,7 @@ paths:
       - BearerAuth: []
       summary: Remove labels from pipelines
       tags:
-      - labels
+      - Labels
   /workflow/labels/add:
     post:
       description: Adds the given list of labels to the given workflows. Existing labels are preserved.
@@ -484,7 +486,7 @@ paths:
       - BearerAuth: []
       summary: Add labels to workflows
       tags:
-      - labels
+      - Labels
   /workflow/labels/apply:
     post:
       description: Applies the given list of labels to the given workflows. Existing labels are replaced — include labels to be preserved in `labelIds`.
@@ -512,7 +514,7 @@ paths:
       - BearerAuth: []
       summary: Replace workflow labels
       tags:
-      - labels
+      - Labels
   /workflow/labels/remove:
     post:
       description: Removes the given list of labels from the given workflows.
@@ -540,79 +542,9 @@ paths:
       - BearerAuth: []
       summary: Remove labels from workflows
       tags:
-      - labels
+      - Labels
 components:
   schemas:
-    CreateLabelRequest:
-      properties:
-        isDefault:
-          type: boolean
-        name:
-          type: string
-        resource:
-          type: boolean
-        value:
-          type: string
-      type: object
-    AssociateWorkflowLabelsRequest:
-      properties:
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-        workflowIds:
-          items:
-            type: string
-          type: array
-      type: object
-    LabelType:
-      enum:
-      - simple
-      - resource
-      - all
-      type: string
-      x-enum-varnames:
-      - simple
-      - resource
-      - all
-    AssociatePipelineLabelsRequest:
-      properties:
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-        pipelineIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-      type: object
-    AssociateDatasetsLabelsRequest:
-      properties:
-        datasetIds:
-          items:
-            type: string
-          type: array
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-      type: object
-    AssociateActionLabelsRequest:
-      properties:
-        actionIds:
-          items:
-            type: string
-          type: array
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-      type: object
     UpdateLabelResponse:
       properties:
         id:
@@ -634,43 +566,17 @@ components:
         value:
           type: string
       type: object
-    AllowedDynamicLabelsResponse:
+    AssociateWorkflowLabelsRequest:
       properties:
-        values:
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        workflowIds:
           items:
             type: string
           type: array
-      type: object
-    ListLabelsResponse:
-      properties:
-        labels:
-          items:
-            $ref: '#/components/schemas/LabelDbDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    CreateLabelResponse:
-      properties:
-        id:
-          format: int64
-          type: integer
-        isDefault:
-          type: boolean
-        name:
-          type: string
-        resource:
-          type: boolean
-        value:
-          type: string
       type: object
     LabelDbDto:
       properties:
@@ -692,6 +598,102 @@ components:
           type: boolean
         value:
           type: string
+      type: object
+    CreateLabelRequest:
+      properties:
+        isDefault:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    AssociateActionLabelsRequest:
+      properties:
+        actionIds:
+          items:
+            type: string
+          type: array
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
+    CreateLabelResponse:
+      properties:
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    AllowedDynamicLabelsResponse:
+      properties:
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    ListLabelsResponse:
+      properties:
+        labels:
+          items:
+            $ref: '#/components/schemas/LabelDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    LabelType:
+      enum:
+      - simple
+      - resource
+      - all
+      type: string
+      x-enum-varnames:
+      - simple
+      - resource
+      - all
+    AssociateDatasetsLabelsRequest:
+      properties:
+        datasetIds:
+          items:
+            type: string
+          type: array
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
+    AssociatePipelineLabelsRequest:
+      properties:
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        pipelineIds:
+          items:
+            format: int64
+            type: integer
+          type: array
       type: object
   securitySchemes:
     BearerAuth:

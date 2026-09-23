@@ -1,13 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions agents API
+  title: Seqera Agents API
   version: 1.181.0
 tags:
-- name: agents
+- name: Agents
 paths:
   /agents:
     get:
@@ -56,7 +56,7 @@ paths:
       - BearerAuth: []
       summary: List agents
       tags:
-      - agents
+      - Agents
     post:
       description: Creates an agent in a workspace.
       operationId: CreateAgent
@@ -99,7 +99,7 @@ paths:
       - BearerAuth: []
       summary: Create agent
       tags:
-      - agents
+      - Agents
   /agents/{agentId}:
     delete:
       description: Tombstones an agent in a workspace.
@@ -132,7 +132,7 @@ paths:
       - BearerAuth: []
       summary: Delete agent
       tags:
-      - agents
+      - Agents
     get:
       description: Retrieves an agent in a workspace.
       operationId: DescribeAgent
@@ -174,7 +174,7 @@ paths:
       - BearerAuth: []
       summary: Describe agent
       tags:
-      - agents
+      - Agents
     put:
       description: Updates an agent in a workspace.
       operationId: UpdateAgent
@@ -229,7 +229,7 @@ paths:
       - BearerAuth: []
       summary: Update agent
       tags:
-      - agents
+      - Agents
   /agents/{agentId}/disable:
     post:
       description: Marks an active agent as inactive.
@@ -272,7 +272,7 @@ paths:
       - BearerAuth: []
       summary: Disable agent
       tags:
-      - agents
+      - Agents
   /agents/{agentId}/enable:
     post:
       description: Marks an inactive agent as active.
@@ -315,60 +315,35 @@ paths:
       - BearerAuth: []
       summary: Enable agent
       tags:
-      - agents
+      - Agents
 components:
   schemas:
-    Agent.Status:
-      enum:
-      - active
-      - inactive
-      - deleted
-      type: string
-      x-enum-varnames:
-      - active
-      - inactive
-      - deleted
-    CreateAgentResponse:
+    UpdateAgentRequest:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        systemPrompt:
+          type: string
+        templateId:
+          type:
+          - string
+          - 'null'
+      type: object
+    DescribeAgentResponse:
       properties:
         agent:
           $ref: '#/components/schemas/AgentDbDto'
-      type: object
-    ListAgentsResponse:
-      properties:
-        agents:
-          items:
-            $ref: '#/components/schemas/AgentDbDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
       type: object
     UpdateAgentResponse:
       properties:
         agent:
           $ref: '#/components/schemas/AgentDbDto'
       type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    CreateAgentRequest:
-      properties:
-        description:
-          nullable: true
-          type: string
-        name:
-          type: string
-        systemPrompt:
-          type: string
-        templateId:
-          nullable: true
-          type: string
-      type: object
-    DescribeAgentResponse:
+    CreateAgentResponse:
       properties:
         agent:
           $ref: '#/components/schemas/AgentDbDto'
@@ -382,8 +357,9 @@ components:
           format: date-time
           type: string
         description:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         id:
           type: string
         lastUpdated:
@@ -396,8 +372,9 @@ components:
         systemPrompt:
           type: string
         templateId:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         updatedBy:
           format: int64
           type: integer
@@ -405,19 +382,48 @@ components:
           format: int64
           type: integer
       type: object
-    UpdateAgentRequest:
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    CreateAgentRequest:
       properties:
         description:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         name:
           type: string
         systemPrompt:
           type: string
         templateId:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       type: object
+    ListAgentsResponse:
+      properties:
+        agents:
+          items:
+            $ref: '#/components/schemas/AgentDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    Agent.Status:
+      enum:
+      - active
+      - inactive
+      - deleted
+      type: string
+      x-enum-varnames:
+      - active
+      - inactive
+      - deleted
   securitySchemes:
     BearerAuth:
       bearerFormat: jwt

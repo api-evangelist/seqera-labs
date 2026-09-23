@@ -1,14 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions teams API
+  title: Seqera Teams API
   version: 1.181.0
 tags:
 - description: Teams in an organization context
-  name: teams
+  name: Teams
 paths:
   /orgs/{orgId}/teams:
     get:
@@ -58,7 +58,7 @@ paths:
       - BearerAuth: []
       summary: List organization teams
       tags:
-      - teams
+      - Teams
     post:
       description: Creates a new team in the organization identified by the given `orgId`.
       operationId: CreateOrganizationTeam
@@ -102,10 +102,10 @@ paths:
       - BearerAuth: []
       summary: Create team
       tags:
-      - teams
+      - Teams
   /orgs/{orgId}/teams/validate:
     get:
-      description: Confirms the validity of the given team name. Append `?name=<your_team_name>`.
+      description: Confirms the validity of the given team name. Append `?name=`.
       operationId: ValidateTeamName
       parameters:
       - description: Organization numeric identifier
@@ -135,7 +135,7 @@ paths:
       - BearerAuth: []
       summary: Validate team name
       tags:
-      - teams
+      - Teams
   /orgs/{orgId}/teams/{teamId}:
     delete:
       description: Deletes the team identified by the given `teamId`.
@@ -170,7 +170,7 @@ paths:
       - BearerAuth: []
       summary: Delete team
       tags:
-      - teams
+      - Teams
     get:
       description: Retrieves the details of the team identified by the given `teamId`.
       operationId: DescribeOrganizationTeam
@@ -208,7 +208,7 @@ paths:
       - BearerAuth: []
       summary: Describe team
       tags:
-      - teams
+      - Teams
     put:
       description: Updates the details of the team identified by the given `teamId`.
       operationId: UpdateOrganizationTeam
@@ -257,7 +257,7 @@ paths:
       - BearerAuth: []
       summary: Update team
       tags:
-      - teams
+      - Teams
   /orgs/{orgId}/teams/{teamId}/members:
     get:
       description: Lists the team members associated with the given `teamId`.
@@ -293,8 +293,9 @@ paths:
         in: query
         name: search
         schema:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       responses:
         '200':
           content:
@@ -314,7 +315,7 @@ paths:
       - BearerAuth: []
       summary: List team members
       tags:
-      - teams
+      - Teams
     post:
       description: Adds a new member to the team identified by the given `teamId`.
       operationId: CreateOrganizationTeamMember
@@ -359,7 +360,7 @@ paths:
       - BearerAuth: []
       summary: Create team member
       tags:
-      - teams
+      - Teams
   /orgs/{orgId}/teams/{teamId}/members/{memberId}/delete:
     delete:
       description: Deletes the team member identified by the given `memberId`.
@@ -401,7 +402,7 @@ paths:
       - BearerAuth: []
       summary: Delete team member
       tags:
-      - teams
+      - Teams
   /orgs/{orgId}/teams/{teamId}/workspaces:
     get:
       description: Lists all the workspaces of which the given `teamId` is a participant.
@@ -463,19 +464,9 @@ paths:
       - BearerAuth: []
       summary: List team workspaces
       tags:
-      - teams
+      - Teams
 components:
   schemas:
-    OrgRole:
-      enum:
-      - owner
-      - member
-      - collaborator
-      type: string
-      x-enum-varnames:
-      - owner
-      - member
-      - collaborator
     CreateTeamResponse:
       properties:
         team:
@@ -489,11 +480,13 @@ components:
           type: string
         idpGroupId:
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         idpGroupName:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         membersCount:
           format: int64
           type: integer
@@ -508,10 +501,15 @@ components:
         userNameOrEmail:
           type: string
       type: object
-    AddTeamMemberResponse:
+    ListWorkspacesByTeamResponse:
       properties:
-        member:
-          $ref: '#/components/schemas/MemberDbDto'
+        totalSize:
+          format: int64
+          type: integer
+        workspaces:
+          items:
+            $ref: '#/components/schemas/WorkspaceParticipantResponseDto'
+          type: array
       type: object
     WorkspaceParticipantResponseDto:
       properties:
@@ -541,48 +539,11 @@ components:
           type: string
         idpGroupId:
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         name:
           type: string
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    CreateTeamRequest:
-      properties:
-        avatarId:
-          type: string
-        idpGroupId:
-          format: int64
-          nullable: true
-          type: integer
-        team:
-          $ref: '#/components/schemas/Team'
-      type: object
-    ListWorkspacesByTeamResponse:
-      properties:
-        totalSize:
-          format: int64
-          type: integer
-        workspaces:
-          items:
-            $ref: '#/components/schemas/WorkspaceParticipantResponseDto'
-          type: array
-      type: object
-    ListTeamResponse:
-      properties:
-        teams:
-          items:
-            $ref: '#/components/schemas/TeamDbDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
       type: object
     Team:
       properties:
@@ -595,9 +556,10 @@ components:
           type: string
         id:
           format: int64
-          nullable: true
           readOnly: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         lastUpdated:
           format: date-time
           readOnly: true
@@ -608,6 +570,40 @@ components:
           type: string
       required:
       - name
+      type: object
+    CreateTeamRequest:
+      properties:
+        avatarId:
+          type: string
+        idpGroupId:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        team:
+          $ref: '#/components/schemas/Team'
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    OrgRole:
+      enum:
+      - owner
+      - member
+      - collaborator
+      type: string
+      x-enum-varnames:
+      - owner
+      - member
+      - collaborator
+    AddTeamMemberResponse:
+      properties:
+        member:
+          $ref: '#/components/schemas/MemberDbDto'
       type: object
     MemberDbDto:
       properties:
@@ -630,6 +626,11 @@ components:
         userName:
           type: string
       type: object
+    DescribeTeamResponse:
+      properties:
+        team:
+          $ref: '#/components/schemas/TeamDbDto'
+      type: object
     ListMembersResponse:
       properties:
         members:
@@ -640,10 +641,15 @@ components:
           format: int64
           type: integer
       type: object
-    DescribeTeamResponse:
+    ListTeamResponse:
       properties:
-        team:
-          $ref: '#/components/schemas/TeamDbDto'
+        teams:
+          items:
+            $ref: '#/components/schemas/TeamDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
       type: object
   securitySchemes:
     BearerAuth:

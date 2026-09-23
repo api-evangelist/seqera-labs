@@ -1,14 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions orgs API
+  title: Seqera Orgs API
   version: 1.181.0
 tags:
 - description: Organizations
-  name: orgs
+  name: Orgs
 paths:
   /orgs:
     get:
@@ -39,7 +39,7 @@ paths:
       - BearerAuth: []
       summary: List organizations
       tags:
-      - orgs
+      - Orgs
     post:
       description: Creates a new organization.
       operationId: CreateOrganization
@@ -75,10 +75,10 @@ paths:
       - BearerAuth: []
       summary: Create organization
       tags:
-      - orgs
+      - Orgs
   /orgs/validate:
     get:
-      description: Confirms the validity of the given organization name. Append `?name=<your_org_name>`.
+      description: Confirms the validity of the given organization name. Append `?name=`.
       operationId: ValidateOrganizationName
       parameters:
       - description: Organization name to validate
@@ -107,7 +107,7 @@ paths:
       - BearerAuth: []
       summary: Validate organization name
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}:
     delete:
       description: Deletes the organization identified by the given `orgId`.
@@ -135,7 +135,7 @@ paths:
       - BearerAuth: []
       summary: Delete organization
       tags:
-      - orgs
+      - Orgs
     get:
       description: Retrieves the details of the organization identified by the given `orgId`.
       operationId: DescribeOrganization
@@ -166,7 +166,7 @@ paths:
       - BearerAuth: []
       summary: Describe organization
       tags:
-      - orgs
+      - Orgs
     put:
       description: Updates the details of the organization identified by the given `orgId`.
       operationId: UpdateOrganization
@@ -210,7 +210,7 @@ paths:
       - BearerAuth: []
       summary: Update organization
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/collaborators:
     get:
       description: Lists the collaborators of the organization identified by the given `orgId`.
@@ -259,7 +259,7 @@ paths:
       - BearerAuth: []
       summary: List organization collaborators
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/idp-groups:
     get:
       description: Returns the IdP group catalog for the organization, including both SCIM-pushed and manually entered groups.
@@ -287,7 +287,7 @@ paths:
       - BearerAuth: []
       summary: List IdP groups for an organization
       tags:
-      - orgs
+      - Orgs
     post:
       description: Adds a group entry to the IdP group catalog via manual entry. The admin must enter the exact claim value their IdP sends in the groups claim.
       operationId: CreateOrganizationIdpGroup
@@ -333,7 +333,7 @@ paths:
       - BearerAuth: []
       summary: Manually add an IdP group to the catalog
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/idp-groups/{groupId}:
     delete:
       description: Removes a manually-entered group from the catalog. SCIM-managed groups cannot be deleted via this endpoint.
@@ -370,7 +370,7 @@ paths:
       - BearerAuth: []
       summary: Remove an IdP group from the catalog
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/members:
     get:
       description: Lists the members of the organization identified by the given `orgId`.
@@ -419,7 +419,7 @@ paths:
       - BearerAuth: []
       summary: List organization members
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/members/add:
     put:
       description: Adds a new member to the organization identified by the given `orgId`.
@@ -464,7 +464,7 @@ paths:
       - BearerAuth: []
       summary: Add organization member
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/members/leave:
     delete:
       description: Removes the requesting user from the organization identified by the given `orgId`.
@@ -492,7 +492,7 @@ paths:
       - BearerAuth: []
       summary: Leave organization
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/members/{memberId}:
     delete:
       description: Deletes the member identified by the given `memberId`.
@@ -527,7 +527,7 @@ paths:
       - BearerAuth: []
       summary: Delete member
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/members/{memberId}/role:
     put:
       description: Updates the role of the member identified by the given `memberId`.
@@ -569,7 +569,7 @@ paths:
       - BearerAuth: []
       summary: Update member role
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/quotas:
     get:
       description: Retrieves the details of the organization quotas identified by the given `orgId`.
@@ -608,7 +608,7 @@ paths:
       - BearerAuth: []
       summary: Describe organization quotas
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/scim/config:
     get:
       description: Returns the SCIM configuration for the organization, including token metadata, group count, and SSO state. Accessible to all org members (read access).
@@ -636,7 +636,7 @@ paths:
       - BearerAuth: []
       summary: View SCIM configuration
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/scim/token:
     delete:
       description: Revokes the active SCIM bearer token for the organization. Returns 404 if no active token exists.
@@ -660,7 +660,7 @@ paths:
       - BearerAuth: []
       summary: Revoke the active SCIM bearer token
       tags:
-      - orgs
+      - Orgs
     post:
       description: Generates a new SCIM bearer token for the organization. If an active token already exists it is revoked first. The plaintext token is returned only once.
       operationId: CreateOrganizationScimToken
@@ -687,7 +687,7 @@ paths:
       - BearerAuth: []
       summary: Generate a SCIM bearer token
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/scim/token/rotate:
     post:
       description: Revokes the current active token and generates a new one. The new plaintext token is returned only once.
@@ -715,7 +715,7 @@ paths:
       - BearerAuth: []
       summary: Rotate the SCIM bearer token
       tags:
-      - orgs
+      - Orgs
   /orgs/{orgId}/users/{userId}/roles:
     get:
       description: List all user roles and permissions in an organization; also list the sources of those roles (via team assignment or direct user assignment).
@@ -754,30 +754,45 @@ paths:
       - BearerAuth: []
       summary: List all user roles and permissions in an organization
       tags:
-      - orgs
+      - Orgs
 components:
   schemas:
-    CreateOrganizationResponse:
+    CreateIdpGroupRequest:
       properties:
+        displayName:
+          type: string
+      type: object
+    CreateOrganizationRequest:
+      properties:
+        logoId:
+          type: string
         organization:
-          $ref: '#/components/schemas/OrganizationDbDto'
+          $ref: '#/components/schemas/Organization'
       type: object
-    OrgIdpGroupSource:
-      enum:
-      - SCIM
-      - MANUAL
-      type: string
-    ListOrganizationsResponse:
+    ListUserRolesResponse:
       properties:
-        organizations:
+        user:
+          $ref: '#/components/schemas/MemberDbDto'
+        userWorkspaces:
           items:
-            $ref: '#/components/schemas/OrganizationDbDto'
+            $ref: '#/components/schemas/UserWorkspaceRolesDto'
           type: array
-        totalSize:
-          format: int32
-          type: integer
       type: object
-    OrganizationDbDto:
+    OrgType:
+      enum:
+      - academic
+      - evaluating
+      - pro
+      - basic
+      - internal
+      type: string
+      x-enum-varnames:
+      - academic
+      - evaluating
+      - pro
+      - basic
+      - internal
+    UpdateOrganizationRequest:
       properties:
         description:
           type: string
@@ -787,29 +802,17 @@ components:
           type: string
         logoId:
           type: string
-        logoUrl:
-          type: string
-        memberId:
-          format: int64
-          type: integer
-        memberRole:
-          $ref: '#/components/schemas/OrgRole'
         name:
           type: string
-        orgId:
-          format: int64
-          type: integer
         paying:
           deprecated: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         type:
-          $ref: '#/components/schemas/OrgType'
+          allOf:
+          - $ref: '#/components/schemas/OrgType'
         website:
-          type: string
-      type: object
-    CreateIdpGroupRequest:
-      properties:
-        displayName:
           type: string
       type: object
     UpdateMemberRoleRequest:
@@ -817,23 +820,99 @@ components:
         role:
           $ref: '#/components/schemas/OrgRole'
       type: object
-    IdpGroupEntry:
+    OrgIdpGroupSource:
+      enum:
+      - SCIM
+      - MANUAL
+      type: string
+    UserWorkspaceRolesDto:
       properties:
-        displayName:
+        permissions:
+          items:
+            $ref: '#/components/schemas/UserWorkspacePermissionDto'
+          type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/UserWorkspaceRoleDto'
+          type: array
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+    AddMemberRequest:
+      properties:
+        user:
+          type: string
+      type: object
+    DescribeOrganizationQuotasResponse:
+      properties:
+        quotas:
+          $ref: '#/components/schemas/OrganizationQuotas'
+      type: object
+    Organization:
+      properties:
+        dateCreated:
+          format: date-time
+          readOnly: true
+          type: string
+        description:
+          maxLength: 1000
+          type: string
+        fullName:
+          maxLength: 100
           type: string
         id:
           format: int64
-          type: integer
-        source:
-          $ref: '#/components/schemas/OrgIdpGroupSource'
-      type: object
-    ErrorResponse:
-      properties:
-        message:
+          readOnly: true
+          type:
+          - integer
+          - 'null'
+        lastUpdated:
+          format: date-time
+          readOnly: true
+          type: string
+        location:
+          maxLength: 100
+          type: string
+        name:
+          maxLength: 40
+          pattern: ^[a-zA-Z\d](?:[a-zA-Z\d]|[-_](?=[a-zA-Z\d])){1,38}$
+          type: string
+        website:
+          pattern: ''
           type: string
       required:
-      - message
+      - fullName
+      - name
       type: object
+    UserWorkspacePermissionDto:
+      properties:
+        permission:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+      type: object
+    ListIdpGroupsResponse:
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/IdpGroupEntry'
+          type: array
+      type: object
+    OrgRole:
+      enum:
+      - owner
+      - member
+      - collaborator
+      type: string
+      x-enum-varnames:
+      - owner
+      - member
+      - collaborator
     MemberDbDto:
       properties:
         avatar:
@@ -855,15 +934,15 @@ components:
         userName:
           type: string
       type: object
-    ListMembersResponse:
+    IdpGroupEntry:
       properties:
-        members:
-          items:
-            $ref: '#/components/schemas/MemberDbDto'
-          type: array
-        totalSize:
+        displayName:
+          type: string
+        id:
           format: int64
           type: integer
+        source:
+          $ref: '#/components/schemas/OrgIdpGroupSource'
       type: object
     UserWorkspaceRoleDto:
       properties:
@@ -879,24 +958,6 @@ components:
         sourceTeamType:
           $ref: '#/components/schemas/TeamType'
       type: object
-    TeamType:
-      enum:
-      - regular
-      - system_owners
-      type: string
-      x-enum-varnames:
-      - regular
-      - system_owners
-    OrgRole:
-      enum:
-      - owner
-      - member
-      - collaborator
-      type: string
-      x-enum-varnames:
-      - owner
-      - member
-      - collaborator
     DescribeScimConfigResponse:
       properties:
         endpointUrl:
@@ -907,50 +968,21 @@ components:
         hasActiveToken:
           type: boolean
         maskedToken:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         ssoActive:
           type: boolean
         tokenCreatedAt:
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         tokenLastUsed:
           format: date-time
-          nullable: true
-          type: string
-      type: object
-    ListUserRolesResponse:
-      properties:
-        user:
-          $ref: '#/components/schemas/MemberDbDto'
-        userWorkspaces:
-          items:
-            $ref: '#/components/schemas/UserWorkspaceRolesDto'
-          type: array
-      type: object
-    UpdateOrganizationRequest:
-      properties:
-        description:
-          type: string
-        fullName:
-          type: string
-        location:
-          type: string
-        logoId:
-          type: string
-        name:
-          type: string
-        paying:
-          deprecated: true
-          nullable: true
-          type: boolean
-        type:
-          allOf:
-          - $ref: '#/components/schemas/OrgType'
-          nullable: true
-        website:
-          type: string
+          type:
+          - string
+          - 'null'
       type: object
     WspRoleSourceType:
       enum:
@@ -960,52 +992,44 @@ components:
       x-enum-varnames:
       - individual
       - team
-    Organization:
+    DescribeOrganizationResponse:
       properties:
-        dateCreated:
-          format: date-time
-          readOnly: true
+        organization:
+          $ref: '#/components/schemas/OrganizationDbDto'
+      type: object
+    TeamType:
+      enum:
+      - regular
+      - system_owners
+      type: string
+      x-enum-varnames:
+      - regular
+      - system_owners
+    CreateOrganizationResponse:
+      properties:
+        organization:
+          $ref: '#/components/schemas/OrganizationDbDto'
+      type: object
+    AddMemberResponse:
+      properties:
+        member:
+          $ref: '#/components/schemas/MemberDbDto'
+      type: object
+    CreateScimTokenResponse:
+      properties:
+        endpointUrl:
           type: string
-        description:
-          maxLength: 1000
+        maskedToken:
           type: string
-        fullName:
-          maxLength: 100
+        token:
           type: string
-        id:
-          format: int64
-          nullable: true
-          readOnly: true
-          type: integer
-        lastUpdated:
-          format: date-time
-          readOnly: true
-          type: string
-        location:
-          maxLength: 100
-          type: string
-        name:
-          maxLength: 40
-          pattern: ^[a-zA-Z\d](?:[a-zA-Z\d]|[-_](?=[a-zA-Z\d])){1,38}$
-          type: string
-        website:
-          pattern: ''
+      type: object
+    ErrorResponse:
+      properties:
+        message:
           type: string
       required:
-      - fullName
-      - name
-      type: object
-    ListIdpGroupsResponse:
-      properties:
-        groups:
-          items:
-            $ref: '#/components/schemas/IdpGroupEntry'
-          type: array
-      type: object
-    AddMemberRequest:
-      properties:
-        user:
-          type: string
+      - message
       type: object
     OrganizationQuotas:
       properties:
@@ -1052,74 +1076,54 @@ components:
           format: int64
           type: integer
       type: object
-    DescribeOrganizationQuotasResponse:
+    ListMembersResponse:
       properties:
-        quotas:
-          $ref: '#/components/schemas/OrganizationQuotas'
-      type: object
-    OrgType:
-      enum:
-      - academic
-      - evaluating
-      - pro
-      - basic
-      - internal
-      type: string
-      x-enum-varnames:
-      - academic
-      - evaluating
-      - pro
-      - basic
-      - internal
-    UserWorkspaceRolesDto:
-      properties:
-        permissions:
+        members:
           items:
-            $ref: '#/components/schemas/UserWorkspacePermissionDto'
+            $ref: '#/components/schemas/MemberDbDto'
           type: array
-        roles:
-          items:
-            $ref: '#/components/schemas/UserWorkspaceRoleDto'
-          type: array
-        workspaceId:
+        totalSize:
           format: int64
           type: integer
-        workspaceName:
+      type: object
+    ListOrganizationsResponse:
+      properties:
+        organizations:
+          items:
+            $ref: '#/components/schemas/OrganizationDbDto'
+          type: array
+        totalSize:
+          format: int32
+          type: integer
+      type: object
+    OrganizationDbDto:
+      properties:
+        description:
           type: string
-      type: object
-    AddMemberResponse:
-      properties:
-        member:
-          $ref: '#/components/schemas/MemberDbDto'
-      type: object
-    CreateOrganizationRequest:
-      properties:
+        fullName:
+          type: string
+        location:
+          type: string
         logoId:
           type: string
-        organization:
-          $ref: '#/components/schemas/Organization'
-      type: object
-    DescribeOrganizationResponse:
-      properties:
-        organization:
-          $ref: '#/components/schemas/OrganizationDbDto'
-      type: object
-    UserWorkspacePermissionDto:
-      properties:
-        permission:
+        logoUrl:
           type: string
-        roles:
-          items:
-            type: string
-          type: array
-      type: object
-    CreateScimTokenResponse:
-      properties:
-        endpointUrl:
+        memberId:
+          format: int64
+          type: integer
+        memberRole:
+          $ref: '#/components/schemas/OrgRole'
+        name:
           type: string
-        maskedToken:
-          type: string
-        token:
+        orgId:
+          format: int64
+          type: integer
+        paying:
+          deprecated: true
+          type: boolean
+        type:
+          $ref: '#/components/schemas/OrgType'
+        website:
           type: string
       type: object
   securitySchemes:

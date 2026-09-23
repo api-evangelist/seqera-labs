@@ -1,14 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions datasets API
+  title: Seqera Datasets API
   version: 1.181.0
 tags:
 - description: Pipeline input datasets (samplesheets) in CSV or TSV format
-  name: datasets
+  name: Datasets
 paths:
   /datasets:
     delete:
@@ -52,7 +52,7 @@ paths:
       - BearerAuth: []
       summary: Delete dataset
       tags:
-      - datasets
+      - Datasets
     get:
       description: Lists all available datasets in a user context. Append `?workspaceId` to list datasets in a workspace context.
       operationId: ListDatasetsV2
@@ -122,7 +122,7 @@ paths:
       - BearerAuth: []
       summary: List datasets
       tags:
-      - datasets
+      - Datasets
     post:
       description: Creates a new dataset in the user context. Include the dataset file and details in your request body. Append `?workspaceId` to create the dataset in a workspace context.
       operationId: CreateDatasetV2
@@ -165,7 +165,7 @@ paths:
       - BearerAuth: []
       summary: Create dataset
       tags:
-      - datasets
+      - Datasets
   /datasets/hide:
     post:
       description: Hide the given `datasetIds`
@@ -199,7 +199,7 @@ paths:
       - BearerAuth: []
       summary: Hide dataset
       tags:
-      - datasets
+      - Datasets
   /datasets/preview-url:
     post:
       description: Fetches a partial content preview from an arbitrary HTTP/HTTPS URL, without creating a dataset. Intended for the dataset form preview after URL validation.
@@ -210,8 +210,9 @@ paths:
         name: workspaceId
         schema:
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       requestBody:
         content:
           application/json:
@@ -238,7 +239,7 @@ paths:
       - BearerAuth: []
       summary: Preview content from a URL
       tags:
-      - datasets
+      - Datasets
   /datasets/show:
     post:
       description: Show the given `datasetIds`
@@ -272,7 +273,7 @@ paths:
       - BearerAuth: []
       summary: Show dataset
       tags:
-      - datasets
+      - Datasets
   /datasets/validate-url:
     post:
       description: Validates that a remote dataset URL is accessible and returns a supported CSV/TSV format, without creating a dataset.
@@ -283,8 +284,9 @@ paths:
         name: workspaceId
         schema:
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       requestBody:
         content:
           application/json:
@@ -311,7 +313,7 @@ paths:
       - BearerAuth: []
       summary: Validate URL for dataset linking
       tags:
-      - datasets
+      - Datasets
   /datasets/versions:
     get:
       description: Lists the latest version of each dataset in the user context. Append `?workspaceId` to list latest versions in a workspace context.
@@ -364,7 +366,7 @@ paths:
       - BearerAuth: []
       summary: List latest dataset versions
       tags:
-      - datasets
+      - Datasets
   /datasets/{datasetId}:
     delete:
       description: Deletes the dataset identified by the given `datasetId`.
@@ -397,7 +399,7 @@ paths:
       - BearerAuth: []
       summary: Delete dataset
       tags:
-      - datasets
+      - Datasets
     put:
       description: Updates the details of the dataset identified by the given `datasetId`.
       operationId: UpdateDatasetV2
@@ -442,7 +444,7 @@ paths:
       - BearerAuth: []
       summary: Update dataset
       tags:
-      - datasets
+      - Datasets
   /datasets/{datasetId}/link:
     post:
       description: Creates a new linked DatasetVersion for an existing LINKED dataset by supplying a public HTTP/HTTPS URL.
@@ -488,7 +490,7 @@ paths:
       - BearerAuth: []
       summary: Link external URL as dataset version
       tags:
-      - datasets
+      - Datasets
   /datasets/{datasetId}/metadata:
     get:
       description: Retrieves the metadata of the dataset identified by the given `datasetId`.
@@ -533,7 +535,7 @@ paths:
       - BearerAuth: []
       summary: Describe dataset
       tags:
-      - datasets
+      - Datasets
   /datasets/{datasetId}/upload:
     post:
       description: Uploads the CSV or TSV content to create a new version of the dataset identified by the given `datasetId`.
@@ -582,7 +584,7 @@ paths:
       - BearerAuth: []
       summary: Upload new dataset version
       tags:
-      - datasets
+      - Datasets
   /datasets/{datasetId}/v/{version}/n/{fileName}:
     get:
       description: Downloads the content of the dataset identified by the given `datasetId` and `version`.
@@ -640,7 +642,7 @@ paths:
       - BearerAuth: []
       summary: Download dataset content
       tags:
-      - datasets
+      - Datasets
   /datasets/{datasetId}/v/{version}/preview:
     get:
       description: Fetches a partial preview of the content for a linked dataset version.
@@ -690,7 +692,7 @@ paths:
       - BearerAuth: []
       summary: Preview linked dataset content
       tags:
-      - datasets
+      - Datasets
   /datasets/{datasetId}/versions:
     get:
       description: Lists all versions of the given `datasetId`.
@@ -732,7 +734,7 @@ paths:
       - BearerAuth: []
       summary: List all dataset versions
       tags:
-      - datasets
+      - Datasets
   /datasets/{datasetId}/versions/{version}/disable:
     post:
       description: Disable a dataset version, the dataset version cannot be used for runs, and cannot be enabled again
@@ -778,7 +780,7 @@ paths:
       - BearerAuth: []
       summary: Disable a dataset version
       tags:
-      - datasets
+      - Datasets
   /launch/{launchId}/datasets:
     get:
       description: Retrieves the details of the datasets used in the launch identified by the given `launchId`.
@@ -809,7 +811,7 @@ paths:
       - BearerAuth: []
       summary: Describe launch datasets
       tags:
-      - datasets
+      - Datasets
   /workspaces/{workspaceId}/datasets:
     get:
       deprecated: true
@@ -842,7 +844,7 @@ paths:
       - BearerAuth: []
       summary: List available datasets
       tags:
-      - datasets
+      - Datasets
     post:
       deprecated: true
       description: Creates a new dataset in the given workspace context. Include the dataset file and details in your request body.
@@ -887,7 +889,7 @@ paths:
       - BearerAuth: []
       summary: Create dataset
       tags:
-      - datasets
+      - Datasets
   /workspaces/{workspaceId}/datasets/versions:
     get:
       deprecated: true
@@ -905,8 +907,9 @@ paths:
         in: query
         name: mimeType
         schema:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       responses:
         '200':
           content:
@@ -926,7 +929,7 @@ paths:
       - BearerAuth: []
       summary: List latest dataset versions
       tags:
-      - datasets
+      - Datasets
   /workspaces/{workspaceId}/datasets/{datasetId}:
     delete:
       deprecated: true
@@ -961,7 +964,7 @@ paths:
       - BearerAuth: []
       summary: Delete dataset
       tags:
-      - datasets
+      - Datasets
     put:
       deprecated: true
       description: Updates the details of the dataset identified by the given `datasetId`.
@@ -1008,7 +1011,7 @@ paths:
       - BearerAuth: []
       summary: Update dataset
       tags:
-      - datasets
+      - Datasets
   /workspaces/{workspaceId}/datasets/{datasetId}/metadata:
     get:
       deprecated: true
@@ -1055,7 +1058,7 @@ paths:
       - BearerAuth: []
       summary: Describe dataset
       tags:
-      - datasets
+      - Datasets
   /workspaces/{workspaceId}/datasets/{datasetId}/upload:
     post:
       deprecated: true
@@ -1106,7 +1109,7 @@ paths:
       - BearerAuth: []
       summary: Upload new dataset version
       tags:
-      - datasets
+      - Datasets
   /workspaces/{workspaceId}/datasets/{datasetId}/versions:
     get:
       deprecated: true
@@ -1150,226 +1153,9 @@ paths:
       - BearerAuth: []
       summary: List all dataset versions
       tags:
-      - datasets
+      - Datasets
 components:
   schemas:
-    UserInfo:
-      properties:
-        avatar:
-          type: string
-        email:
-          type: string
-        id:
-          format: int64
-          type: integer
-        userName:
-          type: string
-      type: object
-    ListDatasetVersionsResponse:
-      properties:
-        totalSize:
-          format: int64
-          type: integer
-        versions:
-          items:
-            $ref: '#/components/schemas/DatasetVersionDto'
-          type: array
-      type: object
-    UpdateDatasetRequest:
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-      type: object
-    ValidateUrlRequest:
-      properties:
-        url:
-          type: string
-      type: object
-    DatasetRunsInfo:
-      properties:
-        lastUsed:
-          format: date-time
-          type: string
-        runsCount:
-          format: int64
-          type: integer
-      type: object
-    LabelDbDto:
-      properties:
-        dateCreated:
-          format: date-time
-          type: string
-        id:
-          format: int64
-          type: integer
-        isDefault:
-          type: boolean
-        isDynamic:
-          type: boolean
-        isInterpolated:
-          type: boolean
-        name:
-          type: string
-        resource:
-          type: boolean
-        value:
-          type: string
-      type: object
-    CreateDatasetResponse:
-      properties:
-        dataset:
-          $ref: '#/components/schemas/DatasetDto'
-      type: object
-    LinkedSourceDto:
-      properties:
-        changeStatus:
-          $ref: '#/components/schemas/ChangeStatus'
-        checkedAt:
-          format: date-time
-          type: string
-        hasChangeIndicators:
-          type: boolean
-        url:
-          type: string
-      type: object
-    ChangeStatus:
-      enum:
-      - UNCHANGED
-      - CHANGED
-      - UNKNOWN
-      - UNAVAILABLE
-      type: string
-    DatasetPreviewResponse:
-      properties:
-        content:
-          type: string
-        fileTooLarge:
-          type: boolean
-        reachable:
-          type: boolean
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    MultiRequestFileSchema:
-      properties:
-        file:
-          format: binary
-          type: string
-      type: object
-    DatasetVersionDto:
-      properties:
-        createdBy:
-          $ref: '#/components/schemas/UserInfo'
-        datasetDescription:
-          type: string
-        datasetId:
-          type: string
-        datasetName:
-          type: string
-        dateCreated:
-          format: date-time
-          type: string
-        disabled:
-          type: boolean
-        fileName:
-          type: string
-        fileSize:
-          format: int64
-          type: integer
-        hasHeader:
-          type: boolean
-        lastUpdated:
-          format: date-time
-          type: string
-        linkedSource:
-          $ref: '#/components/schemas/LinkedSourceDto'
-        mediaType:
-          type: string
-        url:
-          type: string
-        version:
-          format: int64
-          type: integer
-        workspaceId:
-          format: int64
-          type: integer
-      type: object
-    ValidateUrlResponse:
-      properties:
-        contentLength:
-          format: int64
-          type: integer
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
-        hasEtag:
-          type: boolean
-        mediaType:
-          type: string
-        valid:
-          type: boolean
-      type: object
-    DatasetQueryAttribute:
-      enum:
-      - labels
-      type: string
-      x-enum-varnames:
-      - labels
-    DeleteDatasetsRequest:
-      properties:
-        datasetIds:
-          items:
-            type: string
-          type: array
-      type: object
-    CreateDatasetRequest:
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-        sourceType:
-          $ref: '#/components/schemas/SourceType'
-      type: object
-    DeleteDatasetsResponse:
-      properties:
-        failed:
-          items:
-            type: string
-          type: array
-        success:
-          items:
-            type: string
-          type: array
-      type: object
-    ListDatasetsResponse:
-      properties:
-        datasets:
-          items:
-            $ref: '#/components/schemas/DatasetDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
-      type: object
-    UploadDatasetVersionResponse:
-      properties:
-        version:
-          $ref: '#/components/schemas/DatasetVersionDto'
-      type: object
-    DescribeDatasetResponse:
-      properties:
-        dataset:
-          $ref: '#/components/schemas/DatasetDto'
-      type: object
     DatasetDto:
       properties:
         dateCreated:
@@ -1419,6 +1205,131 @@ components:
         url:
           type: string
       type: object
+    LabelDbDto:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        isDynamic:
+          type: boolean
+        isInterpolated:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    UploadDatasetVersionResponse:
+      properties:
+        version:
+          $ref: '#/components/schemas/DatasetVersionDto'
+      type: object
+    DatasetPreviewResponse:
+      properties:
+        content:
+          type: string
+        fileTooLarge:
+          type: boolean
+        reachable:
+          type: boolean
+      type: object
+    ValidateUrlRequest:
+      properties:
+        url:
+          type: string
+      type: object
+    ListDatasetVersionsResponse:
+      properties:
+        totalSize:
+          format: int64
+          type: integer
+        versions:
+          items:
+            $ref: '#/components/schemas/DatasetVersionDto'
+          type: array
+      type: object
+    DeleteDatasetsRequest:
+      properties:
+        datasetIds:
+          items:
+            type: string
+          type: array
+      type: object
+    LinkedSourceDto:
+      properties:
+        changeStatus:
+          $ref: '#/components/schemas/ChangeStatus'
+        checkedAt:
+          format: date-time
+          type: string
+        hasChangeIndicators:
+          type: boolean
+        url:
+          type: string
+      type: object
+    DatasetVersionDto:
+      properties:
+        createdBy:
+          $ref: '#/components/schemas/UserInfo'
+        datasetDescription:
+          type: string
+        datasetId:
+          type: string
+        datasetName:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        disabled:
+          type: boolean
+        fileName:
+          type: string
+        fileSize:
+          format: int64
+          type: integer
+        hasHeader:
+          type: boolean
+        lastUpdated:
+          format: date-time
+          type: string
+        linkedSource:
+          $ref: '#/components/schemas/LinkedSourceDto'
+        mediaType:
+          type: string
+        url:
+          type: string
+        version:
+          format: int64
+          type: integer
+        workspaceId:
+          format: int64
+          type: integer
+      type: object
+    DatasetQueryAttribute:
+      enum:
+      - labels
+      type: string
+      x-enum-varnames:
+      - labels
+    ChangeStatus:
+      enum:
+      - UNCHANGED
+      - CHANGED
+      - UNKNOWN
+      - UNAVAILABLE
+      type: string
+    SourceType:
+      enum:
+      - UPLOADED
+      - LINKED
+      type: string
     ChangeDatasetVisibilityRequest:
       properties:
         datasetIds:
@@ -1426,11 +1337,103 @@ components:
             type: string
           type: array
       type: object
-    SourceType:
-      enum:
-      - UPLOADED
-      - LINKED
-      type: string
+    ValidateUrlResponse:
+      properties:
+        contentLength:
+          format: int64
+          type: integer
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        hasEtag:
+          type: boolean
+        mediaType:
+          type: string
+        valid:
+          type: boolean
+      type: object
+    DatasetRunsInfo:
+      properties:
+        lastUsed:
+          format: date-time
+          type: string
+        runsCount:
+          format: int64
+          type: integer
+      type: object
+    UserInfo:
+      properties:
+        avatar:
+          type: string
+        email:
+          type: string
+        id:
+          format: int64
+          type: integer
+        userName:
+          type: string
+      type: object
+    MultiRequestFileSchema:
+      properties:
+        file:
+          format: binary
+          type: string
+      type: object
+    CreateDatasetResponse:
+      properties:
+        dataset:
+          $ref: '#/components/schemas/DatasetDto'
+      type: object
+    DeleteDatasetsResponse:
+      properties:
+        failed:
+          items:
+            type: string
+          type: array
+        success:
+          items:
+            type: string
+          type: array
+      type: object
+    UpdateDatasetRequest:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    DescribeDatasetResponse:
+      properties:
+        dataset:
+          $ref: '#/components/schemas/DatasetDto'
+      type: object
+    ListDatasetsResponse:
+      properties:
+        datasets:
+          items:
+            $ref: '#/components/schemas/DatasetDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    CreateDatasetRequest:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        sourceType:
+          $ref: '#/components/schemas/SourceType'
+      type: object
   securitySchemes:
     BearerAuth:
       bearerFormat: jwt

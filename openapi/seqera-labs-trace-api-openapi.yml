@@ -1,14 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions trace API
+  title: Seqera Trace API
   version: 1.181.0
 tags:
 - description: Workflow execution traces
-  name: trace
+  name: Trace
 paths:
   /trace/create:
     post:
@@ -47,7 +47,7 @@ paths:
       - BearerAuth: []
       summary: Create workflow execution trace
       tags:
-      - trace
+      - Trace
   /trace/{workflowId}/begin:
     put:
       description: Updates the workflow execution trace for the given `workflowId`.
@@ -91,7 +91,7 @@ paths:
       - BearerAuth: []
       summary: Signal workflow execution start
       tags:
-      - trace
+      - Trace
   /trace/{workflowId}/complete:
     put:
       description: Updates the workflow execution trace for the given `workflowId`.
@@ -135,7 +135,7 @@ paths:
       - BearerAuth: []
       summary: Signal workflow execution completion
       tags:
-      - trace
+      - Trace
   /trace/{workflowId}/heartbeat:
     put:
       description: Update the workflow execution trace heartbeat for the given `workflowId` to signal that execution is ongoing.
@@ -179,7 +179,7 @@ paths:
       - BearerAuth: []
       summary: Signal workflow execution heartbeat
       tags:
-      - trace
+      - Trace
   /trace/{workflowId}/progress:
     put:
       description: Store the execution metadata for one or more tasks in the given `workflowId`.
@@ -223,83 +223,80 @@ paths:
       - BearerAuth: []
       summary: Store workflow task execution metadata
       tags:
-      - trace
+      - Trace
 components:
   schemas:
-    WfFusionMeta:
+    WorkflowMetrics:
       properties:
-        enabled:
-          type: boolean
-        version:
-          maxLength: 20
+        cpu:
+          $ref: '#/components/schemas/ResourceData'
+        cpuUsage:
+          $ref: '#/components/schemas/ResourceData'
+        gpuMemAvg:
+          $ref: '#/components/schemas/ResourceData'
+        gpuMemPeak:
+          $ref: '#/components/schemas/ResourceData'
+        gpuUsage:
+          $ref: '#/components/schemas/ResourceData'
+        id:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        mem:
+          $ref: '#/components/schemas/ResourceData'
+        memUsage:
+          $ref: '#/components/schemas/ResourceData'
+        process:
+          maxLength: 255
           type: string
-      type: object
-    WorkflowExtAttributes:
-      properties:
-        cost:
-          type: number
-        costCurrency:
-          type: string
-        costRetries:
-          format: int32
-          type: integer
-        empty:
-          type: boolean
-        instancesProvisioned:
-          format: int32
-          type: integer
-        schedRunId:
-          type: string
-      type: object
-    ContainerData:
-      properties:
-        buildId:
-          type: string
-        cached:
-          type: boolean
-        freeze:
-          type: boolean
-        mirrorId:
-          type: string
-        requestId:
-          type: string
-        requestTime:
-          format: date-time
-          type: string
-        scanId:
-          type: string
-        sourceImage:
-          type: string
-        targetImage:
-          type: string
+        reads:
+          $ref: '#/components/schemas/ResourceData'
+        time:
+          $ref: '#/components/schemas/ResourceData'
+        timeUsage:
+          $ref: '#/components/schemas/ResourceData'
+        vmem:
+          $ref: '#/components/schemas/ResourceData'
+        writes:
+          $ref: '#/components/schemas/ResourceData'
       required:
-      - targetImage
+      - process
       type: object
-    TraceCompleteResponse:
+    ResourceData:
       properties:
-        status:
-          $ref: '#/components/schemas/TraceProcessingStatus'
-        workflowId:
+        max:
+          format: float
+          type: number
+        maxLabel:
           type: string
-      type: object
-    TraceHeartbeatResponse:
-      properties:
-        message:
+        mean:
+          format: float
+          type: number
+        min:
+          format: float
+          type: number
+        minLabel:
           type: string
-      type: object
-    TraceBeginRequest:
-      properties:
-        launchId:
-          deprecated: true
+        q1:
+          format: float
+          type: number
+        q1Label:
           type: string
-        processNames:
+        q2:
+          format: float
+          type: number
+        q2Label:
+          type: string
+        q3:
+          format: float
+          type: number
+        q3Label:
+          type: string
+        warnings:
           items:
             type: string
           type: array
-        towerLaunch:
-          type: boolean
-        workflow:
-          $ref: '#/components/schemas/Workflow'
       type: object
     WfManifest:
       properties:
@@ -334,14 +331,51 @@ components:
           maxLength: 20
           type: string
       type: object
-    TraceCompleteRequest:
+    TraceProgressResponse:
       properties:
-        metrics:
-          items:
-            $ref: '#/components/schemas/WorkflowMetrics'
-          type: array
+        status:
+          $ref: '#/components/schemas/TraceProcessingStatus'
+        workflowId:
+          type: string
+      type: object
+    WorkflowStatus:
+      enum:
+      - SUBMITTED
+      - RUNNING
+      - SUCCEEDED
+      - FAILED
+      - CANCELLED
+      - UNKNOWN
+      type: string
+    WfFusionMeta:
+      properties:
+        enabled:
+          type: boolean
+        version:
+          maxLength: 20
+          type: string
+      type: object
+    TraceHeartbeatRequest:
+      properties:
         progress:
           $ref: '#/components/schemas/TraceProgressData'
+      type: object
+    TraceHeartbeatResponse:
+      properties:
+        message:
+          type: string
+      type: object
+    TraceBeginRequest:
+      properties:
+        launchId:
+          deprecated: true
+          type: string
+        processNames:
+          items:
+            type: string
+          type: array
+        towerLaunch:
+          type: boolean
         workflow:
           $ref: '#/components/schemas/Workflow'
       type: object
@@ -364,8 +398,9 @@ components:
           type: integer
         dateCreated:
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         disk:
           format: int64
           type: integer
@@ -377,8 +412,9 @@ components:
         errorAction:
           type: string
         errorMessage:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         executor:
           type: string
         exit:
@@ -390,20 +426,21 @@ components:
         gpuMetrics:
           allOf:
           - $ref: '#/components/schemas/GpuMetrics'
-          nullable: true
         hash:
           type: string
         id:
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         invCtxt:
           format: int64
           type: integer
         lastUpdated:
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         logStreamId:
           type: string
         machineType:
@@ -498,253 +535,6 @@ components:
       - status
       - taskId
       type: object
-    TraceHeartbeatRequest:
-      properties:
-        progress:
-          $ref: '#/components/schemas/TraceProgressData'
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    TraceCreateMetadata:
-      properties:
-        commitId:
-          nullable: true
-          type: string
-        computeEnvId:
-          nullable: true
-          type: string
-        computeEnvName:
-          nullable: true
-          type: string
-        computeEnvPlatform:
-          nullable: true
-          type: string
-        labels:
-          items:
-            type: string
-          nullable: true
-          type: array
-        orgName:
-          nullable: true
-          type: string
-        pipelineId:
-          format: int64
-          nullable: true
-          type: integer
-        pipelineName:
-          nullable: true
-          type: string
-        revision:
-          nullable: true
-          type: string
-        userId:
-          format: int64
-          type: integer
-        userName:
-          type: string
-        userOrganization:
-          nullable: true
-          type: string
-        workspaceFullName:
-          nullable: true
-          type: string
-        workspaceId:
-          format: int64
-          nullable: true
-          type: integer
-        workspaceName:
-          nullable: true
-          type: string
-      type: object
-    TraceProgressDetail:
-      properties:
-        aborted:
-          format: int32
-          type: integer
-        cached:
-          format: int32
-          type: integer
-        failed:
-          format: int32
-          type: integer
-        ignored:
-          format: int32
-          type: integer
-        index:
-          format: int32
-          type: integer
-        loadCpus:
-          format: int64
-          type: integer
-        loadMemory:
-          format: int64
-          type: integer
-        name:
-          type: string
-        peakCpus:
-          format: int64
-          type: integer
-        peakMemory:
-          format: int64
-          type: integer
-        peakRunning:
-          format: int32
-          type: integer
-        pending:
-          format: int32
-          type: integer
-        retries:
-          format: int32
-          type: integer
-        running:
-          format: int32
-          type: integer
-        stored:
-          format: int32
-          type: integer
-        submitted:
-          format: int32
-          type: integer
-        succeeded:
-          format: int32
-          type: integer
-        terminated:
-          type: boolean
-      type: object
-    CloudPriceModel:
-      enum:
-      - standard
-      - spot
-      type: string
-      x-enum-varnames:
-      - standard
-      - spot
-    WfWaveMeta:
-      properties:
-        enabled:
-          type: boolean
-      type: object
-    WorkflowMetrics:
-      properties:
-        cpu:
-          $ref: '#/components/schemas/ResourceData'
-        cpuUsage:
-          $ref: '#/components/schemas/ResourceData'
-        gpuMemAvg:
-          $ref: '#/components/schemas/ResourceData'
-        gpuMemPeak:
-          $ref: '#/components/schemas/ResourceData'
-        gpuUsage:
-          $ref: '#/components/schemas/ResourceData'
-        id:
-          format: int64
-          nullable: true
-          type: integer
-        mem:
-          $ref: '#/components/schemas/ResourceData'
-        memUsage:
-          $ref: '#/components/schemas/ResourceData'
-        process:
-          maxLength: 255
-          type: string
-        reads:
-          $ref: '#/components/schemas/ResourceData'
-        time:
-          $ref: '#/components/schemas/ResourceData'
-        timeUsage:
-          $ref: '#/components/schemas/ResourceData'
-        vmem:
-          $ref: '#/components/schemas/ResourceData'
-        writes:
-          $ref: '#/components/schemas/ResourceData'
-      required:
-      - process
-      type: object
-    TraceProcessingStatus:
-      enum:
-      - OK
-      - KO
-      type: string
-    WorkflowStatus:
-      enum:
-      - SUBMITTED
-      - RUNNING
-      - SUCCEEDED
-      - FAILED
-      - CANCELLED
-      - UNKNOWN
-      type: string
-    TaskStatus:
-      enum:
-      - NEW
-      - SUBMITTED
-      - RUNNING
-      - CACHED
-      - COMPLETED
-      - FAILED
-      - ABORTED
-      type: string
-    ResourceData:
-      properties:
-        max:
-          format: float
-          type: number
-        maxLabel:
-          type: string
-        mean:
-          format: float
-          type: number
-        min:
-          format: float
-          type: number
-        minLabel:
-          type: string
-        q1:
-          format: float
-          type: number
-        q1Label:
-          type: string
-        q2:
-          format: float
-          type: number
-        q2Label:
-          type: string
-        q3:
-          format: float
-          type: number
-        q3Label:
-          type: string
-        warnings:
-          items:
-            type: string
-          type: array
-      type: object
-    WfNextflow:
-      properties:
-        build:
-          maxLength: 10
-          type: string
-        timestamp:
-          format: date-time
-          type: string
-        version:
-          maxLength: 20
-          type: string
-      type: object
-    TraceBeginResponse:
-      properties:
-        status:
-          $ref: '#/components/schemas/TraceProcessingStatus'
-        watchUrl:
-          type: string
-        workflowId:
-          type: string
-      type: object
     GpuMetrics:
       properties:
         active_time:
@@ -782,23 +572,69 @@ components:
           format: int64
           type: integer
       type: object
-    WfSched:
+    TraceCreateMetadata:
       properties:
-        enabled:
-          type: boolean
-      type: object
-    TraceProgressRequest:
-      properties:
-        containers:
+        commitId:
+          type:
+          - string
+          - 'null'
+        computeEnvId:
+          type:
+          - string
+          - 'null'
+        computeEnvName:
+          type:
+          - string
+          - 'null'
+        computeEnvPlatform:
+          type:
+          - string
+          - 'null'
+        labels:
           items:
-            $ref: '#/components/schemas/ContainerData'
-          type: array
-        progress:
-          $ref: '#/components/schemas/TraceProgressData'
-        tasks:
-          items:
-            $ref: '#/components/schemas/Task'
-          type: array
+            type: string
+          type:
+          - array
+          - 'null'
+        orgName:
+          type:
+          - string
+          - 'null'
+        pipelineId:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        pipelineName:
+          type:
+          - string
+          - 'null'
+        revision:
+          type:
+          - string
+          - 'null'
+        userId:
+          format: int64
+          type: integer
+        userName:
+          type: string
+        userOrganization:
+          type:
+          - string
+          - 'null'
+        workspaceFullName:
+          type:
+          - string
+          - 'null'
+        workspaceId:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        workspaceName:
+          type:
+          - string
+          - 'null'
       type: object
     TraceCreateResponse:
       properties:
@@ -807,36 +643,57 @@ components:
         metadata:
           allOf:
           - $ref: '#/components/schemas/TraceCreateMetadata'
-          nullable: true
         watchUrl:
           type: string
         workflowId:
           type: string
       type: object
-    ResourceAllocation:
+    WfWaveMeta:
       properties:
-        acceleratorCount:
-          format: int32
-          type: integer
-        acceleratorName:
-          type: string
-        acceleratorType:
-          type: string
-        cpuShares:
-          format: int32
-          type: integer
-        memoryMiB:
-          format: int32
-          type: integer
-        time:
-          type: string
+        enabled:
+          type: boolean
       type: object
-    TraceProgressResponse:
+    ContainerData:
+      properties:
+        buildId:
+          type: string
+        cached:
+          type: boolean
+        freeze:
+          type: boolean
+        mirrorId:
+          type: string
+        requestId:
+          type: string
+        requestTime:
+          format: date-time
+          type: string
+        scanId:
+          type: string
+        sourceImage:
+          type: string
+        targetImage:
+          type: string
+      required:
+      - targetImage
+      type: object
+    TraceCompleteResponse:
       properties:
         status:
           $ref: '#/components/schemas/TraceProcessingStatus'
         workflowId:
           type: string
+      type: object
+    TraceCompleteRequest:
+      properties:
+        metrics:
+          items:
+            $ref: '#/components/schemas/WorkflowMetrics'
+          type: array
+        progress:
+          $ref: '#/components/schemas/TraceProgressData'
+        workflow:
+          $ref: '#/components/schemas/Workflow'
       type: object
     TraceProgressData:
       properties:
@@ -920,9 +777,10 @@ components:
           type: string
         dateCreated:
           format: date-time
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         deleted:
           readOnly: true
           type: boolean
@@ -945,9 +803,10 @@ components:
           type: string
         lastUpdated:
           format: date-time
-          nullable: true
           readOnly: true
-          type: string
+          type:
+          - string
+          - 'null'
         launchDir:
           type: string
         launchId:
@@ -1035,22 +894,121 @@ components:
       - userName
       - workDir
       type: object
-    TraceCreateRequest:
+    TraceProgressDetail:
       properties:
-        launchId:
-          deprecated: true
+        aborted:
+          format: int32
+          type: integer
+        cached:
+          format: int32
+          type: integer
+        failed:
+          format: int32
+          type: integer
+        ignored:
+          format: int32
+          type: integer
+        index:
+          format: int32
+          type: integer
+        loadCpus:
+          format: int64
+          type: integer
+        loadMemory:
+          format: int64
+          type: integer
+        name:
           type: string
-        projectName:
+        peakCpus:
+          format: int64
+          type: integer
+        peakMemory:
+          format: int64
+          type: integer
+        peakRunning:
+          format: int32
+          type: integer
+        pending:
+          format: int32
+          type: integer
+        retries:
+          format: int32
+          type: integer
+        running:
+          format: int32
+          type: integer
+        stored:
+          format: int32
+          type: integer
+        submitted:
+          format: int32
+          type: integer
+        succeeded:
+          format: int32
+          type: integer
+        terminated:
+          type: boolean
+      type: object
+    WfNextflow:
+      properties:
+        build:
+          maxLength: 10
           type: string
-        repository:
+        timestamp:
+          format: date-time
           type: string
-        runName:
-          type: string
-        sessionId:
-          type: string
-        workflowId:
+        version:
+          maxLength: 20
           type: string
       type: object
+    CloudPriceModel:
+      enum:
+      - standard
+      - spot
+      type: string
+      x-enum-varnames:
+      - standard
+      - spot
+    ResourceAllocation:
+      properties:
+        acceleratorCount:
+          format: int32
+          type: integer
+        acceleratorName:
+          type: string
+        acceleratorType:
+          type: string
+        cpuShares:
+          format: int32
+          type: integer
+        memoryMiB:
+          format: int32
+          type: integer
+        time:
+          type: string
+      type: object
+    WorkflowExtAttributes:
+      properties:
+        cost:
+          type: number
+        costCurrency:
+          type: string
+        costRetries:
+          format: int32
+          type: integer
+        empty:
+          type: boolean
+        instancesProvisioned:
+          format: int32
+          type: integer
+        schedRunId:
+          type: string
+      type: object
+    TraceProcessingStatus:
+      enum:
+      - OK
+      - KO
+      type: string
     WfStats:
       properties:
         cachedCount:
@@ -1098,6 +1056,66 @@ components:
           format: float
           type: number
       type: object
+    WfSched:
+      properties:
+        enabled:
+          type: boolean
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    TraceProgressRequest:
+      properties:
+        containers:
+          items:
+            $ref: '#/components/schemas/ContainerData'
+          type: array
+        progress:
+          $ref: '#/components/schemas/TraceProgressData'
+        tasks:
+          items:
+            $ref: '#/components/schemas/Task'
+          type: array
+      type: object
+    TraceBeginResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/TraceProcessingStatus'
+        watchUrl:
+          type: string
+        workflowId:
+          type: string
+      type: object
+    TraceCreateRequest:
+      properties:
+        launchId:
+          deprecated: true
+          type: string
+        projectName:
+          type: string
+        repository:
+          type: string
+        runName:
+          type: string
+        sessionId:
+          type: string
+        workflowId:
+          type: string
+      type: object
+    TaskStatus:
+      enum:
+      - NEW
+      - SUBMITTED
+      - RUNNING
+      - CACHED
+      - COMPLETED
+      - FAILED
+      - ABORTED
+      type: string
   securitySchemes:
     BearerAuth:
       bearerFormat: jwt

@@ -1,10 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions service-info API
+  title: Seqera Service Info API
   version: 1.181.0
 tags:
 - description: Seqera Platform API service information
@@ -26,23 +26,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Bad request
-      summary: General Seqera service features and version.
+      summary: General Seqera service features and version
       tags:
       - service-info
 components:
   schemas:
-    ServiceInfoResponse:
-      properties:
-        serviceInfo:
-          $ref: '#/components/schemas/ServiceInfo'
-      type: object
-    NavbarConfig.NavbarMenu:
-      properties:
-        label:
-          type: string
-        url:
-          type: string
-      type: object
     ServiceInfo:
       properties:
         allowInstanceCredentials:
@@ -99,16 +87,19 @@ components:
         loginPath:
           type: string
         logoutUrl:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         navbar:
           $ref: '#/components/schemas/NavbarConfig'
         seqeraAgentBackendUrl:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         seqeraAiBaseUrl:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         seqeraCloud:
           type: boolean
         seqeraComputeEnabled:
@@ -122,6 +113,11 @@ components:
         waveEnabled:
           type: boolean
       type: object
+    ServiceInfoResponse:
+      properties:
+        serviceInfo:
+          $ref: '#/components/schemas/ServiceInfo'
+      type: object
     Analytics:
       properties:
         hubspotId:
@@ -129,6 +125,13 @@ components:
         posthogApiHost:
           type: string
         posthogApiKey:
+          type: string
+      type: object
+    NavbarConfig.NavbarMenu:
+      properties:
+        label:
+          type: string
+        url:
           type: string
       type: object
     ErrorResponse:

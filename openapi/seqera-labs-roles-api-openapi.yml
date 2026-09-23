@@ -1,13 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions roles API
+  title: Seqera Roles API
   version: 1.181.0
 tags:
-- name: roles
+- name: Roles
 paths:
   /roles:
     get:
@@ -60,7 +60,7 @@ paths:
       - BearerAuth: []
       summary: List all roles
       tags:
-      - roles
+      - Roles
     post:
       operationId: CreateRole
       parameters:
@@ -98,7 +98,7 @@ paths:
       - BearerAuth: []
       summary: Create a role with the given name
       tags:
-      - roles
+      - Roles
   /roles/permissions:
     get:
       operationId: ListRolePermissions
@@ -138,7 +138,7 @@ paths:
       - BearerAuth: []
       summary: List all role permissions available in the system
       tags:
-      - roles
+      - Roles
   /roles/validate:
     get:
       operationId: ValidateRoleName
@@ -171,7 +171,7 @@ paths:
       - BearerAuth: []
       summary: Validate if a role name is available within the organization
       tags:
-      - roles
+      - Roles
   /roles/{roleName}:
     delete:
       operationId: DeleteRole
@@ -205,7 +205,7 @@ paths:
       - BearerAuth: []
       summary: Delete a role with the given name
       tags:
-      - roles
+      - Roles
     get:
       operationId: DescribeRole
       parameters:
@@ -242,7 +242,7 @@ paths:
       - BearerAuth: []
       summary: Describe role and its permissions fetching by role name
       tags:
-      - roles
+      - Roles
     put:
       operationId: UpdateRole
       parameters:
@@ -284,10 +284,69 @@ paths:
       - BearerAuth: []
       summary: Update a role with the given name
       tags:
-      - roles
+      - Roles
 components:
   schemas:
     UpdateRoleRequest:
+      properties:
+        description:
+          maxLength: 120
+          minLength: 1
+          type: string
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+      required:
+      - description
+      type: object
+    ListRolesResponse:
+      properties:
+        roles:
+          items:
+            $ref: '#/components/schemas/ListRolesResponse.RoleInfo'
+          type: array
+        totalSize:
+          format: int32
+          type: integer
+      type: object
+    RoleDto:
+      properties:
+        description:
+          type: string
+        isPredefined:
+          type: boolean
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+      type: object
+    ListRolePermissionsResponse:
+      properties:
+        permissions:
+          items:
+            $ref: '#/components/schemas/RolePermissionResponseDto'
+          type: array
+      type: object
+    RolePermissionResponseDto:
+      properties:
+        category:
+          type: string
+        name:
+          type: string
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    CreateRoleRequest:
       properties:
         description:
           maxLength: 120
@@ -313,47 +372,10 @@ components:
             type: string
           type: array
       type: object
-    RolePermissionResponseDto:
-      properties:
-        category:
-          type: string
-        name:
-          type: string
-      type: object
-    ListRolesResponse:
-      properties:
-        roles:
-          items:
-            $ref: '#/components/schemas/ListRolesResponse.RoleInfo'
-          type: array
-        totalSize:
-          format: int32
-          type: integer
-      type: object
     DescribeRoleResponse:
       properties:
         role:
           $ref: '#/components/schemas/RoleDto'
-      type: object
-    RoleDto:
-      properties:
-        description:
-          type: string
-        isPredefined:
-          type: boolean
-        name:
-          type: string
-        permissions:
-          items:
-            type: string
-          type: array
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
       type: object
     ListRolesResponse.RoleInfo:
       properties:
@@ -363,28 +385,6 @@ components:
           type: boolean
         name:
           type: string
-      type: object
-    CreateRoleRequest:
-      properties:
-        description:
-          maxLength: 120
-          minLength: 1
-          type: string
-        name:
-          type: string
-        permissions:
-          items:
-            type: string
-          type: array
-      required:
-      - description
-      type: object
-    ListRolePermissionsResponse:
-      properties:
-        permissions:
-          items:
-            $ref: '#/components/schemas/RolePermissionResponseDto'
-          type: array
       type: object
   securitySchemes:
     BearerAuth:

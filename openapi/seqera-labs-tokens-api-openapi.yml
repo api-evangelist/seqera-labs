@@ -1,14 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions tokens API
+  title: Seqera Tokens API
   version: 1.181.0
 tags:
 - description: API access tokens
-  name: tokens
+  name: Tokens
 paths:
   /tokens:
     get:
@@ -33,7 +33,7 @@ paths:
       - BearerAuth: []
       summary: List tokens
       tags:
-      - tokens
+      - Tokens
     post:
       description: Creates an API access token with the details in the given request body.
       operationId: CreateToken
@@ -69,7 +69,7 @@ paths:
       - BearerAuth: []
       summary: Create token
       tags:
-      - tokens
+      - Tokens
   /tokens/delete-all:
     delete:
       description: Deletes all API access tokens in the user context.
@@ -89,7 +89,7 @@ paths:
       - BearerAuth: []
       summary: Delete all user tokens
       tags:
-      - tokens
+      - Tokens
   /tokens/{tokenId}:
     delete:
       description: Deletes the given API access token ID.
@@ -117,9 +117,14 @@ paths:
       - BearerAuth: []
       summary: Delete token
       tags:
-      - tokens
+      - Tokens
 components:
   schemas:
+    CreateAccessTokenRequest:
+      properties:
+        name:
+          type: string
+      type: object
     CreateAccessTokenResponse:
       properties:
         accessKey:
@@ -127,24 +132,19 @@ components:
         token:
           $ref: '#/components/schemas/AccessToken'
       type: object
-    ListAccessTokensResponse:
-      properties:
-        tokens:
-          items:
-            $ref: '#/components/schemas/AccessToken'
-          type: array
-      type: object
-    CreateAccessTokenRequest:
-      properties:
-        name:
-          type: string
-      type: object
     ErrorResponse:
       properties:
         message:
           type: string
       required:
       - message
+      type: object
+    ListAccessTokensResponse:
+      properties:
+        tokens:
+          items:
+            $ref: '#/components/schemas/AccessToken'
+          type: array
       type: object
     AccessToken:
       properties:

@@ -1,14 +1,14 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions avatars API
+  title: Seqera Avatars API
   version: 1.181.0
 tags:
 - description: Avatars
-  name: avatars
+  name: Avatars
 paths:
   /avatars:
     post:
@@ -46,7 +46,7 @@ paths:
       - BearerAuth: []
       summary: Create the avatar image
       tags:
-      - avatars
+      - Avatars
   /avatars/{avatarId}:
     get:
       operationId: DownloadAvatar
@@ -79,7 +79,7 @@ paths:
       - BearerAuth: []
       summary: Download the avatar image
       tags:
-      - avatars
+      - Avatars
 components:
   schemas:
     ErrorResponse:

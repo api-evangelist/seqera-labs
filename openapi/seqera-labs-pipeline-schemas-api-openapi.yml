@@ -1,10 +1,10 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions pipeline-schemas API
+  title: Seqera Pipeline Schemas API
   version: 1.181.0
 tags:
 - name: pipeline-schemas
@@ -49,12 +49,22 @@ paths:
       - pipeline-schemas
 components:
   schemas:
+    CreatePipelineSchemaRequest:
+      properties:
+        content:
+          type: string
+      type: object
     ErrorResponse:
       properties:
         message:
           type: string
       required:
       - message
+      type: object
+    CreatePipelineSchemaResponse:
+      properties:
+        pipelineSchema:
+          $ref: '#/components/schemas/PipelineSchemaDbDto'
       type: object
     PipelineSchemaDbDto:
       properties:
@@ -63,16 +73,6 @@ components:
         id:
           format: int64
           type: integer
-      type: object
-    CreatePipelineSchemaRequest:
-      properties:
-        content:
-          type: string
-      type: object
-    CreatePipelineSchemaResponse:
-      properties:
-        pipelineSchema:
-          $ref: '#/components/schemas/PipelineSchemaDbDto'
       type: object
   securitySchemes:
     BearerAuth:

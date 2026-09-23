@@ -1,13 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions ssh-keys API
+  title: Seqera Ssh Keys API
   version: 1.181.0
 tags:
-- name: ssh-keys
+- name: SSH Keys
 paths:
   /ssh-keys:
     get:
@@ -32,7 +32,7 @@ paths:
       - BearerAuth: []
       summary: List SSH keys
       tags:
-      - ssh-keys
+      - SSH Keys
     post:
       description: Creates a new SSH public key with the details in the given request body.
       operationId: CreateSshKey
@@ -68,7 +68,7 @@ paths:
       - BearerAuth: []
       summary: Create SSH key
       tags:
-      - ssh-keys
+      - SSH Keys
   /ssh-keys/validate/key:
     get:
       description: Confirms the availability of the given key for a SSH key in the user context.
@@ -92,7 +92,7 @@ paths:
       - BearerAuth: []
       summary: Validate SSH key
       tags:
-      - ssh-keys
+      - SSH Keys
   /ssh-keys/validate/name:
     get:
       description: Confirms the availability of the given name for a SSH key in the user context.
@@ -116,7 +116,7 @@ paths:
       - BearerAuth: []
       summary: Validate SSH key name
       tags:
-      - ssh-keys
+      - SSH Keys
   /ssh-keys/{keyId}:
     delete:
       description: Deletes the given SSH public key by its ID.
@@ -144,7 +144,7 @@ paths:
       - BearerAuth: []
       summary: Delete SSH key
       tags:
-      - ssh-keys
+      - SSH Keys
     get:
       description: Retrieves the details of an SSH public key by its ID.
       operationId: DescribeSshKey
@@ -177,9 +177,16 @@ paths:
       - BearerAuth: []
       summary: Describe SSH key
       tags:
-      - ssh-keys
+      - SSH Keys
 components:
   schemas:
+    ListSshKeysResponse:
+      properties:
+        sshKeys:
+          items:
+            $ref: '#/components/schemas/UserSshPublicKeyDto'
+          type: array
+      type: object
     CreateSshKeyRequest:
       properties:
         name:
@@ -206,12 +213,10 @@ components:
         publicKey:
           type: string
       type: object
-    ListSshKeysResponse:
+    DescribeSshKeyResponse:
       properties:
-        sshKeys:
-          items:
-            $ref: '#/components/schemas/UserSshPublicKeyDto'
-          type: array
+        sshKey:
+          $ref: '#/components/schemas/UserSshPublicKeyDto'
       type: object
     ErrorResponse:
       properties:
@@ -219,11 +224,6 @@ components:
           type: string
       required:
       - message
-      type: object
-    DescribeSshKeyResponse:
-      properties:
-        sshKey:
-          $ref: '#/components/schemas/UserSshPublicKeyDto'
       type: object
     CreateSshKeyResponse:
       properties:

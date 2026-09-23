@@ -1,13 +1,13 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   contact:
     email: info@seqera.io
     url: https://seqera.io
   description: Seqera Platform services API
-  title: Seqera actions pipeline-versions API
+  title: Seqera Pipeline Versions API
   version: 1.181.0
 tags:
-- name: pipeline-versions
+- name: Pipeline Versions
 paths:
   /pipelines/{pipelineId}/versions:
     get:
@@ -68,7 +68,7 @@ paths:
       - BearerAuth: []
       summary: List pipeline versions
       tags:
-      - pipeline-versions
+      - Pipeline Versions
   /pipelines/{pipelineId}/versions/validate:
     get:
       description: Confirms the validity of the given pipeline version `name` in a user context.
@@ -113,10 +113,16 @@ paths:
       - BearerAuth: []
       summary: Validate pipeline version name
       tags:
-      - pipeline-versions
+      - Pipeline Versions
   /pipelines/{pipelineId}/versions/{versionId}:
     post:
-      description: "Updates the details of the pipeline version identified by the given `pipelineId` and `versionId`. \n            **Note**: If `labelIds` is `null`, empty, or omitted, existing pipeline labels are removed.\n            Include `labelIds: [<label-id-1>,<label-id-2>]` to override existing labels. Labels to be preserved must be included.\n            To append a list of labels to multiple pipelines, use `/pipelines/labels/add`."
+      description: 'Updates the details of the pipeline version identified by the given `pipelineId` and `versionId`.
+
+        **Note**: If `labelIds` is `null`, empty, or omitted, existing pipeline labels are removed.
+
+        Include `labelIds: [,]` to override existing labels. Labels to be preserved must be included.
+
+        To append a list of labels to multiple pipelines, use `/pipelines/labels/add`.'
       operationId: UpdatePipelineVersion
       parameters:
       - description: Pipeline numeric identifier
@@ -170,10 +176,14 @@ paths:
       - BearerAuth: []
       summary: Update pipeline version
       tags:
-      - pipeline-versions
+      - Pipeline Versions
   /pipelines/{pipelineId}/versions/{versionId}/manage:
     put:
-      description: "Updates a pipeline version's name and/or marks it as the default version.\n                             When setting a version as default, any previously default version is automatically unset.\n                             Version names cannot be changed if the version is already referenced by workflow runs."
+      description: 'Updates a pipeline version''s name and/or marks it as the default version.
+
+        When setting a version as default, any previously default version is automatically unset.
+
+        Version names cannot be changed if the version is already referenced by workflow runs.'
       operationId: ManagePipelineVersion
       parameters:
       - description: Pipeline numeric identifier
@@ -221,7 +231,7 @@ paths:
       - BearerAuth: []
       summary: Update pipeline version name and default flag
       tags:
-      - pipeline-versions
+      - Pipeline Versions
 components:
   schemas:
     ListPipelineVersionsResponse:
@@ -233,6 +243,11 @@ components:
           items:
             $ref: '#/components/schemas/PipelineDbDto'
           type: array
+      type: object
+    UpdatePipelineResponse:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PipelineDbDto'
       type: object
     WorkflowLaunchRequest:
       properties:
@@ -274,8 +289,9 @@ components:
           type: string
         outputDir:
           description: Per-run output directory passed as Nextflow -output-dir (requires Nextflow 24.10.0 or later and workflow outputs syntax).
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         paramsText:
           type: string
         pipeline:
@@ -305,8 +321,9 @@ components:
           enum:
           - v1
           - v2
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         towerConfig:
           type: string
         userSecrets:
@@ -319,41 +336,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    PipelineVersionFullInfoDto:
-      properties:
-        creatorAvatarUrl:
-          type: string
-        creatorFirstName:
-          type: string
-        creatorLastName:
-          type: string
-        creatorUserId:
-          format: int64
-          type: integer
-        creatorUserName:
-          type: string
-        dateCreated:
-          format: date-time
-          type: string
-        hash:
-          type: string
-        id:
-          type: string
-        isDefault:
-          type: boolean
-        lastUpdated:
-          format: date-time
-          type: string
-        name:
-          type: string
       type: object
     UpdatePipelineRequest:
       properties:
@@ -369,6 +351,38 @@ components:
         launch:
           $ref: '#/components/schemas/WorkflowLaunchRequest'
         name:
+          type: string
+      type: object
+    ComputeEnvDbDto:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        region:
+          type: string
+      type: object
+    LabelDbDto:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        isDynamic:
+          type: boolean
+        isInterpolated:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
           type: string
       type: object
     PipelineDbDto:
@@ -425,25 +439,46 @@ components:
         workspaceName:
           type: string
       type: object
-    LabelDbDto:
+    PipelineVersionManageRequest:
       properties:
-        dateCreated:
-          format: date-time
-          type: string
-        id:
-          format: int64
-          type: integer
         isDefault:
-          type: boolean
-        isDynamic:
-          type: boolean
-        isInterpolated:
           type: boolean
         name:
           type: string
-        resource:
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    PipelineVersionFullInfoDto:
+      properties:
+        creatorAvatarUrl:
+          type: string
+        creatorFirstName:
+          type: string
+        creatorLastName:
+          type: string
+        creatorUserId:
+          format: int64
+          type: integer
+        creatorUserName:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        hash:
+          type: string
+        id:
+          type: string
+        isDefault:
           type: boolean
-        value:
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
           type: string
       type: object
     PipelineOptimizationStatus:
@@ -452,29 +487,6 @@ components:
       - OPTIMIZABLE
       - UNAVAILABLE
       type: string
-    ComputeEnvDbDto:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-        region:
-          type: string
-      type: object
-    UpdatePipelineResponse:
-      properties:
-        pipeline:
-          $ref: '#/components/schemas/PipelineDbDto'
-      type: object
-    PipelineVersionManageRequest:
-      properties:
-        isDefault:
-          type: boolean
-        name:
-          type: string
-      type: object
   securitySchemes:
     BearerAuth:
       bearerFormat: jwt
