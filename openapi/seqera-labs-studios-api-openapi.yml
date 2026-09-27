@@ -724,6 +724,502 @@ paths:
       - Studios
 components:
   schemas:
+    DataStudioCreateResponse:
+      properties:
+        studio:
+          $ref: '#/components/schemas/DataStudioDto'
+      type: object
+    DataStudioTemplatesListResponse:
+      properties:
+        templates:
+          items:
+            $ref: '#/components/schemas/DataStudioTemplate'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      required:
+      - templates
+      - totalSize
+      type: object
+    DataStudioCheckpointUpdateRequest:
+      properties:
+        name:
+          type: string
+      type: object
+    ListComputeEnvsResponse:
+      properties:
+        computeEnvs:
+          items:
+            $ref: '#/components/schemas/ListComputeEnvsResponse.Entry'
+          type: array
+      type: object
+    DataStudioCreateRequest:
+      properties:
+        computeEnvId:
+          minLength: 1
+          type: string
+        configuration:
+          $ref: '#/components/schemas/DataStudioConfiguration'
+        dataStudioToolUrl:
+          type: string
+        description:
+          maxLength: 2048
+          type: string
+        initialCheckpointId:
+          format: int64
+          type: integer
+        isPrivate:
+          type: boolean
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type:
+          - array
+          - 'null'
+        name:
+          maxLength: 80
+          minLength: 1
+          type: string
+        remoteConfig:
+          allOf:
+          - $ref: '#/components/schemas/StudioRemoteConfiguration'
+        spot:
+          type:
+          - boolean
+          - 'null'
+      required:
+      - computeEnvId
+      - name
+      type: object
+    DataLinkCredentials:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        provider:
+          $ref: '#/components/schemas/DataLinkProvider'
+      required:
+      - id
+      - name
+      - provider
+      type: object
+    ComputeEnv.Status:
+      enum:
+      - CREATING
+      - AVAILABLE
+      - DISABLED
+      - DELETING
+      - ERRORED
+      - INVALID
+      - DELETED
+      type: string
+    DataStudioListCheckpointsResponse:
+      properties:
+        checkpoints:
+          items:
+            $ref: '#/components/schemas/DataStudioCheckpointDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      required:
+      - checkpoints
+      - totalSize
+      type: object
+    DataLinkType:
+      enum:
+      - bucket
+      type: string
+      x-enum-varnames:
+      - bucket
+    ListComputeEnvsResponse.Entry:
+      properties:
+        credentialsId:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        fusion2Enabled:
+          type:
+          - boolean
+          - 'null'
+        id:
+          type: string
+        labels:
+          items:
+            $ref: '#/components/schemas/LabelDbDto'
+          type:
+          - array
+          - 'null'
+        lastUsed:
+          format: date-time
+          type: string
+        message:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        primary:
+          type: boolean
+        region:
+          type: string
+        resources:
+          allOf:
+          - $ref: '#/components/schemas/ComputeEnvResources'
+        schedEnabled:
+          type:
+          - boolean
+          - 'null'
+        status:
+          $ref: '#/components/schemas/ComputeEnv.Status'
+        visibility:
+          type: string
+        waveEnabled:
+          type:
+          - boolean
+          - 'null'
+        workDir:
+          type: string
+        workspaceName:
+          type: string
+      type: object
+    DataStudioProgressStep:
+      properties:
+        message:
+          type: string
+        status:
+          $ref: '#/components/schemas/DataStudioProgressStep.Status'
+        warnings:
+          items:
+            type: string
+          type: array
+      type: object
+    DataStudioStopReason:
+      enum:
+      - CREDITS_RUN_OUT
+      - LIFESPAN_EXPIRED
+      - SPOT_RECLAMATION
+      - NO_STATS_AVAIL
+      type: string
+    DataStudioStatusInfo:
+      properties:
+        lastUpdate:
+          format: date-time
+          type: string
+        message:
+          type: string
+        status:
+          $ref: '#/components/schemas/DataStudioStatus'
+        stopReason:
+          $ref: '#/components/schemas/DataStudioStopReason'
+      type: object
+    DataStudioProgressStep.Status:
+      enum:
+      - pending
+      - in-progress
+      - succeeded
+      - errored
+      type: string
+    DataStudioCheckpointDto:
+      properties:
+        author:
+          $ref: '#/components/schemas/UserInfo'
+        dateCreated:
+          format: date-time
+          type: string
+        dateSaved:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        path:
+          type: string
+        status:
+          $ref: '#/components/schemas/StudioCheckpointStatus'
+      required:
+      - author
+      - dateCreated
+      - dateSaved
+      - id
+      - name
+      - path
+      - status
+      type: object
+    MountData:
+      properties:
+        dataLinkId:
+          type: string
+        path:
+          type:
+          - string
+          - 'null'
+      type: object
+    UserInfo:
+      properties:
+        avatar:
+          type: string
+        email:
+          type: string
+        id:
+          format: int64
+          type: integer
+        userName:
+          type: string
+      type: object
+    DataStudioStartRequest:
+      properties:
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/DataStudioConfiguration'
+        description:
+          type:
+          - string
+          - 'null'
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type:
+          - array
+          - 'null'
+        name:
+          maxLength: 80
+          minLength: 1
+          type:
+          - string
+          - 'null'
+        spot:
+          type:
+          - boolean
+          - 'null'
+      type: object
+    DataLinkProvider:
+      enum:
+      - aws
+      - google
+      - azure
+      - azure_entra
+      - azure-cloud
+      - seqeracompute
+      - s3
+      type: string
+    DataStudioStartResponse:
+      properties:
+        jobSubmitted:
+          type: boolean
+        sessionId:
+          type: string
+        statusInfo:
+          $ref: '#/components/schemas/DataStudioStatusInfo'
+      required:
+      - jobSubmitted
+      - sessionId
+      - statusInfo
+      type: object
+    DataLinkDto:
+      properties:
+        credentials:
+          items:
+            $ref: '#/components/schemas/DataLinkCredentials'
+          type: array
+        description:
+          type: string
+        hidden:
+          type: boolean
+        id:
+          type: string
+        message:
+          type: string
+        name:
+          type: string
+        provider:
+          $ref: '#/components/schemas/DataLinkProvider'
+        publicAccessible:
+          type: boolean
+        region:
+          type: string
+        resourceRef:
+          type: string
+        status:
+          allOf:
+          - $ref: '#/components/schemas/DataLink.Status'
+          readOnly: true
+        type:
+          $ref: '#/components/schemas/DataLinkType'
+      type: object
+    DataStudioQueryAttribute:
+      enum:
+      - labels
+      type: string
+      x-enum-varnames:
+      - labels
+    DataStudioConfiguration:
+      properties:
+        condaEnvironment:
+          maxLength: 2048
+          type: string
+        cpu:
+          format: int32
+          minimum: 0
+          type: integer
+        environment:
+          additionalProperties:
+            type: string
+          type:
+          - object
+          - 'null'
+        gpu:
+          format: int32
+          minimum: 0
+          type: integer
+        lifespanHours:
+          format: int32
+          minimum: 0
+          type: integer
+        memory:
+          format: int32
+          minimum: 0
+          type: integer
+        mountData:
+          deprecated: true
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        mountDataV2:
+          items:
+            $ref: '#/components/schemas/MountData'
+          type:
+          - array
+          - 'null'
+        sshEnabled:
+          type:
+          - boolean
+          - 'null'
+      type: object
+    ComputeEnvQueryAttribute:
+      enum:
+      - labels
+      - resources
+      type: string
+      x-enum-varnames:
+      - labels
+      - resources
+    DataStudioMountedLinksResponse:
+      properties:
+        dataLinkIds:
+          items:
+            type: string
+          type: array
+      type: object
+    DataStudioUpdateRequest:
+      properties:
+        computeEnvId:
+          type:
+          - string
+          - 'null'
+        configuration:
+          allOf:
+          - $ref: '#/components/schemas/DataStudioConfiguration'
+        description:
+          maxLength: 2048
+          type:
+          - string
+          - 'null'
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type:
+          - array
+          - 'null'
+        name:
+          maxLength: 80
+          minLength: 1
+          type:
+          - string
+          - 'null'
+      type: object
+    ComputeEnvDbDto:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        region:
+          type: string
+      type: object
+    DataStudioListResponse:
+      properties:
+        studios:
+          items:
+            $ref: '#/components/schemas/DataStudioDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      required:
+      - studios
+      - totalSize
+      type: object
+    ActiveConnection:
+      allOf:
+      - $ref: '#/components/schemas/UserInfo'
+      - properties:
+          lastActive:
+            format: date-time
+            type: string
+        type: object
+      type: object
+    StudioRemoteConfiguration:
+      properties:
+        commitId:
+          type:
+          - string
+          - 'null'
+        repository:
+          type: string
+        revision:
+          type:
+          - string
+          - 'null'
+      required:
+      - repository
+      type: object
+    DataStudioTemplate:
+      properties:
+        icon:
+          type: string
+        repository:
+          type: string
+        status:
+          $ref: '#/components/schemas/DataStudioVersionStatus'
+        tool:
+          type: string
+      type: object
+    DataStudioVersionStatus:
+      enum:
+      - recommended
+      - deprecated
+      - experimental
+      - unsupported
+      type: string
+      x-enum-varnames:
+      - recommended
+      - deprecated
+      - experimental
+      - unsupported
     DataStudioDto:
       properties:
         activeConnections:
@@ -793,36 +1289,42 @@ components:
           format: int64
           type: integer
       type: object
-    DataLinkDto:
+    DataStudioStopResponse:
       properties:
-        credentials:
-          items:
-            $ref: '#/components/schemas/DataLinkCredentials'
-          type: array
-        description:
-          type: string
-        hidden:
+        jobSubmitted:
           type: boolean
-        id:
+        sessionId:
           type: string
-        message:
+        statusInfo:
+          $ref: '#/components/schemas/DataStudioStatusInfo'
+      required:
+      - jobSubmitted
+      - sessionId
+      - statusInfo
+      type: object
+    StudioCheckpointStatus:
+      enum:
+      - empty
+      - interim
+      - finalized
+      - invalid
+      type: string
+      x-enum-varnames:
+      - empty
+      - interim
+      - finalized
+      - invalid
+    DataStudioDto.ParentCheckpoint:
+      properties:
+        checkpointId:
+          format: int64
+          type: integer
+        checkpointName:
           type: string
-        name:
+        sessionId:
           type: string
-        provider:
-          $ref: '#/components/schemas/DataLinkProvider'
-        publicAccessible:
-          type: boolean
-        region:
+        studioName:
           type: string
-        resourceRef:
-          type: string
-        status:
-          allOf:
-          - $ref: '#/components/schemas/DataLink.Status'
-          readOnly: true
-        type:
-          $ref: '#/components/schemas/DataLinkType'
       type: object
     LabelDbDto:
       properties:
@@ -845,228 +1347,13 @@ components:
         value:
           type: string
       type: object
-    DataLink.Status:
-      enum:
-      - VALID
-      - INVALID
-      readOnly: true
-      type: string
-    DataStudioTemplatesListResponse:
+    ErrorResponse:
       properties:
-        templates:
-          items:
-            $ref: '#/components/schemas/DataStudioTemplate'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
-      required:
-      - templates
-      - totalSize
-      type: object
-    DataStudioTemplate:
-      properties:
-        icon:
-          type: string
-        repository:
-          type: string
-        status:
-          $ref: '#/components/schemas/DataStudioVersionStatus'
-        tool:
-          type: string
-      type: object
-    DataStudioStartRequest:
-      properties:
-        configuration:
-          allOf:
-          - $ref: '#/components/schemas/DataStudioConfiguration'
-        description:
-          type:
-          - string
-          - 'null'
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type:
-          - array
-          - 'null'
-        name:
-          maxLength: 80
-          minLength: 1
-          type:
-          - string
-          - 'null'
-        spot:
-          type:
-          - boolean
-          - 'null'
-      type: object
-    DataStudioMountedLinksResponse:
-      properties:
-        dataLinkIds:
-          items:
-            type: string
-          type: array
-      type: object
-    DataLinkCredentials:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        provider:
-          $ref: '#/components/schemas/DataLinkProvider'
-      required:
-      - id
-      - name
-      - provider
-      type: object
-    DataStudioDto.ParentCheckpoint:
-      properties:
-        checkpointId:
-          format: int64
-          type: integer
-        checkpointName:
-          type: string
-        sessionId:
-          type: string
-        studioName:
-          type: string
-      type: object
-    DataStudioStatusInfo:
-      properties:
-        lastUpdate:
-          format: date-time
-          type: string
         message:
           type: string
-        status:
-          $ref: '#/components/schemas/DataStudioStatus'
-        stopReason:
-          $ref: '#/components/schemas/DataStudioStopReason'
-      type: object
-    ComputeEnvDbDto:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-        region:
-          type: string
-      type: object
-    DataStudioStopResponse:
-      properties:
-        jobSubmitted:
-          type: boolean
-        sessionId:
-          type: string
-        statusInfo:
-          $ref: '#/components/schemas/DataStudioStatusInfo'
       required:
-      - jobSubmitted
-      - sessionId
-      - statusInfo
+      - message
       type: object
-    DataStudioProgressStep.Status:
-      enum:
-      - pending
-      - in-progress
-      - succeeded
-      - errored
-      type: string
-    ListComputeEnvsResponse:
-      properties:
-        computeEnvs:
-          items:
-            $ref: '#/components/schemas/ListComputeEnvsResponse.Entry'
-          type: array
-      type: object
-    DataStudioComputeEnvDto:
-      allOf:
-      - $ref: '#/components/schemas/ComputeEnvDbDto'
-      - properties:
-          credentialsId:
-            type: string
-          workDir:
-            type: string
-        type: object
-      type: object
-    ComputeEnvQueryAttribute:
-      enum:
-      - labels
-      - resources
-      type: string
-      x-enum-varnames:
-      - labels
-      - resources
-    DataStudioListCheckpointsResponse:
-      properties:
-        checkpoints:
-          items:
-            $ref: '#/components/schemas/DataStudioCheckpointDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
-      required:
-      - checkpoints
-      - totalSize
-      type: object
-    DataStudioVersionStatus:
-      enum:
-      - recommended
-      - deprecated
-      - experimental
-      - unsupported
-      type: string
-      x-enum-varnames:
-      - recommended
-      - deprecated
-      - experimental
-      - unsupported
-    ComputeEnv.Status:
-      enum:
-      - CREATING
-      - AVAILABLE
-      - DISABLED
-      - DELETING
-      - ERRORED
-      - INVALID
-      - DELETED
-      type: string
-    UserInfo:
-      properties:
-        avatar:
-          type: string
-        email:
-          type: string
-        id:
-          format: int64
-          type: integer
-        userName:
-          type: string
-      type: object
-    DataStudioStatus:
-      enum:
-      - starting
-      - running
-      - stopping
-      - stopped
-      - errored
-      - building
-      - buildFailed
-      type: string
-      x-enum-varnames:
-      - starting
-      - running
-      - stopping
-      - stopped
-      - errored
-      - building
-      - buildFailed
     StudioSshDetailsDto:
       description: SSH connection details for a Studio session
       properties:
@@ -1090,271 +1377,6 @@ components:
       - port
       - user
       type: object
-    DataLinkType:
-      enum:
-      - bucket
-      type: string
-      x-enum-varnames:
-      - bucket
-    DataStudioUpdateRequest:
-      properties:
-        computeEnvId:
-          type:
-          - string
-          - 'null'
-        configuration:
-          allOf:
-          - $ref: '#/components/schemas/DataStudioConfiguration'
-        description:
-          maxLength: 2048
-          type:
-          - string
-          - 'null'
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type:
-          - array
-          - 'null'
-        name:
-          maxLength: 80
-          minLength: 1
-          type:
-          - string
-          - 'null'
-      type: object
-    ListComputeEnvsResponse.Entry:
-      properties:
-        credentialsId:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        fusion2Enabled:
-          type:
-          - boolean
-          - 'null'
-        id:
-          type: string
-        labels:
-          items:
-            $ref: '#/components/schemas/LabelDbDto'
-          type:
-          - array
-          - 'null'
-        lastUsed:
-          format: date-time
-          type: string
-        message:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-        primary:
-          type: boolean
-        region:
-          type: string
-        resources:
-          allOf:
-          - $ref: '#/components/schemas/ComputeEnvResources'
-        schedEnabled:
-          type:
-          - boolean
-          - 'null'
-        status:
-          $ref: '#/components/schemas/ComputeEnv.Status'
-        visibility:
-          type: string
-        waveEnabled:
-          type:
-          - boolean
-          - 'null'
-        workDir:
-          type: string
-        workspaceName:
-          type: string
-      type: object
-    DataStudioStartResponse:
-      properties:
-        jobSubmitted:
-          type: boolean
-        sessionId:
-          type: string
-        statusInfo:
-          $ref: '#/components/schemas/DataStudioStatusInfo'
-      required:
-      - jobSubmitted
-      - sessionId
-      - statusInfo
-      type: object
-    DataStudioQueryAttribute:
-      enum:
-      - labels
-      type: string
-      x-enum-varnames:
-      - labels
-    DataStudioStopReason:
-      enum:
-      - CREDITS_RUN_OUT
-      - LIFESPAN_EXPIRED
-      - SPOT_RECLAMATION
-      - NO_STATS_AVAIL
-      type: string
-    StudioRemoteConfiguration:
-      properties:
-        commitId:
-          type:
-          - string
-          - 'null'
-        repository:
-          type: string
-        revision:
-          type:
-          - string
-          - 'null'
-      required:
-      - repository
-      type: object
-    DataStudioCreateRequest:
-      properties:
-        computeEnvId:
-          minLength: 1
-          type: string
-        configuration:
-          $ref: '#/components/schemas/DataStudioConfiguration'
-        dataStudioToolUrl:
-          type: string
-        description:
-          maxLength: 2048
-          type: string
-        initialCheckpointId:
-          format: int64
-          type: integer
-        isPrivate:
-          type: boolean
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type:
-          - array
-          - 'null'
-        name:
-          maxLength: 80
-          minLength: 1
-          type: string
-        remoteConfig:
-          allOf:
-          - $ref: '#/components/schemas/StudioRemoteConfiguration'
-        spot:
-          type:
-          - boolean
-          - 'null'
-      required:
-      - computeEnvId
-      - name
-      type: object
-    DataStudioCheckpointDto:
-      properties:
-        author:
-          $ref: '#/components/schemas/UserInfo'
-        dateCreated:
-          format: date-time
-          type: string
-        dateSaved:
-          format: date-time
-          type: string
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-        path:
-          type: string
-        status:
-          $ref: '#/components/schemas/StudioCheckpointStatus'
-      required:
-      - author
-      - dateCreated
-      - dateSaved
-      - id
-      - name
-      - path
-      - status
-      type: object
-    StudioCheckpointStatus:
-      enum:
-      - empty
-      - interim
-      - finalized
-      - invalid
-      type: string
-      x-enum-varnames:
-      - empty
-      - interim
-      - finalized
-      - invalid
-    DataStudioCreateResponse:
-      properties:
-        studio:
-          $ref: '#/components/schemas/DataStudioDto'
-      type: object
-    ActiveConnection:
-      allOf:
-      - $ref: '#/components/schemas/UserInfo'
-      - properties:
-          lastActive:
-            format: date-time
-            type: string
-        type: object
-      type: object
-    MountData:
-      properties:
-        dataLinkId:
-          type: string
-        path:
-          type:
-          - string
-          - 'null'
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    DataStudioCheckpointUpdateRequest:
-      properties:
-        name:
-          type: string
-      type: object
-    DataStudioListResponse:
-      properties:
-        studios:
-          items:
-            $ref: '#/components/schemas/DataStudioDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
-      required:
-      - studios
-      - totalSize
-      type: object
-    DataLinkProvider:
-      enum:
-      - aws
-      - google
-      - azure
-      - azure_entra
-      - azure-cloud
-      - seqeracompute
-      - s3
-      type: string
     ComputeEnvResources:
       properties:
         cpus:
@@ -1391,62 +1413,40 @@ components:
           - integer
           - 'null'
       type: object
-    DataStudioConfiguration:
-      properties:
-        condaEnvironment:
-          maxLength: 2048
-          type: string
-        cpu:
-          format: int32
-          minimum: 0
-          type: integer
-        environment:
-          additionalProperties:
+    DataStudioComputeEnvDto:
+      allOf:
+      - $ref: '#/components/schemas/ComputeEnvDbDto'
+      - properties:
+          credentialsId:
             type: string
-          type:
-          - object
-          - 'null'
-        gpu:
-          format: int32
-          minimum: 0
-          type: integer
-        lifespanHours:
-          format: int32
-          minimum: 0
-          type: integer
-        memory:
-          format: int32
-          minimum: 0
-          type: integer
-        mountData:
-          deprecated: true
-          items:
+          workDir:
             type: string
-          type:
-          - array
-          - 'null'
-        mountDataV2:
-          items:
-            $ref: '#/components/schemas/MountData'
-          type:
-          - array
-          - 'null'
-        sshEnabled:
-          type:
-          - boolean
-          - 'null'
+        type: object
       type: object
-    DataStudioProgressStep:
-      properties:
-        message:
-          type: string
-        status:
-          $ref: '#/components/schemas/DataStudioProgressStep.Status'
-        warnings:
-          items:
-            type: string
-          type: array
-      type: object
+    DataStudioStatus:
+      enum:
+      - starting
+      - running
+      - stopping
+      - stopped
+      - errored
+      - building
+      - buildFailed
+      type: string
+      x-enum-varnames:
+      - starting
+      - running
+      - stopping
+      - stopped
+      - errored
+      - building
+      - buildFailed
+    DataLink.Status:
+      enum:
+      - VALID
+      - INVALID
+      readOnly: true
+      type: string
   securitySchemes:
     BearerAuth:
       bearerFormat: jwt

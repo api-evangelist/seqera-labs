@@ -234,6 +234,138 @@ paths:
       - Pipeline Versions
 components:
   schemas:
+    PipelineVersionFullInfoDto:
+      properties:
+        creatorAvatarUrl:
+          type: string
+        creatorFirstName:
+          type: string
+        creatorLastName:
+          type: string
+        creatorUserId:
+          format: int64
+          type: integer
+        creatorUserName:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        hash:
+          type: string
+        id:
+          type: string
+        isDefault:
+          type: boolean
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
+          type: string
+      type: object
+    PipelineDbDto:
+      properties:
+        computeEnv:
+          $ref: '#/components/schemas/ComputeEnvDbDto'
+        deleted:
+          type: boolean
+        description:
+          type: string
+        icon:
+          type: string
+        labels:
+          items:
+            $ref: '#/components/schemas/LabelDbDto'
+          type: array
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
+          type: string
+        optimizationId:
+          type: string
+        optimizationStatus:
+          $ref: '#/components/schemas/PipelineOptimizationStatus'
+        optimizationTargets:
+          type: string
+        orgId:
+          format: int64
+          type: integer
+        orgName:
+          type: string
+        pipelineId:
+          format: int64
+          type: integer
+        repository:
+          type: string
+        userFirstName:
+          type: string
+        userId:
+          format: int64
+          type: integer
+        userLastName:
+          type: string
+        userName:
+          type: string
+        version:
+          $ref: '#/components/schemas/PipelineVersionFullInfoDto'
+        visibility:
+          type: string
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+    UpdatePipelineResponse:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PipelineDbDto'
+      type: object
+    LabelDbDto:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        isDynamic:
+          type: boolean
+        isInterpolated:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    PipelineOptimizationStatus:
+      enum:
+      - OPTIMIZED
+      - OPTIMIZABLE
+      - UNAVAILABLE
+      type: string
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    ComputeEnvDbDto:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        region:
+          type: string
+      type: object
     ListPipelineVersionsResponse:
       properties:
         totalSize:
@@ -244,10 +376,28 @@ components:
             $ref: '#/components/schemas/PipelineDbDto'
           type: array
       type: object
-    UpdatePipelineResponse:
+    PipelineVersionManageRequest:
       properties:
-        pipeline:
-          $ref: '#/components/schemas/PipelineDbDto'
+        isDefault:
+          type: boolean
+        name:
+          type: string
+      type: object
+    UpdatePipelineRequest:
+      properties:
+        description:
+          type: string
+        icon:
+          type: string
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        launch:
+          $ref: '#/components/schemas/WorkflowLaunchRequest'
+        name:
+          type: string
       type: object
     WorkflowLaunchRequest:
       properties:
@@ -337,156 +487,6 @@ components:
             type: string
           type: array
       type: object
-    UpdatePipelineRequest:
-      properties:
-        description:
-          type: string
-        icon:
-          type: string
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-        launch:
-          $ref: '#/components/schemas/WorkflowLaunchRequest'
-        name:
-          type: string
-      type: object
-    ComputeEnvDbDto:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-        region:
-          type: string
-      type: object
-    LabelDbDto:
-      properties:
-        dateCreated:
-          format: date-time
-          type: string
-        id:
-          format: int64
-          type: integer
-        isDefault:
-          type: boolean
-        isDynamic:
-          type: boolean
-        isInterpolated:
-          type: boolean
-        name:
-          type: string
-        resource:
-          type: boolean
-        value:
-          type: string
-      type: object
-    PipelineDbDto:
-      properties:
-        computeEnv:
-          $ref: '#/components/schemas/ComputeEnvDbDto'
-        deleted:
-          type: boolean
-        description:
-          type: string
-        icon:
-          type: string
-        labels:
-          items:
-            $ref: '#/components/schemas/LabelDbDto'
-          type: array
-        lastUpdated:
-          format: date-time
-          type: string
-        name:
-          type: string
-        optimizationId:
-          type: string
-        optimizationStatus:
-          $ref: '#/components/schemas/PipelineOptimizationStatus'
-        optimizationTargets:
-          type: string
-        orgId:
-          format: int64
-          type: integer
-        orgName:
-          type: string
-        pipelineId:
-          format: int64
-          type: integer
-        repository:
-          type: string
-        userFirstName:
-          type: string
-        userId:
-          format: int64
-          type: integer
-        userLastName:
-          type: string
-        userName:
-          type: string
-        version:
-          $ref: '#/components/schemas/PipelineVersionFullInfoDto'
-        visibility:
-          type: string
-        workspaceId:
-          format: int64
-          type: integer
-        workspaceName:
-          type: string
-      type: object
-    PipelineVersionManageRequest:
-      properties:
-        isDefault:
-          type: boolean
-        name:
-          type: string
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    PipelineVersionFullInfoDto:
-      properties:
-        creatorAvatarUrl:
-          type: string
-        creatorFirstName:
-          type: string
-        creatorLastName:
-          type: string
-        creatorUserId:
-          format: int64
-          type: integer
-        creatorUserName:
-          type: string
-        dateCreated:
-          format: date-time
-          type: string
-        hash:
-          type: string
-        id:
-          type: string
-        isDefault:
-          type: boolean
-        lastUpdated:
-          format: date-time
-          type: string
-        name:
-          type: string
-      type: object
-    PipelineOptimizationStatus:
-      enum:
-      - OPTIMIZED
-      - OPTIMIZABLE
-      - UNAVAILABLE
-      type: string
   securitySchemes:
     BearerAuth:
       bearerFormat: jwt

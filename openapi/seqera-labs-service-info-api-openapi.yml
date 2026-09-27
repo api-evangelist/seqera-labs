@@ -31,6 +31,34 @@ paths:
       - service-info
 components:
   schemas:
+    NavbarConfig:
+      properties:
+        menus:
+          items:
+            $ref: '#/components/schemas/NavbarConfig.NavbarMenu'
+          type: array
+      type: object
+    Analytics:
+      properties:
+        hubspotId:
+          type: string
+        posthogApiHost:
+          type: string
+        posthogApiKey:
+          type: string
+      type: object
+    ServiceInfoResponse:
+      properties:
+        serviceInfo:
+          $ref: '#/components/schemas/ServiceInfo'
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
     ServiceInfo:
       properties:
         allowInstanceCredentials:
@@ -113,40 +141,12 @@ components:
         waveEnabled:
           type: boolean
       type: object
-    ServiceInfoResponse:
-      properties:
-        serviceInfo:
-          $ref: '#/components/schemas/ServiceInfo'
-      type: object
-    Analytics:
-      properties:
-        hubspotId:
-          type: string
-        posthogApiHost:
-          type: string
-        posthogApiKey:
-          type: string
-      type: object
     NavbarConfig.NavbarMenu:
       properties:
         label:
           type: string
         url:
           type: string
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    NavbarConfig:
-      properties:
-        menus:
-          items:
-            $ref: '#/components/schemas/NavbarConfig.NavbarMenu'
-          type: array
       type: object
   securitySchemes:
     BearerAuth:

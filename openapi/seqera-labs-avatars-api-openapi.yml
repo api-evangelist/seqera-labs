@@ -82,6 +82,13 @@ paths:
       - Avatars
 components:
   schemas:
+    CreateAvatarResponse:
+      properties:
+        avatar:
+          $ref: '#/components/schemas/Avatar'
+        url:
+          type: string
+      type: object
     ErrorResponse:
       properties:
         message:
@@ -99,13 +106,6 @@ components:
           type: string
         lastUpdated:
           format: date-time
-          type: string
-      type: object
-    CreateAvatarResponse:
-      properties:
-        avatar:
-          $ref: '#/components/schemas/Avatar'
-        url:
           type: string
       type: object
   securitySchemes:

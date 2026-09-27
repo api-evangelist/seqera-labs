@@ -190,51 +190,6 @@ paths:
       - ga4gh
 components:
   schemas:
-    Log:
-      properties:
-        cmd:
-          items:
-            type: string
-          type: array
-        end_time:
-          type: string
-        exit_code:
-          format: int32
-          type: integer
-        name:
-          type: string
-        start_time:
-          type: string
-        stderr:
-          type: string
-        stdout:
-          type: string
-      type: object
-    DefaultWorkflowEngineParameter:
-      properties:
-        default_value:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-      type: object
-    RunId:
-      properties:
-        run_id:
-          type: string
-      type: object
-    EmptyBodyRequest:
-      type: object
-    RunListResponse:
-      properties:
-        next_page_token:
-          type: string
-        runs:
-          items:
-            $ref: '#/components/schemas/RunStatus'
-          type: array
-      type: object
     State:
       enum:
       - UNKNOWN
@@ -248,14 +203,6 @@ components:
       - CANCELED
       - CANCELING
       type: string
-    WesErrorResponse:
-      properties:
-        msg:
-          type: string
-        status_code:
-          format: int32
-          type: integer
-      type: object
     RunStatus:
       properties:
         run_id:
@@ -299,28 +246,30 @@ components:
             $ref: '#/components/schemas/WorkflowTypeVersion'
           type: object
       type: object
-    RunLog:
+    DefaultWorkflowEngineParameter:
       properties:
-        outputs:
-          type: object
-        request:
-          $ref: '#/components/schemas/RunRequest'
-        run_id:
+        default_value:
           type: string
-        run_log:
-          $ref: '#/components/schemas/Log'
-        state:
-          $ref: '#/components/schemas/State'
-        task_logs:
-          items:
-            $ref: '#/components/schemas/Log'
-          type: array
+        name:
+          type: string
+        type:
+          type: string
       type: object
-    WorkflowTypeVersion:
+    WesErrorResponse:
       properties:
-        workflow_type_version:
+        msg:
+          type: string
+        status_code:
+          format: int32
+          type: integer
+      type: object
+    RunListResponse:
+      properties:
+        next_page_token:
+          type: string
+        runs:
           items:
-            type: string
+            $ref: '#/components/schemas/RunStatus'
           type: array
       type: object
     RunRequest:
@@ -340,6 +289,57 @@ components:
         workflow_type_version:
           type: string
         workflow_url:
+          type: string
+      type: object
+    WorkflowTypeVersion:
+      properties:
+        workflow_type_version:
+          items:
+            type: string
+          type: array
+      type: object
+    RunId:
+      properties:
+        run_id:
+          type: string
+      type: object
+    RunLog:
+      properties:
+        outputs:
+          type: object
+        request:
+          $ref: '#/components/schemas/RunRequest'
+        run_id:
+          type: string
+        run_log:
+          $ref: '#/components/schemas/Log'
+        state:
+          $ref: '#/components/schemas/State'
+        task_logs:
+          items:
+            $ref: '#/components/schemas/Log'
+          type: array
+      type: object
+    EmptyBodyRequest:
+      type: object
+    Log:
+      properties:
+        cmd:
+          items:
+            type: string
+          type: array
+        end_time:
+          type: string
+        exit_code:
+          format: int32
+          type: integer
+        name:
+          type: string
+        start_time:
+          type: string
+        stderr:
+          type: string
+        stdout:
           type: string
       type: object
   securitySchemes:

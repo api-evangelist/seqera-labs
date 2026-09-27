@@ -157,22 +157,6 @@ paths:
       - Users
 components:
   schemas:
-    WaveBuildNotification:
-      enum:
-      - ALWAYS_ON
-      - ON_ERROR
-      - ALWAYS_OFF
-      type: string
-    DescribeUserResponse:
-      properties:
-        defaultWorkspaceId:
-          format: int64
-          type: integer
-        needConsent:
-          type: boolean
-        user:
-          $ref: '#/components/schemas/UserResponseDto'
-      type: object
     UserResponseDto:
       properties:
         avatar:
@@ -222,6 +206,12 @@ components:
       required:
       - message
       type: object
+    WaveBuildNotification:
+      enum:
+      - ALWAYS_ON
+      - ON_ERROR
+      - ALWAYS_OFF
+      type: string
     UpsertUserRequest:
       properties:
         avatar:
@@ -260,6 +250,16 @@ components:
       required:
       - email
       - userName
+      type: object
+    DescribeUserResponse:
+      properties:
+        defaultWorkspaceId:
+          format: int64
+          type: integer
+        needConsent:
+          type: boolean
+        user:
+          $ref: '#/components/schemas/UserResponseDto'
       type: object
   securitySchemes:
     BearerAuth:

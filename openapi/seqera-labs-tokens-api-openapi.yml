@@ -120,17 +120,17 @@ paths:
       - Tokens
 components:
   schemas:
+    ListAccessTokensResponse:
+      properties:
+        tokens:
+          items:
+            $ref: '#/components/schemas/AccessToken'
+          type: array
+      type: object
     CreateAccessTokenRequest:
       properties:
         name:
           type: string
-      type: object
-    CreateAccessTokenResponse:
-      properties:
-        accessKey:
-          type: string
-        token:
-          $ref: '#/components/schemas/AccessToken'
       type: object
     ErrorResponse:
       properties:
@@ -138,13 +138,6 @@ components:
           type: string
       required:
       - message
-      type: object
-    ListAccessTokensResponse:
-      properties:
-        tokens:
-          items:
-            $ref: '#/components/schemas/AccessToken'
-          type: array
       type: object
     AccessToken:
       properties:
@@ -166,6 +159,13 @@ components:
           type: string
       required:
       - name
+      type: object
+    CreateAccessTokenResponse:
+      properties:
+        accessKey:
+          type: string
+        token:
+          $ref: '#/components/schemas/AccessToken'
       type: object
   securitySchemes:
     BearerAuth:

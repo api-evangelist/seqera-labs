@@ -147,101 +147,6 @@ paths:
       - Platforms
 components:
   schemas:
-    Vpc:
-      properties:
-        id:
-          type: string
-        isDefault:
-          type: boolean
-      type: object
-    GoogleImage:
-      properties:
-        arch:
-          type: string
-        description:
-          type: string
-        id:
-          type: string
-        name:
-          type: string
-        qualifiedName:
-          type: string
-      type: object
-    GridPlatformMetainfo:
-      allOf:
-      - $ref: '#/components/schemas/PlatformMetainfo'
-      title: Grid platform metainfo
-      type: object
-    InstanceType:
-      properties:
-        arch:
-          type: string
-        features:
-          description: Capability features advertised for this instance type (e.g. GPU, NVMe). Absent when the data source does not publish features; an empty list means none.
-          items:
-            $ref: '#/components/schemas/Feature'
-          type: array
-        id:
-          type: string
-      required:
-      - arch
-      type: object
-    K8sPlatformMetaInfo:
-      allOf:
-      - $ref: '#/components/schemas/PlatformMetainfo'
-      title: Kubernetes platform metainfo
-      type: object
-    EfsFileSystem:
-      properties:
-        id:
-          type: string
-      type: object
-    JobQueue:
-      properties:
-        name:
-          type: string
-        state:
-          type: string
-      required:
-      - name
-      - state
-      type: object
-    SecurityGroup:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        vpcId:
-          type: string
-      type: object
-    AzCloudPlatformMetaInfo:
-      allOf:
-      - $ref: '#/components/schemas/PlatformMetainfo'
-      - properties:
-          containers:
-            items:
-              type: string
-            type: array
-          instanceTypes:
-            items:
-              type: string
-            type: array
-          networks:
-            items:
-              $ref: '#/components/schemas/AzNetwork'
-            type: array
-          subnets:
-            items:
-              $ref: '#/components/schemas/AzSubnet'
-            type: array
-          warnings:
-            items:
-              type: string
-            type: array
-        type: object
-      title: Azure Cloud platform metainfo
-      type: object
     PlatformMetainfo:
       discriminator:
         mapping:
@@ -276,51 +181,22 @@ components:
           description: property to select the platform metainfo type
           type: string
       type: object
-    GooglePlatformMetainfo:
-      allOf:
-      - $ref: '#/components/schemas/PlatformMetainfo'
-      - properties:
-          buckets:
-            items:
-              $ref: '#/components/schemas/GooglePlatformMetainfo.Bucket'
-            type: array
-          filestores:
-            items:
-              $ref: '#/components/schemas/GooglePlatformMetainfo.Filestore'
-            type: array
-          images:
-            items:
-              $ref: '#/components/schemas/GoogleImage'
-            type: array
-          instanceTypes:
-            items:
-              $ref: '#/components/schemas/GoogleInstanceType'
-            type: array
-          locations:
-            items:
-              type: string
-            type: array
-          warnings:
-            items:
-              type: string
-            type: array
-          zones:
-            items:
-              type: string
-            type: array
-        type: object
-      title: Google Batch platform metainfo
-      type: object
-    GoogleInstanceType:
+    GoogleImage:
       properties:
         arch:
           type: string
-        features:
-          description: Capability features advertised for this instance type (e.g. GPU). Absent when the data source does not publish features; an empty list means none.
-          items:
-            $ref: '#/components/schemas/Feature'
-          type: array
+        description:
+          type: string
         id:
+          type: string
+        name:
+          type: string
+        qualifiedName:
+          type: string
+      type: object
+    Bucket:
+      properties:
+        path:
           type: string
       type: object
     SeqeraComputePlatformMetainfo:
@@ -382,6 +258,228 @@ components:
         type: object
       title: Seqera Compute platform metainfo
       type: object
+    InstanceType:
+      properties:
+        arch:
+          type: string
+        features:
+          description: Capability features advertised for this instance type (e.g. GPU, NVMe). Absent when the data source does not publish features; an empty list means none.
+          items:
+            $ref: '#/components/schemas/Feature'
+          type: array
+        id:
+          type: string
+      required:
+      - arch
+      type: object
+    GridPlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      title: Grid platform metainfo
+      type: object
+    ComputeRegion:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    Feature:
+      enum:
+      - AMD
+      - ARM
+      - SCHED
+      - GPU
+      - FPGA
+      - NVME
+      type: string
+    GooglePlatformMetainfo.Bucket:
+      properties:
+        path:
+          type: string
+      type: object
+    ListRegionsResponse:
+      properties:
+        regions:
+          items:
+            $ref: '#/components/schemas/ComputeRegion'
+          type: array
+      type: object
+    ComputePlatform:
+      properties:
+        credentialsProviders:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    AzNetwork:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        region:
+          type: string
+        resourceGroup:
+          type: string
+      type: object
+    ListPlatformsResponse:
+      properties:
+        platforms:
+          items:
+            $ref: '#/components/schemas/ComputePlatform'
+          type: array
+      type: object
+    Subnet:
+      properties:
+        id:
+          type: string
+        vpcId:
+          type: string
+        zone:
+          type: string
+      type: object
+    Vpc:
+      properties:
+        id:
+          type: string
+        isDefault:
+          type: boolean
+      type: object
+    GooglePlatformMetainfo.Filestore:
+      properties:
+        location:
+          type: string
+        name:
+          type: string
+        target:
+          type: string
+      type: object
+    AwsCloudPlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          buckets:
+            items:
+              $ref: '#/components/schemas/Bucket'
+            type: array
+          images:
+            items:
+              $ref: '#/components/schemas/Image'
+            type: array
+          instanceTypes:
+            items:
+              $ref: '#/components/schemas/InstanceType'
+            type: array
+          keyPairs:
+            items:
+              type: string
+            type: array
+          securityGroups:
+            items:
+              $ref: '#/components/schemas/SecurityGroup'
+            type: array
+          subnets:
+            items:
+              $ref: '#/components/schemas/Subnet'
+            type: array
+          vpcs:
+            items:
+              $ref: '#/components/schemas/Vpc'
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+        type: object
+      title: AWS Cloud platform metainfo
+      type: object
+    AzBatchPlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          containers:
+            items:
+              type: string
+            type: array
+          pools:
+            items:
+              type: string
+            type: array
+          vmTypes:
+            items:
+              type: string
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Azure Batch platform metainfo
+      type: object
+    GooglePlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          buckets:
+            items:
+              $ref: '#/components/schemas/GooglePlatformMetainfo.Bucket'
+            type: array
+          filestores:
+            items:
+              $ref: '#/components/schemas/GooglePlatformMetainfo.Filestore'
+            type: array
+          images:
+            items:
+              $ref: '#/components/schemas/GoogleImage'
+            type: array
+          instanceTypes:
+            items:
+              $ref: '#/components/schemas/GoogleInstanceType'
+            type: array
+          locations:
+            items:
+              type: string
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+          zones:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Google Batch platform metainfo
+      type: object
+    GoogleBucket:
+      properties:
+        path:
+          type: string
+      type: object
+    DescribePlatformResponse:
+      properties:
+        metainfo:
+          $ref: '#/components/schemas/PlatformMetainfo'
+      type: object
+    FsxFileSystem:
+      properties:
+        dns:
+          type: string
+        id:
+          type: string
+        mount:
+          type: string
+      type: object
+    EfsFileSystem:
+      properties:
+        id:
+          type: string
+      type: object
     AwsBatchPlatformMetainfo:
       allOf:
       - $ref: '#/components/schemas/PlatformMetainfo'
@@ -437,28 +535,47 @@ components:
         type: object
       title: AWS Batch platform metainfo
       type: object
-    AzNetwork:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        region:
-          type: string
-        resourceGroup:
-          type: string
+    GkePlatformMetaInfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          clusters:
+            items:
+              type: string
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Google GKE platform metainfo
       type: object
-    ComputeRegion:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      type: object
-    GooglePlatformMetainfo.Bucket:
-      properties:
-        path:
-          type: string
+    AzCloudPlatformMetaInfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      - properties:
+          containers:
+            items:
+              type: string
+            type: array
+          instanceTypes:
+            items:
+              type: string
+            type: array
+          networks:
+            items:
+              $ref: '#/components/schemas/AzNetwork'
+            type: array
+          subnets:
+            items:
+              $ref: '#/components/schemas/AzSubnet'
+            type: array
+          warnings:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Azure Cloud platform metainfo
       type: object
     AzSubnet:
       properties:
@@ -469,33 +586,36 @@ components:
         region:
           type: string
       type: object
-    ListRegionsResponse:
-      properties:
-        regions:
-          items:
-            $ref: '#/components/schemas/ComputeRegion'
-          type: array
+    K8sPlatformMetaInfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      title: Kubernetes platform metainfo
       type: object
-    DescribePlatformResponse:
-      properties:
-        metainfo:
-          $ref: '#/components/schemas/PlatformMetainfo'
+    LocalPlatformMetainfo:
+      allOf:
+      - $ref: '#/components/schemas/PlatformMetainfo'
+      title: Local platform metainfo
       type: object
-    Image:
+    SecurityGroup:
       properties:
-        arch:
-          type: string
-        description:
-          type: string
         id:
           type: string
         name:
           type: string
-      required:
-      - arch
-      - description
-      - id
-      - name
+        vpcId:
+          type: string
+      type: object
+    GoogleInstanceType:
+      properties:
+        arch:
+          type: string
+        features:
+          description: Capability features advertised for this instance type (e.g. GPU). Absent when the data source does not publish features; an empty list means none.
+          items:
+            $ref: '#/components/schemas/Feature'
+          type: array
+        id:
+          type: string
       type: object
     EksPlatformMetaInfo:
       allOf:
@@ -512,63 +632,28 @@ components:
         type: object
       title: Amazon EKS platform metainfo
       type: object
-    GoogleBucket:
+    ErrorResponse:
       properties:
-        path:
+        message:
           type: string
+      required:
+      - message
       type: object
-    AwsCloudPlatformMetainfo:
-      allOf:
-      - $ref: '#/components/schemas/PlatformMetainfo'
-      - properties:
-          buckets:
-            items:
-              $ref: '#/components/schemas/Bucket'
-            type: array
-          images:
-            items:
-              $ref: '#/components/schemas/Image'
-            type: array
-          instanceTypes:
-            items:
-              $ref: '#/components/schemas/InstanceType'
-            type: array
-          keyPairs:
-            items:
-              type: string
-            type: array
-          securityGroups:
-            items:
-              $ref: '#/components/schemas/SecurityGroup'
-            type: array
-          subnets:
-            items:
-              $ref: '#/components/schemas/Subnet'
-            type: array
-          vpcs:
-            items:
-              $ref: '#/components/schemas/Vpc'
-            type: array
-          warnings:
-            items:
-              type: string
-            type: array
-        type: object
-      title: AWS Cloud platform metainfo
-      type: object
-    Feature:
-      enum:
-      - AMD
-      - ARM
-      - SCHED
-      - GPU
-      - FPGA
-      - NVME
-      type: string
-    Bucket:
+    Image:
       properties:
-        path:
+        arch:
           type: string
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - arch
+      - description
+      - id
+      - name
       type: object
     GoogleCloudPlatformMetaInfo:
       allOf:
@@ -597,100 +682,15 @@ components:
         type: object
       title: Google Cloud platform metainfo
       type: object
-    LocalPlatformMetainfo:
-      allOf:
-      - $ref: '#/components/schemas/PlatformMetainfo'
-      title: Local platform metainfo
-      type: object
-    FsxFileSystem:
+    JobQueue:
       properties:
-        dns:
-          type: string
-        id:
-          type: string
-        mount:
-          type: string
-      type: object
-    GooglePlatformMetainfo.Filestore:
-      properties:
-        location:
-          type: string
         name:
           type: string
-        target:
-          type: string
-      type: object
-    ComputePlatform:
-      properties:
-        credentialsProviders:
-          items:
-            type: string
-          type: array
-        id:
-          type: string
-        name:
-          type: string
-      type: object
-    ErrorResponse:
-      properties:
-        message:
+        state:
           type: string
       required:
-      - message
-      type: object
-    Subnet:
-      properties:
-        id:
-          type: string
-        vpcId:
-          type: string
-        zone:
-          type: string
-      type: object
-    ListPlatformsResponse:
-      properties:
-        platforms:
-          items:
-            $ref: '#/components/schemas/ComputePlatform'
-          type: array
-      type: object
-    GkePlatformMetaInfo:
-      allOf:
-      - $ref: '#/components/schemas/PlatformMetainfo'
-      - properties:
-          clusters:
-            items:
-              type: string
-            type: array
-          warnings:
-            items:
-              type: string
-            type: array
-        type: object
-      title: Google GKE platform metainfo
-      type: object
-    AzBatchPlatformMetainfo:
-      allOf:
-      - $ref: '#/components/schemas/PlatformMetainfo'
-      - properties:
-          containers:
-            items:
-              type: string
-            type: array
-          pools:
-            items:
-              type: string
-            type: array
-          vmTypes:
-            items:
-              type: string
-            type: array
-          warnings:
-            items:
-              type: string
-            type: array
-        type: object
-      title: Azure Batch platform metainfo
+      - name
+      - state
       type: object
   securitySchemes:
     BearerAuth:

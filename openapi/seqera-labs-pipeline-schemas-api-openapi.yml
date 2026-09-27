@@ -49,11 +49,6 @@ paths:
       - pipeline-schemas
 components:
   schemas:
-    CreatePipelineSchemaRequest:
-      properties:
-        content:
-          type: string
-      type: object
     ErrorResponse:
       properties:
         message:
@@ -65,6 +60,11 @@ components:
       properties:
         pipelineSchema:
           $ref: '#/components/schemas/PipelineSchemaDbDto'
+      type: object
+    CreatePipelineSchemaRequest:
+      properties:
+        content:
+          type: string
       type: object
     PipelineSchemaDbDto:
       properties:

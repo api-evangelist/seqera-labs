@@ -467,10 +467,42 @@ paths:
       - Teams
 components:
   schemas:
-    CreateTeamResponse:
+    AddTeamMemberResponse:
       properties:
+        member:
+          $ref: '#/components/schemas/MemberDbDto'
+      type: object
+    ListWorkspacesByTeamResponse:
+      properties:
+        totalSize:
+          format: int64
+          type: integer
+        workspaces:
+          items:
+            $ref: '#/components/schemas/WorkspaceParticipantResponseDto'
+          type: array
+      type: object
+    OrgRole:
+      enum:
+      - owner
+      - member
+      - collaborator
+      type: string
+      x-enum-varnames:
+      - owner
+      - member
+      - collaborator
+    CreateTeamRequest:
+      properties:
+        avatarId:
+          type: string
+        idpGroupId:
+          format: int64
+          type:
+          - integer
+          - 'null'
         team:
-          $ref: '#/components/schemas/TeamDbDto'
+          $ref: '#/components/schemas/Team'
       type: object
     TeamDbDto:
       properties:
@@ -495,41 +527,6 @@ components:
         teamId:
           format: int64
           type: integer
-      type: object
-    CreateTeamMemberRequest:
-      properties:
-        userNameOrEmail:
-          type: string
-      type: object
-    ListWorkspacesByTeamResponse:
-      properties:
-        totalSize:
-          format: int64
-          type: integer
-        workspaces:
-          items:
-            $ref: '#/components/schemas/WorkspaceParticipantResponseDto'
-          type: array
-      type: object
-    WorkspaceParticipantResponseDto:
-      properties:
-        orgId:
-          format: int64
-          type: integer
-        orgName:
-          type: string
-        participantId:
-          format: int64
-          type: integer
-        participantRole:
-          type: string
-        workspaceFullName:
-          type: string
-        workspaceId:
-          format: int64
-          type: integer
-        workspaceName:
-          type: string
       type: object
     UpdateTeamRequest:
       properties:
@@ -571,17 +568,20 @@ components:
       required:
       - name
       type: object
-    CreateTeamRequest:
+    ListTeamResponse:
       properties:
-        avatarId:
-          type: string
-        idpGroupId:
+        teams:
+          items:
+            $ref: '#/components/schemas/TeamDbDto'
+          type: array
+        totalSize:
           format: int64
-          type:
-          - integer
-          - 'null'
+          type: integer
+      type: object
+    CreateTeamResponse:
+      properties:
         team:
-          $ref: '#/components/schemas/Team'
+          $ref: '#/components/schemas/TeamDbDto'
       type: object
     ErrorResponse:
       properties:
@@ -590,20 +590,45 @@ components:
       required:
       - message
       type: object
-    OrgRole:
-      enum:
-      - owner
-      - member
-      - collaborator
-      type: string
-      x-enum-varnames:
-      - owner
-      - member
-      - collaborator
-    AddTeamMemberResponse:
+    WorkspaceParticipantResponseDto:
       properties:
-        member:
-          $ref: '#/components/schemas/MemberDbDto'
+        orgId:
+          format: int64
+          type: integer
+        orgName:
+          type: string
+        participantId:
+          format: int64
+          type: integer
+        participantRole:
+          type: string
+        workspaceFullName:
+          type: string
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+    DescribeTeamResponse:
+      properties:
+        team:
+          $ref: '#/components/schemas/TeamDbDto'
+      type: object
+    ListMembersResponse:
+      properties:
+        members:
+          items:
+            $ref: '#/components/schemas/MemberDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    CreateTeamMemberRequest:
+      properties:
+        userNameOrEmail:
+          type: string
       type: object
     MemberDbDto:
       properties:
@@ -625,31 +650,6 @@ components:
           type: integer
         userName:
           type: string
-      type: object
-    DescribeTeamResponse:
-      properties:
-        team:
-          $ref: '#/components/schemas/TeamDbDto'
-      type: object
-    ListMembersResponse:
-      properties:
-        members:
-          items:
-            $ref: '#/components/schemas/MemberDbDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
-      type: object
-    ListTeamResponse:
-      properties:
-        teams:
-          items:
-            $ref: '#/components/schemas/TeamDbDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
       type: object
   securitySchemes:
     BearerAuth:

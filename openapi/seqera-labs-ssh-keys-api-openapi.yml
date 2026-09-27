@@ -180,13 +180,6 @@ paths:
       - SSH Keys
 components:
   schemas:
-    ListSshKeysResponse:
-      properties:
-        sshKeys:
-          items:
-            $ref: '#/components/schemas/UserSshPublicKeyDto'
-          type: array
-      type: object
     CreateSshKeyRequest:
       properties:
         name:
@@ -196,6 +189,18 @@ components:
       required:
       - name
       - publicKey
+      type: object
+    DescribeSshKeyResponse:
+      properties:
+        sshKey:
+          $ref: '#/components/schemas/UserSshPublicKeyDto'
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
       type: object
     UserSshPublicKeyDto:
       properties:
@@ -213,17 +218,12 @@ components:
         publicKey:
           type: string
       type: object
-    DescribeSshKeyResponse:
+    ListSshKeysResponse:
       properties:
-        sshKey:
-          $ref: '#/components/schemas/UserSshPublicKeyDto'
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
+        sshKeys:
+          items:
+            $ref: '#/components/schemas/UserSshPublicKeyDto'
+          type: array
       type: object
     CreateSshKeyResponse:
       properties:

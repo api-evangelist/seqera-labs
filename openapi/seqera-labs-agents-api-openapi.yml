@@ -318,6 +318,16 @@ paths:
       - Agents
 components:
   schemas:
+    UpdateAgentResponse:
+      properties:
+        agent:
+          $ref: '#/components/schemas/AgentDbDto'
+      type: object
+    DescribeAgentResponse:
+      properties:
+        agent:
+          $ref: '#/components/schemas/AgentDbDto'
+      type: object
     UpdateAgentRequest:
       properties:
         description:
@@ -333,20 +343,52 @@ components:
           - string
           - 'null'
       type: object
-    DescribeAgentResponse:
+    Agent.Status:
+      enum:
+      - active
+      - inactive
+      - deleted
+      type: string
+      x-enum-varnames:
+      - active
+      - inactive
+      - deleted
+    ErrorResponse:
       properties:
-        agent:
-          $ref: '#/components/schemas/AgentDbDto'
+        message:
+          type: string
+      required:
+      - message
       type: object
-    UpdateAgentResponse:
+    CreateAgentRequest:
       properties:
-        agent:
-          $ref: '#/components/schemas/AgentDbDto'
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        systemPrompt:
+          type: string
+        templateId:
+          type:
+          - string
+          - 'null'
       type: object
     CreateAgentResponse:
       properties:
         agent:
           $ref: '#/components/schemas/AgentDbDto'
+      type: object
+    ListAgentsResponse:
+      properties:
+        agents:
+          items:
+            $ref: '#/components/schemas/AgentDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
       type: object
     AgentDbDto:
       properties:
@@ -382,48 +424,6 @@ components:
           format: int64
           type: integer
       type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    CreateAgentRequest:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        systemPrompt:
-          type: string
-        templateId:
-          type:
-          - string
-          - 'null'
-      type: object
-    ListAgentsResponse:
-      properties:
-        agents:
-          items:
-            $ref: '#/components/schemas/AgentDbDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
-      type: object
-    Agent.Status:
-      enum:
-      - active
-      - inactive
-      - deleted
-      type: string
-      x-enum-varnames:
-      - active
-      - inactive
-      - deleted
   securitySchemes:
     BearerAuth:
       bearerFormat: jwt

@@ -71,7 +71,7 @@ tags_raw:
 - GA4GH
 apis:
 - aid: seqera-labs:seqera-labs-actions-api
-  name: Seqera Labs actions API
+  name: Seqera Labs Actions API
   description: Pipeline actions
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -93,7 +93,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-admin-api
-  name: Seqera Labs admin API
+  name: Seqera Labs Admin API
   description: The admin API from Seqera Labs — 3 operation(s) for admin.
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -115,7 +115,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-agents-api
-  name: Seqera Labs agents API
+  name: Seqera Labs Agents API
   description: The agents API from Seqera Labs — 4 operation(s) for agents.
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -137,7 +137,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-avatars-api
-  name: Seqera Labs avatars API
+  name: Seqera Labs Avatars API
   description: Avatars
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -159,7 +159,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-compute-envs-api
-  name: Seqera Labs compute-envs API
+  name: Seqera Labs Compute Envs API
   description: Compute environments
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -179,7 +179,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-credentials-api
-  name: Seqera Labs credentials API
+  name: Seqera Labs Credentials API
   description: Credentials
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -201,7 +201,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-data-links-api
-  name: Seqera Labs data-links API
+  name: Seqera Labs Data Links API
   description: Cloud storage directory paths in Data Explorer
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -223,7 +223,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-datasets-api
-  name: Seqera Labs datasets API
+  name: Seqera Labs Datasets API
   description: Pipeline input datasets (samplesheets) in CSV or TSV format
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -245,7 +245,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-ga4gh-api
-  name: Seqera Labs ga4gh API
+  name: Seqera Labs Ga4gh API
   description: GA4GH workflow execution service runs
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -267,7 +267,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-identities-api
-  name: Seqera Labs identities API
+  name: Seqera Labs Identities API
   description: The identities API from Seqera Labs — 4 operation(s) for identities.
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -289,7 +289,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-labels-api
-  name: Seqera Labs labels API
+  name: Seqera Labs Labels API
   description: Labels and resource labels
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -311,7 +311,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-launch-api
-  name: Seqera Labs launch API
+  name: Seqera Labs Launch API
   description: Workflow launch events
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -333,7 +333,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-orgs-api
-  name: Seqera Labs orgs API
+  name: Seqera Labs Orgs API
   description: Organizations
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -355,7 +355,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-pipeline-schemas-api
-  name: Seqera Labs pipeline-schemas API
+  name: Seqera Labs Pipeline Schemas API
   description: The pipeline-schemas API from Seqera Labs — 1 operation(s) for pipeline-schemas.
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -375,7 +375,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-pipeline-secrets-api
-  name: Seqera Labs pipeline-secrets API
+  name: Seqera Labs Pipeline Secrets API
   description: Pipeline secrets in a user or workspace context
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -395,7 +395,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-pipeline-versions-api
-  name: Seqera Labs pipeline-versions API
+  name: Seqera Labs Pipeline Versions API
   description: The pipeline-versions API from Seqera Labs — 4 operation(s) for pipeline-versions.
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -417,7 +417,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-pipelines-api
-  name: Seqera Labs pipelines API
+  name: Seqera Labs Pipelines API
   description: Pipelines
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -439,7 +439,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-platforms-api
-  name: Seqera Labs platforms API
+  name: Seqera Labs Platforms API
   description: Computing platforms
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -461,7 +461,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-roles-api
-  name: Seqera Labs roles API
+  name: Seqera Labs Roles API
   description: The roles API from Seqera Labs — 4 operation(s) for roles.
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -483,7 +483,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-service-info-api
-  name: Seqera Labs service-info API
+  name: Seqera Labs Service Info API
   description: Seqera Platform API service information
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -503,7 +503,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-ssh-keys-api
-  name: Seqera Labs ssh-keys API
+  name: Seqera Labs Ssh Keys API
   description: The ssh-keys API from Seqera Labs — 4 operation(s) for ssh-keys.
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -525,7 +525,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-studios-api
-  name: Seqera Labs studios API
+  name: Seqera Labs Studios API
   description: Studios and Studio sessions
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -547,7 +547,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-teams-api
-  name: Seqera Labs teams API
+  name: Seqera Labs Teams API
   description: Teams in an organization context
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -569,7 +569,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-tokens-api
-  name: Seqera Labs tokens API
+  name: Seqera Labs Tokens API
   description: API access tokens
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -591,7 +591,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-trace-api
-  name: Seqera Labs trace API
+  name: Seqera Labs Trace API
   description: Workflow execution traces
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -613,7 +613,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-users-api
-  name: Seqera Labs users API
+  name: Seqera Labs Users API
   description: Users
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -635,7 +635,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-workflows-api
-  name: Seqera Labs workflows API
+  name: Seqera Labs Workflows API
   description: Workflow executions
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io
@@ -657,7 +657,7 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 - aid: seqera-labs:seqera-labs-workspaces-api
-  name: Seqera Labs workspaces API
+  name: Seqera Labs Workspaces API
   description: Workspaces in an organization context
   humanURL: https://docs.seqera.io/platform-cloud/api/overview
   baseURL: https://api.cloud.seqera.io

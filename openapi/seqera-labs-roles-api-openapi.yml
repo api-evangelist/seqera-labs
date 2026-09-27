@@ -302,50 +302,6 @@ components:
       required:
       - description
       type: object
-    ListRolesResponse:
-      properties:
-        roles:
-          items:
-            $ref: '#/components/schemas/ListRolesResponse.RoleInfo'
-          type: array
-        totalSize:
-          format: int32
-          type: integer
-      type: object
-    RoleDto:
-      properties:
-        description:
-          type: string
-        isPredefined:
-          type: boolean
-        name:
-          type: string
-        permissions:
-          items:
-            type: string
-          type: array
-      type: object
-    ListRolePermissionsResponse:
-      properties:
-        permissions:
-          items:
-            $ref: '#/components/schemas/RolePermissionResponseDto'
-          type: array
-      type: object
-    RolePermissionResponseDto:
-      properties:
-        category:
-          type: string
-        name:
-          type: string
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
     CreateRoleRequest:
       properties:
         description:
@@ -372,10 +328,26 @@ components:
             type: string
           type: array
       type: object
-    DescribeRoleResponse:
+    ErrorResponse:
       properties:
-        role:
-          $ref: '#/components/schemas/RoleDto'
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    RolePermissionResponseDto:
+      properties:
+        category:
+          type: string
+        name:
+          type: string
+      type: object
+    ListRolePermissionsResponse:
+      properties:
+        permissions:
+          items:
+            $ref: '#/components/schemas/RolePermissionResponseDto'
+          type: array
       type: object
     ListRolesResponse.RoleInfo:
       properties:
@@ -385,6 +357,34 @@ components:
           type: boolean
         name:
           type: string
+      type: object
+    RoleDto:
+      properties:
+        description:
+          type: string
+        isPredefined:
+          type: boolean
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+      type: object
+    ListRolesResponse:
+      properties:
+        roles:
+          items:
+            $ref: '#/components/schemas/ListRolesResponse.RoleInfo'
+          type: array
+        totalSize:
+          format: int32
+          type: integer
+      type: object
+    DescribeRoleResponse:
+      properties:
+        role:
+          $ref: '#/components/schemas/RoleDto'
       type: object
   securitySchemes:
     BearerAuth:
