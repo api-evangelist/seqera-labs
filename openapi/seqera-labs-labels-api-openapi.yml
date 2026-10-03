@@ -545,47 +545,16 @@ paths:
       - Labels
 components:
   schemas:
-    AllowedDynamicLabelsResponse:
-      properties:
-        values:
-          items:
-            type: string
-          type: array
-      type: object
-    AssociateActionLabelsRequest:
-      properties:
-        actionIds:
-          items:
-            type: string
-          type: array
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-      type: object
-    ListLabelsResponse:
-      properties:
-        labels:
-          items:
-            $ref: '#/components/schemas/LabelDbDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
-      type: object
-    UpdateLabelResponse:
-      properties:
-        id:
-          format: int64
-          type: integer
-        isDefault:
-          type: boolean
-        name:
-          type: string
-        value:
-          type: string
-      type: object
+    LabelType:
+      enum:
+      - simple
+      - resource
+      - all
+      type: string
+      x-enum-varnames:
+      - simple
+      - resource
+      - all
     LabelDbDto:
       properties:
         dateCreated:
@@ -607,6 +576,64 @@ components:
         value:
           type: string
       type: object
+    ListLabelsResponse:
+      properties:
+        labels:
+          items:
+            $ref: '#/components/schemas/LabelDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    CreateLabelRequest:
+      properties:
+        isDefault:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    AssociatePipelineLabelsRequest:
+      properties:
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        pipelineIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
+    AssociateDatasetsLabelsRequest:
+      properties:
+        datasetIds:
+          items:
+            type: string
+          type: array
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
+    AssociateActionLabelsRequest:
+      properties:
+        actionIds:
+          items:
+            type: string
+          type: array
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+      type: object
     AssociateWorkflowLabelsRequest:
       properties:
         labelIds:
@@ -615,6 +642,29 @@ components:
             type: integer
           type: array
         workflowIds:
+          items:
+            type: string
+          type: array
+      type: object
+    UpdateLabelRequest:
+      properties:
+        isDefault:
+          type: boolean
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    AllowedDynamicLabelsResponse:
+      properties:
+        values:
           items:
             type: string
           type: array
@@ -633,61 +683,11 @@ components:
         value:
           type: string
       type: object
-    ErrorResponse:
+    UpdateLabelResponse:
       properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    AssociatePipelineLabelsRequest:
-      properties:
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-        pipelineIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-      type: object
-    CreateLabelRequest:
-      properties:
-        isDefault:
-          type: boolean
-        name:
-          type: string
-        resource:
-          type: boolean
-        value:
-          type: string
-      type: object
-    AssociateDatasetsLabelsRequest:
-      properties:
-        datasetIds:
-          items:
-            type: string
-          type: array
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-      type: object
-    LabelType:
-      enum:
-      - simple
-      - resource
-      - all
-      type: string
-      x-enum-varnames:
-      - simple
-      - resource
-      - all
-    UpdateLabelRequest:
-      properties:
+        id:
+          format: int64
+          type: integer
         isDefault:
           type: boolean
         name:

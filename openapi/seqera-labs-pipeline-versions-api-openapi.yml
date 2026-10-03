@@ -234,6 +234,62 @@ paths:
       - Pipeline Versions
 components:
   schemas:
+    LabelDbDto:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        isDynamic:
+          type: boolean
+        isInterpolated:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    ListPipelineVersionsResponse:
+      properties:
+        totalSize:
+          format: int64
+          type: integer
+        versions:
+          items:
+            $ref: '#/components/schemas/PipelineDbDto'
+          type: array
+      type: object
+    PipelineVersionManageRequest:
+      properties:
+        isDefault:
+          type: boolean
+        name:
+          type: string
+      type: object
+    ComputeEnvDbDto:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        region:
+          type: string
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
     PipelineVersionFullInfoDto:
       properties:
         creatorAvatarUrl:
@@ -261,6 +317,33 @@ components:
           type: string
         name:
           type: string
+      type: object
+    PipelineOptimizationStatus:
+      enum:
+      - OPTIMIZED
+      - OPTIMIZABLE
+      - UNAVAILABLE
+      type: string
+    UpdatePipelineRequest:
+      properties:
+        description:
+          type: string
+        icon:
+          type: string
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        launch:
+          $ref: '#/components/schemas/WorkflowLaunchRequest'
+        name:
+          type: string
+      type: object
+    UpdatePipelineResponse:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PipelineDbDto'
       type: object
     PipelineDbDto:
       properties:
@@ -314,89 +397,6 @@ components:
           format: int64
           type: integer
         workspaceName:
-          type: string
-      type: object
-    UpdatePipelineResponse:
-      properties:
-        pipeline:
-          $ref: '#/components/schemas/PipelineDbDto'
-      type: object
-    LabelDbDto:
-      properties:
-        dateCreated:
-          format: date-time
-          type: string
-        id:
-          format: int64
-          type: integer
-        isDefault:
-          type: boolean
-        isDynamic:
-          type: boolean
-        isInterpolated:
-          type: boolean
-        name:
-          type: string
-        resource:
-          type: boolean
-        value:
-          type: string
-      type: object
-    PipelineOptimizationStatus:
-      enum:
-      - OPTIMIZED
-      - OPTIMIZABLE
-      - UNAVAILABLE
-      type: string
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    ComputeEnvDbDto:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-        region:
-          type: string
-      type: object
-    ListPipelineVersionsResponse:
-      properties:
-        totalSize:
-          format: int64
-          type: integer
-        versions:
-          items:
-            $ref: '#/components/schemas/PipelineDbDto'
-          type: array
-      type: object
-    PipelineVersionManageRequest:
-      properties:
-        isDefault:
-          type: boolean
-        name:
-          type: string
-      type: object
-    UpdatePipelineRequest:
-      properties:
-        description:
-          type: string
-        icon:
-          type: string
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-        launch:
-          $ref: '#/components/schemas/WorkflowLaunchRequest'
-        name:
           type: string
       type: object
     WorkflowLaunchRequest:

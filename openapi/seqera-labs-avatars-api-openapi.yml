@@ -82,6 +82,18 @@ paths:
       - Avatars
 components:
   schemas:
+    Avatar:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          maxLength: 22
+          type: string
+        lastUpdated:
+          format: date-time
+          type: string
+      type: object
     CreateAvatarResponse:
       properties:
         avatar:
@@ -95,18 +107,6 @@ components:
           type: string
       required:
       - message
-      type: object
-    Avatar:
-      properties:
-        dateCreated:
-          format: date-time
-          type: string
-        id:
-          maxLength: 22
-          type: string
-        lastUpdated:
-          format: date-time
-          type: string
       type: object
   securitySchemes:
     BearerAuth:

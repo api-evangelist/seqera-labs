@@ -190,25 +190,46 @@ paths:
       - ga4gh
 components:
   schemas:
-    State:
-      enum:
-      - UNKNOWN
-      - QUEUED
-      - INITIALIZING
-      - RUNNING
-      - PAUSED
-      - COMPLETE
-      - EXECUTOR_ERROR
-      - SYSTEM_ERROR
-      - CANCELED
-      - CANCELING
-      type: string
     RunStatus:
       properties:
         run_id:
           type: string
         state:
           $ref: '#/components/schemas/State'
+      type: object
+    WesErrorResponse:
+      properties:
+        msg:
+          type: string
+        status_code:
+          format: int32
+          type: integer
+      type: object
+    RunLog:
+      properties:
+        outputs:
+          type: object
+        request:
+          $ref: '#/components/schemas/RunRequest'
+        run_id:
+          type: string
+        run_log:
+          $ref: '#/components/schemas/Log'
+        state:
+          $ref: '#/components/schemas/State'
+        task_logs:
+          items:
+            $ref: '#/components/schemas/Log'
+          type: array
+      type: object
+    DefaultWorkflowEngineParameter:
+      properties:
+        default_value:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
       type: object
     WesServiceInfo:
       properties:
@@ -246,23 +267,6 @@ components:
             $ref: '#/components/schemas/WorkflowTypeVersion'
           type: object
       type: object
-    DefaultWorkflowEngineParameter:
-      properties:
-        default_value:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-      type: object
-    WesErrorResponse:
-      properties:
-        msg:
-          type: string
-        status_code:
-          format: int32
-          type: integer
-      type: object
     RunListResponse:
       properties:
         next_page_token:
@@ -271,6 +275,28 @@ components:
           items:
             $ref: '#/components/schemas/RunStatus'
           type: array
+      type: object
+    WorkflowTypeVersion:
+      properties:
+        workflow_type_version:
+          items:
+            type: string
+          type: array
+      type: object
+    State:
+      enum:
+      - UNKNOWN
+      - QUEUED
+      - INITIALIZING
+      - RUNNING
+      - PAUSED
+      - COMPLETE
+      - EXECUTOR_ERROR
+      - SYSTEM_ERROR
+      - CANCELED
+      - CANCELING
+      type: string
+    EmptyBodyRequest:
       type: object
     RunRequest:
       properties:
@@ -291,36 +317,10 @@ components:
         workflow_url:
           type: string
       type: object
-    WorkflowTypeVersion:
-      properties:
-        workflow_type_version:
-          items:
-            type: string
-          type: array
-      type: object
     RunId:
       properties:
         run_id:
           type: string
-      type: object
-    RunLog:
-      properties:
-        outputs:
-          type: object
-        request:
-          $ref: '#/components/schemas/RunRequest'
-        run_id:
-          type: string
-        run_log:
-          $ref: '#/components/schemas/Log'
-        state:
-          $ref: '#/components/schemas/State'
-        task_logs:
-          items:
-            $ref: '#/components/schemas/Log'
-          type: array
-      type: object
-    EmptyBodyRequest:
       type: object
     Log:
       properties:

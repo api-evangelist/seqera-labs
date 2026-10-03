@@ -153,11 +153,776 @@ paths:
       - Admin
 components:
   schemas:
+    LocalComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          fusion2Enabled:
+            type: boolean
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Local execution configuration
+      type: object
+    WfStats:
+      properties:
+        cachedCount:
+          format: int32
+          type: integer
+        cachedCountFmt:
+          type: string
+        cachedDuration:
+          format: int64
+          type: integer
+        cachedPct:
+          format: float
+          type: number
+        computeTimeFmt:
+          maxLength: 50
+          type: string
+        failedCount:
+          format: int32
+          type: integer
+        failedCountFmt:
+          type: string
+        failedDuration:
+          format: int64
+          type: integer
+        failedPct:
+          format: float
+          type: number
+        ignoredCount:
+          format: int32
+          type: integer
+        ignoredCountFmt:
+          type: string
+        ignoredPct:
+          format: float
+          type: number
+        succeedCount:
+          format: int32
+          type: integer
+        succeedCountFmt:
+          type: string
+        succeedDuration:
+          format: int64
+          type: integer
+        succeedPct:
+          format: float
+          type: number
+      type: object
+    AuditLogV2ResponseDto.ResourceUser:
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+      type: object
+    ListAuditLogV2Response:
+      properties:
+        auditLogs:
+          items:
+            $ref: '#/components/schemas/AuditLogV2ResponseDto'
+          type: array
+        nextPageToken:
+          type: string
+      type: object
+    ParticipantImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        memberId:
+          format: int64
+          type: integer
+        role:
+          $ref: '#/components/schemas/WspRole'
+        teamId:
+          format: int64
+          type: integer
+        userId:
+          format: int64
+          type: integer
+        workspaceId:
+          format: int64
+          type: integer
+        wspCustomRoleId:
+          format: int64
+          type: integer
+      required:
+      - auditImageType
+      title: Participant audit image
+      type: object
     OrgIdpGroupSource:
       enum:
       - SCIM
       - MANUAL
       type: string
+    AuditLogV2QueryAttribute:
+      enum:
+      - state
+      type: string
+      x-enum-varnames:
+      - state
+    AbstractGridConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          computeQueue:
+            type: string
+          headJobOptions:
+            type: string
+          headQueue:
+            type: string
+          hostName:
+            type: string
+          launchDir:
+            type: string
+          maxQueueSize:
+            format: int32
+            type: integer
+          port:
+            format: int32
+            type: integer
+          propagateHeadJobOptions:
+            type: boolean
+          userName:
+            type: string
+        type: object
+      type: object
+    Map.Entry_String.String_:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    SchedConfig.Pool:
+      properties:
+        desiredWarm:
+          description: Target number of idle VMs to keep warm. Bounds total warm-VM cost across all of this CE's pool clusters.
+          format: int32
+          type: integer
+        enabled:
+          description: Whether the warm pool is active for this CE. When false, the scheduler will not maintain idle VMs.
+          type: boolean
+        scaleToZeroSecs:
+          description: Seconds of inactivity after which the warm pool scales to zero. Set to 0 to never scale to zero.
+          format: int32
+          type: integer
+      type: object
+    AuditImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+      type: object
+    ManagedCredentialsImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        credentialsId:
+          type: string
+        managedIdentityId:
+          format: int64
+          type: integer
+        memberId:
+          format: int64
+          type: integer
+        metadata:
+          $ref: '#/components/schemas/ManagedCredentialsMetadata'
+      required:
+      - auditImageType
+      title: Managed credentials audit image
+      type: object
+    AuditLogV2ResponseDto.Actor:
+      properties:
+        email:
+          type: string
+        firstName:
+          type: string
+        isRoot:
+          type: boolean
+        lastName:
+          type: string
+        type:
+          $ref: '#/components/schemas/AuditActor.ActorType'
+        userId:
+          format: int64
+          type: integer
+        userName:
+          type: string
+      type: object
+    JobCleanupPolicy:
+      enum:
+      - on_success
+      - always
+      - never
+      type: string
+      x-enum-varnames:
+      - on_success
+      - always
+      - never
+    K8sComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          computeServiceAccount:
+            type: string
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          headPodSpec:
+            type: string
+          headServiceAccount:
+            type: string
+          namespace:
+            type: string
+          podCleanup:
+            $ref: '#/components/schemas/PodCleanupPolicy'
+          server:
+            type: string
+          servicePodSpec:
+            type: string
+          sslCert:
+            type: string
+          storageClaimName:
+            type: string
+          storageMountPath:
+            type: string
+        type: object
+      title: Kubernetes compute configuration
+      type: object
+    OrganizationImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        description:
+          type: string
+        fullName:
+          type: string
+        location:
+          type: string
+        logoId:
+          type: string
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/OrgType'
+        website:
+          type: string
+      required:
+      - auditImageType
+      title: Organization audit image
+      type: object
+    AuditImageType:
+      enum:
+      - user
+      - pipeline
+      - compute_env
+      - workspace
+      - team
+      - team_member
+      - organization
+      - label
+      - label_assignment
+      - participant
+      - credentials
+      - custom_role
+      - org_sso_connection
+      - credit_info
+      - data_studio
+      - data_studio_connection
+      - data_link
+      - data_link_metadata
+      - data_link_file
+      - action
+      - agent
+      - workflow
+      - dataset
+      - dataset_version
+      - managed_credentials
+      - managed_identity
+      - user_role
+      - member
+      - oauth_consent
+      - pipeline_secret
+      - access_token
+      - user_ssh_public_key
+      - idp_group
+      type: string
+      x-enum-varnames:
+      - user
+      - pipeline
+      - compute_env
+      - workspace
+      - team
+      - team_member
+      - organization
+      - label
+      - label_assignment
+      - participant
+      - credentials
+      - custom_role
+      - org_sso_connection
+      - credit_info
+      - data_studio
+      - data_studio_connection
+      - data_link
+      - data_link_metadata
+      - data_link_file
+      - action
+      - agent
+      - workflow
+      - dataset
+      - dataset_version
+      - managed_credentials
+      - managed_identity
+      - user_role
+      - member
+      - oauth_consent
+      - pipeline_secret
+      - access_token
+      - user_ssh_public_key
+      - idp_group
+    BucketActionEvent:
+      allOf:
+      - $ref: '#/components/schemas/Action.EventType'
+      - properties:
+          bucketName:
+            type: string
+          eventName:
+            type: string
+          provider:
+            type: string
+          recordCount:
+            format: int32
+            type: integer
+        type: object
+      title: Bucket action event
+      type: object
+    CronActionConfig:
+      allOf:
+      - $ref: '#/components/schemas/Action.ConfigType'
+      - properties:
+          expression:
+            type: string
+          preset:
+            type: string
+          timezone:
+            type: string
+        type: object
+      title: Cron action config
+      type: object
+    AuditLogTargetStateMetadata:
+      properties:
+        contentRequested:
+          type: boolean
+        postStateStatus:
+          $ref: '#/components/schemas/AuditLogTargetStateMetadataStatus'
+        preStateStatus:
+          $ref: '#/components/schemas/AuditLogTargetStateMetadataStatus'
+      type: object
+    SeqeraComputeSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/AwsSecurityKeys'
+      - properties:
+          discriminator:
+            type: string
+        type: object
+      title: Seqera Compute credentials
+      type: object
+    ActionImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        config:
+          $ref: '#/components/schemas/Action.ConfigType'
+        error:
+          type: string
+        event:
+          $ref: '#/components/schemas/Action.EventType'
+        hookId:
+          type: string
+        hookUrl:
+          type: string
+        lastSeen:
+          format: date-time
+          type: string
+        launch:
+          $ref: '#/components/schemas/LaunchImage'
+        name:
+          type: string
+        source:
+          type: string
+        status:
+          type: string
+      required:
+      - auditImageType
+      title: Action audit image
+      type: object
+    Action.TowerActionConfig:
+      allOf:
+      - $ref: '#/components/schemas/Action.ConfigType'
+      - properties:
+          discriminator:
+            type: string
+        type: object
+      title: Tower Action Config
+      type: object
+    AuditLogTargetStateMetadataStatus:
+      enum:
+      - RECORDED
+      - UNRECORDED
+      - UNAPPLICABLE
+      type: string
+    SSHSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          discriminator:
+            type: string
+          passphrase:
+            type: string
+            writeOnly: true
+          privateKey:
+            type: string
+            writeOnly: true
+        type: object
+      title: SSH credentials
+      type: object
+    UserRoleImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        context:
+          type: string
+        customRoleId:
+          format: int64
+          type: integer
+        organizationId:
+          format: int64
+          type: integer
+        role:
+          type: string
+        teamId:
+          format: int64
+          type: integer
+        userId:
+          format: int64
+          type: integer
+        workspaceId:
+          format: int64
+          type: integer
+      required:
+      - auditImageType
+      title: User role audit image
+      type: object
+    GitHubSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/GitKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+          token:
+            type: string
+          username:
+            type: string
+        type: object
+      title: GitHub credentials
+      type: object
+    Action.TowerActionEvent:
+      allOf:
+      - $ref: '#/components/schemas/Action.EventType'
+      - properties:
+          workflowId:
+            type: string
+        type: object
+      title: Tower action event
+      type: object
+    BitBucketSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/GitKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+          token:
+            type: string
+            writeOnly: true
+          username:
+            type: string
+        type: object
+      title: BitBucket credentials
+      type: object
+    AwsBatchConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          cliPath:
+            type: string
+          computeJobRole:
+            type: string
+          computeQueue:
+            type: string
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          dragenInstanceType:
+            type: string
+          dragenQueue:
+            type: string
+          executionRole:
+            type: string
+          forge:
+            $ref: '#/components/schemas/ForgeConfig'
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          fusionSnapshots:
+            type: boolean
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          headJobRole:
+            type: string
+          headQueue:
+            type: string
+          logGroup:
+            type: string
+          lustreId:
+            deprecated: true
+            type: string
+          nvnmeStorageEnabled:
+            type: boolean
+          region:
+            type: string
+          storageType:
+            deprecated: true
+            type: string
+          volumes:
+            items:
+              type: string
+            type: array
+          waveEnabled:
+            type: boolean
+        type: object
+      title: AWS Batch configuration
+      type: object
+    TeamImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        avatarId:
+          type: string
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - auditImageType
+      title: Team audit image
+      type: object
+    DataStudioConnectionImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        connectionTag:
+          format: int32
+          type: integer
+        lastActive:
+          format: date-time
+          type: string
+        userId:
+          type: string
+      required:
+      - auditImageType
+      title: Data Studio connection audit image
+      type: object
+    ConfigEnvVariable:
+      properties:
+        compute:
+          type: boolean
+        head:
+          type: boolean
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    UserImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        auth0Id:
+          type: string
+        authTime:
+          format: date-time
+          type: string
+        avatarId:
+          type: string
+        avatarUrl:
+          type: string
+        description:
+          type: string
+        disabled:
+          type: boolean
+        email:
+          type: string
+        firstName:
+          type: string
+        lastAccess:
+          format: date-time
+          type: string
+        lastName:
+          type: string
+        marketingConsent:
+          type: boolean
+        notification:
+          type: boolean
+        organization:
+          type: string
+        termsOfUseConsent:
+          type: boolean
+        trusted:
+          type: boolean
+        userName:
+          type: string
+      required:
+      - auditImageType
+      title: User audit image
+      type: object
+    DataLinkMetadataImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        hidden:
+          type: boolean
+      required:
+      - auditImageType
+      title: Data-link metadata audit image
+      type: object
+    WfManifest:
+      properties:
+        author:
+          maxLength: 150
+          type: string
+        defaultBranch:
+          maxLength: 20
+          type: string
+        description:
+          maxLength: 1024
+          type: string
+        gitmodules:
+          maxLength: 150
+          type: string
+        homePage:
+          maxLength: 200
+          type: string
+        icon:
+          maxLength: 255
+          type: string
+        mainScript:
+          maxLength: 100
+          type: string
+        name:
+          maxLength: 150
+          type: string
+        nextflowVersion:
+          maxLength: 20
+          type: string
+        version:
+          maxLength: 20
+          type: string
+      type: object
+    LsfComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      - properties:
+          perJobMemLimit:
+            type: boolean
+          perTaskReserve:
+            type: boolean
+          unitForLimits:
+            type: string
+        type: object
+      title: IBM LSF configuration
+      type: object
+    SlurmComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Slurm configuration
+      type: object
+    SecurityKeys:
+      discriminator:
+        mapping:
+          aws: '#/components/schemas/AwsSecurityKeys'
+          azure: '#/components/schemas/AzureSecurityKeys'
+          azure-cloud: '#/components/schemas/AzureCloudKeys'
+          azure_entra: '#/components/schemas/AzureEntraKeys'
+          azurerepos: '#/components/schemas/AzureReposSecurityKeys'
+          bitbucket: '#/components/schemas/BitBucketSecurityKeys'
+          codecommit: '#/components/schemas/CodeCommitSecurityKeys'
+          container-reg: '#/components/schemas/ContainerRegistryKeys'
+          gitea: '#/components/schemas/GiteaSecurityKeys'
+          github: '#/components/schemas/GitHubSecurityKeys'
+          github_app: '#/components/schemas/GitHubAppSecurityKeys'
+          gitlab: '#/components/schemas/GitLabSecurityKeys'
+          google: '#/components/schemas/GoogleSecurityKeys'
+          k8s: '#/components/schemas/K8sSecurityKeys'
+          local: '#/components/schemas/LocalSecurityKeys'
+          s3: '#/components/schemas/S3SecurityKeys'
+          seqeracompute: '#/components/schemas/SeqeraComputeSecurityKeys'
+          ssh: '#/components/schemas/SSHSecurityKeys'
+          tw-agent: '#/components/schemas/AgentSecurityKeys'
+        propertyName: discriminator
+      oneOf:
+      - $ref: '#/components/schemas/AwsSecurityKeys'
+      - $ref: '#/components/schemas/GoogleSecurityKeys'
+      - $ref: '#/components/schemas/GitHubSecurityKeys'
+      - $ref: '#/components/schemas/GitHubAppSecurityKeys'
+      - $ref: '#/components/schemas/GitLabSecurityKeys'
+      - $ref: '#/components/schemas/BitBucketSecurityKeys'
+      - $ref: '#/components/schemas/GiteaSecurityKeys'
+      - $ref: '#/components/schemas/SSHSecurityKeys'
+      - $ref: '#/components/schemas/K8sSecurityKeys'
+      - $ref: '#/components/schemas/AzureSecurityKeys'
+      - $ref: '#/components/schemas/AzureCloudKeys'
+      - $ref: '#/components/schemas/AzureReposSecurityKeys'
+      - $ref: '#/components/schemas/ContainerRegistryKeys'
+      - $ref: '#/components/schemas/AgentSecurityKeys'
+      - $ref: '#/components/schemas/CodeCommitSecurityKeys'
+      - $ref: '#/components/schemas/AzureEntraKeys'
+      - $ref: '#/components/schemas/SeqeraComputeSecurityKeys'
+      - $ref: '#/components/schemas/S3SecurityKeys'
+      - $ref: '#/components/schemas/LocalSecurityKeys'
+      properties:
+        discriminator:
+          type: string
+      type: object
     AzCloudConfig:
       allOf:
       - $ref: '#/components/schemas/ComputeConfig'
@@ -207,302 +972,6 @@ components:
             type: boolean
         type: object
       title: Azure Cloud configuration
-      type: object
-    BitBucketSecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/GitKeys'
-      - properties:
-          discriminator:
-            type: string
-          password:
-            type: string
-            writeOnly: true
-          token:
-            type: string
-            writeOnly: true
-          username:
-            type: string
-        type: object
-      title: BitBucket credentials
-      type: object
-    DataStudioImage:
-      properties:
-        appliedLifespanHours:
-          format: int32
-          type: integer
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        baseImage:
-          type: string
-        computeEnvId:
-          type: string
-        condaEnvironment:
-          type: string
-        connectVersion:
-          type: string
-        description:
-          type: string
-        effectiveLifespanHours:
-          format: int32
-          type: integer
-        environment:
-          type: string
-        initialCheckpointId:
-          format: int64
-          type: integer
-        initialSessionId:
-          type: string
-        isPrivate:
-          type: boolean
-        lastHeartbeat:
-          format: date-time
-          type: string
-        lastStarted:
-          format: date-time
-          type: string
-        name:
-          type: string
-        remoteConfigCloneEnabled:
-          type: boolean
-        remoteConfigClonePath:
-          type: string
-        remoteConfigCommitHash:
-          type: string
-        remoteConfigRepository:
-          type: string
-        remoteConfigRevision:
-          type: string
-        requiredCpus:
-          format: int64
-          type: integer
-        requiredGpus:
-          format: int64
-          type: integer
-        requiredMemory:
-          format: int64
-          type: integer
-        runningOperationId:
-          type: string
-        sshEnabled:
-          type: boolean
-        status:
-          type: string
-        statusMessage:
-          type: string
-        stopReason:
-          type: string
-        templateIcon:
-          type: string
-        templatePort:
-          format: int32
-          type: integer
-        templateUrl:
-          type: string
-        tool:
-          type: string
-        userId:
-          format: int64
-          type: integer
-        waveBuildId:
-          type: string
-      required:
-      - auditImageType
-      title: Data Studio audit image
-      type: object
-    UserRoleImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        context:
-          type: string
-        customRoleId:
-          format: int64
-          type: integer
-        organizationId:
-          format: int64
-          type: integer
-        role:
-          type: string
-        teamId:
-          format: int64
-          type: integer
-        userId:
-          format: int64
-          type: integer
-        workspaceId:
-          format: int64
-          type: integer
-      required:
-      - auditImageType
-      title: User role audit image
-      type: object
-    SchedConfig:
-      properties:
-        backendStrategy:
-          description: Backend used by Intelligent Compute to run tasks. 'ECS' (AWS only, default) delegates task execution to AWS ECS; 'EC2' (AWS only) runs tasks directly on AWS EC2 instances; 'VM' runs tasks on cloud VMs (provider-agnostic).
-          enum:
-          - ECS
-          - EC2
-          - VM
-          type: string
-        diskAllocation:
-          type: string
-        fusionSnapshots:
-          description: Enable Fusion snapshots so interrupted (e.g. spot-reclaimed) tasks can resume from a snapshot instead of restarting from scratch.
-          type: boolean
-        machineTypes:
-          description: EC2 instance types for compute nodes. Leave empty to automatically select the most cost-effective types for each task.
-          items:
-            type: string
-          type: array
-        nvmeEnabled:
-          description: When true, only use instance types providing local SSD (NVMe) storage. Maps to diskAllocation='nvme'.
-          type: boolean
-        pool:
-          allOf:
-          - $ref: '#/components/schemas/SchedConfig.Pool'
-          description: Warm-pool configuration. When present and enabled, the scheduler maintains a pool of idle VMs ready to absorb incoming tasks with sub-5s start latency.
-        predictionModel:
-          description: 'Resource-prediction model used by Intelligent Compute to size tasks. Suggested values: ''none'' (default), ''qr/v1'', ''qr/v2''. Any other string is accepted.'
-          type: string
-        provisioningModel:
-          enum:
-          - spot
-          - spotFirst
-          - ondemand
-          type: string
-      type: object
-    MoabComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      title: Moab configuration
-      type: object
-    GitKeys:
-      allOf:
-      - $ref: '#/components/schemas/SecurityKeys'
-      - properties:
-          password:
-            type: string
-          token:
-            type: string
-          username:
-            type: string
-        type: object
-      type: object
-    AzureEntraKeys:
-      allOf:
-      - $ref: '#/components/schemas/AzureSecurityKeys'
-      - properties:
-          clientId:
-            type: string
-          clientSecret:
-            type: string
-            writeOnly: true
-          discriminator:
-            type: string
-          tenantId:
-            type: string
-        type: object
-      title: Azure Entra credentials
-      type: object
-    GitHubAppSecurityKeys:
-      properties:
-        appId:
-          type: string
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-          writeOnly: true
-        discriminator:
-          type: string
-        privateKey:
-          type: string
-          writeOnly: true
-        slug:
-          type: string
-        webhookSecret:
-          type: string
-          writeOnly: true
-      type: object
-    DataLinkImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        creationSource:
-          type: string
-        credentialsId:
-          type: string
-        description:
-          type: string
-        message:
-          type: string
-        name:
-          type: string
-        provider:
-          type: string
-        publicAccessible:
-          type: boolean
-        region:
-          type: string
-        resourceRef:
-          type: string
-        status:
-          type: string
-        type:
-          type: string
-      required:
-      - auditImageType
-      title: Data-link audit image
-      type: object
-    CustomRoleImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        contextType:
-          type: string
-        description:
-          type: string
-        name:
-          type: string
-        permissions:
-          items:
-            type: string
-          type: array
-      required:
-      - auditImageType
-      title: Custom role audit image
-      type: object
-    GiteaSecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/GitKeys'
-      - properties:
-          discriminator:
-            type: string
-          password:
-            type: string
-            writeOnly: true
-          token:
-            type: string
-          username:
-            type: string
-        type: object
-      title: Gitea credentials
-      type: object
-    LocalComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          fusion2Enabled:
-            type: boolean
-          schedConfig:
-            $ref: '#/components/schemas/SchedConfig'
-          schedEnabled:
-            type: boolean
-          waveEnabled:
-            type: boolean
-        type: object
-      title: Local execution configuration
       type: object
     AzBatchConfig:
       allOf:
@@ -588,45 +1057,821 @@ components:
         type: object
       title: Azure Batch configuration
       type: object
-    DataStudioConnectionImage:
+    UnivaComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Univa Grid Engine configuration
+      type: object
+    DatasetImage:
       properties:
         auditImageType:
           $ref: '#/components/schemas/AuditImageType'
-        connectionTag:
+        description:
+          type: string
+        hidden:
+          type: boolean
+        lastUpdatedById:
+          format: int64
+          type: integer
+        mediaType:
+          type: string
+        name:
+          type: string
+        sourceType:
+          type: string
+      required:
+      - auditImageType
+      title: Dataset audit image
+      type: object
+    GitHubAppSecurityKeys:
+      properties:
+        appId:
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+          writeOnly: true
+        discriminator:
+          type: string
+        privateKey:
+          type: string
+          writeOnly: true
+        slug:
+          type: string
+        webhookSecret:
+          type: string
+          writeOnly: true
+      type: object
+    CronActionEvent:
+      allOf:
+      - $ref: '#/components/schemas/Action.EventType'
+      - properties:
+          scheduledTime:
+            format: date-time
+            type: string
+          workflowId:
+            type: string
+        type: object
+      title: Cron action event
+      type: object
+    ComputeConfig:
+      discriminator:
+        mapping:
+          altair-platform: '#/components/schemas/AltairPbsComputeConfig'
+          aws-batch: '#/components/schemas/AwsBatchConfig'
+          aws-cloud: '#/components/schemas/AwsCloudConfig'
+          azure-batch: '#/components/schemas/AzBatchConfig'
+          azure-cloud: '#/components/schemas/AzCloudConfig'
+          eks-platform: '#/components/schemas/EksComputeConfig'
+          gke-platform: '#/components/schemas/GkeComputeConfig'
+          google-batch: '#/components/schemas/GoogleBatchConfig'
+          google-cloud: '#/components/schemas/GoogleCloudConfig'
+          google-lifesciences: '#/components/schemas/GoogleLifeSciencesConfig'
+          k8s-platform: '#/components/schemas/K8sComputeConfig'
+          local-platform: '#/components/schemas/LocalComputeConfig'
+          lsf-platform: '#/components/schemas/LsfComputeConfig'
+          moab-platform: '#/components/schemas/MoabComputeConfig'
+          seqeracompute-platform: '#/components/schemas/SeqeraComputeConfig'
+          slurm-platform: '#/components/schemas/SlurmComputeConfig'
+          uge-platform: '#/components/schemas/UnivaComputeConfig'
+        propertyName: discriminator
+      oneOf:
+      - $ref: '#/components/schemas/AwsBatchConfig'
+      - $ref: '#/components/schemas/AwsCloudConfig'
+      - $ref: '#/components/schemas/SeqeraComputeConfig'
+      - $ref: '#/components/schemas/GoogleBatchConfig'
+      - $ref: '#/components/schemas/GoogleCloudConfig'
+      - $ref: '#/components/schemas/AzBatchConfig'
+      - $ref: '#/components/schemas/AzCloudConfig'
+      - $ref: '#/components/schemas/LsfComputeConfig'
+      - $ref: '#/components/schemas/SlurmComputeConfig'
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - $ref: '#/components/schemas/EksComputeConfig'
+      - $ref: '#/components/schemas/GkeComputeConfig'
+      - $ref: '#/components/schemas/UnivaComputeConfig'
+      - $ref: '#/components/schemas/AltairPbsComputeConfig'
+      - $ref: '#/components/schemas/MoabComputeConfig'
+      - $ref: '#/components/schemas/LocalComputeConfig'
+      - $ref: '#/components/schemas/GoogleLifeSciencesConfig'
+      properties:
+        discriminator:
+          description: property to select the compute config platform
+          type: string
+        environment:
+          items:
+            $ref: '#/components/schemas/ConfigEnvVariable'
+          type: array
+        nextflowConfig:
+          type: string
+        postRunScript:
+          description: Add a script that executes after all Nextflow processes have completed. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
+          type: string
+        preRunScript:
+          description: Add a script that executes in the nf-launch script prior to invoking Nextflow processes. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
+          type: string
+        workDir:
+          description: Compute environment working directory
+          type: string
+      type: object
+    S3SecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          accessKey:
+            type: string
+          discriminator:
+            type: string
+          pathStyleAccessEnabled:
+            type: boolean
+          secretKey:
+            type: string
+            writeOnly: true
+        type: object
+      title: S3-compatible credentials
+      type: object
+    MoabComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Moab configuration
+      type: object
+    WorkspaceImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        description:
+          type: string
+        fullName:
+          type: string
+        name:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+      required:
+      - auditImageType
+      title: Workspace audit image
+      type: object
+    GitKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          password:
+            type: string
+          token:
+            type: string
+          username:
+            type: string
+        type: object
+      type: object
+    GoogleCloudConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          arm64Enabled:
+            type: boolean
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          gpuEnabled:
+            type: boolean
+          imageId:
+            type: string
+          instanceType:
+            type: string
+          projectId:
+            type: string
+          region:
+            type: string
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          serviceAccountEmail:
+            type: string
+          waveEnabled:
+            type: boolean
+          zone:
+            type: string
+        type: object
+      title: Google Cloud configuration
+      type: object
+    ForgeConfig:
+      properties:
+        allocStrategy:
+          enum:
+          - BEST_FIT
+          - BEST_FIT_PROGRESSIVE
+          - SPOT_CAPACITY_OPTIMIZED
+          - SPOT_PRICE_CAPACITY_OPTIMIZED
+          type: string
+        allowBuckets:
+          items:
+            type: string
+          type: array
+        arm64Enabled:
+          type: boolean
+        bidPercentage:
           format: int32
           type: integer
-        lastActive:
-          format: date-time
+        disposeOnDeletion:
+          type: boolean
+        dragenAmiId:
           type: string
-        userId:
+        dragenEnabled:
+          type: boolean
+        dragenInstanceType:
           type: string
-      required:
-      - auditImageType
-      title: Data Studio connection audit image
+        ebsAutoScale:
+          type: boolean
+        ebsBlockSize:
+          format: int32
+          type: integer
+        ebsBootSize:
+          format: int32
+          type: integer
+        ec2KeyPair:
+          type: string
+        ecsConfig:
+          type: string
+        efsCreate:
+          type: boolean
+        efsId:
+          type: string
+        efsMount:
+          type: string
+        fargateHeadEnabled:
+          type: boolean
+        fsxMount:
+          type: string
+        fsxName:
+          type: string
+        fsxSize:
+          format: int32
+          type: integer
+        fusionEnabled:
+          type: boolean
+        gpuEnabled:
+          type: boolean
+        imageId:
+          type: string
+        instanceTypes:
+          items:
+            type: string
+          type: array
+        maxCpus:
+          format: int32
+          type: integer
+        minCpus:
+          format: int32
+          type: integer
+        securityGroups:
+          items:
+            type: string
+          type: array
+        subnets:
+          items:
+            type: string
+          type: array
+        type:
+          enum:
+          - SPOT
+          - EC2
+          type: string
+        vpcId:
+          type: string
       type: object
-    OAuthConsentImage:
+    DataLinkImage:
       properties:
         auditImageType:
           $ref: '#/components/schemas/AuditImageType'
-        scopes:
+        creationSource:
+          type: string
+        credentialsId:
+          type: string
+        description:
+          type: string
+        message:
+          type: string
+        name:
+          type: string
+        provider:
+          type: string
+        publicAccessible:
+          type: boolean
+        region:
+          type: string
+        resourceRef:
+          type: string
+        status:
+          type: string
+        type:
           type: string
       required:
       - auditImageType
-      title: OAuth consent audit image
+      title: Data-link audit image
       type: object
-    TeamImage:
+    CustomRoleImage:
       properties:
         auditImageType:
           $ref: '#/components/schemas/AuditImageType'
-        avatarId:
+        contextType:
           type: string
         description:
           type: string
         name:
           type: string
+        permissions:
+          items:
+            type: string
+          type: array
       required:
       - auditImageType
-      title: Team audit image
+      title: Custom role audit image
+      type: object
+    DataStudioImage:
+      properties:
+        appliedLifespanHours:
+          format: int32
+          type: integer
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        baseImage:
+          type: string
+        computeEnvId:
+          type: string
+        condaEnvironment:
+          type: string
+        connectVersion:
+          type: string
+        description:
+          type: string
+        effectiveLifespanHours:
+          format: int32
+          type: integer
+        environment:
+          type: string
+        initialCheckpointId:
+          format: int64
+          type: integer
+        initialSessionId:
+          type: string
+        isPrivate:
+          type: boolean
+        lastHeartbeat:
+          format: date-time
+          type: string
+        lastStarted:
+          format: date-time
+          type: string
+        name:
+          type: string
+        remoteConfigCloneEnabled:
+          type: boolean
+        remoteConfigClonePath:
+          type: string
+        remoteConfigCommitHash:
+          type: string
+        remoteConfigRepository:
+          type: string
+        remoteConfigRevision:
+          type: string
+        requiredCpus:
+          format: int64
+          type: integer
+        requiredGpus:
+          format: int64
+          type: integer
+        requiredMemory:
+          format: int64
+          type: integer
+        runningOperationId:
+          type: string
+        sshEnabled:
+          type: boolean
+        status:
+          type: string
+        statusMessage:
+          type: string
+        stopReason:
+          type: string
+        templateIcon:
+          type: string
+        templatePort:
+          format: int32
+          type: integer
+        templateUrl:
+          type: string
+        tool:
+          type: string
+        userId:
+          format: int64
+          type: integer
+        waveBuildId:
+          type: string
+      required:
+      - auditImageType
+      title: Data Studio audit image
+      type: object
+    PodCleanupPolicy:
+      enum:
+      - on_success
+      - always
+      - never
+      type: string
+      x-enum-varnames:
+      - on_success
+      - always
+      - never
+    LocalSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+        type: object
+      title: Local security keys
+      type: object
+    AgentSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          connectionId:
+            type: string
+          discriminator:
+            type: string
+          shared:
+            type: boolean
+          workDir:
+            type: string
+        type: object
+      title: Tower Agent credentials
+      type: object
+    AzureSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          batchKey:
+            type: string
+            writeOnly: true
+          batchName:
+            type: string
+          discriminator:
+            type: string
+          storageKey:
+            type: string
+            writeOnly: true
+          storageName:
+            type: string
+        type: object
+      title: Azure credentials
+      type: object
+    AzureReposSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/GitKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+          token:
+            type: string
+          username:
+            type: string
+        type: object
+      title: Azure Repos credentials
+      type: object
+    OrgSsoConnectionImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        auth0OrgId:
+          type: string
+        connectionId:
+          type: string
+        connectionName:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        createdById:
+          format: int64
+          type: integer
+        domain:
+          type: string
+        status:
+          type: string
+        ticketUrl:
+          type: string
+      required:
+      - auditImageType
+      title: Org SSO connection audit image
+      type: object
+    DatasetVersionImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        createdById:
+          format: int64
+          type: integer
+        data:
+          $ref: '#/components/schemas/DatasetVersionImage.BlobContentImage'
+        datasetId:
+          type: string
+        disabled:
+          type: boolean
+        hasHeader:
+          type: boolean
+        latest:
+          type: boolean
+        linkedSource:
+          $ref: '#/components/schemas/DatasetVersionImage.LinkedSourceImage'
+        version:
+          format: int64
+          type: integer
+      required:
+      - auditImageType
+      title: Dataset version audit image
+      type: object
+    DatasetVersionImage.BlobContentImage:
+      properties:
+        fileName:
+          type: string
+        mediaType:
+          type: string
+        size:
+          format: int64
+          type: integer
+      title: Blob content snapshot
+      type: object
+    AzureCloudKeys:
+      allOf:
+      - $ref: '#/components/schemas/AzureSecurityKeys'
+      - properties:
+          clientId:
+            type: string
+          clientSecret:
+            type: string
+            writeOnly: true
+          discriminator:
+            type: string
+          storageName:
+            type: string
+          subscriptionId:
+            type: string
+          tenantId:
+            type: string
+        type: object
+      title: Azure Cloud credentials
+      type: object
+    WfFusionMeta:
+      properties:
+        enabled:
+          type: boolean
+        version:
+          maxLength: 20
+          type: string
+      type: object
+    ManagedCredentialsMetadata:
+      properties:
+        discriminator:
+          readOnly: true
+          type: string
+      type: object
+    SeqeraComputeCloudInstanceTypeSize:
+      enum:
+      - SMALL
+      - MEDIUM
+      - LARGE
+      type: string
+    AzBatchPoolConfig:
+      description: Azure Batch pool configuration for head or worker pool
+      properties:
+        autoScale:
+          type: boolean
+        bootDiskSizeGB:
+          description: Boot disk size in GB for this pool's nodes. Overrides the forge-level bootDiskSizeGB. When omitted, falls back to the forge-level value or Azure's default.
+          example: 100
+          format: int32
+          maximum: 4095
+          minimum: 50
+          type:
+          - integer
+          - 'null'
+        vmCount:
+          format: int32
+          type: integer
+        vmType:
+          type: string
+      type: object
+    LabelImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        dynamic:
+          type: boolean
+        isDefault:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      required:
+      - auditImageType
+      title: Label audit image
+      type: object
+    AuditLogV2ResponseDto.Client:
+      properties:
+        accessTokenId:
+          format: int64
+          type: integer
+        ip:
+          type: string
+        userAgent:
+          type: string
+      type: object
+    AzureEntraKeys:
+      allOf:
+      - $ref: '#/components/schemas/AzureSecurityKeys'
+      - properties:
+          clientId:
+            type: string
+          clientSecret:
+            type: string
+            writeOnly: true
+          discriminator:
+            type: string
+          tenantId:
+            type: string
+        type: object
+      title: Azure Entra credentials
+      type: object
+    AwsSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          accessKey:
+            type: string
+          assumeRoleArn:
+            type: string
+          discriminator:
+            type: string
+          externalId:
+            type: string
+          mode:
+            $ref: '#/components/schemas/AwsCredentialsMode'
+          secretKey:
+            type: string
+            writeOnly: true
+        type: object
+      title: AWS credentials
+      type: object
+    AuditLogV2ResponseDto:
+      properties:
+        actor:
+          $ref: '#/components/schemas/AuditLogV2ResponseDto.Actor'
+        client:
+          $ref: '#/components/schemas/AuditLogV2ResponseDto.Client'
+        correlationId:
+          type: string
+        event:
+          $ref: '#/components/schemas/AuditEventType'
+        id:
+          type: string
+        target:
+          $ref: '#/components/schemas/AuditLogV2ResponseDto.Target'
+        timestamp:
+          format: date-time
+          type: string
+      type: object
+    GoogleLifeSciencesConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          copyImage:
+            type: string
+          debugMode:
+            format: int32
+            type: integer
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          labels:
+            additionalProperties:
+              type: string
+            type: object
+          location:
+            type: string
+          nfsMount:
+            type: string
+          nfsTarget:
+            type: string
+          preemptible:
+            type: boolean
+          projectId:
+            type: string
+          region:
+            type: string
+          sshDaemon:
+            type: boolean
+          sshImage:
+            type: string
+          usePrivateAddress:
+            type: boolean
+          zones:
+            items:
+              type: string
+            type: array
+        type: object
+      title: Google Life Sciences configuration (retired)
+      type: object
+    PipelineSecretImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        lastUsed:
+          format: date-time
+          type: string
+        name:
+          type: string
+        salt:
+          type: string
+      required:
+      - auditImageType
+      title: Pipeline secret audit image
+      type: object
+    GithubActionConfig:
+      allOf:
+      - $ref: '#/components/schemas/Action.ConfigType'
+      - properties:
+          events:
+            items:
+              type: string
+            type: array
+        type: object
+      title: GitHub action config
+      type: object
+    WspRole:
+      enum:
+      - owner
+      - admin
+      - maintain
+      - launch
+      - connect
+      - view
+      type: string
+      x-enum-varnames:
+      - owner
+      - admin
+      - maintain
+      - launch
+      - connect
+      - view
+    Action.EventType:
+      discriminator:
+        mapping:
+          bucket: '#/components/schemas/BucketActionEvent'
+          cron: '#/components/schemas/CronActionEvent'
+          github: '#/components/schemas/GithubActionEvent'
+          tower: '#/components/schemas/Action.TowerActionEvent'
+        propertyName: discriminator
+      oneOf:
+      - $ref: '#/components/schemas/GithubActionEvent'
+      - $ref: '#/components/schemas/Action.TowerActionEvent'
+      - $ref: '#/components/schemas/BucketActionEvent'
+      - $ref: '#/components/schemas/CronActionEvent'
+      properties:
+        discriminator:
+          type: string
+        timestamp:
+          format: date-time
+          type: string
       type: object
     AuditLogTargetState:
       properties:
@@ -777,276 +2022,66 @@ components:
           - $ref: '#/components/schemas/WorkflowImage'
           - $ref: '#/components/schemas/WorkspaceImage'
       type: object
-    AuditImage:
+    TeamMemberImage:
       properties:
         auditImageType:
           $ref: '#/components/schemas/AuditImageType'
-      type: object
-    EntityContext:
-      enum:
-      - User
-      - Organization
-      - Workspace
-      - System
-      type: string
-      x-enum-varnames:
-      - User
-      - Organization
-      - Workspace
-      - System
-    Action.TowerActionConfig:
-      allOf:
-      - $ref: '#/components/schemas/Action.ConfigType'
-      - properties:
-          discriminator:
-            type: string
-        type: object
-      title: Tower Action Config
-      type: object
-    WorkspaceImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        description:
-          type: string
-        fullName:
-          type: string
-        name:
-          type: string
-        visibility:
-          $ref: '#/components/schemas/Visibility'
-      required:
-      - auditImageType
-      title: Workspace audit image
-      type: object
-    GoogleLifeSciencesConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          bootDiskSizeGb:
-            format: int32
-            type: integer
-          copyImage:
-            type: string
-          debugMode:
-            format: int32
-            type: integer
-          headJobCpus:
-            format: int32
-            type: integer
-          headJobMemoryMb:
-            format: int32
-            type: integer
-          labels:
-            additionalProperties:
-              type: string
-            type: object
-          location:
-            type: string
-          nfsMount:
-            type: string
-          nfsTarget:
-            type: string
-          preemptible:
-            type: boolean
-          projectId:
-            type: string
-          region:
-            type: string
-          sshDaemon:
-            type: boolean
-          sshImage:
-            type: string
-          usePrivateAddress:
-            type: boolean
-          zones:
-            items:
-              type: string
-            type: array
-        type: object
-      title: Google Life Sciences configuration (retired)
-      type: object
-    OrganizationImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        description:
-          type: string
-        fullName:
-          type: string
-        location:
-          type: string
-        logoId:
-          type: string
-        name:
-          type: string
-        type:
-          $ref: '#/components/schemas/OrgType'
-        website:
-          type: string
-      required:
-      - auditImageType
-      title: Organization audit image
-      type: object
-    ManagedCredentialsImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        credentialsId:
-          type: string
-        managedIdentityId:
-          format: int64
-          type: integer
         memberId:
           format: int64
           type: integer
-        metadata:
-          $ref: '#/components/schemas/ManagedCredentialsMetadata'
+        teamId:
+          format: int64
+          type: integer
+        userId:
+          format: int64
+          type: integer
       required:
       - auditImageType
-      title: Managed credentials audit image
+      title: Team member audit image
       type: object
-    ManagedCredentialsMetadata:
-      properties:
-        discriminator:
-          readOnly: true
-          type: string
-      type: object
-    SeqeraComputeCloudInstanceTypeSize:
-      enum:
-      - SMALL
-      - MEDIUM
-      - LARGE
-      type: string
-    CronActionEvent:
-      allOf:
-      - $ref: '#/components/schemas/Action.EventType'
-      - properties:
-          scheduledTime:
-            format: date-time
-            type: string
-          workflowId:
-            type: string
-        type: object
-      title: Cron action event
-      type: object
-    Action.TowerActionEvent:
-      allOf:
-      - $ref: '#/components/schemas/Action.EventType'
-      - properties:
-          workflowId:
-            type: string
-        type: object
-      title: Tower action event
-      type: object
-    SeqeraComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          defaultDataRetentionPolicy:
-            type: boolean
-          instanceTypeSize:
-            allOf:
-            - $ref: '#/components/schemas/SeqeraComputeCloudInstanceTypeSize'
-            description: Size of the Data Studios instance (SMALL, MEDIUM, LARGE)
-          region:
-            type: string
-        type: object
-      title: Seqera Compute configuration
-      type: object
-    ComputeEnvImage:
+    LabelAssignmentImage:
       properties:
         auditImageType:
           $ref: '#/components/schemas/AuditImageType'
-        config:
-          $ref: '#/components/schemas/ComputeConfig'
-        credentialsId:
+        labelId:
+          format: int64
+          type: integer
+        resourceId:
+          type: string
+        resourceType:
+          type: string
+      required:
+      - auditImageType
+      title: Label assignment audit image
+      type: object
+    CredentialsImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        baseUrl:
+          type: string
+        category:
           type: string
         description:
           type: string
-        fusionMetricsCollectionEnabled:
-          type: boolean
+        keys:
+          $ref: '#/components/schemas/SecurityKeys'
         lastUsed:
           format: date-time
           type: string
-        managedIdentityId:
-          format: int64
-          type: integer
         message:
           type: string
         name:
           type: string
-        platform:
+        provider:
           type: string
-        primary:
-          type: boolean
         status:
           type: string
       required:
       - auditImageType
-      title: Compute environment audit image
+      title: Credentials audit image
       type: object
-    ListAuditLogV2Response:
-      properties:
-        auditLogs:
-          items:
-            $ref: '#/components/schemas/AuditLogV2ResponseDto'
-          type: array
-        nextPageToken:
-          type: string
-      type: object
-    OrgSsoConnectionImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        auth0OrgId:
-          type: string
-        connectionId:
-          type: string
-        connectionName:
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-        createdById:
-          format: int64
-          type: integer
-        domain:
-          type: string
-        status:
-          type: string
-        ticketUrl:
-          type: string
-      required:
-      - auditImageType
-      title: Org SSO connection audit image
-      type: object
-    AuditLogV2ResponseDto.ResourceOrganization:
-      properties:
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-      type: object
-    EksComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/K8sComputeConfig'
-      - properties:
-          clusterName:
-            description: The AWS EKS cluster name
-            type: string
-          fusion2Enabled:
-            type: boolean
-          region:
-            description: AWS region
-            type: string
-          waveEnabled:
-            type: boolean
-        type: object
-      title: Amazon EKS cluster configuration
-      type: object
-    GitHubSecurityKeys:
+    GitLabSecurityKeys:
       allOf:
       - $ref: '#/components/schemas/GitKeys'
       - properties:
@@ -1057,87 +2092,36 @@ components:
             writeOnly: true
           token:
             type: string
+            writeOnly: true
           username:
             type: string
         type: object
-      title: GitHub credentials
+      title: GitLab credentials
       type: object
-    GkeComputeConfig:
+    BucketActionConfig:
       allOf:
-      - $ref: '#/components/schemas/K8sComputeConfig'
+      - $ref: '#/components/schemas/Action.ConfigType'
       - properties:
-          clusterName:
-            description: The GKE cluster name
+          bucketName:
             type: string
-          fusion2Enabled:
-            type: boolean
-          region:
-            description: The GKE cluster region - or - zone
+          dataLinkId:
             type: string
-          waveEnabled:
-            type: boolean
+          datasetId:
+            type: string
+          events:
+            items:
+              type: string
+            type: array
+          filter:
+            type: string
+          markerFile:
+            type: string
+          subscriptionArn:
+            type: string
+          topicArn:
+            type: string
         type: object
-      title: Google GKE cluster configuration
-      type: object
-    ParticipantImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        memberId:
-          format: int64
-          type: integer
-        role:
-          $ref: '#/components/schemas/WspRole'
-        teamId:
-          format: int64
-          type: integer
-        userId:
-          format: int64
-          type: integer
-        workspaceId:
-          format: int64
-          type: integer
-        wspCustomRoleId:
-          format: int64
-          type: integer
-      required:
-      - auditImageType
-      title: Participant audit image
-      type: object
-    AzBatchForgeConfig:
-      properties:
-        autoScale:
-          type: boolean
-        bootDiskSizeGB:
-          description: Boot disk size in GB for all pool nodes. When omitted, Azure uses the default disk size for the selected VM image. Per-pool values in headPool/workerPool take precedence in dual-pool mode.
-          example: 100
-          format: int32
-          maximum: 4095
-          minimum: 50
-          type:
-          - integer
-          - 'null'
-        containerRegIds:
-          items:
-            type: string
-          type: array
-        disposeOnDeletion:
-          type: boolean
-        dualPoolConfig:
-          type: boolean
-        headPool:
-          allOf:
-          - $ref: '#/components/schemas/AzBatchPoolConfig'
-          description: Head pool configuration for dual pool mode
-        vmCount:
-          format: int32
-          type: integer
-        vmType:
-          type: string
-        workerPool:
-          allOf:
-          - $ref: '#/components/schemas/AzBatchPoolConfig'
-          description: Worker pool configuration for dual pool mode
+      title: Bucket action config
       type: object
     K8sSecurityKeys:
       allOf:
@@ -1156,76 +2140,46 @@ components:
         type: object
       title: Kubernetes credentials
       type: object
-    DataLinkFileImage:
+    AuditLogV2ResponseDto.ResourceOrganization:
       properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        provider:
+        id:
+          format: int64
+          type: integer
+        name:
           type: string
-        uri:
-          type: string
-      required:
-      - auditImageType
-      title: Data-link file operation audit image
       type: object
-    GithubActionEvent:
-      allOf:
-      - $ref: '#/components/schemas/Action.EventType'
-      - properties:
-          commitId:
-            type: string
-          commitMessage:
-            type: string
-          pusherEmail:
-            type: string
-          pusherName:
-            type: string
-          ref:
-            type: string
-        type: object
-      title: GitHub action event
-      type: object
-    AgentSecurityKeys:
+    ContainerRegistryKeys:
       allOf:
       - $ref: '#/components/schemas/SecurityKeys'
       - properties:
-          connectionId:
-            type: string
           discriminator:
             type: string
-          shared:
-            type: boolean
-          workDir:
+          password:
+            type: string
+            writeOnly: true
+          registry:
+            type: string
+          userName:
             type: string
         type: object
-      title: Tower Agent credentials
+      title: Container registry credentials
       type: object
-    AzBatchPoolConfig:
-      description: Azure Batch pool configuration for head or worker pool
+    PipelineImage:
       properties:
-        autoScale:
-          type: boolean
-        bootDiskSizeGB:
-          description: Boot disk size in GB for this pool's nodes. Overrides the forge-level bootDiskSizeGB. When omitted, falls back to the forge-level value or Azure's default.
-          example: 100
-          format: int32
-          maximum: 4095
-          minimum: 50
-          type:
-          - integer
-          - 'null'
-        vmCount:
-          format: int32
-          type: integer
-        vmType:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        description:
           type: string
+        icon:
+          type: string
+        launch:
+          $ref: '#/components/schemas/LaunchImage'
+        name:
+          type: string
+      required:
+      - auditImageType
+      title: Pipeline audit image
       type: object
-    AuditLogTargetStateMetadataStatus:
-      enum:
-      - RECORDED
-      - UNRECORDED
-      - UNAPPLICABLE
-      type: string
     AuditEventType:
       enum:
       - workflow_launched
@@ -1561,6 +2515,472 @@ components:
       - user_enabled
       - user_disabled
       - workflow_status_changed
+    WfNextflow:
+      properties:
+        build:
+          maxLength: 10
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+        version:
+          maxLength: 20
+          type: string
+      type: object
+    DataLinkFileImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        provider:
+          type: string
+        uri:
+          type: string
+      required:
+      - auditImageType
+      title: Data-link file operation audit image
+      type: object
+    MemberImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        organizationId:
+          format: int64
+          type: integer
+        role:
+          type: string
+        userId:
+          format: int64
+          type: integer
+      required:
+      - auditImageType
+      title: Member audit image
+      type: object
+    AwsCloudConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          allowBuckets:
+            items:
+              type: string
+            type: array
+          arm64Enabled:
+            type: boolean
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          ebsBootSize:
+            format: int32
+            type: integer
+          ebsEncrypted:
+            description: When true, the boot EBS volume of provisioned instances is encrypted. Null/absent (the default) is treated as false — no encryption.
+            type: boolean
+          ebsKmsKeyId:
+            description: Optional KMS key ARN used to encrypt the boot EBS volume. Only applied when ebsEncrypted is true. When omitted, the account/region default EBS encryption key is used.
+            type: string
+          ec2KeyPair:
+            type: string
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          gpuEnabled:
+            type: boolean
+          imageId:
+            type: string
+          instanceProfileArn:
+            type: string
+          instanceType:
+            type: string
+          logGroup:
+            type: string
+          region:
+            type: string
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          securityGroups:
+            items:
+              type: string
+            type: array
+          subnetId:
+            deprecated: true
+            description: DEPRECATED — use subnetIds. Kept in sync with the first element of subnetIds.
+            type: string
+          subnetIds:
+            description: Subnets to launch into. Basic uses the first; Intelligent Compute may use all.
+            items:
+              type: string
+            type: array
+          vpcId:
+            description: The VPC used to scope subnet and security-group selection.
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: AWS Cloud configuration
+      type: object
+    GkeComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - properties:
+          clusterName:
+            description: The GKE cluster name
+            type: string
+          fusion2Enabled:
+            type: boolean
+          region:
+            description: The GKE cluster region - or - zone
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Google GKE cluster configuration
+      type: object
+    CodeCommitSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/GitKeys'
+      - properties:
+          discriminator:
+            type: string
+          password:
+            type: string
+            writeOnly: true
+          token:
+            type: string
+          username:
+            type: string
+        type: object
+      title: AWS CodeCommit credentials
+      type: object
+    GoogleSecurityKeys:
+      allOf:
+      - $ref: '#/components/schemas/SecurityKeys'
+      - properties:
+          data:
+            type: string
+            writeOnly: true
+          discriminator:
+            type: string
+          serviceAccountEmail:
+            type: string
+          tokenAudience:
+            type: string
+          workloadIdentityProvider:
+            type: string
+        type: object
+      title: Google credentials
+      type: object
+    Visibility:
+      enum:
+      - PRIVATE
+      - SHARED
+      type: string
+    CreditInfoImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        contractId:
+          type: string
+        customerId:
+          type: string
+        hasCreditGrant:
+          type: boolean
+      required:
+      - auditImageType
+      title: Credit info audit image
+      type: object
+    OAuthConsentImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        scopes:
+          type: string
+      required:
+      - auditImageType
+      title: OAuth consent audit image
+      type: object
+    UserSshPublicKeyImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        keyHash:
+          type: string
+        lastUsed:
+          format: date-time
+          type: string
+      required:
+      - auditImageType
+      title: SSH key audit image
+      type: object
+    GoogleBatchConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          bootDiskImage:
+            type: string
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          computeJobsInstanceTemplate:
+            type: string
+          computeJobsMachineType:
+            items:
+              type: string
+            type: array
+          copyImage:
+            type: string
+          cpuPlatform:
+            type: string
+          debugMode:
+            format: int32
+            type: integer
+          fusion2Enabled:
+            type: boolean
+          fusionSnapshots:
+            type: boolean
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobInstanceTemplate:
+            type: string
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          labels:
+            additionalProperties:
+              type: string
+            type: object
+          location:
+            type: string
+          machineType:
+            type: string
+          network:
+            type: string
+          networkTags:
+            items:
+              type: string
+            type: array
+          nfsMount:
+            type: string
+          nfsTarget:
+            type: string
+          projectId:
+            type: string
+          serviceAccount:
+            type: string
+          spot:
+            type: boolean
+          sshDaemon:
+            type: boolean
+          sshImage:
+            type: string
+          subnetwork:
+            type: string
+          usePrivateAddress:
+            type: boolean
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Google Batch service configuration
+      type: object
+    AuditActor.ActorType:
+      enum:
+      - user
+      - system
+      type: string
+      x-enum-varnames:
+      - user
+      - system
+    AzBatchForgeConfig:
+      properties:
+        autoScale:
+          type: boolean
+        bootDiskSizeGB:
+          description: Boot disk size in GB for all pool nodes. When omitted, Azure uses the default disk size for the selected VM image. Per-pool values in headPool/workerPool take precedence in dual-pool mode.
+          example: 100
+          format: int32
+          maximum: 4095
+          minimum: 50
+          type:
+          - integer
+          - 'null'
+        containerRegIds:
+          items:
+            type: string
+          type: array
+        disposeOnDeletion:
+          type: boolean
+        dualPoolConfig:
+          type: boolean
+        headPool:
+          allOf:
+          - $ref: '#/components/schemas/AzBatchPoolConfig'
+          description: Head pool configuration for dual pool mode
+        vmCount:
+          format: int32
+          type: integer
+        vmType:
+          type: string
+        workerPool:
+          allOf:
+          - $ref: '#/components/schemas/AzBatchPoolConfig'
+          description: Worker pool configuration for dual pool mode
+      type: object
+    LaunchImage:
+      properties:
+        commitId:
+          type: string
+        computeEnvId:
+          type: string
+        configProfiles:
+          items:
+            type: string
+          type: array
+        configText:
+          type: string
+        defaultTemplate:
+          type: boolean
+        entryName:
+          type: string
+        headJobCpus:
+          format: int32
+          type: integer
+        headJobMemoryMb:
+          format: int32
+          type: integer
+        id:
+          type: string
+        launchContainer:
+          type: string
+        mainScript:
+          type: string
+        optimizationId:
+          type: string
+        optimizationTargets:
+          type: string
+        paramsText:
+          type: string
+        pipeline:
+          type: string
+        pipelineSchemaId:
+          format: int64
+          type: integer
+        postRunScript:
+          type: string
+        preRunScript:
+          type: string
+        pullLatest:
+          type: boolean
+        resume:
+          type: boolean
+        revision:
+          type: string
+        schemaName:
+          type: string
+        sessionId:
+          type: string
+        sourceTemplateId:
+          type: string
+        stubRun:
+          type: boolean
+        towerConfig:
+          type: string
+        userSecrets:
+          type: string
+        versionName:
+          type: string
+        workDir:
+          type: string
+        workspaceSecrets:
+          type: string
+      type: object
+    SchedConfig:
+      properties:
+        backendStrategy:
+          description: Backend used by Intelligent Compute to run tasks. 'ECS' (AWS only, default) delegates task execution to AWS ECS; 'EC2' (AWS only) runs tasks directly on AWS EC2 instances; 'VM' runs tasks on cloud VMs (provider-agnostic).
+          enum:
+          - ECS
+          - EC2
+          - VM
+          type: string
+        diskAllocation:
+          type: string
+        fusionSnapshots:
+          description: Enable Fusion snapshots so interrupted (e.g. spot-reclaimed) tasks can resume from a snapshot instead of restarting from scratch.
+          type: boolean
+        machineTypes:
+          description: EC2 instance types for compute nodes. Leave empty to automatically select the most cost-effective types for each task.
+          items:
+            type: string
+          type: array
+        nvmeEnabled:
+          description: When true, only use instance types providing local SSD (NVMe) storage. Maps to diskAllocation='nvme'.
+          type: boolean
+        pool:
+          allOf:
+          - $ref: '#/components/schemas/SchedConfig.Pool'
+          description: Warm-pool configuration. When present and enabled, the scheduler maintains a pool of idle VMs ready to absorb incoming tasks with sub-5s start latency.
+        predictionModel:
+          description: 'Resource-prediction model used by Intelligent Compute to size tasks. Suggested values: ''none'' (default), ''qr/v1'', ''qr/v2''. Any other string is accepted.'
+          type: string
+        provisioningModel:
+          enum:
+          - spot
+          - spotFirst
+          - ondemand
+          type: string
+      type: object
+    ManagedIdentityImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        config:
+          $ref: '#/components/schemas/ComputeConfig'
+        name:
+          type: string
+        platform:
+          type: string
+      required:
+      - auditImageType
+      title: Managed identity audit image
+      type: object
+    DatasetVersionImage.LinkedSourceImage:
+      properties:
+        checkedAt:
+          format: date-time
+          type: string
+        contentLength:
+          format: int64
+          type: integer
+        etag:
+          type: string
+        lastModified:
+          format: date-time
+          type: string
+        mediaType:
+          type: string
+        url:
+          type: string
+      title: Linked source snapshot
+      type: object
+    AwsCredentialsMode:
+      enum:
+      - keys
+      - role
+      type: string
+      x-enum-varnames:
+      - keys
+      - role
+      x-type: String
     OrgType:
       enum:
       - academic
@@ -1575,84 +2995,27 @@ components:
       - pro
       - basic
       - internal
-    AltairPbsComputeConfig:
+    EksComputeConfig:
       allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      title: Altair PBS configuration
-      type: object
-    DatasetImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        description:
-          type: string
-        hidden:
-          type: boolean
-        lastUpdatedById:
-          format: int64
-          type: integer
-        mediaType:
-          type: string
-        name:
-          type: string
-        sourceType:
-          type: string
-      required:
-      - auditImageType
-      title: Dataset audit image
-      type: object
-    IdpGroupImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        displayName:
-          type: string
-        scimExternalId:
-          type: string
-        source:
-          $ref: '#/components/schemas/OrgIdpGroupSource'
-      required:
-      - auditImageType
-      title: IdP group audit image
-      type: object
-    CronActionConfig:
-      allOf:
-      - $ref: '#/components/schemas/Action.ConfigType'
+      - $ref: '#/components/schemas/K8sComputeConfig'
       - properties:
-          expression:
+          clusterName:
+            description: The AWS EKS cluster name
             type: string
-          preset:
+          fusion2Enabled:
+            type: boolean
+          region:
+            description: AWS region
             type: string
-          timezone:
-            type: string
+          waveEnabled:
+            type: boolean
         type: object
-      title: Cron action config
+      title: Amazon EKS cluster configuration
       type: object
-    DatasetVersionImage:
+    WfWaveMeta:
       properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        createdById:
-          format: int64
-          type: integer
-        data:
-          $ref: '#/components/schemas/DatasetVersionImage.BlobContentImage'
-        datasetId:
-          type: string
-        disabled:
+        enabled:
           type: boolean
-        hasHeader:
-          type: boolean
-        latest:
-          type: boolean
-        linkedSource:
-          $ref: '#/components/schemas/DatasetVersionImage.LinkedSourceImage'
-        version:
-          format: int64
-          type: integer
-      required:
-      - auditImageType
-      title: Dataset version audit image
       type: object
     AccessTokenImage:
       properties:
@@ -1667,275 +3030,7 @@ components:
       - auditImageType
       title: Access token audit image
       type: object
-    AuditLogV2ResponseDto:
-      properties:
-        actor:
-          $ref: '#/components/schemas/AuditLogV2ResponseDto.Actor'
-        client:
-          $ref: '#/components/schemas/AuditLogV2ResponseDto.Client'
-        correlationId:
-          type: string
-        event:
-          $ref: '#/components/schemas/AuditEventType'
-        id:
-          type: string
-        target:
-          $ref: '#/components/schemas/AuditLogV2ResponseDto.Target'
-        timestamp:
-          format: date-time
-          type: string
-      type: object
-    BucketActionConfig:
-      allOf:
-      - $ref: '#/components/schemas/Action.ConfigType'
-      - properties:
-          bucketName:
-            type: string
-          dataLinkId:
-            type: string
-          datasetId:
-            type: string
-          events:
-            items:
-              type: string
-            type: array
-          filter:
-            type: string
-          markerFile:
-            type: string
-          subscriptionArn:
-            type: string
-          topicArn:
-            type: string
-        type: object
-      title: Bucket action config
-      type: object
-    DatasetVersionImage.BlobContentImage:
-      properties:
-        fileName:
-          type: string
-        mediaType:
-          type: string
-        size:
-          format: int64
-          type: integer
-      title: Blob content snapshot
-      type: object
-    JobCleanupPolicy:
-      enum:
-      - on_success
-      - always
-      - never
-      type: string
-      x-enum-varnames:
-      - on_success
-      - always
-      - never
-    LabelImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        dynamic:
-          type: boolean
-        isDefault:
-          type: boolean
-        name:
-          type: string
-        resource:
-          type: boolean
-        value:
-          type: string
-      required:
-      - auditImageType
-      title: Label audit image
-      type: object
-    Visibility:
-      enum:
-      - PRIVATE
-      - SHARED
-      type: string
-    SchedConfig.Pool:
-      properties:
-        desiredWarm:
-          description: Target number of idle VMs to keep warm. Bounds total warm-VM cost across all of this CE's pool clusters.
-          format: int32
-          type: integer
-        enabled:
-          description: Whether the warm pool is active for this CE. When false, the scheduler will not maintain idle VMs.
-          type: boolean
-        scaleToZeroSecs:
-          description: Seconds of inactivity after which the warm pool scales to zero. Set to 0 to never scale to zero.
-          format: int32
-          type: integer
-      type: object
-    AuditImageType:
-      enum:
-      - user
-      - pipeline
-      - compute_env
-      - workspace
-      - team
-      - team_member
-      - organization
-      - label
-      - label_assignment
-      - participant
-      - credentials
-      - custom_role
-      - org_sso_connection
-      - credit_info
-      - data_studio
-      - data_studio_connection
-      - data_link
-      - data_link_metadata
-      - data_link_file
-      - action
-      - agent
-      - workflow
-      - dataset
-      - dataset_version
-      - managed_credentials
-      - managed_identity
-      - user_role
-      - member
-      - oauth_consent
-      - pipeline_secret
-      - access_token
-      - user_ssh_public_key
-      - idp_group
-      type: string
-      x-enum-varnames:
-      - user
-      - pipeline
-      - compute_env
-      - workspace
-      - team
-      - team_member
-      - organization
-      - label
-      - label_assignment
-      - participant
-      - credentials
-      - custom_role
-      - org_sso_connection
-      - credit_info
-      - data_studio
-      - data_studio_connection
-      - data_link
-      - data_link_metadata
-      - data_link_file
-      - action
-      - agent
-      - workflow
-      - dataset
-      - dataset_version
-      - managed_credentials
-      - managed_identity
-      - user_role
-      - member
-      - oauth_consent
-      - pipeline_secret
-      - access_token
-      - user_ssh_public_key
-      - idp_group
-    DataLinkMetadataImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        hidden:
-          type: boolean
-      required:
-      - auditImageType
-      title: Data-link metadata audit image
-      type: object
-    SlurmComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      title: Slurm configuration
-      type: object
-    Action.EventType:
-      discriminator:
-        mapping:
-          bucket: '#/components/schemas/BucketActionEvent'
-          cron: '#/components/schemas/CronActionEvent'
-          github: '#/components/schemas/GithubActionEvent'
-          tower: '#/components/schemas/Action.TowerActionEvent'
-        propertyName: discriminator
-      oneOf:
-      - $ref: '#/components/schemas/GithubActionEvent'
-      - $ref: '#/components/schemas/Action.TowerActionEvent'
-      - $ref: '#/components/schemas/BucketActionEvent'
-      - $ref: '#/components/schemas/CronActionEvent'
-      properties:
-        discriminator:
-          type: string
-        timestamp:
-          format: date-time
-          type: string
-      type: object
-    PipelineImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        description:
-          type: string
-        icon:
-          type: string
-        launch:
-          $ref: '#/components/schemas/LaunchImage'
-        name:
-          type: string
-      required:
-      - auditImageType
-      title: Pipeline audit image
-      type: object
-    CredentialsImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        baseUrl:
-          type: string
-        category:
-          type: string
-        description:
-          type: string
-        keys:
-          $ref: '#/components/schemas/SecurityKeys'
-        lastUsed:
-          format: date-time
-          type: string
-        message:
-          type: string
-        name:
-          type: string
-        provider:
-          type: string
-        status:
-          type: string
-      required:
-      - auditImageType
-      title: Credentials audit image
-      type: object
-    AzureSecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/SecurityKeys'
-      - properties:
-          batchKey:
-            type: string
-            writeOnly: true
-          batchName:
-            type: string
-          discriminator:
-            type: string
-          storageKey:
-            type: string
-            writeOnly: true
-          storageName:
-            type: string
-        type: object
-      title: Azure credentials
-      type: object
-    AuditLogV2ResponseDto.ResourceUser:
+    AuditLogV2ResponseDto.ResourceWorkspace:
       properties:
         id:
           format: int64
@@ -1943,236 +3038,36 @@ components:
         name:
           type: string
       type: object
-    GoogleCloudConfig:
+    SeqeraComputeConfig:
       allOf:
       - $ref: '#/components/schemas/ComputeConfig'
       - properties:
-          arm64Enabled:
+          defaultDataRetentionPolicy:
             type: boolean
-          bootDiskSizeGb:
-            format: int32
-            type: integer
-          deletedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            readOnly: true
-            type: array
-          forgedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            type: array
-          fusion2Enabled:
-            type: boolean
-          gpuEnabled:
-            type: boolean
-          imageId:
-            type: string
-          instanceType:
-            type: string
-          projectId:
-            type: string
+          instanceTypeSize:
+            allOf:
+            - $ref: '#/components/schemas/SeqeraComputeCloudInstanceTypeSize'
+            description: Size of the Data Studios instance (SMALL, MEDIUM, LARGE)
           region:
             type: string
-          schedConfig:
-            $ref: '#/components/schemas/SchedConfig'
-          schedEnabled:
-            type: boolean
-          serviceAccountEmail:
-            type: string
-          waveEnabled:
-            type: boolean
-          zone:
-            type: string
         type: object
-      title: Google Cloud configuration
+      title: Seqera Compute configuration
       type: object
-    ComputeConfig:
-      discriminator:
-        mapping:
-          altair-platform: '#/components/schemas/AltairPbsComputeConfig'
-          aws-batch: '#/components/schemas/AwsBatchConfig'
-          aws-cloud: '#/components/schemas/AwsCloudConfig'
-          azure-batch: '#/components/schemas/AzBatchConfig'
-          azure-cloud: '#/components/schemas/AzCloudConfig'
-          eks-platform: '#/components/schemas/EksComputeConfig'
-          gke-platform: '#/components/schemas/GkeComputeConfig'
-          google-batch: '#/components/schemas/GoogleBatchConfig'
-          google-cloud: '#/components/schemas/GoogleCloudConfig'
-          google-lifesciences: '#/components/schemas/GoogleLifeSciencesConfig'
-          k8s-platform: '#/components/schemas/K8sComputeConfig'
-          local-platform: '#/components/schemas/LocalComputeConfig'
-          lsf-platform: '#/components/schemas/LsfComputeConfig'
-          moab-platform: '#/components/schemas/MoabComputeConfig'
-          seqeracompute-platform: '#/components/schemas/SeqeraComputeConfig'
-          slurm-platform: '#/components/schemas/SlurmComputeConfig'
-          uge-platform: '#/components/schemas/UnivaComputeConfig'
-        propertyName: discriminator
-      oneOf:
-      - $ref: '#/components/schemas/AwsBatchConfig'
-      - $ref: '#/components/schemas/AwsCloudConfig'
-      - $ref: '#/components/schemas/SeqeraComputeConfig'
-      - $ref: '#/components/schemas/GoogleBatchConfig'
-      - $ref: '#/components/schemas/GoogleCloudConfig'
-      - $ref: '#/components/schemas/AzBatchConfig'
-      - $ref: '#/components/schemas/AzCloudConfig'
-      - $ref: '#/components/schemas/LsfComputeConfig'
-      - $ref: '#/components/schemas/SlurmComputeConfig'
-      - $ref: '#/components/schemas/K8sComputeConfig'
-      - $ref: '#/components/schemas/EksComputeConfig'
-      - $ref: '#/components/schemas/GkeComputeConfig'
-      - $ref: '#/components/schemas/UnivaComputeConfig'
-      - $ref: '#/components/schemas/AltairPbsComputeConfig'
-      - $ref: '#/components/schemas/MoabComputeConfig'
-      - $ref: '#/components/schemas/LocalComputeConfig'
-      - $ref: '#/components/schemas/GoogleLifeSciencesConfig'
-      properties:
-        discriminator:
-          description: property to select the compute config platform
-          type: string
-        environment:
-          items:
-            $ref: '#/components/schemas/ConfigEnvVariable'
-          type: array
-        nextflowConfig:
-          type: string
-        postRunScript:
-          description: Add a script that executes after all Nextflow processes have completed. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
-          type: string
-        preRunScript:
-          description: Add a script that executes in the nf-launch script prior to invoking Nextflow processes. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
-          type: string
-        workDir:
-          description: Compute environment working directory
-          type: string
-      type: object
-    ConfigEnvVariable:
-      properties:
-        compute:
-          type: boolean
-        head:
-          type: boolean
-        name:
-          type: string
-        value:
-          type: string
-      type: object
-    AwsBatchConfig:
+    GiteaSecurityKeys:
       allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          cliPath:
-            type: string
-          computeJobRole:
-            type: string
-          computeQueue:
-            type: string
-          deletedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            readOnly: true
-            type: array
-          dragenInstanceType:
-            type: string
-          dragenQueue:
-            type: string
-          executionRole:
-            type: string
-          forge:
-            $ref: '#/components/schemas/ForgeConfig'
-          forgedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            type: array
-          fusion2Enabled:
-            type: boolean
-          fusionSnapshots:
-            type: boolean
-          headJobCpus:
-            format: int32
-            type: integer
-          headJobMemoryMb:
-            format: int32
-            type: integer
-          headJobRole:
-            type: string
-          headQueue:
-            type: string
-          logGroup:
-            type: string
-          lustreId:
-            deprecated: true
-            type: string
-          nvnmeStorageEnabled:
-            type: boolean
-          region:
-            type: string
-          storageType:
-            deprecated: true
-            type: string
-          volumes:
-            items:
-              type: string
-            type: array
-          waveEnabled:
-            type: boolean
-        type: object
-      title: AWS Batch configuration
-      type: object
-    ContainerRegistryKeys:
-      allOf:
-      - $ref: '#/components/schemas/SecurityKeys'
+      - $ref: '#/components/schemas/GitKeys'
       - properties:
           discriminator:
             type: string
           password:
             type: string
             writeOnly: true
-          registry:
+          token:
             type: string
-          userName:
+          username:
             type: string
         type: object
-      title: Container registry credentials
-      type: object
-    WfNextflow:
-      properties:
-        build:
-          maxLength: 10
-          type: string
-        timestamp:
-          format: date-time
-          type: string
-        version:
-          maxLength: 20
-          type: string
-      type: object
-    AwsSecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/SecurityKeys'
-      - properties:
-          accessKey:
-            type: string
-          assumeRoleArn:
-            type: string
-          discriminator:
-            type: string
-          externalId:
-            type: string
-          mode:
-            $ref: '#/components/schemas/AwsCredentialsMode'
-          secretKey:
-            type: string
-            writeOnly: true
-        type: object
-      title: AWS credentials
+      title: Gitea credentials
       type: object
     WorkflowImage:
       properties:
@@ -2271,313 +3166,22 @@ components:
       - auditImageType
       title: Workflow audit image
       type: object
-    K8sComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          computeServiceAccount:
-            type: string
-          headJobCpus:
-            format: int32
-            type: integer
-          headJobMemoryMb:
-            format: int32
-            type: integer
-          headPodSpec:
-            type: string
-          headServiceAccount:
-            type: string
-          namespace:
-            type: string
-          podCleanup:
-            $ref: '#/components/schemas/PodCleanupPolicy'
-          server:
-            type: string
-          servicePodSpec:
-            type: string
-          sslCert:
-            type: string
-          storageClaimName:
-            type: string
-          storageMountPath:
-            type: string
-        type: object
-      title: Kubernetes compute configuration
-      type: object
-    LocalSecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/SecurityKeys'
-      - properties:
-          discriminator:
-            type: string
-          password:
-            type: string
-            writeOnly: true
-        type: object
-      title: Local security keys
-      type: object
-    GithubActionConfig:
-      allOf:
-      - $ref: '#/components/schemas/Action.ConfigType'
-      - properties:
-          events:
-            items:
-              type: string
-            type: array
-        type: object
-      title: GitHub action config
-      type: object
-    LabelAssignmentImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        labelId:
-          format: int64
-          type: integer
-        resourceId:
-          type: string
-        resourceType:
-          type: string
-      required:
-      - auditImageType
-      title: Label assignment audit image
-      type: object
-    WfManifest:
-      properties:
-        author:
-          maxLength: 150
-          type: string
-        defaultBranch:
-          maxLength: 20
-          type: string
-        description:
-          maxLength: 1024
-          type: string
-        gitmodules:
-          maxLength: 150
-          type: string
-        homePage:
-          maxLength: 200
-          type: string
-        icon:
-          maxLength: 255
-          type: string
-        mainScript:
-          maxLength: 100
-          type: string
-        name:
-          maxLength: 150
-          type: string
-        nextflowVersion:
-          maxLength: 20
-          type: string
-        version:
-          maxLength: 20
-          type: string
-      type: object
-    GoogleSecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/SecurityKeys'
-      - properties:
-          data:
-            type: string
-            writeOnly: true
-          discriminator:
-            type: string
-          serviceAccountEmail:
-            type: string
-          tokenAudience:
-            type: string
-          workloadIdentityProvider:
-            type: string
-        type: object
-      title: Google credentials
-      type: object
-    AwsCredentialsMode:
+    EntityContext:
       enum:
-      - keys
-      - role
+      - User
+      - Organization
+      - Workspace
+      - System
       type: string
       x-enum-varnames:
-      - keys
-      - role
-      x-type: String
-    AuditActor.ActorType:
-      enum:
-      - user
-      - system
-      type: string
-      x-enum-varnames:
-      - user
-      - system
-    UnivaComputeConfig:
+      - User
+      - Organization
+      - Workspace
+      - System
+    AltairPbsComputeConfig:
       allOf:
       - $ref: '#/components/schemas/AbstractGridConfig'
-      title: Univa Grid Engine configuration
-      type: object
-    LsfComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      - properties:
-          perJobMemLimit:
-            type: boolean
-          perTaskReserve:
-            type: boolean
-          unitForLimits:
-            type: string
-        type: object
-      title: IBM LSF configuration
-      type: object
-    CodeCommitSecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/GitKeys'
-      - properties:
-          discriminator:
-            type: string
-          password:
-            type: string
-            writeOnly: true
-          token:
-            type: string
-          username:
-            type: string
-        type: object
-      title: AWS CodeCommit credentials
-      type: object
-    AuditLogTargetStateMetadata:
-      properties:
-        contentRequested:
-          type: boolean
-        postStateStatus:
-          $ref: '#/components/schemas/AuditLogTargetStateMetadataStatus'
-        preStateStatus:
-          $ref: '#/components/schemas/AuditLogTargetStateMetadataStatus'
-      type: object
-    SecurityKeys:
-      discriminator:
-        mapping:
-          aws: '#/components/schemas/AwsSecurityKeys'
-          azure: '#/components/schemas/AzureSecurityKeys'
-          azure-cloud: '#/components/schemas/AzureCloudKeys'
-          azure_entra: '#/components/schemas/AzureEntraKeys'
-          azurerepos: '#/components/schemas/AzureReposSecurityKeys'
-          bitbucket: '#/components/schemas/BitBucketSecurityKeys'
-          codecommit: '#/components/schemas/CodeCommitSecurityKeys'
-          container-reg: '#/components/schemas/ContainerRegistryKeys'
-          gitea: '#/components/schemas/GiteaSecurityKeys'
-          github: '#/components/schemas/GitHubSecurityKeys'
-          github_app: '#/components/schemas/GitHubAppSecurityKeys'
-          gitlab: '#/components/schemas/GitLabSecurityKeys'
-          google: '#/components/schemas/GoogleSecurityKeys'
-          k8s: '#/components/schemas/K8sSecurityKeys'
-          local: '#/components/schemas/LocalSecurityKeys'
-          s3: '#/components/schemas/S3SecurityKeys'
-          seqeracompute: '#/components/schemas/SeqeraComputeSecurityKeys'
-          ssh: '#/components/schemas/SSHSecurityKeys'
-          tw-agent: '#/components/schemas/AgentSecurityKeys'
-        propertyName: discriminator
-      oneOf:
-      - $ref: '#/components/schemas/AwsSecurityKeys'
-      - $ref: '#/components/schemas/GoogleSecurityKeys'
-      - $ref: '#/components/schemas/GitHubSecurityKeys'
-      - $ref: '#/components/schemas/GitHubAppSecurityKeys'
-      - $ref: '#/components/schemas/GitLabSecurityKeys'
-      - $ref: '#/components/schemas/BitBucketSecurityKeys'
-      - $ref: '#/components/schemas/GiteaSecurityKeys'
-      - $ref: '#/components/schemas/SSHSecurityKeys'
-      - $ref: '#/components/schemas/K8sSecurityKeys'
-      - $ref: '#/components/schemas/AzureSecurityKeys'
-      - $ref: '#/components/schemas/AzureCloudKeys'
-      - $ref: '#/components/schemas/AzureReposSecurityKeys'
-      - $ref: '#/components/schemas/ContainerRegistryKeys'
-      - $ref: '#/components/schemas/AgentSecurityKeys'
-      - $ref: '#/components/schemas/CodeCommitSecurityKeys'
-      - $ref: '#/components/schemas/AzureEntraKeys'
-      - $ref: '#/components/schemas/SeqeraComputeSecurityKeys'
-      - $ref: '#/components/schemas/S3SecurityKeys'
-      - $ref: '#/components/schemas/LocalSecurityKeys'
-      properties:
-        discriminator:
-          type: string
-      type: object
-    DatasetVersionImage.LinkedSourceImage:
-      properties:
-        checkedAt:
-          format: date-time
-          type: string
-        contentLength:
-          format: int64
-          type: integer
-        etag:
-          type: string
-        lastModified:
-          format: date-time
-          type: string
-        mediaType:
-          type: string
-        url:
-          type: string
-      title: Linked source snapshot
-      type: object
-    UserImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        auth0Id:
-          type: string
-        authTime:
-          format: date-time
-          type: string
-        avatarId:
-          type: string
-        avatarUrl:
-          type: string
-        description:
-          type: string
-        disabled:
-          type: boolean
-        email:
-          type: string
-        firstName:
-          type: string
-        lastAccess:
-          format: date-time
-          type: string
-        lastName:
-          type: string
-        marketingConsent:
-          type: boolean
-        notification:
-          type: boolean
-        organization:
-          type: string
-        termsOfUseConsent:
-          type: boolean
-        trusted:
-          type: boolean
-        userName:
-          type: string
-      required:
-      - auditImageType
-      title: User audit image
-      type: object
-    AuditLogV2ResponseDto.Actor:
-      properties:
-        email:
-          type: string
-        firstName:
-          type: string
-        isRoot:
-          type: boolean
-        lastName:
-          type: string
-        type:
-          $ref: '#/components/schemas/AuditActor.ActorType'
-        userId:
-          format: int64
-          type: integer
-        userName:
-          type: string
+      title: Altair PBS configuration
       type: object
     ErrorResponse:
       properties:
@@ -2586,170 +3190,37 @@ components:
       required:
       - message
       type: object
-    AuditLogV2ResponseDto.Client:
-      properties:
-        accessTokenId:
-          format: int64
-          type: integer
-        ip:
-          type: string
-        userAgent:
-          type: string
-      type: object
-    AbstractGridConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          computeQueue:
-            type: string
-          headJobOptions:
-            type: string
-          headQueue:
-            type: string
-          hostName:
-            type: string
-          launchDir:
-            type: string
-          maxQueueSize:
-            format: int32
-            type: integer
-          port:
-            format: int32
-            type: integer
-          propagateHeadJobOptions:
-            type: boolean
-          userName:
-            type: string
-        type: object
-      type: object
-    UserSshPublicKeyImage:
+    ComputeEnvImage:
       properties:
         auditImageType:
           $ref: '#/components/schemas/AuditImageType'
-        keyHash:
+        config:
+          $ref: '#/components/schemas/ComputeConfig'
+        credentialsId:
           type: string
+        description:
+          type: string
+        fusionMetricsCollectionEnabled:
+          type: boolean
         lastUsed:
           format: date-time
           type: string
+        managedIdentityId:
+          format: int64
+          type: integer
+        message:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        primary:
+          type: boolean
+        status:
+          type: string
       required:
       - auditImageType
-      title: SSH key audit image
-      type: object
-    WspRole:
-      enum:
-      - owner
-      - admin
-      - maintain
-      - launch
-      - connect
-      - view
-      type: string
-      x-enum-varnames:
-      - owner
-      - admin
-      - maintain
-      - launch
-      - connect
-      - view
-    GoogleBatchConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          bootDiskImage:
-            type: string
-          bootDiskSizeGb:
-            format: int32
-            type: integer
-          computeJobsInstanceTemplate:
-            type: string
-          computeJobsMachineType:
-            items:
-              type: string
-            type: array
-          copyImage:
-            type: string
-          cpuPlatform:
-            type: string
-          debugMode:
-            format: int32
-            type: integer
-          fusion2Enabled:
-            type: boolean
-          fusionSnapshots:
-            type: boolean
-          headJobCpus:
-            format: int32
-            type: integer
-          headJobInstanceTemplate:
-            type: string
-          headJobMemoryMb:
-            format: int32
-            type: integer
-          labels:
-            additionalProperties:
-              type: string
-            type: object
-          location:
-            type: string
-          machineType:
-            type: string
-          network:
-            type: string
-          networkTags:
-            items:
-              type: string
-            type: array
-          nfsMount:
-            type: string
-          nfsTarget:
-            type: string
-          projectId:
-            type: string
-          serviceAccount:
-            type: string
-          spot:
-            type: boolean
-          sshDaemon:
-            type: boolean
-          sshImage:
-            type: string
-          subnetwork:
-            type: string
-          usePrivateAddress:
-            type: boolean
-          waveEnabled:
-            type: boolean
-        type: object
-      title: Google Batch service configuration
-      type: object
-    AzureCloudKeys:
-      allOf:
-      - $ref: '#/components/schemas/AzureSecurityKeys'
-      - properties:
-          clientId:
-            type: string
-          clientSecret:
-            type: string
-            writeOnly: true
-          discriminator:
-            type: string
-          storageName:
-            type: string
-          subscriptionId:
-            type: string
-          tenantId:
-            type: string
-        type: object
-      title: Azure Cloud credentials
-      type: object
-    SeqeraComputeSecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/AwsSecurityKeys'
-      - properties:
-          discriminator:
-            type: string
-        type: object
-      title: Seqera Compute credentials
+      title: Compute environment audit image
       type: object
     Action.ConfigType:
       discriminator:
@@ -2767,6 +3238,37 @@ components:
       properties:
         discriminator:
           type: string
+      type: object
+    GithubActionEvent:
+      allOf:
+      - $ref: '#/components/schemas/Action.EventType'
+      - properties:
+          commitId:
+            type: string
+          commitMessage:
+            type: string
+          pusherEmail:
+            type: string
+          pusherName:
+            type: string
+          ref:
+            type: string
+        type: object
+      title: GitHub action event
+      type: object
+    IdpGroupImage:
+      properties:
+        auditImageType:
+          $ref: '#/components/schemas/AuditImageType'
+        displayName:
+          type: string
+        scimExternalId:
+          type: string
+        source:
+          $ref: '#/components/schemas/OrgIdpGroupSource'
+      required:
+      - auditImageType
+      title: IdP group audit image
       type: object
     AuditLogV2ResponseDto.Target:
       properties:
@@ -2786,508 +3288,6 @@ components:
           $ref: '#/components/schemas/AuditLogV2ResponseDto.ResourceUser'
         workspace:
           $ref: '#/components/schemas/AuditLogV2ResponseDto.ResourceWorkspace'
-      type: object
-    PipelineSecretImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        lastUsed:
-          format: date-time
-          type: string
-        name:
-          type: string
-        salt:
-          type: string
-      required:
-      - auditImageType
-      title: Pipeline secret audit image
-      type: object
-    Map.Entry_String.String_:
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      type: object
-    SSHSecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/SecurityKeys'
-      - properties:
-          discriminator:
-            type: string
-          passphrase:
-            type: string
-            writeOnly: true
-          privateKey:
-            type: string
-            writeOnly: true
-        type: object
-      title: SSH credentials
-      type: object
-    ManagedIdentityImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        config:
-          $ref: '#/components/schemas/ComputeConfig'
-        name:
-          type: string
-        platform:
-          type: string
-      required:
-      - auditImageType
-      title: Managed identity audit image
-      type: object
-    WfWaveMeta:
-      properties:
-        enabled:
-          type: boolean
-      type: object
-    ActionImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        config:
-          $ref: '#/components/schemas/Action.ConfigType'
-        error:
-          type: string
-        event:
-          $ref: '#/components/schemas/Action.EventType'
-        hookId:
-          type: string
-        hookUrl:
-          type: string
-        lastSeen:
-          format: date-time
-          type: string
-        launch:
-          $ref: '#/components/schemas/LaunchImage'
-        name:
-          type: string
-        source:
-          type: string
-        status:
-          type: string
-      required:
-      - auditImageType
-      title: Action audit image
-      type: object
-    S3SecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/SecurityKeys'
-      - properties:
-          accessKey:
-            type: string
-          discriminator:
-            type: string
-          pathStyleAccessEnabled:
-            type: boolean
-          secretKey:
-            type: string
-            writeOnly: true
-        type: object
-      title: S3-compatible credentials
-      type: object
-    LaunchImage:
-      properties:
-        commitId:
-          type: string
-        computeEnvId:
-          type: string
-        configProfiles:
-          items:
-            type: string
-          type: array
-        configText:
-          type: string
-        defaultTemplate:
-          type: boolean
-        entryName:
-          type: string
-        headJobCpus:
-          format: int32
-          type: integer
-        headJobMemoryMb:
-          format: int32
-          type: integer
-        id:
-          type: string
-        launchContainer:
-          type: string
-        mainScript:
-          type: string
-        optimizationId:
-          type: string
-        optimizationTargets:
-          type: string
-        paramsText:
-          type: string
-        pipeline:
-          type: string
-        pipelineSchemaId:
-          format: int64
-          type: integer
-        postRunScript:
-          type: string
-        preRunScript:
-          type: string
-        pullLatest:
-          type: boolean
-        resume:
-          type: boolean
-        revision:
-          type: string
-        schemaName:
-          type: string
-        sessionId:
-          type: string
-        sourceTemplateId:
-          type: string
-        stubRun:
-          type: boolean
-        towerConfig:
-          type: string
-        userSecrets:
-          type: string
-        versionName:
-          type: string
-        workDir:
-          type: string
-        workspaceSecrets:
-          type: string
-      type: object
-    ForgeConfig:
-      properties:
-        allocStrategy:
-          enum:
-          - BEST_FIT
-          - BEST_FIT_PROGRESSIVE
-          - SPOT_CAPACITY_OPTIMIZED
-          - SPOT_PRICE_CAPACITY_OPTIMIZED
-          type: string
-        allowBuckets:
-          items:
-            type: string
-          type: array
-        arm64Enabled:
-          type: boolean
-        bidPercentage:
-          format: int32
-          type: integer
-        disposeOnDeletion:
-          type: boolean
-        dragenAmiId:
-          type: string
-        dragenEnabled:
-          type: boolean
-        dragenInstanceType:
-          type: string
-        ebsAutoScale:
-          type: boolean
-        ebsBlockSize:
-          format: int32
-          type: integer
-        ebsBootSize:
-          format: int32
-          type: integer
-        ec2KeyPair:
-          type: string
-        ecsConfig:
-          type: string
-        efsCreate:
-          type: boolean
-        efsId:
-          type: string
-        efsMount:
-          type: string
-        fargateHeadEnabled:
-          type: boolean
-        fsxMount:
-          type: string
-        fsxName:
-          type: string
-        fsxSize:
-          format: int32
-          type: integer
-        fusionEnabled:
-          type: boolean
-        gpuEnabled:
-          type: boolean
-        imageId:
-          type: string
-        instanceTypes:
-          items:
-            type: string
-          type: array
-        maxCpus:
-          format: int32
-          type: integer
-        minCpus:
-          format: int32
-          type: integer
-        securityGroups:
-          items:
-            type: string
-          type: array
-        subnets:
-          items:
-            type: string
-          type: array
-        type:
-          enum:
-          - SPOT
-          - EC2
-          type: string
-        vpcId:
-          type: string
-      type: object
-    BucketActionEvent:
-      allOf:
-      - $ref: '#/components/schemas/Action.EventType'
-      - properties:
-          bucketName:
-            type: string
-          eventName:
-            type: string
-          provider:
-            type: string
-          recordCount:
-            format: int32
-            type: integer
-        type: object
-      title: Bucket action event
-      type: object
-    AuditLogV2ResponseDto.ResourceWorkspace:
-      properties:
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-      type: object
-    PodCleanupPolicy:
-      enum:
-      - on_success
-      - always
-      - never
-      type: string
-      x-enum-varnames:
-      - on_success
-      - always
-      - never
-    AwsCloudConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          allowBuckets:
-            items:
-              type: string
-            type: array
-          arm64Enabled:
-            type: boolean
-          deletedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            readOnly: true
-            type: array
-          ebsBootSize:
-            format: int32
-            type: integer
-          ebsEncrypted:
-            description: When true, the boot EBS volume of provisioned instances is encrypted. Null/absent (the default) is treated as false — no encryption.
-            type: boolean
-          ebsKmsKeyId:
-            description: Optional KMS key ARN used to encrypt the boot EBS volume. Only applied when ebsEncrypted is true. When omitted, the account/region default EBS encryption key is used.
-            type: string
-          ec2KeyPair:
-            type: string
-          forgedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            type: array
-          fusion2Enabled:
-            type: boolean
-          gpuEnabled:
-            type: boolean
-          imageId:
-            type: string
-          instanceProfileArn:
-            type: string
-          instanceType:
-            type: string
-          logGroup:
-            type: string
-          region:
-            type: string
-          schedConfig:
-            $ref: '#/components/schemas/SchedConfig'
-          schedEnabled:
-            type: boolean
-          securityGroups:
-            items:
-              type: string
-            type: array
-          subnetId:
-            deprecated: true
-            description: DEPRECATED — use subnetIds. Kept in sync with the first element of subnetIds.
-            type: string
-          subnetIds:
-            description: Subnets to launch into. Basic uses the first; Intelligent Compute may use all.
-            items:
-              type: string
-            type: array
-          vpcId:
-            description: The VPC used to scope subnet and security-group selection.
-            type: string
-          waveEnabled:
-            type: boolean
-        type: object
-      title: AWS Cloud configuration
-      type: object
-    GitLabSecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/GitKeys'
-      - properties:
-          discriminator:
-            type: string
-          password:
-            type: string
-            writeOnly: true
-          token:
-            type: string
-            writeOnly: true
-          username:
-            type: string
-        type: object
-      title: GitLab credentials
-      type: object
-    WfFusionMeta:
-      properties:
-        enabled:
-          type: boolean
-        version:
-          maxLength: 20
-          type: string
-      type: object
-    TeamMemberImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        memberId:
-          format: int64
-          type: integer
-        teamId:
-          format: int64
-          type: integer
-        userId:
-          format: int64
-          type: integer
-      required:
-      - auditImageType
-      title: Team member audit image
-      type: object
-    CreditInfoImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        contractId:
-          type: string
-        customerId:
-          type: string
-        hasCreditGrant:
-          type: boolean
-      required:
-      - auditImageType
-      title: Credit info audit image
-      type: object
-    MemberImage:
-      properties:
-        auditImageType:
-          $ref: '#/components/schemas/AuditImageType'
-        organizationId:
-          format: int64
-          type: integer
-        role:
-          type: string
-        userId:
-          format: int64
-          type: integer
-      required:
-      - auditImageType
-      title: Member audit image
-      type: object
-    AuditLogV2QueryAttribute:
-      enum:
-      - state
-      type: string
-      x-enum-varnames:
-      - state
-    WfStats:
-      properties:
-        cachedCount:
-          format: int32
-          type: integer
-        cachedCountFmt:
-          type: string
-        cachedDuration:
-          format: int64
-          type: integer
-        cachedPct:
-          format: float
-          type: number
-        computeTimeFmt:
-          maxLength: 50
-          type: string
-        failedCount:
-          format: int32
-          type: integer
-        failedCountFmt:
-          type: string
-        failedDuration:
-          format: int64
-          type: integer
-        failedPct:
-          format: float
-          type: number
-        ignoredCount:
-          format: int32
-          type: integer
-        ignoredCountFmt:
-          type: string
-        ignoredPct:
-          format: float
-          type: number
-        succeedCount:
-          format: int32
-          type: integer
-        succeedCountFmt:
-          type: string
-        succeedDuration:
-          format: int64
-          type: integer
-        succeedPct:
-          format: float
-          type: number
-      type: object
-    AzureReposSecurityKeys:
-      allOf:
-      - $ref: '#/components/schemas/GitKeys'
-      - properties:
-          discriminator:
-            type: string
-          password:
-            type: string
-            writeOnly: true
-          token:
-            type: string
-          username:
-            type: string
-        type: object
-      title: Azure Repos credentials
       type: object
   securitySchemes:
     BearerAuth:

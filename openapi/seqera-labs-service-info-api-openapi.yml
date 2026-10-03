@@ -31,12 +31,24 @@ paths:
       - service-info
 components:
   schemas:
+    ServiceInfoResponse:
+      properties:
+        serviceInfo:
+          $ref: '#/components/schemas/ServiceInfo'
+      type: object
     NavbarConfig:
       properties:
         menus:
           items:
             $ref: '#/components/schemas/NavbarConfig.NavbarMenu'
           type: array
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
       type: object
     Analytics:
       properties:
@@ -47,17 +59,12 @@ components:
         posthogApiKey:
           type: string
       type: object
-    ServiceInfoResponse:
+    NavbarConfig.NavbarMenu:
       properties:
-        serviceInfo:
-          $ref: '#/components/schemas/ServiceInfo'
-      type: object
-    ErrorResponse:
-      properties:
-        message:
+        label:
           type: string
-      required:
-      - message
+        url:
+          type: string
       type: object
     ServiceInfo:
       properties:
@@ -140,13 +147,6 @@ components:
           type: string
         waveEnabled:
           type: boolean
-      type: object
-    NavbarConfig.NavbarMenu:
-      properties:
-        label:
-          type: string
-        url:
-          type: string
       type: object
   securitySchemes:
     BearerAuth:

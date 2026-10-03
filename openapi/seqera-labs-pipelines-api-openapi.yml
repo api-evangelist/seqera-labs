@@ -511,175 +511,207 @@ paths:
       - Pipelines
 components:
   schemas:
-    DescribeLaunchResponse:
+    ConfigEnvVariable:
       properties:
-        launch:
-          $ref: '#/components/schemas/LaunchDbDto'
-      type: object
-    PipelineVersionFullInfoDto:
-      properties:
-        creatorAvatarUrl:
-          type: string
-        creatorFirstName:
-          type: string
-        creatorLastName:
-          type: string
-        creatorUserId:
-          format: int64
-          type: integer
-        creatorUserName:
-          type: string
-        dateCreated:
-          format: date-time
-          type: string
-        hash:
-          type: string
-        id:
-          type: string
-        isDefault:
+        compute:
           type: boolean
-        lastUpdated:
-          format: date-time
-          type: string
+        head:
+          type: boolean
         name:
           type: string
+        value:
+          type: string
       type: object
-    AzCloudConfig:
+    LocalComputeConfig:
       allOf:
       - $ref: '#/components/schemas/ComputeConfig'
       - properties:
-          dataCollectionEndpoint:
-            type: string
-          dataCollectionRuleId:
-            type: string
+          fusion2Enabled:
+            type: boolean
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Local execution configuration
+      type: object
+    AwsCloudConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          allowBuckets:
+            items:
+              type: string
+            type: array
+          arm64Enabled:
+            type: boolean
           deletedResources:
             items:
-              $ref: '#/components/schemas/Map.Entry_String.String_'
+              additionalProperties:
+                type: object
+              type: object
             readOnly: true
             type: array
+          ebsBootSize:
+            format: int32
+            type: integer
+          ebsEncrypted:
+            description: When true, the boot EBS volume of provisioned instances is encrypted. Null/absent (the default) is treated as false — no encryption.
+            type: boolean
+          ebsKmsKeyId:
+            description: Optional KMS key ARN used to encrypt the boot EBS volume. Only applied when ebsEncrypted is true. When omitted, the account/region default EBS encryption key is used.
+            type: string
+          ec2KeyPair:
+            type: string
           forgedResources:
             items:
-              $ref: '#/components/schemas/Map.Entry_String.String_'
+              additionalProperties:
+                type: object
+              type: object
             type: array
           fusion2Enabled:
             type: boolean
+          gpuEnabled:
+            type: boolean
+          imageId:
+            type: string
+          instanceProfileArn:
+            type: string
           instanceType:
             type: string
-          logTableName:
-            type: string
-          logWorkspaceId:
-            type: string
-          managedIdentityClientId:
-            type: string
-          managedIdentityId:
-            type: string
-          networkId:
+          logGroup:
             type: string
           region:
-            type: string
-          resourceGroup:
             type: string
           schedConfig:
             $ref: '#/components/schemas/SchedConfig'
           schedEnabled:
             type: boolean
-          subnets:
+          securityGroups:
             items:
               type: string
             type: array
-          subscriptionId:
+          subnetId:
+            deprecated: true
+            description: DEPRECATED — use subnetIds. Kept in sync with the first element of subnetIds.
+            type: string
+          subnetIds:
+            description: Subnets to launch into. Basic uses the first; Intelligent Compute may use all.
+            items:
+              type: string
+            type: array
+          vpcId:
+            description: The VPC used to scope subnet and security-group selection.
             type: string
           waveEnabled:
             type: boolean
         type: object
-      title: Azure Cloud configuration
+      title: AWS Cloud configuration
       type: object
-    ListPipelinesResponse:
-      properties:
-        pipelines:
-          items:
-            $ref: '#/components/schemas/PipelineDbDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
+    GkeComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - properties:
+          clusterName:
+            description: The GKE cluster name
+            type: string
+          fusion2Enabled:
+            type: boolean
+          region:
+            description: The GKE cluster region - or - zone
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Google GKE cluster configuration
       type: object
-    ComputeEnv_ComputeConfig_:
+    PipelineSchemaResponse:
       properties:
-        config:
-          $ref: '#/components/schemas/ComputeConfig'
-        credentialsId:
+        params:
           type: string
-        dateCreated:
-          format: date-time
-          readOnly: true
+        schema:
           type: string
-        deleted:
-          readOnly: true
-          type: boolean
+      required:
+      - schema
+      type: object
+    PipelineQueryAttribute:
+      enum:
+      - optimized
+      - labels
+      - computeEnv
+      type: string
+      x-enum-varnames:
+      - optimized
+      - labels
+      - computeEnv
+    WfManifest:
+      properties:
+        author:
+          maxLength: 150
+          type: string
+        defaultBranch:
+          maxLength: 20
+          type: string
         description:
-          maxLength: 2000
+          maxLength: 1024
           type: string
-        fusionMetricsCollectionEnabled:
-          type: boolean
-        id:
-          maxLength: 22
-          readOnly: true
+        gitmodules:
+          maxLength: 150
           type: string
-        lastUpdated:
-          format: date-time
-          readOnly: true
+        homePage:
+          maxLength: 200
           type: string
-        lastUsed:
-          format: date-time
-          readOnly: true
+        icon:
+          maxLength: 255
           type: string
-        message:
-          maxLength: 4096
-          type: string
-        name:
+        mainScript:
           maxLength: 100
           type: string
-        orgId:
-          format: int64
-          readOnly: true
-          type: integer
-        platform:
-          enum:
-          - aws-batch
-          - aws-cloud
-          - seqeracompute-platform
-          - google-batch
-          - google-cloud
-          - azure-batch
-          - azure-cloud
-          - k8s-platform
-          - eks-platform
-          - gke-platform
-          - uge-platform
-          - slurm-platform
-          - lsf-platform
-          - altair-platform
-          - moab-platform
-          - local-platform
-          - google-lifesciences
-          maxLength: 25
+        name:
+          maxLength: 150
           type: string
-        primary:
-          readOnly: true
-          type: boolean
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ComputeEnv.Status'
-          readOnly: true
-        workspaceId:
-          format: int64
-          readOnly: true
-          type: integer
-      required:
-      - config
-      - name
-      - platform
+        nextflowVersion:
+          maxLength: 20
+          type: string
+        version:
+          maxLength: 20
+          type: string
+      type: object
+    CreatePipelineVersionRequest:
+      properties:
+        name:
+          type: string
+      type: object
+    CreatePipelineResponse:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PipelineDbDto'
+      type: object
+    LsfComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      - properties:
+          perJobMemLimit:
+            type: boolean
+          perTaskReserve:
+            type: boolean
+          unitForLimits:
+            type: string
+        type: object
+      title: IBM LSF configuration
+      type: object
+    SeqeraComputeCloudInstanceTypeSize:
+      enum:
+      - SMALL
+      - MEDIUM
+      - LARGE
+      type: string
+    SlurmComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Slurm configuration
       type: object
     GoogleBatchConfig:
       allOf:
@@ -752,95 +784,31 @@ components:
         type: object
       title: Google Batch service configuration
       type: object
-    CreatePipelineVersionRequest:
-      properties:
-        name:
-          type: string
-      type: object
-    EksComputeConfig:
+    AbstractGridConfig:
       allOf:
-      - $ref: '#/components/schemas/K8sComputeConfig'
+      - $ref: '#/components/schemas/ComputeConfig'
       - properties:
-          clusterName:
-            description: The AWS EKS cluster name
+          computeQueue:
             type: string
-          fusion2Enabled:
-            type: boolean
-          region:
-            description: AWS region
+          headJobOptions:
             type: string
-          waveEnabled:
+          headQueue:
+            type: string
+          hostName:
+            type: string
+          launchDir:
+            type: string
+          maxQueueSize:
+            format: int32
+            type: integer
+          port:
+            format: int32
+            type: integer
+          propagateHeadJobOptions:
             type: boolean
+          userName:
+            type: string
         type: object
-      title: Amazon EKS cluster configuration
-      type: object
-    GkeComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/K8sComputeConfig'
-      - properties:
-          clusterName:
-            description: The GKE cluster name
-            type: string
-          fusion2Enabled:
-            type: boolean
-          region:
-            description: The GKE cluster region - or - zone
-            type: string
-          waveEnabled:
-            type: boolean
-        type: object
-      title: Google GKE cluster configuration
-      type: object
-    SchedConfig:
-      properties:
-        backendStrategy:
-          description: Backend used by Intelligent Compute to run tasks. 'ECS' (AWS only, default) delegates task execution to AWS ECS; 'EC2' (AWS only) runs tasks directly on AWS EC2 instances; 'VM' runs tasks on cloud VMs (provider-agnostic).
-          enum:
-          - ECS
-          - EC2
-          - VM
-          type: string
-        diskAllocation:
-          type: string
-        fusionSnapshots:
-          description: Enable Fusion snapshots so interrupted (e.g. spot-reclaimed) tasks can resume from a snapshot instead of restarting from scratch.
-          type: boolean
-        machineTypes:
-          description: EC2 instance types for compute nodes. Leave empty to automatically select the most cost-effective types for each task.
-          items:
-            type: string
-          type: array
-        nvmeEnabled:
-          description: When true, only use instance types providing local SSD (NVMe) storage. Maps to diskAllocation='nvme'.
-          type: boolean
-        pool:
-          allOf:
-          - $ref: '#/components/schemas/SchedConfig.Pool'
-          description: Warm-pool configuration. When present and enabled, the scheduler maintains a pool of idle VMs ready to absorb incoming tasks with sub-5s start latency.
-        predictionModel:
-          description: 'Resource-prediction model used by Intelligent Compute to size tasks. Suggested values: ''none'' (default), ''qr/v1'', ''qr/v2''. Any other string is accepted.'
-          type: string
-        provisioningModel:
-          enum:
-          - spot
-          - spotFirst
-          - ondemand
-          type: string
-      type: object
-    ComputeEnv.Status:
-      enum:
-      - CREATING
-      - AVAILABLE
-      - DISABLED
-      - DELETING
-      - ERRORED
-      - INVALID
-      - DELETED
-      type: string
-    MoabComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      title: Moab configuration
       type: object
     AzBatchForgeConfig:
       properties:
@@ -876,338 +844,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/AzBatchPoolConfig'
           description: Worker pool configuration for dual pool mode
-      type: object
-    GoogleCloudConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          arm64Enabled:
-            type: boolean
-          bootDiskSizeGb:
-            format: int32
-            type: integer
-          deletedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            readOnly: true
-            type: array
-          forgedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            type: array
-          fusion2Enabled:
-            type: boolean
-          gpuEnabled:
-            type: boolean
-          imageId:
-            type: string
-          instanceType:
-            type: string
-          projectId:
-            type: string
-          region:
-            type: string
-          schedConfig:
-            $ref: '#/components/schemas/SchedConfig'
-          schedEnabled:
-            type: boolean
-          serviceAccountEmail:
-            type: string
-          waveEnabled:
-            type: boolean
-          zone:
-            type: string
-        type: object
-      title: Google Cloud configuration
-      type: object
-    ComputeConfig:
-      discriminator:
-        mapping:
-          altair-platform: '#/components/schemas/AltairPbsComputeConfig'
-          aws-batch: '#/components/schemas/AwsBatchConfig'
-          aws-cloud: '#/components/schemas/AwsCloudConfig'
-          azure-batch: '#/components/schemas/AzBatchConfig'
-          azure-cloud: '#/components/schemas/AzCloudConfig'
-          eks-platform: '#/components/schemas/EksComputeConfig'
-          gke-platform: '#/components/schemas/GkeComputeConfig'
-          google-batch: '#/components/schemas/GoogleBatchConfig'
-          google-cloud: '#/components/schemas/GoogleCloudConfig'
-          google-lifesciences: '#/components/schemas/GoogleLifeSciencesConfig'
-          k8s-platform: '#/components/schemas/K8sComputeConfig'
-          local-platform: '#/components/schemas/LocalComputeConfig'
-          lsf-platform: '#/components/schemas/LsfComputeConfig'
-          moab-platform: '#/components/schemas/MoabComputeConfig'
-          seqeracompute-platform: '#/components/schemas/SeqeraComputeConfig'
-          slurm-platform: '#/components/schemas/SlurmComputeConfig'
-          uge-platform: '#/components/schemas/UnivaComputeConfig'
-        propertyName: discriminator
-      oneOf:
-      - $ref: '#/components/schemas/AwsBatchConfig'
-      - $ref: '#/components/schemas/AwsCloudConfig'
-      - $ref: '#/components/schemas/SeqeraComputeConfig'
-      - $ref: '#/components/schemas/GoogleBatchConfig'
-      - $ref: '#/components/schemas/GoogleCloudConfig'
-      - $ref: '#/components/schemas/AzBatchConfig'
-      - $ref: '#/components/schemas/AzCloudConfig'
-      - $ref: '#/components/schemas/LsfComputeConfig'
-      - $ref: '#/components/schemas/SlurmComputeConfig'
-      - $ref: '#/components/schemas/K8sComputeConfig'
-      - $ref: '#/components/schemas/EksComputeConfig'
-      - $ref: '#/components/schemas/GkeComputeConfig'
-      - $ref: '#/components/schemas/UnivaComputeConfig'
-      - $ref: '#/components/schemas/AltairPbsComputeConfig'
-      - $ref: '#/components/schemas/MoabComputeConfig'
-      - $ref: '#/components/schemas/LocalComputeConfig'
-      - $ref: '#/components/schemas/GoogleLifeSciencesConfig'
-      properties:
-        discriminator:
-          description: property to select the compute config platform
-          type: string
-        environment:
-          items:
-            $ref: '#/components/schemas/ConfigEnvVariable'
-          type: array
-        nextflowConfig:
-          type: string
-        postRunScript:
-          description: Add a script that executes after all Nextflow processes have completed. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
-          type: string
-        preRunScript:
-          description: Add a script that executes in the nf-launch script prior to invoking Nextflow processes. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
-          type: string
-        workDir:
-          description: Compute environment working directory
-          type: string
-      type: object
-    PipelineSchemaResponse:
-      properties:
-        params:
-          type: string
-        schema:
-          type: string
-      required:
-      - schema
-      type: object
-    AwsBatchConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          cliPath:
-            type: string
-          computeJobRole:
-            type: string
-          computeQueue:
-            type: string
-          deletedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            readOnly: true
-            type: array
-          dragenInstanceType:
-            type: string
-          dragenQueue:
-            type: string
-          executionRole:
-            type: string
-          forge:
-            $ref: '#/components/schemas/ForgeConfig'
-          forgedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            type: array
-          fusion2Enabled:
-            type: boolean
-          fusionSnapshots:
-            type: boolean
-          headJobCpus:
-            format: int32
-            type: integer
-          headJobMemoryMb:
-            format: int32
-            type: integer
-          headJobRole:
-            type: string
-          headQueue:
-            type: string
-          logGroup:
-            type: string
-          lustreId:
-            deprecated: true
-            type: string
-          nvnmeStorageEnabled:
-            type: boolean
-          region:
-            type: string
-          storageType:
-            deprecated: true
-            type: string
-          volumes:
-            items:
-              type: string
-            type: array
-          waveEnabled:
-            type: boolean
-        type: object
-      title: AWS Batch configuration
-      type: object
-    ConfigEnvVariable:
-      properties:
-        compute:
-          type: boolean
-        head:
-          type: boolean
-        name:
-          type: string
-        value:
-          type: string
-      type: object
-    PipelineDbDto:
-      properties:
-        computeEnv:
-          $ref: '#/components/schemas/ComputeEnvDbDto'
-        deleted:
-          type: boolean
-        description:
-          type: string
-        icon:
-          type: string
-        labels:
-          items:
-            $ref: '#/components/schemas/LabelDbDto'
-          type: array
-        lastUpdated:
-          format: date-time
-          type: string
-        name:
-          type: string
-        optimizationId:
-          type: string
-        optimizationStatus:
-          $ref: '#/components/schemas/PipelineOptimizationStatus'
-        optimizationTargets:
-          type: string
-        orgId:
-          format: int64
-          type: integer
-        orgName:
-          type: string
-        pipelineId:
-          format: int64
-          type: integer
-        repository:
-          type: string
-        userFirstName:
-          type: string
-        userId:
-          format: int64
-          type: integer
-        userLastName:
-          type: string
-        userName:
-          type: string
-        version:
-          $ref: '#/components/schemas/PipelineVersionFullInfoDto'
-        visibility:
-          type: string
-        workspaceId:
-          format: int64
-          type: integer
-        workspaceName:
-          type: string
-      type: object
-    Map.Entry_String.String_:
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      type: object
-    DescribePipelineInfoResponse:
-      properties:
-        pipelineInfo:
-          $ref: '#/components/schemas/PipelineInfo'
-      type: object
-    PipelineQueryAttribute:
-      enum:
-      - optimized
-      - labels
-      - computeEnv
-      type: string
-      x-enum-varnames:
-      - optimized
-      - labels
-      - computeEnv
-    AzBatchPoolConfig:
-      description: Azure Batch pool configuration for head or worker pool
-      properties:
-        autoScale:
-          type: boolean
-        bootDiskSizeGB:
-          description: Boot disk size in GB for this pool's nodes. Overrides the forge-level bootDiskSizeGB. When omitted, falls back to the forge-level value or Azure's default.
-          example: 100
-          format: int32
-          maximum: 4095
-          minimum: 50
-          type:
-          - integer
-          - 'null'
-        vmCount:
-          format: int32
-          type: integer
-        vmType:
-          type: string
-      type: object
-    PipelineListParams.SortBy:
-      enum:
-      - CREATED
-      - MODIFIED
-      - NAME
-      type: string
-    K8sComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          computeServiceAccount:
-            type: string
-          headJobCpus:
-            format: int32
-            type: integer
-          headJobMemoryMb:
-            format: int32
-            type: integer
-          headPodSpec:
-            type: string
-          headServiceAccount:
-            type: string
-          namespace:
-            type: string
-          podCleanup:
-            $ref: '#/components/schemas/PodCleanupPolicy'
-          server:
-            type: string
-          servicePodSpec:
-            type: string
-          sslCert:
-            type: string
-          storageClaimName:
-            type: string
-          storageMountPath:
-            type: string
-        type: object
-      title: Kubernetes compute configuration
-      type: object
-    DescribePipelineResponse:
-      properties:
-        pipeline:
-          $ref: '#/components/schemas/PipelineDbDto'
       type: object
     WorkflowLaunchRequest:
       properties:
@@ -1297,50 +933,147 @@ components:
             type: string
           type: array
       type: object
-    AltairPbsComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      title: Altair PBS configuration
-      type: object
-    WfManifest:
+    AzBatchPoolConfig:
+      description: Azure Batch pool configuration for head or worker pool
       properties:
-        author:
-          maxLength: 150
-          type: string
-        defaultBranch:
-          maxLength: 20
-          type: string
-        description:
-          maxLength: 1024
-          type: string
-        gitmodules:
-          maxLength: 150
-          type: string
-        homePage:
-          maxLength: 200
-          type: string
-        icon:
-          maxLength: 255
-          type: string
-        mainScript:
-          maxLength: 100
-          type: string
-        name:
-          maxLength: 150
-          type: string
-        nextflowVersion:
-          maxLength: 20
-          type: string
-        version:
-          maxLength: 20
+        autoScale:
+          type: boolean
+        bootDiskSizeGB:
+          description: Boot disk size in GB for this pool's nodes. Overrides the forge-level bootDiskSizeGB. When omitted, falls back to the forge-level value or Azure's default.
+          example: 100
+          format: int32
+          maximum: 4095
+          minimum: 50
+          type:
+          - integer
+          - 'null'
+        vmCount:
+          format: int32
+          type: integer
+        vmType:
           type: string
       type: object
-    ListPipelineInfoResponse:
+    Map.Entry_String.String_:
       properties:
-        pipelines:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    SchedConfig:
+      properties:
+        backendStrategy:
+          description: Backend used by Intelligent Compute to run tasks. 'ECS' (AWS only, default) delegates task execution to AWS ECS; 'EC2' (AWS only) runs tasks directly on AWS EC2 instances; 'VM' runs tasks on cloud VMs (provider-agnostic).
+          enum:
+          - ECS
+          - EC2
+          - VM
+          type: string
+        diskAllocation:
+          type: string
+        fusionSnapshots:
+          description: Enable Fusion snapshots so interrupted (e.g. spot-reclaimed) tasks can resume from a snapshot instead of restarting from scratch.
+          type: boolean
+        machineTypes:
+          description: EC2 instance types for compute nodes. Leave empty to automatically select the most cost-effective types for each task.
           items:
             type: string
           type: array
+        nvmeEnabled:
+          description: When true, only use instance types providing local SSD (NVMe) storage. Maps to diskAllocation='nvme'.
+          type: boolean
+        pool:
+          allOf:
+          - $ref: '#/components/schemas/SchedConfig.Pool'
+          description: Warm-pool configuration. When present and enabled, the scheduler maintains a pool of idle VMs ready to absorb incoming tasks with sub-5s start latency.
+        predictionModel:
+          description: 'Resource-prediction model used by Intelligent Compute to size tasks. Suggested values: ''none'' (default), ''qr/v1'', ''qr/v2''. Any other string is accepted.'
+          type: string
+        provisioningModel:
+          enum:
+          - spot
+          - spotFirst
+          - ondemand
+          type: string
+      type: object
+    SchedConfig.Pool:
+      properties:
+        desiredWarm:
+          description: Target number of idle VMs to keep warm. Bounds total warm-VM cost across all of this CE's pool clusters.
+          format: int32
+          type: integer
+        enabled:
+          description: Whether the warm pool is active for this CE. When false, the scheduler will not maintain idle VMs.
+          type: boolean
+        scaleToZeroSecs:
+          description: Seconds of inactivity after which the warm pool scales to zero. Set to 0 to never scale to zero.
+          format: int32
+          type: integer
+      type: object
+    ComputeEnv.Status:
+      enum:
+      - CREATING
+      - AVAILABLE
+      - DISABLED
+      - DELETING
+      - ERRORED
+      - INVALID
+      - DELETED
+      type: string
+    DescribeLaunchResponse:
+      properties:
+        launch:
+          $ref: '#/components/schemas/LaunchDbDto'
+      type: object
+    AzCloudConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          dataCollectionEndpoint:
+            type: string
+          dataCollectionRuleId:
+            type: string
+          deletedResources:
+            items:
+              $ref: '#/components/schemas/Map.Entry_String.String_'
+            readOnly: true
+            type: array
+          forgedResources:
+            items:
+              $ref: '#/components/schemas/Map.Entry_String.String_'
+            type: array
+          fusion2Enabled:
+            type: boolean
+          instanceType:
+            type: string
+          logTableName:
+            type: string
+          logWorkspaceId:
+            type: string
+          managedIdentityClientId:
+            type: string
+          managedIdentityId:
+            type: string
+          networkId:
+            type: string
+          region:
+            type: string
+          resourceGroup:
+            type: string
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          subnets:
+            items:
+              type: string
+            type: array
+          subscriptionId:
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Azure Cloud configuration
       type: object
     AzBatchConfig:
       allOf:
@@ -1426,20 +1159,230 @@ components:
         type: object
       title: Azure Batch configuration
       type: object
-    LocalComputeConfig:
+    DescribePipelineInfoResponse:
+      properties:
+        pipelineInfo:
+          $ref: '#/components/schemas/PipelineInfo'
+      type: object
+    PipelineDbDto:
+      properties:
+        computeEnv:
+          $ref: '#/components/schemas/ComputeEnvDbDto'
+        deleted:
+          type: boolean
+        description:
+          type: string
+        icon:
+          type: string
+        labels:
+          items:
+            $ref: '#/components/schemas/LabelDbDto'
+          type: array
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
+          type: string
+        optimizationId:
+          type: string
+        optimizationStatus:
+          $ref: '#/components/schemas/PipelineOptimizationStatus'
+        optimizationTargets:
+          type: string
+        orgId:
+          format: int64
+          type: integer
+        orgName:
+          type: string
+        pipelineId:
+          format: int64
+          type: integer
+        repository:
+          type: string
+        userFirstName:
+          type: string
+        userId:
+          format: int64
+          type: integer
+        userLastName:
+          type: string
+        userName:
+          type: string
+        version:
+          $ref: '#/components/schemas/PipelineVersionFullInfoDto'
+        visibility:
+          type: string
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+    PipelineSchemaAttributes:
+      enum:
+      - schema
+      - params
+      type: string
+      x-enum-varnames:
+      - schema
+      - params
+    JobCleanupPolicy:
+      enum:
+      - on_success
+      - always
+      - never
+      type: string
+      x-enum-varnames:
+      - on_success
+      - always
+      - never
+    UnivaComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Univa Grid Engine configuration
+      type: object
+    GoogleLifeSciencesConfig:
       allOf:
       - $ref: '#/components/schemas/ComputeConfig'
       - properties:
-          fusion2Enabled:
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          copyImage:
+            type: string
+          debugMode:
+            format: int32
+            type: integer
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          labels:
+            additionalProperties:
+              type: string
+            type: object
+          location:
+            type: string
+          nfsMount:
+            type: string
+          nfsTarget:
+            type: string
+          preemptible:
             type: boolean
-          schedConfig:
-            $ref: '#/components/schemas/SchedConfig'
-          schedEnabled:
+          projectId:
+            type: string
+          region:
+            type: string
+          sshDaemon:
             type: boolean
-          waveEnabled:
+          sshImage:
+            type: string
+          usePrivateAddress:
             type: boolean
+          zones:
+            items:
+              type: string
+            type: array
         type: object
-      title: Local execution configuration
+      title: Google Life Sciences configuration (retired)
+      type: object
+    K8sComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          computeServiceAccount:
+            type: string
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          headPodSpec:
+            type: string
+          headServiceAccount:
+            type: string
+          namespace:
+            type: string
+          podCleanup:
+            $ref: '#/components/schemas/PodCleanupPolicy'
+          server:
+            type: string
+          servicePodSpec:
+            type: string
+          sslCert:
+            type: string
+          storageClaimName:
+            type: string
+          storageMountPath:
+            type: string
+        type: object
+      title: Kubernetes compute configuration
+      type: object
+    ComputeEnvDbDto:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        region:
+          type: string
+      type: object
+    PipelineListParams.SortBy:
+      enum:
+      - CREATED
+      - MODIFIED
+      - NAME
+      type: string
+    CreatePipelineRequest:
+      properties:
+        description:
+          type: string
+        icon:
+          type: string
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        launch:
+          $ref: '#/components/schemas/WorkflowLaunchRequest'
+        name:
+          type: string
+        version:
+          $ref: '#/components/schemas/CreatePipelineVersionRequest'
+      type: object
+    PipelineVersionFullInfoDto:
+      properties:
+        creatorAvatarUrl:
+          type: string
+        creatorFirstName:
+          type: string
+        creatorLastName:
+          type: string
+        creatorUserId:
+          format: int64
+          type: integer
+        creatorUserName:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        hash:
+          type: string
+        id:
+          type: string
+        isDefault:
+          type: boolean
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
+          type: string
       type: object
     PipelineOptimizationStatus:
       enum:
@@ -1447,6 +1390,402 @@ components:
       - OPTIMIZABLE
       - UNAVAILABLE
       type: string
+    EksComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - properties:
+          clusterName:
+            description: The AWS EKS cluster name
+            type: string
+          fusion2Enabled:
+            type: boolean
+          region:
+            description: AWS region
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Amazon EKS cluster configuration
+      type: object
+    UpdatePipelineRequest:
+      properties:
+        description:
+          type: string
+        icon:
+          type: string
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        launch:
+          $ref: '#/components/schemas/WorkflowLaunchRequest'
+        name:
+          type: string
+      type: object
+    ComputeConfig:
+      discriminator:
+        mapping:
+          altair-platform: '#/components/schemas/AltairPbsComputeConfig'
+          aws-batch: '#/components/schemas/AwsBatchConfig'
+          aws-cloud: '#/components/schemas/AwsCloudConfig'
+          azure-batch: '#/components/schemas/AzBatchConfig'
+          azure-cloud: '#/components/schemas/AzCloudConfig'
+          eks-platform: '#/components/schemas/EksComputeConfig'
+          gke-platform: '#/components/schemas/GkeComputeConfig'
+          google-batch: '#/components/schemas/GoogleBatchConfig'
+          google-cloud: '#/components/schemas/GoogleCloudConfig'
+          google-lifesciences: '#/components/schemas/GoogleLifeSciencesConfig'
+          k8s-platform: '#/components/schemas/K8sComputeConfig'
+          local-platform: '#/components/schemas/LocalComputeConfig'
+          lsf-platform: '#/components/schemas/LsfComputeConfig'
+          moab-platform: '#/components/schemas/MoabComputeConfig'
+          seqeracompute-platform: '#/components/schemas/SeqeraComputeConfig'
+          slurm-platform: '#/components/schemas/SlurmComputeConfig'
+          uge-platform: '#/components/schemas/UnivaComputeConfig'
+        propertyName: discriminator
+      oneOf:
+      - $ref: '#/components/schemas/AwsBatchConfig'
+      - $ref: '#/components/schemas/AwsCloudConfig'
+      - $ref: '#/components/schemas/SeqeraComputeConfig'
+      - $ref: '#/components/schemas/GoogleBatchConfig'
+      - $ref: '#/components/schemas/GoogleCloudConfig'
+      - $ref: '#/components/schemas/AzBatchConfig'
+      - $ref: '#/components/schemas/AzCloudConfig'
+      - $ref: '#/components/schemas/LsfComputeConfig'
+      - $ref: '#/components/schemas/SlurmComputeConfig'
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - $ref: '#/components/schemas/EksComputeConfig'
+      - $ref: '#/components/schemas/GkeComputeConfig'
+      - $ref: '#/components/schemas/UnivaComputeConfig'
+      - $ref: '#/components/schemas/AltairPbsComputeConfig'
+      - $ref: '#/components/schemas/MoabComputeConfig'
+      - $ref: '#/components/schemas/LocalComputeConfig'
+      - $ref: '#/components/schemas/GoogleLifeSciencesConfig'
+      properties:
+        discriminator:
+          description: property to select the compute config platform
+          type: string
+        environment:
+          items:
+            $ref: '#/components/schemas/ConfigEnvVariable'
+          type: array
+        nextflowConfig:
+          type: string
+        postRunScript:
+          description: Add a script that executes after all Nextflow processes have completed. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
+          type: string
+        preRunScript:
+          description: Add a script that executes in the nf-launch script prior to invoking Nextflow processes. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
+          type: string
+        workDir:
+          description: Compute environment working directory
+          type: string
+      type: object
+    ComputeEnv_ComputeConfig_:
+      properties:
+        config:
+          $ref: '#/components/schemas/ComputeConfig'
+        credentialsId:
+          type: string
+        dateCreated:
+          format: date-time
+          readOnly: true
+          type: string
+        deleted:
+          readOnly: true
+          type: boolean
+        description:
+          maxLength: 2000
+          type: string
+        fusionMetricsCollectionEnabled:
+          type: boolean
+        id:
+          maxLength: 22
+          readOnly: true
+          type: string
+        lastUpdated:
+          format: date-time
+          readOnly: true
+          type: string
+        lastUsed:
+          format: date-time
+          readOnly: true
+          type: string
+        message:
+          maxLength: 4096
+          type: string
+        name:
+          maxLength: 100
+          type: string
+        orgId:
+          format: int64
+          readOnly: true
+          type: integer
+        platform:
+          enum:
+          - aws-batch
+          - aws-cloud
+          - seqeracompute-platform
+          - google-batch
+          - google-cloud
+          - azure-batch
+          - azure-cloud
+          - k8s-platform
+          - eks-platform
+          - gke-platform
+          - uge-platform
+          - slurm-platform
+          - lsf-platform
+          - altair-platform
+          - moab-platform
+          - local-platform
+          - google-lifesciences
+          maxLength: 25
+          type: string
+        primary:
+          readOnly: true
+          type: boolean
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ComputeEnv.Status'
+          readOnly: true
+        workspaceId:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - config
+      - name
+      - platform
+      type: object
+    DescribePipelineResponse:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PipelineDbDto'
+      type: object
+    PipelineInfo:
+      properties:
+        cloneUrl:
+          type: string
+        commitId:
+          type:
+          - string
+          - 'null'
+        configFiles:
+          items:
+            type: string
+          type: array
+        manifest:
+          $ref: '#/components/schemas/WfManifest'
+        profiles:
+          items:
+            type: string
+          type: array
+        projectName:
+          type: string
+        provider:
+          type: string
+        repositoryUrl:
+          type: string
+        revisionName:
+          type:
+          - string
+          - 'null'
+        revisions:
+          items:
+            type: string
+          type: array
+        simpleName:
+          type: string
+        warnings:
+          items:
+            type: string
+          type: array
+        workDirs:
+          items:
+            type: string
+          type: array
+      type: object
+    PipelineListParams.SortDir:
+      enum:
+      - ASCENDING
+      - DESCENDING
+      type: string
+    SeqeraComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          defaultDataRetentionPolicy:
+            type: boolean
+          instanceTypeSize:
+            allOf:
+            - $ref: '#/components/schemas/SeqeraComputeCloudInstanceTypeSize'
+            description: Size of the Data Studios instance (SMALL, MEDIUM, LARGE)
+          region:
+            type: string
+        type: object
+      title: Seqera Compute configuration
+      type: object
+    LabelDbDto:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        isDynamic:
+          type: boolean
+        isInterpolated:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    UpdatePipelineResponse:
+      properties:
+        pipeline:
+          $ref: '#/components/schemas/PipelineDbDto'
+      type: object
+    AltairPbsComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Altair PBS configuration
+      type: object
+    MoabComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Moab configuration
+      type: object
+    ListPipelinesResponse:
+      properties:
+        pipelines:
+          items:
+            $ref: '#/components/schemas/PipelineDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    GoogleCloudConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          arm64Enabled:
+            type: boolean
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          gpuEnabled:
+            type: boolean
+          imageId:
+            type: string
+          instanceType:
+            type: string
+          projectId:
+            type: string
+          region:
+            type: string
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          serviceAccountEmail:
+            type: string
+          waveEnabled:
+            type: boolean
+          zone:
+            type: string
+        type: object
+      title: Google Cloud configuration
+      type: object
+    AwsBatchConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          cliPath:
+            type: string
+          computeJobRole:
+            type: string
+          computeQueue:
+            type: string
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          dragenInstanceType:
+            type: string
+          dragenQueue:
+            type: string
+          executionRole:
+            type: string
+          forge:
+            $ref: '#/components/schemas/ForgeConfig'
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          fusionSnapshots:
+            type: boolean
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          headJobRole:
+            type: string
+          headQueue:
+            type: string
+          logGroup:
+            type: string
+          lustreId:
+            deprecated: true
+            type: string
+          nvnmeStorageEnabled:
+            type: boolean
+          region:
+            type: string
+          storageType:
+            deprecated: true
+            type: string
+          volumes:
+            items:
+              type: string
+            type: array
+          waveEnabled:
+            type: boolean
+        type: object
+      title: AWS Batch configuration
+      type: object
     ForgeConfig:
       properties:
         allocStrategy:
@@ -1532,6 +1871,20 @@ components:
         vpcId:
           type: string
       type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    ListPipelineInfoResponse:
+      properties:
+        pipelines:
+          items:
+            type: string
+          type: array
+      type: object
     PodCleanupPolicy:
       enum:
       - on_success
@@ -1542,124 +1895,6 @@ components:
       - on_success
       - always
       - never
-    ComputeEnvDbDto:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-        region:
-          type: string
-      type: object
-    UpdatePipelineRequest:
-      properties:
-        description:
-          type: string
-        icon:
-          type: string
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-        launch:
-          $ref: '#/components/schemas/WorkflowLaunchRequest'
-        name:
-          type: string
-      type: object
-    AwsCloudConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          allowBuckets:
-            items:
-              type: string
-            type: array
-          arm64Enabled:
-            type: boolean
-          deletedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            readOnly: true
-            type: array
-          ebsBootSize:
-            format: int32
-            type: integer
-          ebsEncrypted:
-            description: When true, the boot EBS volume of provisioned instances is encrypted. Null/absent (the default) is treated as false — no encryption.
-            type: boolean
-          ebsKmsKeyId:
-            description: Optional KMS key ARN used to encrypt the boot EBS volume. Only applied when ebsEncrypted is true. When omitted, the account/region default EBS encryption key is used.
-            type: string
-          ec2KeyPair:
-            type: string
-          forgedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            type: array
-          fusion2Enabled:
-            type: boolean
-          gpuEnabled:
-            type: boolean
-          imageId:
-            type: string
-          instanceProfileArn:
-            type: string
-          instanceType:
-            type: string
-          logGroup:
-            type: string
-          region:
-            type: string
-          schedConfig:
-            $ref: '#/components/schemas/SchedConfig'
-          schedEnabled:
-            type: boolean
-          securityGroups:
-            items:
-              type: string
-            type: array
-          subnetId:
-            deprecated: true
-            description: DEPRECATED — use subnetIds. Kept in sync with the first element of subnetIds.
-            type: string
-          subnetIds:
-            description: Subnets to launch into. Basic uses the first; Intelligent Compute may use all.
-            items:
-              type: string
-            type: array
-          vpcId:
-            description: The VPC used to scope subnet and security-group selection.
-            type: string
-          waveEnabled:
-            type: boolean
-        type: object
-      title: AWS Cloud configuration
-      type: object
-    UnivaComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      title: Univa Grid Engine configuration
-      type: object
-    LsfComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      - properties:
-          perJobMemLimit:
-            type: boolean
-          perTaskReserve:
-            type: boolean
-          unitForLimits:
-            type: string
-        type: object
-      title: IBM LSF configuration
-      type: object
     LaunchDbDto:
       properties:
         commitId:
@@ -1750,241 +1985,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    CreatePipelineRequest:
-      properties:
-        description:
-          type: string
-        icon:
-          type: string
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-        launch:
-          $ref: '#/components/schemas/WorkflowLaunchRequest'
-        name:
-          type: string
-        version:
-          $ref: '#/components/schemas/CreatePipelineVersionRequest'
-      type: object
-    UpdatePipelineResponse:
-      properties:
-        pipeline:
-          $ref: '#/components/schemas/PipelineDbDto'
-      type: object
-    LabelDbDto:
-      properties:
-        dateCreated:
-          format: date-time
-          type: string
-        id:
-          format: int64
-          type: integer
-        isDefault:
-          type: boolean
-        isDynamic:
-          type: boolean
-        isInterpolated:
-          type: boolean
-        name:
-          type: string
-        resource:
-          type: boolean
-        value:
-          type: string
-      type: object
-    PipelineInfo:
-      properties:
-        cloneUrl:
-          type: string
-        commitId:
-          type:
-          - string
-          - 'null'
-        configFiles:
-          items:
-            type: string
-          type: array
-        manifest:
-          $ref: '#/components/schemas/WfManifest'
-        profiles:
-          items:
-            type: string
-          type: array
-        projectName:
-          type: string
-        provider:
-          type: string
-        repositoryUrl:
-          type: string
-        revisionName:
-          type:
-          - string
-          - 'null'
-        revisions:
-          items:
-            type: string
-          type: array
-        simpleName:
-          type: string
-        warnings:
-          items:
-            type: string
-          type: array
-        workDirs:
-          items:
-            type: string
-          type: array
-      type: object
-    GoogleLifeSciencesConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          bootDiskSizeGb:
-            format: int32
-            type: integer
-          copyImage:
-            type: string
-          debugMode:
-            format: int32
-            type: integer
-          headJobCpus:
-            format: int32
-            type: integer
-          headJobMemoryMb:
-            format: int32
-            type: integer
-          labels:
-            additionalProperties:
-              type: string
-            type: object
-          location:
-            type: string
-          nfsMount:
-            type: string
-          nfsTarget:
-            type: string
-          preemptible:
-            type: boolean
-          projectId:
-            type: string
-          region:
-            type: string
-          sshDaemon:
-            type: boolean
-          sshImage:
-            type: string
-          usePrivateAddress:
-            type: boolean
-          zones:
-            items:
-              type: string
-            type: array
-        type: object
-      title: Google Life Sciences configuration (retired)
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    PipelineListParams.SortDir:
-      enum:
-      - ASCENDING
-      - DESCENDING
-      type: string
-    SchedConfig.Pool:
-      properties:
-        desiredWarm:
-          description: Target number of idle VMs to keep warm. Bounds total warm-VM cost across all of this CE's pool clusters.
-          format: int32
-          type: integer
-        enabled:
-          description: Whether the warm pool is active for this CE. When false, the scheduler will not maintain idle VMs.
-          type: boolean
-        scaleToZeroSecs:
-          description: Seconds of inactivity after which the warm pool scales to zero. Set to 0 to never scale to zero.
-          format: int32
-          type: integer
-      type: object
-    JobCleanupPolicy:
-      enum:
-      - on_success
-      - always
-      - never
-      type: string
-      x-enum-varnames:
-      - on_success
-      - always
-      - never
-    PipelineSchemaAttributes:
-      enum:
-      - schema
-      - params
-      type: string
-      x-enum-varnames:
-      - schema
-      - params
-    AbstractGridConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          computeQueue:
-            type: string
-          headJobOptions:
-            type: string
-          headQueue:
-            type: string
-          hostName:
-            type: string
-          launchDir:
-            type: string
-          maxQueueSize:
-            format: int32
-            type: integer
-          port:
-            format: int32
-            type: integer
-          propagateHeadJobOptions:
-            type: boolean
-          userName:
-            type: string
-        type: object
-      type: object
-    SeqeraComputeCloudInstanceTypeSize:
-      enum:
-      - SMALL
-      - MEDIUM
-      - LARGE
-      type: string
-    CreatePipelineResponse:
-      properties:
-        pipeline:
-          $ref: '#/components/schemas/PipelineDbDto'
-      type: object
-    SlurmComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      title: Slurm configuration
-      type: object
-    SeqeraComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          defaultDataRetentionPolicy:
-            type: boolean
-          instanceTypeSize:
-            allOf:
-            - $ref: '#/components/schemas/SeqeraComputeCloudInstanceTypeSize'
-            description: Size of the Data Studios instance (SMALL, MEDIUM, LARGE)
-          region:
-            type: string
-        type: object
-      title: Seqera Compute configuration
       type: object
   securitySchemes:
     BearerAuth:

@@ -656,31 +656,114 @@ paths:
       - Workspaces
 components:
   schemas:
-    OrgAndWorkspaceDto:
+    DataStudioWorkspaceSettingsResponse:
       properties:
+        containerRepository:
+          type:
+          - string
+          - 'null'
+        lifespanHours:
+          format: int32
+          type: integer
+        nameStrategy:
+          type:
+          - string
+          - 'null'
         orgId:
           format: int64
           type: integer
-        orgLogoUrl:
-          type: string
-        orgName:
-          type: string
-        orgType:
-          $ref: '#/components/schemas/OrgType'
-        roles:
-          items:
-            type: string
-          type: array
-        visibility:
-          $ref: '#/components/schemas/Visibility'
-        workspaceFullName:
-          type: string
-        workspaceId:
+        privateStudioByDefault:
+          type: boolean
+        wspId:
           format: int64
           type: integer
-        workspaceName:
+      type: object
+    CreateWorkspaceResponse:
+      properties:
+        workspace:
+          $ref: '#/components/schemas/Workspace'
+      type: object
+    UpdateWorkspaceRequest:
+      properties:
+        description:
+          type: string
+        fullName:
+          type: string
+        name:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+      type: object
+    OrgRole:
+      enum:
+      - owner
+      - member
+      - collaborator
+      type: string
+      x-enum-varnames:
+      - owner
+      - member
+      - collaborator
+    Workspace:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        description:
+          maxLength: 1000
+          type: string
+        fullName:
+          maxLength: 100
+          type: string
+        id:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
+          maxLength: 40
+          pattern: ^[a-zA-Z\d](?:[a-zA-Z\d]|[-_](?=[a-zA-Z\d])){1,38}$
+          type: string
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+      required:
+      - fullName
+      - name
+      - visibility
+      type: object
+    Visibility:
+      enum:
+      - PRIVATE
+      - SHARED
+      type: string
+    UpdateParticipantRoleRequest:
+      properties:
+        role:
           type: string
       type: object
+    WorkspaceDbDto:
+      properties:
+        description:
+          type: string
+        fullName:
+          type: string
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+      type: object
+    ParticipantType:
+      enum:
+      - MEMBER
+      - TEAM
+      - COLLABORATOR
+      type: string
     ParticipantResponseDto:
       properties:
         email:
@@ -713,77 +796,6 @@ components:
         wspRole:
           type: string
       type: object
-    ListWorkspacesAndOrgResponse:
-      properties:
-        orgsAndWorkspaces:
-          items:
-            $ref: '#/components/schemas/OrgAndWorkspaceDto'
-          type: array
-      type: object
-    Workspace:
-      properties:
-        dateCreated:
-          format: date-time
-          type: string
-        description:
-          maxLength: 1000
-          type: string
-        fullName:
-          maxLength: 100
-          type: string
-        id:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        lastUpdated:
-          format: date-time
-          type: string
-        name:
-          maxLength: 40
-          pattern: ^[a-zA-Z\d](?:[a-zA-Z\d]|[-_](?=[a-zA-Z\d])){1,38}$
-          type: string
-        visibility:
-          $ref: '#/components/schemas/Visibility'
-      required:
-      - fullName
-      - name
-      - visibility
-      type: object
-    WorkspaceDbDto:
-      properties:
-        description:
-          type: string
-        fullName:
-          type: string
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-        visibility:
-          $ref: '#/components/schemas/Visibility'
-      type: object
-    OrgRole:
-      enum:
-      - owner
-      - member
-      - collaborator
-      type: string
-      x-enum-varnames:
-      - owner
-      - member
-      - collaborator
-    CreateWorkspaceResponse:
-      properties:
-        workspace:
-          $ref: '#/components/schemas/Workspace'
-      type: object
-    DescribeWorkspaceResponse:
-      properties:
-        workspace:
-          $ref: '#/components/schemas/Workspace'
-      type: object
     DataStudioWorkspaceSettingsRequest:
       properties:
         containerRepository:
@@ -807,28 +819,6 @@ components:
         privateStudioByDefault:
           description: When true, newly created Studio sessions are private by default and only accessible to their creator.
           type: boolean
-      type: object
-    DataStudioWorkspaceSettingsResponse:
-      properties:
-        containerRepository:
-          type:
-          - string
-          - 'null'
-        lifespanHours:
-          format: int32
-          type: integer
-        nameStrategy:
-          type:
-          - string
-          - 'null'
-        orgId:
-          format: int64
-          type: integer
-        privateStudioByDefault:
-          type: boolean
-        wspId:
-          format: int64
-          type: integer
       type: object
     OrgType:
       enum:
@@ -860,11 +850,60 @@ components:
         workspace:
           $ref: '#/components/schemas/Workspace'
       type: object
+    DescribeWorkspaceResponse:
+      properties:
+        workspace:
+          $ref: '#/components/schemas/Workspace'
+      type: object
+    AddParticipantResponse:
+      properties:
+        participant:
+          $ref: '#/components/schemas/ParticipantResponseDto'
+      type: object
     ListWorkspacesResponse:
       properties:
         workspaces:
           items:
             $ref: '#/components/schemas/WorkspaceDbDto'
+          type: array
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    OrgAndWorkspaceDto:
+      properties:
+        orgId:
+          format: int64
+          type: integer
+        orgLogoUrl:
+          type: string
+        orgName:
+          type: string
+        orgType:
+          $ref: '#/components/schemas/OrgType'
+        roles:
+          items:
+            type: string
+          type: array
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+        workspaceFullName:
+          type: string
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+    ListWorkspacesAndOrgResponse:
+      properties:
+        orgsAndWorkspaces:
+          items:
+            $ref: '#/components/schemas/OrgAndWorkspaceDto'
           type: array
       type: object
     ListParticipantsResponse:
@@ -876,45 +915,6 @@ components:
         totalSize:
           format: int64
           type: integer
-      type: object
-    AddParticipantResponse:
-      properties:
-        participant:
-          $ref: '#/components/schemas/ParticipantResponseDto'
-      type: object
-    UpdateParticipantRoleRequest:
-      properties:
-        role:
-          type: string
-      type: object
-    ParticipantType:
-      enum:
-      - MEMBER
-      - TEAM
-      - COLLABORATOR
-      type: string
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    Visibility:
-      enum:
-      - PRIVATE
-      - SHARED
-      type: string
-    UpdateWorkspaceRequest:
-      properties:
-        description:
-          type: string
-        fullName:
-          type: string
-        name:
-          type: string
-        visibility:
-          $ref: '#/components/schemas/Visibility'
       type: object
   securitySchemes:
     BearerAuth:

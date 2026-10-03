@@ -287,20 +287,43 @@ paths:
       - Roles
 components:
   schemas:
-    UpdateRoleRequest:
+    ListRolesResponse.RoleInfo:
       properties:
         description:
-          maxLength: 120
-          minLength: 1
+          type: string
+        isPredefined:
+          type: boolean
+        name:
+          type: string
+      type: object
+    ListRolesResponse:
+      properties:
+        roles:
+          items:
+            $ref: '#/components/schemas/ListRolesResponse.RoleInfo'
+          type: array
+        totalSize:
+          format: int32
+          type: integer
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    RolePermissionResponseDto:
+      properties:
+        category:
           type: string
         name:
           type: string
-        permissions:
-          items:
-            type: string
-          type: array
-      required:
-      - description
+      type: object
+    DescribeRoleResponse:
+      properties:
+        role:
+          $ref: '#/components/schemas/RoleDto'
       type: object
     CreateRoleRequest:
       properties:
@@ -317,6 +340,13 @@ components:
       required:
       - description
       type: object
+    ListRolePermissionsResponse:
+      properties:
+        permissions:
+          items:
+            $ref: '#/components/schemas/RolePermissionResponseDto'
+          type: array
+      type: object
     CreateRoleResponse:
       properties:
         description:
@@ -327,36 +357,6 @@ components:
           items:
             type: string
           type: array
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    RolePermissionResponseDto:
-      properties:
-        category:
-          type: string
-        name:
-          type: string
-      type: object
-    ListRolePermissionsResponse:
-      properties:
-        permissions:
-          items:
-            $ref: '#/components/schemas/RolePermissionResponseDto'
-          type: array
-      type: object
-    ListRolesResponse.RoleInfo:
-      properties:
-        description:
-          type: string
-        isPredefined:
-          type: boolean
-        name:
-          type: string
       type: object
     RoleDto:
       properties:
@@ -371,20 +371,20 @@ components:
             type: string
           type: array
       type: object
-    ListRolesResponse:
+    UpdateRoleRequest:
       properties:
-        roles:
+        description:
+          maxLength: 120
+          minLength: 1
+          type: string
+        name:
+          type: string
+        permissions:
           items:
-            $ref: '#/components/schemas/ListRolesResponse.RoleInfo'
+            type: string
           type: array
-        totalSize:
-          format: int32
-          type: integer
-      type: object
-    DescribeRoleResponse:
-      properties:
-        role:
-          $ref: '#/components/schemas/RoleDto'
+      required:
+      - description
       type: object
   securitySchemes:
     BearerAuth:

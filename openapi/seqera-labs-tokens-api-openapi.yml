@@ -120,25 +120,6 @@ paths:
       - Tokens
 components:
   schemas:
-    ListAccessTokensResponse:
-      properties:
-        tokens:
-          items:
-            $ref: '#/components/schemas/AccessToken'
-          type: array
-      type: object
-    CreateAccessTokenRequest:
-      properties:
-        name:
-          type: string
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
     AccessToken:
       properties:
         basicAuth:
@@ -160,12 +141,31 @@ components:
       required:
       - name
       type: object
+    ListAccessTokensResponse:
+      properties:
+        tokens:
+          items:
+            $ref: '#/components/schemas/AccessToken'
+          type: array
+      type: object
     CreateAccessTokenResponse:
       properties:
         accessKey:
           type: string
         token:
           $ref: '#/components/schemas/AccessToken'
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    CreateAccessTokenRequest:
+      properties:
+        name:
+          type: string
       type: object
   securitySchemes:
     BearerAuth:

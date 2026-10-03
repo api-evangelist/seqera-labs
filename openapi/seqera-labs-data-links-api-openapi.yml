@@ -959,37 +959,29 @@ paths:
       - Data links
 components:
   schemas:
-    DataLinkDeleteItemResponse:
+    DataLinkDownloadUrlResponse:
       properties:
-        deletionFailures:
+        resolvedMimeType:
+          type: string
+        resolvedPath:
+          type: string
+        url:
+          type: string
+        warning:
+          type: string
+      type: object
+    DataLinkFinishMultiPartUploadRequest:
+      properties:
+        fileName:
+          type: string
+        tags:
           items:
-            $ref: '#/components/schemas/DataLinkItemDeletionFailure'
+            $ref: '#/components/schemas/UploadEtag'
           type: array
-      type: object
-    UploadEtag:
-      properties:
-        eTag:
+        uploadId:
           type: string
-        partNumber:
-          format: int32
-          type: integer
-      type: object
-    DataLinkDownloadScriptResponse:
-      properties:
-        script:
-          type: string
-      type: object
-    DataLinkItem:
-      properties:
-        mimeType:
-          type: string
-        name:
-          type: string
-        size:
-          format: int64
-          type: integer
-        type:
-          $ref: '#/components/schemas/DataLinkItemType'
+        withError:
+          type: boolean
       type: object
     DataLinkCredentials:
       properties:
@@ -1004,22 +996,24 @@ components:
       - name
       - provider
       type: object
-    DataLinkMultiPartUploadRequest:
+    DataLinkMultiPartUploadResponse:
       properties:
-        contentLength:
-          format: int64
-          type: integer
-        contentType:
+        uploadId:
           type: string
-        fileName:
-          type: string
+        uploadUrls:
+          items:
+            type: string
+          type: array
       type: object
-    DataLinkType:
-      enum:
-      - bucket
-      type: string
-      x-enum-varnames:
-      - bucket
+    DataLinkContentTreeListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/DataLinkSimpleItem'
+          type: array
+      required:
+      - items
+      type: object
     DataLinkUpdateRequest:
       properties:
         credentialsId:
@@ -1029,37 +1023,16 @@ components:
         name:
           type: string
       type: object
-    DataLinkDownloadUrlResponse:
+    DataLinkDeleteItemRequest:
       properties:
-        resolvedMimeType:
-          type: string
-        resolvedPath:
-          type: string
-        url:
-          type: string
-        warning:
-          type: string
-      type: object
-    DataLinkContentResponse:
-      properties:
-        nextPageToken:
-          type: string
-        objects:
+        dirs:
           items:
-            $ref: '#/components/schemas/DataLinkItem'
+            type: string
           type: array
-        originalPath:
-          type: string
-      type: object
-    DataLinkItemDeletionFailure:
-      properties:
-        dataLinkItem:
-          $ref: '#/components/schemas/DataLinkItem'
-        errorMessage:
-          type: string
-      required:
-      - dataLinkItem
-      - errorMessage
+        files:
+          items:
+            type: string
+          type: array
       type: object
     DataLinkSimpleItem:
       properties:
@@ -1072,26 +1045,89 @@ components:
       - path
       - size
       type: object
-    DataLinkProvider:
-      enum:
-      - aws
-      - google
-      - azure
-      - azure_entra
-      - azure-cloud
-      - seqeracompute
-      - s3
-      type: string
-    DataLinkDeleteItemRequest:
+    DataLinkContentResponse:
       properties:
-        dirs:
+        nextPageToken:
+          type: string
+        objects:
           items:
-            type: string
+            $ref: '#/components/schemas/DataLinkItem'
           type: array
-        files:
+        originalPath:
+          type: string
+      type: object
+    DataLinkDownloadScriptResponse:
+      properties:
+        script:
+          type: string
+      type: object
+    DataLinkItemDeletionFailure:
+      properties:
+        dataLinkItem:
+          $ref: '#/components/schemas/DataLinkItem'
+        errorMessage:
+          type: string
+      required:
+      - dataLinkItem
+      - errorMessage
+      type: object
+    DataLinkItemType:
+      enum:
+      - FOLDER
+      - FILE
+      - FUSION_SYMLINK_FILE
+      type: string
+    DataLinksListResponse:
+      properties:
+        dataLinks:
           items:
-            type: string
+            $ref: '#/components/schemas/DataLinkDto'
           type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    DataLinkType:
+      enum:
+      - bucket
+      type: string
+      x-enum-varnames:
+      - bucket
+    UploadEtag:
+      properties:
+        eTag:
+          type: string
+        partNumber:
+          format: int32
+          type: integer
+      type: object
+    DataLinkDeleteItemResponse:
+      properties:
+        deletionFailures:
+          items:
+            $ref: '#/components/schemas/DataLinkItemDeletionFailure'
+          type: array
+      type: object
+    DataLinkMultiPartUploadRequest:
+      properties:
+        contentLength:
+          format: int64
+          type: integer
+        contentType:
+          type: string
+        fileName:
+          type: string
+      type: object
+    DataLink.Status:
+      enum:
+      - VALID
+      - INVALID
+      readOnly: true
+      type: string
+    DataLinkResponse:
+      properties:
+        dataLink:
+          $ref: '#/components/schemas/DataLinkDto'
       type: object
     DataLinkDto:
       properties:
@@ -1124,41 +1160,6 @@ components:
         type:
           $ref: '#/components/schemas/DataLinkType'
       type: object
-    DataLinksListResponse:
-      properties:
-        dataLinks:
-          items:
-            $ref: '#/components/schemas/DataLinkDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
-      type: object
-    DataLinkContentTreeListResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/DataLinkSimpleItem'
-          type: array
-      required:
-      - items
-      type: object
-    DataLinkMultiPartUploadResponse:
-      properties:
-        uploadId:
-          type: string
-        uploadUrls:
-          items:
-            type: string
-          type: array
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
     DataLinkCreateRequest:
       properties:
         credentialsId:
@@ -1176,36 +1177,35 @@ components:
         type:
           $ref: '#/components/schemas/DataLinkType'
       type: object
-    DataLinkResponse:
+    ErrorResponse:
       properties:
-        dataLink:
-          $ref: '#/components/schemas/DataLinkDto'
+        message:
+          type: string
+      required:
+      - message
       type: object
-    DataLinkFinishMultiPartUploadRequest:
+    DataLinkProvider:
+      enum:
+      - aws
+      - google
+      - azure
+      - azure_entra
+      - azure-cloud
+      - seqeracompute
+      - s3
+      type: string
+    DataLinkItem:
       properties:
-        fileName:
+        mimeType:
           type: string
-        tags:
-          items:
-            $ref: '#/components/schemas/UploadEtag'
-          type: array
-        uploadId:
+        name:
           type: string
-        withError:
-          type: boolean
+        size:
+          format: int64
+          type: integer
+        type:
+          $ref: '#/components/schemas/DataLinkItemType'
       type: object
-    DataLinkItemType:
-      enum:
-      - FOLDER
-      - FILE
-      - FUSION_SYMLINK_FILE
-      type: string
-    DataLink.Status:
-      enum:
-      - VALID
-      - INVALID
-      readOnly: true
-      type: string
   securitySchemes:
     BearerAuth:
       bearerFormat: jwt
