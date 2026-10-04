@@ -4,6 +4,7 @@ generated_by: planning/capability-mapping/scripts/classify_capabilities.py
 model: claude-opus-5
 frame:
 - Pharmaceuticals & Life Sciences
+- Software & Technology
 min_confidence: 0.7
 capability_model:
   source: https://github.com/vincentmakes/turbo-ea-capabilities
@@ -11,7 +12,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 4
+edge_count: 5
 edges:
 - tag: roles
   spec_file: seqera-labs-roles-api-openapi.yml
@@ -23,6 +24,18 @@ edges:
     CreateRole, UpdateRole, DescribeRole 'Describe role and its permissions'
   reason: Full CRUD over roles and their permissions within an organization — authorisation/role administration,
     i.e. identity and access management.
+- tag: Orgs
+  spec_file: seqera-labs-orgs-api-openapi.yml
+  capability_id: BC-4230
+  capability_id_l1: BC-4230
+  capability_name: SaaS Tenant Management
+  confidence: 0.7
+  evidence: POST /orgs CreateOrganization 'Create organization'; GET /orgs/{orgId}/members 'List organization
+    members'; GET /orgs/{orgId}/idp-groups 'List IdP groups for an organization'; schemas DescribeScimConfigResponse,
+    OrganizationQuotas
+  reason: Operations create/delete organizations, manage their members, quotas, IdP groups and SCIM config
+    in the multi-tenant Seqera Platform — i.e. tenant lifecycle, configuration and identity federation.
+    Spans several BC-4230 sub-capabilities, so only the L1 is asserted.
 - tag: compute-envs
   spec_file: seqera-labs-compute-envs-api-openapi.yml
   capability_id: BC-600.50
