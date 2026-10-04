@@ -31,18 +31,6 @@ paths:
       - service-info
 components:
   schemas:
-    ServiceInfoResponse:
-      properties:
-        serviceInfo:
-          $ref: '#/components/schemas/ServiceInfo'
-      type: object
-    NavbarConfig:
-      properties:
-        menus:
-          items:
-            $ref: '#/components/schemas/NavbarConfig.NavbarMenu'
-          type: array
-      type: object
     ErrorResponse:
       properties:
         message:
@@ -59,12 +47,24 @@ components:
         posthogApiKey:
           type: string
       type: object
+    NavbarConfig:
+      properties:
+        menus:
+          items:
+            $ref: '#/components/schemas/NavbarConfig.NavbarMenu'
+          type: array
+      type: object
     NavbarConfig.NavbarMenu:
       properties:
         label:
           type: string
         url:
           type: string
+      type: object
+    ServiceInfoResponse:
+      properties:
+        serviceInfo:
+          $ref: '#/components/schemas/ServiceInfo'
       type: object
     ServiceInfo:
       properties:

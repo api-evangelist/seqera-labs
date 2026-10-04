@@ -467,6 +467,69 @@ paths:
       - Teams
 components:
   schemas:
+    OrgRole:
+      enum:
+      - owner
+      - member
+      - collaborator
+      type: string
+      x-enum-varnames:
+      - owner
+      - member
+      - collaborator
+    UpdateTeamRequest:
+      properties:
+        avatarId:
+          type: string
+        description:
+          type: string
+        idpGroupId:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        name:
+          type: string
+      type: object
+    CreateTeamResponse:
+      properties:
+        team:
+          $ref: '#/components/schemas/TeamDbDto'
+      type: object
+    CreateTeamRequest:
+      properties:
+        avatarId:
+          type: string
+        idpGroupId:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        team:
+          $ref: '#/components/schemas/Team'
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    AddTeamMemberResponse:
+      properties:
+        member:
+          $ref: '#/components/schemas/MemberDbDto'
+      type: object
+    ListWorkspacesByTeamResponse:
+      properties:
+        totalSize:
+          format: int64
+          type: integer
+        workspaces:
+          items:
+            $ref: '#/components/schemas/WorkspaceParticipantResponseDto'
+          type: array
+      type: object
     ListMembersResponse:
       properties:
         members:
@@ -498,36 +561,35 @@ components:
         userName:
           type: string
       type: object
-    UpdateTeamRequest:
+    WorkspaceParticipantResponseDto:
       properties:
-        avatarId:
-          type: string
-        description:
-          type: string
-        idpGroupId:
+        orgId:
           format: int64
-          type:
-          - integer
-          - 'null'
-        name:
+          type: integer
+        orgName:
           type: string
+        participantId:
+          format: int64
+          type: integer
+        participantRole:
+          type: string
+        workspaceFullName:
+          type: string
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+    DescribeTeamResponse:
+      properties:
+        team:
+          $ref: '#/components/schemas/TeamDbDto'
       type: object
     CreateTeamMemberRequest:
       properties:
         userNameOrEmail:
           type: string
-      type: object
-    CreateTeamRequest:
-      properties:
-        avatarId:
-          type: string
-        idpGroupId:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        team:
-          $ref: '#/components/schemas/Team'
       type: object
     Team:
       properties:
@@ -565,38 +627,6 @@ components:
           format: int64
           type: integer
       type: object
-    OrgRole:
-      enum:
-      - owner
-      - member
-      - collaborator
-      type: string
-      x-enum-varnames:
-      - owner
-      - member
-      - collaborator
-    AddTeamMemberResponse:
-      properties:
-        member:
-          $ref: '#/components/schemas/MemberDbDto'
-      type: object
-    ListWorkspacesByTeamResponse:
-      properties:
-        totalSize:
-          format: int64
-          type: integer
-        workspaces:
-          items:
-            $ref: '#/components/schemas/WorkspaceParticipantResponseDto'
-          type: array
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
     TeamDbDto:
       properties:
         avatarUrl:
@@ -620,36 +650,6 @@ components:
         teamId:
           format: int64
           type: integer
-      type: object
-    WorkspaceParticipantResponseDto:
-      properties:
-        orgId:
-          format: int64
-          type: integer
-        orgName:
-          type: string
-        participantId:
-          format: int64
-          type: integer
-        participantRole:
-          type: string
-        workspaceFullName:
-          type: string
-        workspaceId:
-          format: int64
-          type: integer
-        workspaceName:
-          type: string
-      type: object
-    DescribeTeamResponse:
-      properties:
-        team:
-          $ref: '#/components/schemas/TeamDbDto'
-      type: object
-    CreateTeamResponse:
-      properties:
-        team:
-          $ref: '#/components/schemas/TeamDbDto'
       type: object
   securitySchemes:
     BearerAuth:

@@ -49,31 +49,52 @@ paths:
       - Launch
 components:
   schemas:
-    ConfigEnvVariable:
-      properties:
-        compute:
-          type: boolean
-        head:
-          type: boolean
-        name:
-          type: string
-        value:
-          type: string
-      type: object
-    LocalComputeConfig:
+    GoogleLifeSciencesConfig:
       allOf:
       - $ref: '#/components/schemas/ComputeConfig'
       - properties:
-          fusion2Enabled:
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          copyImage:
+            type: string
+          debugMode:
+            format: int32
+            type: integer
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          labels:
+            additionalProperties:
+              type: string
+            type: object
+          location:
+            type: string
+          nfsMount:
+            type: string
+          nfsTarget:
+            type: string
+          preemptible:
             type: boolean
-          schedConfig:
-            $ref: '#/components/schemas/SchedConfig'
-          schedEnabled:
+          projectId:
+            type: string
+          region:
+            type: string
+          sshDaemon:
             type: boolean
-          waveEnabled:
+          sshImage:
+            type: string
+          usePrivateAddress:
             type: boolean
+          zones:
+            items:
+              type: string
+            type: array
         type: object
-      title: Local execution configuration
+      title: Google Life Sciences configuration (retired)
       type: object
     AwsCloudConfig:
       allOf:
@@ -148,118 +169,16 @@ components:
         type: object
       title: AWS Cloud configuration
       type: object
-    GkeComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/K8sComputeConfig'
-      - properties:
-          clusterName:
-            description: The GKE cluster name
-            type: string
-          fusion2Enabled:
-            type: boolean
-          region:
-            description: The GKE cluster region - or - zone
-            type: string
-          waveEnabled:
-            type: boolean
-        type: object
-      title: Google GKE cluster configuration
-      type: object
-    LsfComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      - properties:
-          perJobMemLimit:
-            type: boolean
-          perTaskReserve:
-            type: boolean
-          unitForLimits:
-            type: string
-        type: object
-      title: IBM LSF configuration
-      type: object
-    SlurmComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      title: Slurm configuration
-      type: object
-    SeqeraComputeCloudInstanceTypeSize:
+    PodCleanupPolicy:
       enum:
-      - SMALL
-      - MEDIUM
-      - LARGE
+      - on_success
+      - always
+      - never
       type: string
-    GoogleBatchConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          bootDiskImage:
-            type: string
-          bootDiskSizeGb:
-            format: int32
-            type: integer
-          computeJobsInstanceTemplate:
-            type: string
-          computeJobsMachineType:
-            items:
-              type: string
-            type: array
-          copyImage:
-            type: string
-          cpuPlatform:
-            type: string
-          debugMode:
-            format: int32
-            type: integer
-          fusion2Enabled:
-            type: boolean
-          fusionSnapshots:
-            type: boolean
-          headJobCpus:
-            format: int32
-            type: integer
-          headJobInstanceTemplate:
-            type: string
-          headJobMemoryMb:
-            format: int32
-            type: integer
-          labels:
-            additionalProperties:
-              type: string
-            type: object
-          location:
-            type: string
-          machineType:
-            type: string
-          network:
-            type: string
-          networkTags:
-            items:
-              type: string
-            type: array
-          nfsMount:
-            type: string
-          nfsTarget:
-            type: string
-          projectId:
-            type: string
-          serviceAccount:
-            type: string
-          spot:
-            type: boolean
-          sshDaemon:
-            type: boolean
-          sshImage:
-            type: string
-          subnetwork:
-            type: string
-          usePrivateAddress:
-            type: boolean
-          waveEnabled:
-            type: boolean
-        type: object
-      title: Google Batch service configuration
-      type: object
+      x-enum-varnames:
+      - on_success
+      - always
+      - never
     AzBatchPoolConfig:
       description: Azure Batch pool configuration for head or worker pool
       properties:
@@ -280,13 +199,12 @@ components:
         vmType:
           type: string
       type: object
-    Map.Entry_String.String_:
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      type: object
+    SeqeraComputeCloudInstanceTypeSize:
+      enum:
+      - SMALL
+      - MEDIUM
+      - LARGE
+      type: string
     AbstractGridConfig:
       allOf:
       - $ref: '#/components/schemas/ComputeConfig'
@@ -312,6 +230,184 @@ components:
           userName:
             type: string
         type: object
+      type: object
+    SlurmComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Slurm configuration
+      type: object
+    ComputeEnv.Status:
+      enum:
+      - CREATING
+      - AVAILABLE
+      - DISABLED
+      - DELETING
+      - ERRORED
+      - INVALID
+      - DELETED
+      type: string
+    AwsBatchConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          cliPath:
+            type: string
+          computeJobRole:
+            type: string
+          computeQueue:
+            type: string
+          deletedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            readOnly: true
+            type: array
+          dragenInstanceType:
+            type: string
+          dragenQueue:
+            type: string
+          executionRole:
+            type: string
+          forge:
+            $ref: '#/components/schemas/ForgeConfig'
+          forgedResources:
+            items:
+              additionalProperties:
+                type: object
+              type: object
+            type: array
+          fusion2Enabled:
+            type: boolean
+          fusionSnapshots:
+            type: boolean
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          headJobRole:
+            type: string
+          headQueue:
+            type: string
+          logGroup:
+            type: string
+          lustreId:
+            deprecated: true
+            type: string
+          nvnmeStorageEnabled:
+            type: boolean
+          region:
+            type: string
+          storageType:
+            deprecated: true
+            type: string
+          volumes:
+            items:
+              type: string
+            type: array
+          waveEnabled:
+            type: boolean
+        type: object
+      title: AWS Batch configuration
+      type: object
+    UnivaComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Univa Grid Engine configuration
+      type: object
+    Map.Entry_String.String_:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    ForgeConfig:
+      properties:
+        allocStrategy:
+          enum:
+          - BEST_FIT
+          - BEST_FIT_PROGRESSIVE
+          - SPOT_CAPACITY_OPTIMIZED
+          - SPOT_PRICE_CAPACITY_OPTIMIZED
+          type: string
+        allowBuckets:
+          items:
+            type: string
+          type: array
+        arm64Enabled:
+          type: boolean
+        bidPercentage:
+          format: int32
+          type: integer
+        disposeOnDeletion:
+          type: boolean
+        dragenAmiId:
+          type: string
+        dragenEnabled:
+          type: boolean
+        dragenInstanceType:
+          type: string
+        ebsAutoScale:
+          type: boolean
+        ebsBlockSize:
+          format: int32
+          type: integer
+        ebsBootSize:
+          format: int32
+          type: integer
+        ec2KeyPair:
+          type: string
+        ecsConfig:
+          type: string
+        efsCreate:
+          type: boolean
+        efsId:
+          type: string
+        efsMount:
+          type: string
+        fargateHeadEnabled:
+          type: boolean
+        fsxMount:
+          type: string
+        fsxName:
+          type: string
+        fsxSize:
+          format: int32
+          type: integer
+        fusionEnabled:
+          type: boolean
+        gpuEnabled:
+          type: boolean
+        imageId:
+          type: string
+        instanceTypes:
+          items:
+            type: string
+          type: array
+        maxCpus:
+          format: int32
+          type: integer
+        minCpus:
+          format: int32
+          type: integer
+        securityGroups:
+          items:
+            type: string
+          type: array
+        subnets:
+          items:
+            type: string
+          type: array
+        type:
+          enum:
+          - SPOT
+          - EC2
+          type: string
+        vpcId:
+          type: string
       type: object
     AzBatchForgeConfig:
       properties:
@@ -347,6 +443,163 @@ components:
           allOf:
           - $ref: '#/components/schemas/AzBatchPoolConfig'
           description: Worker pool configuration for dual pool mode
+      type: object
+    JobCleanupPolicy:
+      enum:
+      - on_success
+      - always
+      - never
+      type: string
+      x-enum-varnames:
+      - on_success
+      - always
+      - never
+    DescribeLaunchResponse:
+      properties:
+        launch:
+          $ref: '#/components/schemas/LaunchDbDto'
+      type: object
+    K8sComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          computeServiceAccount:
+            type: string
+          headJobCpus:
+            format: int32
+            type: integer
+          headJobMemoryMb:
+            format: int32
+            type: integer
+          headPodSpec:
+            type: string
+          headServiceAccount:
+            type: string
+          namespace:
+            type: string
+          podCleanup:
+            $ref: '#/components/schemas/PodCleanupPolicy'
+          server:
+            type: string
+          servicePodSpec:
+            type: string
+          sslCert:
+            type: string
+          storageClaimName:
+            type: string
+          storageMountPath:
+            type: string
+        type: object
+      title: Kubernetes compute configuration
+      type: object
+    EksComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - properties:
+          clusterName:
+            description: The AWS EKS cluster name
+            type: string
+          fusion2Enabled:
+            type: boolean
+          region:
+            description: AWS region
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Amazon EKS cluster configuration
+      type: object
+    SeqeraComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          defaultDataRetentionPolicy:
+            type: boolean
+          instanceTypeSize:
+            allOf:
+            - $ref: '#/components/schemas/SeqeraComputeCloudInstanceTypeSize'
+            description: Size of the Data Studios instance (SMALL, MEDIUM, LARGE)
+          region:
+            type: string
+        type: object
+      title: Seqera Compute configuration
+      type: object
+    ComputeEnv_ComputeConfig_:
+      properties:
+        config:
+          $ref: '#/components/schemas/ComputeConfig'
+        credentialsId:
+          type: string
+        dateCreated:
+          format: date-time
+          readOnly: true
+          type: string
+        deleted:
+          readOnly: true
+          type: boolean
+        description:
+          maxLength: 2000
+          type: string
+        fusionMetricsCollectionEnabled:
+          type: boolean
+        id:
+          maxLength: 22
+          readOnly: true
+          type: string
+        lastUpdated:
+          format: date-time
+          readOnly: true
+          type: string
+        lastUsed:
+          format: date-time
+          readOnly: true
+          type: string
+        message:
+          maxLength: 4096
+          type: string
+        name:
+          maxLength: 100
+          type: string
+        orgId:
+          format: int64
+          readOnly: true
+          type: integer
+        platform:
+          enum:
+          - aws-batch
+          - aws-cloud
+          - seqeracompute-platform
+          - google-batch
+          - google-cloud
+          - azure-batch
+          - azure-cloud
+          - k8s-platform
+          - eks-platform
+          - gke-platform
+          - uge-platform
+          - slurm-platform
+          - lsf-platform
+          - altair-platform
+          - moab-platform
+          - local-platform
+          - google-lifesciences
+          maxLength: 25
+          type: string
+        primary:
+          readOnly: true
+          type: boolean
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ComputeEnv.Status'
+          readOnly: true
+        workspaceId:
+          format: int64
+          readOnly: true
+          type: integer
+      required:
+      - config
+      - name
+      - platform
       type: object
     SchedConfig:
       properties:
@@ -384,34 +637,190 @@ components:
           - ondemand
           type: string
       type: object
-    ComputeEnv.Status:
-      enum:
-      - CREATING
-      - AVAILABLE
-      - DISABLED
-      - DELETING
-      - ERRORED
-      - INVALID
-      - DELETED
-      type: string
-    SchedConfig.Pool:
-      properties:
-        desiredWarm:
-          description: Target number of idle VMs to keep warm. Bounds total warm-VM cost across all of this CE's pool clusters.
-          format: int32
-          type: integer
-        enabled:
-          description: Whether the warm pool is active for this CE. When false, the scheduler will not maintain idle VMs.
-          type: boolean
-        scaleToZeroSecs:
-          description: Seconds of inactivity after which the warm pool scales to zero. Set to 0 to never scale to zero.
-          format: int32
-          type: integer
+    GkeComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - properties:
+          clusterName:
+            description: The GKE cluster name
+            type: string
+          fusion2Enabled:
+            type: boolean
+          region:
+            description: The GKE cluster region - or - zone
+            type: string
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Google GKE cluster configuration
       type: object
-    DescribeLaunchResponse:
+    LaunchDbDto:
       properties:
-        launch:
-          $ref: '#/components/schemas/LaunchDbDto'
+        commitId:
+          type: string
+        computeEnv:
+          $ref: '#/components/schemas/ComputeEnv_ComputeConfig_'
+        configProfiles:
+          items:
+            type: string
+          type: array
+        configText:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        entryName:
+          type: string
+        headJobCpus:
+          format: int32
+          type: integer
+        headJobMemoryMb:
+          format: int32
+          type: integer
+        id:
+          type: string
+        lastUpdated:
+          format: date-time
+          type: string
+        launchContainer:
+          type: string
+        mainScript:
+          type: string
+        optimizationId:
+          type: string
+        optimizationTargets:
+          type: string
+        outputDir:
+          description: Per-run output directory passed as Nextflow -output-dir (requires Nextflow 24.10.0 or later and workflow outputs syntax).
+          type:
+          - string
+          - 'null'
+        paramsText:
+          type: string
+        pipeline:
+          type: string
+        pipelineSchemaId:
+          format: int64
+          type: integer
+        postRunScript:
+          type: string
+        preRunScript:
+          type: string
+        pullLatest:
+          type: boolean
+        resume:
+          type: boolean
+        resumeLaunchId:
+          type: string
+        revision:
+          type: string
+        runName:
+          type: string
+        schemaName:
+          type: string
+        sessionId:
+          type: string
+        stubRun:
+          type: boolean
+        syntaxParser:
+          enum:
+          - v1
+          - v2
+          type:
+          - string
+          - 'null'
+        towerConfig:
+          type: string
+        userSecrets:
+          items:
+            type: string
+          type: array
+        workDir:
+          type: string
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceSecrets:
+          items:
+            type: string
+          type: array
+      type: object
+    ConfigEnvVariable:
+      properties:
+        compute:
+          type: boolean
+        head:
+          type: boolean
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    ComputeConfig:
+      discriminator:
+        mapping:
+          altair-platform: '#/components/schemas/AltairPbsComputeConfig'
+          aws-batch: '#/components/schemas/AwsBatchConfig'
+          aws-cloud: '#/components/schemas/AwsCloudConfig'
+          azure-batch: '#/components/schemas/AzBatchConfig'
+          azure-cloud: '#/components/schemas/AzCloudConfig'
+          eks-platform: '#/components/schemas/EksComputeConfig'
+          gke-platform: '#/components/schemas/GkeComputeConfig'
+          google-batch: '#/components/schemas/GoogleBatchConfig'
+          google-cloud: '#/components/schemas/GoogleCloudConfig'
+          google-lifesciences: '#/components/schemas/GoogleLifeSciencesConfig'
+          k8s-platform: '#/components/schemas/K8sComputeConfig'
+          local-platform: '#/components/schemas/LocalComputeConfig'
+          lsf-platform: '#/components/schemas/LsfComputeConfig'
+          moab-platform: '#/components/schemas/MoabComputeConfig'
+          seqeracompute-platform: '#/components/schemas/SeqeraComputeConfig'
+          slurm-platform: '#/components/schemas/SlurmComputeConfig'
+          uge-platform: '#/components/schemas/UnivaComputeConfig'
+        propertyName: discriminator
+      oneOf:
+      - $ref: '#/components/schemas/AwsBatchConfig'
+      - $ref: '#/components/schemas/AwsCloudConfig'
+      - $ref: '#/components/schemas/SeqeraComputeConfig'
+      - $ref: '#/components/schemas/GoogleBatchConfig'
+      - $ref: '#/components/schemas/GoogleCloudConfig'
+      - $ref: '#/components/schemas/AzBatchConfig'
+      - $ref: '#/components/schemas/AzCloudConfig'
+      - $ref: '#/components/schemas/LsfComputeConfig'
+      - $ref: '#/components/schemas/SlurmComputeConfig'
+      - $ref: '#/components/schemas/K8sComputeConfig'
+      - $ref: '#/components/schemas/EksComputeConfig'
+      - $ref: '#/components/schemas/GkeComputeConfig'
+      - $ref: '#/components/schemas/UnivaComputeConfig'
+      - $ref: '#/components/schemas/AltairPbsComputeConfig'
+      - $ref: '#/components/schemas/MoabComputeConfig'
+      - $ref: '#/components/schemas/LocalComputeConfig'
+      - $ref: '#/components/schemas/GoogleLifeSciencesConfig'
+      properties:
+        discriminator:
+          description: property to select the compute config platform
+          type: string
+        environment:
+          items:
+            $ref: '#/components/schemas/ConfigEnvVariable'
+          type: array
+        nextflowConfig:
+          type: string
+        postRunScript:
+          description: Add a script that executes after all Nextflow processes have completed. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
+          type: string
+        preRunScript:
+          description: Add a script that executes in the nf-launch script prior to invoking Nextflow processes. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
+          type: string
+        workDir:
+          description: Compute environment working directory
+          type: string
       type: object
     AzCloudConfig:
       allOf:
@@ -547,285 +956,57 @@ components:
         type: object
       title: Azure Batch configuration
       type: object
-    JobCleanupPolicy:
-      enum:
-      - on_success
-      - always
-      - never
-      type: string
-      x-enum-varnames:
-      - on_success
-      - always
-      - never
-    UnivaComputeConfig:
+    LsfComputeConfig:
       allOf:
       - $ref: '#/components/schemas/AbstractGridConfig'
-      title: Univa Grid Engine configuration
-      type: object
-    GoogleLifeSciencesConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
       - properties:
-          bootDiskSizeGb:
-            format: int32
-            type: integer
-          copyImage:
-            type: string
-          debugMode:
-            format: int32
-            type: integer
-          headJobCpus:
-            format: int32
-            type: integer
-          headJobMemoryMb:
-            format: int32
-            type: integer
-          labels:
-            additionalProperties:
-              type: string
-            type: object
-          location:
-            type: string
-          nfsMount:
-            type: string
-          nfsTarget:
-            type: string
-          preemptible:
+          perJobMemLimit:
             type: boolean
-          projectId:
-            type: string
-          region:
-            type: string
-          sshDaemon:
+          perTaskReserve:
             type: boolean
-          sshImage:
-            type: string
-          usePrivateAddress:
-            type: boolean
-          zones:
-            items:
-              type: string
-            type: array
-        type: object
-      title: Google Life Sciences configuration (retired)
-      type: object
-    K8sComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          computeServiceAccount:
-            type: string
-          headJobCpus:
-            format: int32
-            type: integer
-          headJobMemoryMb:
-            format: int32
-            type: integer
-          headPodSpec:
-            type: string
-          headServiceAccount:
-            type: string
-          namespace:
-            type: string
-          podCleanup:
-            $ref: '#/components/schemas/PodCleanupPolicy'
-          server:
-            type: string
-          servicePodSpec:
-            type: string
-          sslCert:
-            type: string
-          storageClaimName:
-            type: string
-          storageMountPath:
+          unitForLimits:
             type: string
         type: object
-      title: Kubernetes compute configuration
-      type: object
-    EksComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/K8sComputeConfig'
-      - properties:
-          clusterName:
-            description: The AWS EKS cluster name
-            type: string
-          fusion2Enabled:
-            type: boolean
-          region:
-            description: AWS region
-            type: string
-          waveEnabled:
-            type: boolean
-        type: object
-      title: Amazon EKS cluster configuration
-      type: object
-    ComputeConfig:
-      discriminator:
-        mapping:
-          altair-platform: '#/components/schemas/AltairPbsComputeConfig'
-          aws-batch: '#/components/schemas/AwsBatchConfig'
-          aws-cloud: '#/components/schemas/AwsCloudConfig'
-          azure-batch: '#/components/schemas/AzBatchConfig'
-          azure-cloud: '#/components/schemas/AzCloudConfig'
-          eks-platform: '#/components/schemas/EksComputeConfig'
-          gke-platform: '#/components/schemas/GkeComputeConfig'
-          google-batch: '#/components/schemas/GoogleBatchConfig'
-          google-cloud: '#/components/schemas/GoogleCloudConfig'
-          google-lifesciences: '#/components/schemas/GoogleLifeSciencesConfig'
-          k8s-platform: '#/components/schemas/K8sComputeConfig'
-          local-platform: '#/components/schemas/LocalComputeConfig'
-          lsf-platform: '#/components/schemas/LsfComputeConfig'
-          moab-platform: '#/components/schemas/MoabComputeConfig'
-          seqeracompute-platform: '#/components/schemas/SeqeraComputeConfig'
-          slurm-platform: '#/components/schemas/SlurmComputeConfig'
-          uge-platform: '#/components/schemas/UnivaComputeConfig'
-        propertyName: discriminator
-      oneOf:
-      - $ref: '#/components/schemas/AwsBatchConfig'
-      - $ref: '#/components/schemas/AwsCloudConfig'
-      - $ref: '#/components/schemas/SeqeraComputeConfig'
-      - $ref: '#/components/schemas/GoogleBatchConfig'
-      - $ref: '#/components/schemas/GoogleCloudConfig'
-      - $ref: '#/components/schemas/AzBatchConfig'
-      - $ref: '#/components/schemas/AzCloudConfig'
-      - $ref: '#/components/schemas/LsfComputeConfig'
-      - $ref: '#/components/schemas/SlurmComputeConfig'
-      - $ref: '#/components/schemas/K8sComputeConfig'
-      - $ref: '#/components/schemas/EksComputeConfig'
-      - $ref: '#/components/schemas/GkeComputeConfig'
-      - $ref: '#/components/schemas/UnivaComputeConfig'
-      - $ref: '#/components/schemas/AltairPbsComputeConfig'
-      - $ref: '#/components/schemas/MoabComputeConfig'
-      - $ref: '#/components/schemas/LocalComputeConfig'
-      - $ref: '#/components/schemas/GoogleLifeSciencesConfig'
-      properties:
-        discriminator:
-          description: property to select the compute config platform
-          type: string
-        environment:
-          items:
-            $ref: '#/components/schemas/ConfigEnvVariable'
-          type: array
-        nextflowConfig:
-          type: string
-        postRunScript:
-          description: Add a script that executes after all Nextflow processes have completed. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
-          type: string
-        preRunScript:
-          description: Add a script that executes in the nf-launch script prior to invoking Nextflow processes. See [Pre and post-run scripts](https://docs.seqera.io/platform-cloud/launch/advanced#pre-and-post-run-scripts).
-          type: string
-        workDir:
-          description: Compute environment working directory
-          type: string
-      type: object
-    ComputeEnv_ComputeConfig_:
-      properties:
-        config:
-          $ref: '#/components/schemas/ComputeConfig'
-        credentialsId:
-          type: string
-        dateCreated:
-          format: date-time
-          readOnly: true
-          type: string
-        deleted:
-          readOnly: true
-          type: boolean
-        description:
-          maxLength: 2000
-          type: string
-        fusionMetricsCollectionEnabled:
-          type: boolean
-        id:
-          maxLength: 22
-          readOnly: true
-          type: string
-        lastUpdated:
-          format: date-time
-          readOnly: true
-          type: string
-        lastUsed:
-          format: date-time
-          readOnly: true
-          type: string
-        message:
-          maxLength: 4096
-          type: string
-        name:
-          maxLength: 100
-          type: string
-        orgId:
-          format: int64
-          readOnly: true
-          type: integer
-        platform:
-          enum:
-          - aws-batch
-          - aws-cloud
-          - seqeracompute-platform
-          - google-batch
-          - google-cloud
-          - azure-batch
-          - azure-cloud
-          - k8s-platform
-          - eks-platform
-          - gke-platform
-          - uge-platform
-          - slurm-platform
-          - lsf-platform
-          - altair-platform
-          - moab-platform
-          - local-platform
-          - google-lifesciences
-          maxLength: 25
-          type: string
-        primary:
-          readOnly: true
-          type: boolean
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ComputeEnv.Status'
-          readOnly: true
-        workspaceId:
-          format: int64
-          readOnly: true
-          type: integer
-      required:
-      - config
-      - name
-      - platform
-      type: object
-    SeqeraComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/ComputeConfig'
-      - properties:
-          defaultDataRetentionPolicy:
-            type: boolean
-          instanceTypeSize:
-            allOf:
-            - $ref: '#/components/schemas/SeqeraComputeCloudInstanceTypeSize'
-            description: Size of the Data Studios instance (SMALL, MEDIUM, LARGE)
-          region:
-            type: string
-        type: object
-      title: Seqera Compute configuration
-      type: object
-    AltairPbsComputeConfig:
-      allOf:
-      - $ref: '#/components/schemas/AbstractGridConfig'
-      title: Altair PBS configuration
+      title: IBM LSF configuration
       type: object
     MoabComputeConfig:
       allOf:
       - $ref: '#/components/schemas/AbstractGridConfig'
       title: Moab configuration
       type: object
-    ErrorResponse:
+    AltairPbsComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/AbstractGridConfig'
+      title: Altair PBS configuration
+      type: object
+    SchedConfig.Pool:
       properties:
-        message:
-          type: string
-      required:
-      - message
+        desiredWarm:
+          description: Target number of idle VMs to keep warm. Bounds total warm-VM cost across all of this CE's pool clusters.
+          format: int32
+          type: integer
+        enabled:
+          description: Whether the warm pool is active for this CE. When false, the scheduler will not maintain idle VMs.
+          type: boolean
+        scaleToZeroSecs:
+          description: Seconds of inactivity after which the warm pool scales to zero. Set to 0 to never scale to zero.
+          format: int32
+          type: integer
+      type: object
+    LocalComputeConfig:
+      allOf:
+      - $ref: '#/components/schemas/ComputeConfig'
+      - properties:
+          fusion2Enabled:
+            type: boolean
+          schedConfig:
+            $ref: '#/components/schemas/SchedConfig'
+          schedEnabled:
+            type: boolean
+          waveEnabled:
+            type: boolean
+        type: object
+      title: Local execution configuration
       type: object
     GoogleCloudConfig:
       allOf:
@@ -874,37 +1055,28 @@ components:
         type: object
       title: Google Cloud configuration
       type: object
-    AwsBatchConfig:
+    GoogleBatchConfig:
       allOf:
       - $ref: '#/components/schemas/ComputeConfig'
       - properties:
-          cliPath:
+          bootDiskImage:
             type: string
-          computeJobRole:
+          bootDiskSizeGb:
+            format: int32
+            type: integer
+          computeJobsInstanceTemplate:
             type: string
-          computeQueue:
-            type: string
-          deletedResources:
+          computeJobsMachineType:
             items:
-              additionalProperties:
-                type: object
-              type: object
-            readOnly: true
+              type: string
             type: array
-          dragenInstanceType:
+          copyImage:
             type: string
-          dragenQueue:
+          cpuPlatform:
             type: string
-          executionRole:
-            type: string
-          forge:
-            $ref: '#/components/schemas/ForgeConfig'
-          forgedResources:
-            items:
-              additionalProperties:
-                type: object
-              type: object
-            type: array
+          debugMode:
+            format: int32
+            type: integer
           fusion2Enabled:
             type: boolean
           fusionSnapshots:
@@ -912,219 +1084,47 @@ components:
           headJobCpus:
             format: int32
             type: integer
+          headJobInstanceTemplate:
+            type: string
           headJobMemoryMb:
             format: int32
             type: integer
-          headJobRole:
+          labels:
+            additionalProperties:
+              type: string
+            type: object
+          location:
             type: string
-          headQueue:
+          machineType:
             type: string
-          logGroup:
+          network:
             type: string
-          lustreId:
-            deprecated: true
-            type: string
-          nvnmeStorageEnabled:
-            type: boolean
-          region:
-            type: string
-          storageType:
-            deprecated: true
-            type: string
-          volumes:
+          networkTags:
             items:
               type: string
             type: array
+          nfsMount:
+            type: string
+          nfsTarget:
+            type: string
+          projectId:
+            type: string
+          serviceAccount:
+            type: string
+          spot:
+            type: boolean
+          sshDaemon:
+            type: boolean
+          sshImage:
+            type: string
+          subnetwork:
+            type: string
+          usePrivateAddress:
+            type: boolean
           waveEnabled:
             type: boolean
         type: object
-      title: AWS Batch configuration
-      type: object
-    ForgeConfig:
-      properties:
-        allocStrategy:
-          enum:
-          - BEST_FIT
-          - BEST_FIT_PROGRESSIVE
-          - SPOT_CAPACITY_OPTIMIZED
-          - SPOT_PRICE_CAPACITY_OPTIMIZED
-          type: string
-        allowBuckets:
-          items:
-            type: string
-          type: array
-        arm64Enabled:
-          type: boolean
-        bidPercentage:
-          format: int32
-          type: integer
-        disposeOnDeletion:
-          type: boolean
-        dragenAmiId:
-          type: string
-        dragenEnabled:
-          type: boolean
-        dragenInstanceType:
-          type: string
-        ebsAutoScale:
-          type: boolean
-        ebsBlockSize:
-          format: int32
-          type: integer
-        ebsBootSize:
-          format: int32
-          type: integer
-        ec2KeyPair:
-          type: string
-        ecsConfig:
-          type: string
-        efsCreate:
-          type: boolean
-        efsId:
-          type: string
-        efsMount:
-          type: string
-        fargateHeadEnabled:
-          type: boolean
-        fsxMount:
-          type: string
-        fsxName:
-          type: string
-        fsxSize:
-          format: int32
-          type: integer
-        fusionEnabled:
-          type: boolean
-        gpuEnabled:
-          type: boolean
-        imageId:
-          type: string
-        instanceTypes:
-          items:
-            type: string
-          type: array
-        maxCpus:
-          format: int32
-          type: integer
-        minCpus:
-          format: int32
-          type: integer
-        securityGroups:
-          items:
-            type: string
-          type: array
-        subnets:
-          items:
-            type: string
-          type: array
-        type:
-          enum:
-          - SPOT
-          - EC2
-          type: string
-        vpcId:
-          type: string
-      type: object
-    PodCleanupPolicy:
-      enum:
-      - on_success
-      - always
-      - never
-      type: string
-      x-enum-varnames:
-      - on_success
-      - always
-      - never
-    LaunchDbDto:
-      properties:
-        commitId:
-          type: string
-        computeEnv:
-          $ref: '#/components/schemas/ComputeEnv_ComputeConfig_'
-        configProfiles:
-          items:
-            type: string
-          type: array
-        configText:
-          type: string
-        dateCreated:
-          format: date-time
-          type: string
-        entryName:
-          type: string
-        headJobCpus:
-          format: int32
-          type: integer
-        headJobMemoryMb:
-          format: int32
-          type: integer
-        id:
-          type: string
-        lastUpdated:
-          format: date-time
-          type: string
-        launchContainer:
-          type: string
-        mainScript:
-          type: string
-        optimizationId:
-          type: string
-        optimizationTargets:
-          type: string
-        outputDir:
-          description: Per-run output directory passed as Nextflow -output-dir (requires Nextflow 24.10.0 or later and workflow outputs syntax).
-          type:
-          - string
-          - 'null'
-        paramsText:
-          type: string
-        pipeline:
-          type: string
-        pipelineSchemaId:
-          format: int64
-          type: integer
-        postRunScript:
-          type: string
-        preRunScript:
-          type: string
-        pullLatest:
-          type: boolean
-        resume:
-          type: boolean
-        resumeLaunchId:
-          type: string
-        revision:
-          type: string
-        runName:
-          type: string
-        schemaName:
-          type: string
-        sessionId:
-          type: string
-        stubRun:
-          type: boolean
-        syntaxParser:
-          enum:
-          - v1
-          - v2
-          type:
-          - string
-          - 'null'
-        towerConfig:
-          type: string
-        userSecrets:
-          items:
-            type: string
-          type: array
-        workDir:
-          type: string
-        workspaceId:
-          format: int64
-          type: integer
-        workspaceSecrets:
-          items:
-            type: string
-          type: array
+      title: Google Batch service configuration
       type: object
   securitySchemes:
     BearerAuth:

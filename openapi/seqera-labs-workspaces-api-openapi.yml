@@ -656,25 +656,13 @@ paths:
       - Workspaces
 components:
   schemas:
-    DataStudioWorkspaceSettingsResponse:
+    ListParticipantsResponse:
       properties:
-        containerRepository:
-          type:
-          - string
-          - 'null'
-        lifespanHours:
-          format: int32
-          type: integer
-        nameStrategy:
-          type:
-          - string
-          - 'null'
-        orgId:
-          format: int64
-          type: integer
-        privateStudioByDefault:
-          type: boolean
-        wspId:
+        participants:
+          items:
+            $ref: '#/components/schemas/ParticipantResponseDto'
+          type: array
+        totalSize:
           format: int64
           type: integer
       type: object
@@ -683,27 +671,11 @@ components:
         workspace:
           $ref: '#/components/schemas/Workspace'
       type: object
-    UpdateWorkspaceRequest:
+    AddParticipantResponse:
       properties:
-        description:
-          type: string
-        fullName:
-          type: string
-        name:
-          type: string
-        visibility:
-          $ref: '#/components/schemas/Visibility'
+        participant:
+          $ref: '#/components/schemas/ParticipantResponseDto'
       type: object
-    OrgRole:
-      enum:
-      - owner
-      - member
-      - collaborator
-      type: string
-      x-enum-varnames:
-      - owner
-      - member
-      - collaborator
     Workspace:
       properties:
         dateCreated:
@@ -734,16 +706,6 @@ components:
       - name
       - visibility
       type: object
-    Visibility:
-      enum:
-      - PRIVATE
-      - SHARED
-      type: string
-    UpdateParticipantRoleRequest:
-      properties:
-        role:
-          type: string
-      type: object
     WorkspaceDbDto:
       properties:
         description:
@@ -758,12 +720,85 @@ components:
         visibility:
           $ref: '#/components/schemas/Visibility'
       type: object
+    UpdateWorkspaceRequest:
+      properties:
+        description:
+          type: string
+        fullName:
+          type: string
+        name:
+          type: string
+        visibility:
+          $ref: '#/components/schemas/Visibility'
+      type: object
+    ListWorkspacesAndOrgResponse:
+      properties:
+        orgsAndWorkspaces:
+          items:
+            $ref: '#/components/schemas/OrgAndWorkspaceDto'
+          type: array
+      type: object
+    CreateWorkspaceRequest:
+      properties:
+        workspace:
+          $ref: '#/components/schemas/Workspace'
+      type: object
+    DescribeWorkspaceResponse:
+      properties:
+        workspace:
+          $ref: '#/components/schemas/Workspace'
+      type: object
     ParticipantType:
       enum:
       - MEMBER
       - TEAM
       - COLLABORATOR
       type: string
+    AddParticipantRequest:
+      properties:
+        memberId:
+          format: int64
+          type: integer
+        teamId:
+          format: int64
+          type: integer
+        userNameOrEmail:
+          type: string
+      type: object
+    DataStudioWorkspaceSettingsRequest:
+      properties:
+        containerRepository:
+          description: Container repository where Wave pushes images built for Studios in this workspace (e.g. 'cr.seqera.io/my-org/studios'). When null, the platform default is used.
+          type:
+          - string
+          - 'null'
+        lifespanHours:
+          description: Maximum number of hours a Studio session may run before it is automatically stopped. Use 0 for unlimited lifespan.
+          format: int32
+          type: integer
+        nameStrategy:
+          description: Wave image naming strategy applied to container images built for Studios in this workspace. When null, the platform default strategy is used.
+          enum:
+          - none
+          - tagPrefix
+          - imageSuffix
+          type:
+          - string
+          - 'null'
+        privateStudioByDefault:
+          description: When true, newly created Studio sessions are private by default and only accessible to their creator.
+          type: boolean
+      type: object
+    OrgRole:
+      enum:
+      - owner
+      - member
+      - collaborator
+      type: string
+      x-enum-varnames:
+      - owner
+      - member
+      - collaborator
     ParticipantResponseDto:
       properties:
         email:
@@ -796,29 +831,29 @@ components:
         wspRole:
           type: string
       type: object
-    DataStudioWorkspaceSettingsRequest:
+    ErrorResponse:
       properties:
-        containerRepository:
-          description: Container repository where Wave pushes images built for Studios in this workspace (e.g. 'cr.seqera.io/my-org/studios'). When null, the platform default is used.
-          type:
-          - string
-          - 'null'
-        lifespanHours:
-          description: Maximum number of hours a Studio session may run before it is automatically stopped. Use 0 for unlimited lifespan.
-          format: int32
-          type: integer
-        nameStrategy:
-          description: Wave image naming strategy applied to container images built for Studios in this workspace. When null, the platform default strategy is used.
-          enum:
-          - none
-          - tagPrefix
-          - imageSuffix
-          type:
-          - string
-          - 'null'
-        privateStudioByDefault:
-          description: When true, newly created Studio sessions are private by default and only accessible to their creator.
-          type: boolean
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    ListWorkspacesResponse:
+      properties:
+        workspaces:
+          items:
+            $ref: '#/components/schemas/WorkspaceDbDto'
+          type: array
+      type: object
+    Visibility:
+      enum:
+      - PRIVATE
+      - SHARED
+      type: string
+    UpdateParticipantRoleRequest:
+      properties:
+        role:
+          type: string
       type: object
     OrgType:
       enum:
@@ -834,46 +869,6 @@ components:
       - pro
       - basic
       - internal
-    AddParticipantRequest:
-      properties:
-        memberId:
-          format: int64
-          type: integer
-        teamId:
-          format: int64
-          type: integer
-        userNameOrEmail:
-          type: string
-      type: object
-    CreateWorkspaceRequest:
-      properties:
-        workspace:
-          $ref: '#/components/schemas/Workspace'
-      type: object
-    DescribeWorkspaceResponse:
-      properties:
-        workspace:
-          $ref: '#/components/schemas/Workspace'
-      type: object
-    AddParticipantResponse:
-      properties:
-        participant:
-          $ref: '#/components/schemas/ParticipantResponseDto'
-      type: object
-    ListWorkspacesResponse:
-      properties:
-        workspaces:
-          items:
-            $ref: '#/components/schemas/WorkspaceDbDto'
-          type: array
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
     OrgAndWorkspaceDto:
       properties:
         orgId:
@@ -899,20 +894,25 @@ components:
         workspaceName:
           type: string
       type: object
-    ListWorkspacesAndOrgResponse:
+    DataStudioWorkspaceSettingsResponse:
       properties:
-        orgsAndWorkspaces:
-          items:
-            $ref: '#/components/schemas/OrgAndWorkspaceDto'
-          type: array
-      type: object
-    ListParticipantsResponse:
-      properties:
-        participants:
-          items:
-            $ref: '#/components/schemas/ParticipantResponseDto'
-          type: array
-        totalSize:
+        containerRepository:
+          type:
+          - string
+          - 'null'
+        lifespanHours:
+          format: int32
+          type: integer
+        nameStrategy:
+          type:
+          - string
+          - 'null'
+        orgId:
+          format: int64
+          type: integer
+        privateStudioByDefault:
+          type: boolean
+        wspId:
           format: int64
           type: integer
       type: object

@@ -1156,116 +1156,17 @@ paths:
       - Datasets
 components:
   schemas:
-    ValidateUrlResponse:
-      properties:
-        contentLength:
-          format: int64
-          type: integer
-        errorCode:
-          type: string
-        errorMessage:
-          type: string
-        hasEtag:
-          type: boolean
-        mediaType:
-          type: string
-        valid:
-          type: boolean
-      type: object
-    ChangeStatus:
-      enum:
-      - UNCHANGED
-      - CHANGED
-      - UNKNOWN
-      - UNAVAILABLE
-      type: string
-    DatasetRunsInfo:
-      properties:
-        lastUsed:
-          format: date-time
-          type: string
-        runsCount:
-          format: int64
-          type: integer
-      type: object
-    SourceType:
-      enum:
-      - UPLOADED
-      - LINKED
-      type: string
-    ListDatasetsResponse:
-      properties:
-        datasets:
-          items:
-            $ref: '#/components/schemas/DatasetDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
-      type: object
-    MultiRequestFileSchema:
-      properties:
-        file:
-          format: binary
-          type: string
-      type: object
-    DeleteDatasetsRequest:
-      properties:
-        datasetIds:
-          items:
-            type: string
-          type: array
-      type: object
-    ChangeDatasetVisibilityRequest:
-      properties:
-        datasetIds:
-          items:
-            type: string
-          type: array
-      type: object
-    CreateDatasetResponse:
-      properties:
-        dataset:
-          $ref: '#/components/schemas/DatasetDto'
-      type: object
-    UploadDatasetVersionResponse:
-      properties:
-        version:
-          $ref: '#/components/schemas/DatasetVersionDto'
-      type: object
-    LinkVersionRequest:
-      properties:
-        hasHeader:
-          type: boolean
-        url:
-          type: string
-      type: object
-    DatasetPreviewResponse:
-      properties:
-        content:
-          type: string
-        fileTooLarge:
-          type: boolean
-        reachable:
-          type: boolean
-      type: object
-    UserInfo:
-      properties:
-        avatar:
-          type: string
-        email:
-          type: string
-        id:
-          format: int64
-          type: integer
-        userName:
-          type: string
-      type: object
     UpdateDatasetRequest:
       properties:
         description:
           type: string
         name:
+          type: string
+      type: object
+    MultiRequestFileSchema:
+      properties:
+        file:
+          format: binary
           type: string
       type: object
     DatasetDto:
@@ -1310,16 +1211,111 @@ components:
           format: int64
           type: integer
       type: object
-    DeleteDatasetsResponse:
+    ValidateUrlResponse:
       properties:
-        failed:
+        contentLength:
+          format: int64
+          type: integer
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
+        hasEtag:
+          type: boolean
+        mediaType:
+          type: string
+        valid:
+          type: boolean
+      type: object
+    DatasetPreviewResponse:
+      properties:
+        content:
+          type: string
+        fileTooLarge:
+          type: boolean
+        reachable:
+          type: boolean
+      type: object
+    DatasetRunsInfo:
+      properties:
+        lastUsed:
+          format: date-time
+          type: string
+        runsCount:
+          format: int64
+          type: integer
+      type: object
+    UserInfo:
+      properties:
+        avatar:
+          type: string
+        email:
+          type: string
+        id:
+          format: int64
+          type: integer
+        userName:
+          type: string
+      type: object
+    ListDatasetsResponse:
+      properties:
+        datasets:
           items:
-            type: string
+            $ref: '#/components/schemas/DatasetDto'
           type: array
-        success:
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    DescribeDatasetResponse:
+      properties:
+        dataset:
+          $ref: '#/components/schemas/DatasetDto'
+      type: object
+    ValidateUrlRequest:
+      properties:
+        url:
+          type: string
+      type: object
+    ListDatasetVersionsResponse:
+      properties:
+        totalSize:
+          format: int64
+          type: integer
+        versions:
           items:
-            type: string
+            $ref: '#/components/schemas/DatasetVersionDto'
           type: array
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    DatasetQueryAttribute:
+      enum:
+      - labels
+      type: string
+      x-enum-varnames:
+      - labels
+    LinkedSourceDto:
+      properties:
+        changeStatus:
+          $ref: '#/components/schemas/ChangeStatus'
+        checkedAt:
+          format: date-time
+          type: string
+        hasChangeIndicators:
+          type: boolean
+        url:
+          type: string
+      type: object
+    CreateDatasetResponse:
+      properties:
+        dataset:
+          $ref: '#/components/schemas/DatasetDto'
       type: object
     LabelDbDto:
       properties:
@@ -1342,35 +1338,51 @@ components:
         value:
           type: string
       type: object
-    LinkedSourceDto:
+    DeleteDatasetsResponse:
       properties:
-        changeStatus:
-          $ref: '#/components/schemas/ChangeStatus'
-        checkedAt:
-          format: date-time
-          type: string
-        hasChangeIndicators:
+        failed:
+          items:
+            type: string
+          type: array
+        success:
+          items:
+            type: string
+          type: array
+      type: object
+    LinkVersionRequest:
+      properties:
+        hasHeader:
           type: boolean
         url:
           type: string
       type: object
-    DatasetQueryAttribute:
-      enum:
-      - labels
-      type: string
-      x-enum-varnames:
-      - labels
-    ErrorResponse:
+    ChangeDatasetVisibilityRequest:
       properties:
-        message:
-          type: string
-      required:
-      - message
+        datasetIds:
+          items:
+            type: string
+          type: array
       type: object
-    DescribeDatasetResponse:
+    SourceType:
+      enum:
+      - UPLOADED
+      - LINKED
+      type: string
+    ChangeStatus:
+      enum:
+      - UNCHANGED
+      - CHANGED
+      - UNKNOWN
+      - UNAVAILABLE
+      type: string
+    CreateDatasetRequest:
       properties:
-        dataset:
-          $ref: '#/components/schemas/DatasetDto'
+        description:
+          type: string
+        name:
+          type: string
+        sourceType:
+          $ref: '#/components/schemas/SourceType'
       type: object
     DatasetVersionDto:
       properties:
@@ -1410,29 +1422,17 @@ components:
           format: int64
           type: integer
       type: object
-    ListDatasetVersionsResponse:
+    UploadDatasetVersionResponse:
       properties:
-        totalSize:
-          format: int64
-          type: integer
-        versions:
+        version:
+          $ref: '#/components/schemas/DatasetVersionDto'
+      type: object
+    DeleteDatasetsRequest:
+      properties:
+        datasetIds:
           items:
-            $ref: '#/components/schemas/DatasetVersionDto'
+            type: string
           type: array
-      type: object
-    CreateDatasetRequest:
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-        sourceType:
-          $ref: '#/components/schemas/SourceType'
-      type: object
-    ValidateUrlRequest:
-      properties:
-        url:
-          type: string
       type: object
   securitySchemes:
     BearerAuth:

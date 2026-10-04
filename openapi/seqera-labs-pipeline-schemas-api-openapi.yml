@@ -49,21 +49,6 @@ paths:
       - pipeline-schemas
 components:
   schemas:
-    PipelineSchemaDbDto:
-      properties:
-        content:
-          type: string
-        id:
-          format: int64
-          type: integer
-      type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
     CreatePipelineSchemaResponse:
       properties:
         pipelineSchema:
@@ -73,6 +58,21 @@ components:
       properties:
         content:
           type: string
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    PipelineSchemaDbDto:
+      properties:
+        content:
+          type: string
+        id:
+          format: int64
+          type: integer
       type: object
   securitySchemes:
     BearerAuth:

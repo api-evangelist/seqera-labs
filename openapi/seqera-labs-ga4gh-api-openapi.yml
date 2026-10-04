@@ -190,46 +190,21 @@ paths:
       - ga4gh
 components:
   schemas:
+    RunListResponse:
+      properties:
+        next_page_token:
+          type: string
+        runs:
+          items:
+            $ref: '#/components/schemas/RunStatus'
+          type: array
+      type: object
     RunStatus:
       properties:
         run_id:
           type: string
         state:
           $ref: '#/components/schemas/State'
-      type: object
-    WesErrorResponse:
-      properties:
-        msg:
-          type: string
-        status_code:
-          format: int32
-          type: integer
-      type: object
-    RunLog:
-      properties:
-        outputs:
-          type: object
-        request:
-          $ref: '#/components/schemas/RunRequest'
-        run_id:
-          type: string
-        run_log:
-          $ref: '#/components/schemas/Log'
-        state:
-          $ref: '#/components/schemas/State'
-        task_logs:
-          items:
-            $ref: '#/components/schemas/Log'
-          type: array
-      type: object
-    DefaultWorkflowEngineParameter:
-      properties:
-        default_value:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
       type: object
     WesServiceInfo:
       properties:
@@ -267,21 +242,34 @@ components:
             $ref: '#/components/schemas/WorkflowTypeVersion'
           type: object
       type: object
-    RunListResponse:
+    Log:
       properties:
-        next_page_token:
-          type: string
-        runs:
-          items:
-            $ref: '#/components/schemas/RunStatus'
-          type: array
-      type: object
-    WorkflowTypeVersion:
-      properties:
-        workflow_type_version:
+        cmd:
           items:
             type: string
           type: array
+        end_time:
+          type: string
+        exit_code:
+          format: int32
+          type: integer
+        name:
+          type: string
+        start_time:
+          type: string
+        stderr:
+          type: string
+        stdout:
+          type: string
+      type: object
+    DefaultWorkflowEngineParameter:
+      properties:
+        default_value:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
       type: object
     State:
       enum:
@@ -317,30 +305,42 @@ components:
         workflow_url:
           type: string
       type: object
+    RunLog:
+      properties:
+        outputs:
+          type: object
+        request:
+          $ref: '#/components/schemas/RunRequest'
+        run_id:
+          type: string
+        run_log:
+          $ref: '#/components/schemas/Log'
+        state:
+          $ref: '#/components/schemas/State'
+        task_logs:
+          items:
+            $ref: '#/components/schemas/Log'
+          type: array
+      type: object
+    WesErrorResponse:
+      properties:
+        msg:
+          type: string
+        status_code:
+          format: int32
+          type: integer
+      type: object
     RunId:
       properties:
         run_id:
           type: string
       type: object
-    Log:
+    WorkflowTypeVersion:
       properties:
-        cmd:
+        workflow_type_version:
           items:
             type: string
           type: array
-        end_time:
-          type: string
-        exit_code:
-          format: int32
-          type: integer
-        name:
-          type: string
-        start_time:
-          type: string
-        stderr:
-          type: string
-        stdout:
-          type: string
       type: object
   securitySchemes:
     BearerAuth:

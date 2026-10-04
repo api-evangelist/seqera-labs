@@ -757,141 +757,47 @@ paths:
       - Orgs
 components:
   schemas:
-    AddMemberResponse:
+    AddMemberRequest:
       properties:
-        member:
-          $ref: '#/components/schemas/MemberDbDto'
-      type: object
-    UpdateMemberRoleRequest:
-      properties:
-        role:
-          $ref: '#/components/schemas/OrgRole'
-      type: object
-    ListOrganizationsResponse:
-      properties:
-        organizations:
-          items:
-            $ref: '#/components/schemas/OrganizationDbDto'
-          type: array
-        totalSize:
-          format: int32
-          type: integer
-      type: object
-    OrgRole:
-      enum:
-      - owner
-      - member
-      - collaborator
-      type: string
-      x-enum-varnames:
-      - owner
-      - member
-      - collaborator
-    CreateIdpGroupRequest:
-      properties:
-        displayName:
+        user:
           type: string
+      type: object
+    ListIdpGroupsResponse:
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/IdpGroupEntry'
+          type: array
+      type: object
+    UserWorkspacePermissionDto:
+      properties:
+        permission:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
       type: object
     OrgIdpGroupSource:
       enum:
       - SCIM
       - MANUAL
       type: string
-    CreateScimTokenResponse:
+    CreateOrganizationRequest:
       properties:
-        endpointUrl:
-          type: string
-        maskedToken:
-          type: string
-        token:
-          type: string
-      type: object
-    UpdateOrganizationRequest:
-      properties:
-        description:
-          type: string
-        fullName:
-          type: string
-        location:
-          type: string
         logoId:
           type: string
-        name:
-          type: string
-        paying:
-          deprecated: true
-          type:
-          - boolean
-          - 'null'
-        type:
-          allOf:
-          - $ref: '#/components/schemas/OrgType'
-        website:
-          type: string
+        organization:
+          $ref: '#/components/schemas/Organization'
       type: object
-    AddMemberRequest:
+    ListUserRolesResponse:
       properties:
         user:
-          type: string
-      type: object
-    DescribeOrganizationQuotasResponse:
-      properties:
-        quotas:
-          $ref: '#/components/schemas/OrganizationQuotas'
-      type: object
-    OrgType:
-      enum:
-      - academic
-      - evaluating
-      - pro
-      - basic
-      - internal
-      type: string
-      x-enum-varnames:
-      - academic
-      - evaluating
-      - pro
-      - basic
-      - internal
-    OrganizationDbDto:
-      properties:
-        description:
-          type: string
-        fullName:
-          type: string
-        location:
-          type: string
-        logoId:
-          type: string
-        logoUrl:
-          type: string
-        memberId:
-          format: int64
-          type: integer
-        memberRole:
-          $ref: '#/components/schemas/OrgRole'
-        name:
-          type: string
-        orgId:
-          format: int64
-          type: integer
-        paying:
-          deprecated: true
-          type: boolean
-        type:
-          $ref: '#/components/schemas/OrgType'
-        website:
-          type: string
-      type: object
-    IdpGroupEntry:
-      properties:
-        displayName:
-          type: string
-        id:
-          format: int64
-          type: integer
-        source:
-          $ref: '#/components/schemas/OrgIdpGroupSource'
+          $ref: '#/components/schemas/MemberDbDto'
+        userWorkspaces:
+          items:
+            $ref: '#/components/schemas/UserWorkspaceRolesDto'
+          type: array
       type: object
     DescribeScimConfigResponse:
       properties:
@@ -919,42 +825,30 @@ components:
           - string
           - 'null'
       type: object
-    UserWorkspacePermissionDto:
-      properties:
-        permission:
-          type: string
-        roles:
-          items:
-            type: string
-          type: array
-      type: object
     CreateOrganizationResponse:
       properties:
         organization:
           $ref: '#/components/schemas/OrganizationDbDto'
       type: object
-    TeamType:
-      enum:
-      - regular
-      - system_owners
-      type: string
-      x-enum-varnames:
-      - regular
-      - system_owners
-    UserWorkspaceRolesDto:
+    MemberDbDto:
       properties:
-        permissions:
-          items:
-            $ref: '#/components/schemas/UserWorkspacePermissionDto'
-          type: array
-        roles:
-          items:
-            $ref: '#/components/schemas/UserWorkspaceRoleDto'
-          type: array
-        workspaceId:
+        avatar:
+          type: string
+        email:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        memberId:
           format: int64
           type: integer
-        workspaceName:
+        role:
+          $ref: '#/components/schemas/OrgRole'
+        userId:
+          format: int64
+          type: integer
+        userName:
           type: string
       type: object
     OrganizationQuotas:
@@ -1016,21 +910,138 @@ components:
         sourceTeamType:
           $ref: '#/components/schemas/TeamType'
       type: object
-    ListIdpGroupsResponse:
+    UpdateMemberRoleRequest:
       properties:
-        groups:
-          items:
-            $ref: '#/components/schemas/IdpGroupEntry'
-          type: array
+        role:
+          $ref: '#/components/schemas/OrgRole'
       type: object
-    ListUserRolesResponse:
+    OrgRole:
+      enum:
+      - owner
+      - member
+      - collaborator
+      type: string
+      x-enum-varnames:
+      - owner
+      - member
+      - collaborator
+    ErrorResponse:
       properties:
-        user:
-          $ref: '#/components/schemas/MemberDbDto'
-        userWorkspaces:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    WspRoleSourceType:
+      enum:
+      - individual
+      - team
+      type: string
+      x-enum-varnames:
+      - individual
+      - team
+    UserWorkspaceRolesDto:
+      properties:
+        permissions:
           items:
-            $ref: '#/components/schemas/UserWorkspaceRolesDto'
+            $ref: '#/components/schemas/UserWorkspacePermissionDto'
           type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/UserWorkspaceRoleDto'
+          type: array
+        workspaceId:
+          format: int64
+          type: integer
+        workspaceName:
+          type: string
+      type: object
+    OrganizationDbDto:
+      properties:
+        description:
+          type: string
+        fullName:
+          type: string
+        location:
+          type: string
+        logoId:
+          type: string
+        logoUrl:
+          type: string
+        memberId:
+          format: int64
+          type: integer
+        memberRole:
+          $ref: '#/components/schemas/OrgRole'
+        name:
+          type: string
+        orgId:
+          format: int64
+          type: integer
+        paying:
+          deprecated: true
+          type: boolean
+        type:
+          $ref: '#/components/schemas/OrgType'
+        website:
+          type: string
+      type: object
+    DescribeOrganizationQuotasResponse:
+      properties:
+        quotas:
+          $ref: '#/components/schemas/OrganizationQuotas'
+      type: object
+    CreateIdpGroupRequest:
+      properties:
+        displayName:
+          type: string
+      type: object
+    OrgType:
+      enum:
+      - academic
+      - evaluating
+      - pro
+      - basic
+      - internal
+      type: string
+      x-enum-varnames:
+      - academic
+      - evaluating
+      - pro
+      - basic
+      - internal
+    UpdateOrganizationRequest:
+      properties:
+        description:
+          type: string
+        fullName:
+          type: string
+        location:
+          type: string
+        logoId:
+          type: string
+        name:
+          type: string
+        paying:
+          deprecated: true
+          type:
+          - boolean
+          - 'null'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/OrgType'
+        website:
+          type: string
+      type: object
+    IdpGroupEntry:
+      properties:
+        displayName:
+          type: string
+        id:
+          format: int64
+          type: integer
+        source:
+          $ref: '#/components/schemas/OrgIdpGroupSource'
       type: object
     ListMembersResponse:
       properties:
@@ -1042,41 +1053,28 @@ components:
           format: int64
           type: integer
       type: object
-    MemberDbDto:
+    DescribeOrganizationResponse:
       properties:
-        avatar:
-          type: string
-        email:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        memberId:
-          format: int64
-          type: integer
-        role:
-          $ref: '#/components/schemas/OrgRole'
-        userId:
-          format: int64
-          type: integer
-        userName:
-          type: string
+        organization:
+          $ref: '#/components/schemas/OrganizationDbDto'
       type: object
-    WspRoleSourceType:
+    TeamType:
       enum:
-      - individual
-      - team
+      - regular
+      - system_owners
       type: string
       x-enum-varnames:
-      - individual
-      - team
-    ErrorResponse:
+      - regular
+      - system_owners
+    ListOrganizationsResponse:
       properties:
-        message:
-          type: string
-      required:
-      - message
+        organizations:
+          items:
+            $ref: '#/components/schemas/OrganizationDbDto'
+          type: array
+        totalSize:
+          format: int32
+          type: integer
       type: object
     Organization:
       properties:
@@ -1114,17 +1112,19 @@ components:
       - fullName
       - name
       type: object
-    DescribeOrganizationResponse:
+    AddMemberResponse:
       properties:
-        organization:
-          $ref: '#/components/schemas/OrganizationDbDto'
+        member:
+          $ref: '#/components/schemas/MemberDbDto'
       type: object
-    CreateOrganizationRequest:
+    CreateScimTokenResponse:
       properties:
-        logoId:
+        endpointUrl:
           type: string
-        organization:
-          $ref: '#/components/schemas/Organization'
+        maskedToken:
+          type: string
+        token:
+          type: string
       type: object
   securitySchemes:
     BearerAuth:

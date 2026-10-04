@@ -234,54 +234,10 @@ paths:
       - Pipeline Versions
 components:
   schemas:
-    LabelDbDto:
+    UpdatePipelineResponse:
       properties:
-        dateCreated:
-          format: date-time
-          type: string
-        id:
-          format: int64
-          type: integer
-        isDefault:
-          type: boolean
-        isDynamic:
-          type: boolean
-        isInterpolated:
-          type: boolean
-        name:
-          type: string
-        resource:
-          type: boolean
-        value:
-          type: string
-      type: object
-    ListPipelineVersionsResponse:
-      properties:
-        totalSize:
-          format: int64
-          type: integer
-        versions:
-          items:
-            $ref: '#/components/schemas/PipelineDbDto'
-          type: array
-      type: object
-    PipelineVersionManageRequest:
-      properties:
-        isDefault:
-          type: boolean
-        name:
-          type: string
-      type: object
-    ComputeEnvDbDto:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        platform:
-          type: string
-        region:
-          type: string
+        pipeline:
+          $ref: '#/components/schemas/PipelineDbDto'
       type: object
     ErrorResponse:
       properties:
@@ -290,60 +246,18 @@ components:
       required:
       - message
       type: object
-    PipelineVersionFullInfoDto:
-      properties:
-        creatorAvatarUrl:
-          type: string
-        creatorFirstName:
-          type: string
-        creatorLastName:
-          type: string
-        creatorUserId:
-          format: int64
-          type: integer
-        creatorUserName:
-          type: string
-        dateCreated:
-          format: date-time
-          type: string
-        hash:
-          type: string
-        id:
-          type: string
-        isDefault:
-          type: boolean
-        lastUpdated:
-          format: date-time
-          type: string
-        name:
-          type: string
-      type: object
     PipelineOptimizationStatus:
       enum:
       - OPTIMIZED
       - OPTIMIZABLE
       - UNAVAILABLE
       type: string
-    UpdatePipelineRequest:
+    PipelineVersionManageRequest:
       properties:
-        description:
-          type: string
-        icon:
-          type: string
-        labelIds:
-          items:
-            format: int64
-            type: integer
-          type: array
-        launch:
-          $ref: '#/components/schemas/WorkflowLaunchRequest'
+        isDefault:
+          type: boolean
         name:
           type: string
-      type: object
-    UpdatePipelineResponse:
-      properties:
-        pipeline:
-          $ref: '#/components/schemas/PipelineDbDto'
       type: object
     PipelineDbDto:
       properties:
@@ -397,6 +311,55 @@ components:
           format: int64
           type: integer
         workspaceName:
+          type: string
+      type: object
+    LabelDbDto:
+      properties:
+        dateCreated:
+          format: date-time
+          type: string
+        id:
+          format: int64
+          type: integer
+        isDefault:
+          type: boolean
+        isDynamic:
+          type: boolean
+        isInterpolated:
+          type: boolean
+        name:
+          type: string
+        resource:
+          type: boolean
+        value:
+          type: string
+      type: object
+    PipelineVersionFullInfoDto:
+      properties:
+        creatorAvatarUrl:
+          type: string
+        creatorFirstName:
+          type: string
+        creatorLastName:
+          type: string
+        creatorUserId:
+          format: int64
+          type: integer
+        creatorUserName:
+          type: string
+        dateCreated:
+          format: date-time
+          type: string
+        hash:
+          type: string
+        id:
+          type: string
+        isDefault:
+          type: boolean
+        lastUpdated:
+          format: date-time
+          type: string
+        name:
           type: string
       type: object
     WorkflowLaunchRequest:
@@ -486,6 +449,43 @@ components:
           items:
             type: string
           type: array
+      type: object
+    ListPipelineVersionsResponse:
+      properties:
+        totalSize:
+          format: int64
+          type: integer
+        versions:
+          items:
+            $ref: '#/components/schemas/PipelineDbDto'
+          type: array
+      type: object
+    ComputeEnvDbDto:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        platform:
+          type: string
+        region:
+          type: string
+      type: object
+    UpdatePipelineRequest:
+      properties:
+        description:
+          type: string
+        icon:
+          type: string
+        labelIds:
+          items:
+            format: int64
+            type: integer
+          type: array
+        launch:
+          $ref: '#/components/schemas/WorkflowLaunchRequest'
+        name:
+          type: string
       type: object
   securitySchemes:
     BearerAuth:

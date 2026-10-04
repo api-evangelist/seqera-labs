@@ -318,10 +318,52 @@ paths:
       - Agents
 components:
   schemas:
+    ListAgentsResponse:
+      properties:
+        agents:
+          items:
+            $ref: '#/components/schemas/AgentDbDto'
+          type: array
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    ErrorResponse:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    Agent.Status:
+      enum:
+      - active
+      - inactive
+      - deleted
+      type: string
+      x-enum-varnames:
+      - active
+      - inactive
+      - deleted
     UpdateAgentResponse:
       properties:
         agent:
           $ref: '#/components/schemas/AgentDbDto'
+      type: object
+    CreateAgentRequest:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        systemPrompt:
+          type: string
+        templateId:
+          type:
+          - string
+          - 'null'
       type: object
     AgentDbDto:
       properties:
@@ -357,43 +399,6 @@ components:
           format: int64
           type: integer
       type: object
-    ErrorResponse:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    Agent.Status:
-      enum:
-      - active
-      - inactive
-      - deleted
-      type: string
-      x-enum-varnames:
-      - active
-      - inactive
-      - deleted
-    CreateAgentResponse:
-      properties:
-        agent:
-          $ref: '#/components/schemas/AgentDbDto'
-      type: object
-    CreateAgentRequest:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        systemPrompt:
-          type: string
-        templateId:
-          type:
-          - string
-          - 'null'
-      type: object
     UpdateAgentRequest:
       properties:
         description:
@@ -409,20 +414,15 @@ components:
           - string
           - 'null'
       type: object
-    DescribeAgentResponse:
+    CreateAgentResponse:
       properties:
         agent:
           $ref: '#/components/schemas/AgentDbDto'
       type: object
-    ListAgentsResponse:
+    DescribeAgentResponse:
       properties:
-        agents:
-          items:
-            $ref: '#/components/schemas/AgentDbDto'
-          type: array
-        totalSize:
-          format: int64
-          type: integer
+        agent:
+          $ref: '#/components/schemas/AgentDbDto'
       type: object
   securitySchemes:
     BearerAuth:
