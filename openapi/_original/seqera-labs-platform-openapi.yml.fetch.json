@@ -1,0 +1,12 @@
+{
+ "url": "https://cloud.seqera.io/openapi/seqera-api-latest.yml",
+ "requested_url": "https://cloud.seqera.io/openapi/seqera-api-latest.yml",
+ "status": 200,
+ "content_type": "text/plain",
+ "bytes": 615085,
+ "sha256": "49d0deea9f96e5cf6088e06ec023e1637134b89b3b77f91f39ddf614114593fb",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.909), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
