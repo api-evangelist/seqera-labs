@@ -679,6 +679,8 @@ apis:
   - type: DataModel
     url: data-model/seqera-labs-data-model.yml
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/seqera-labs/overview
 - type: Plans
   url: plans/seqera-labs-plans-pricing.yml
 - type: Website
