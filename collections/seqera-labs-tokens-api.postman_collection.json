@@ -1,200 +1,541 @@
 {
+  "info": {
+    "_postman_id": "c66b1099-a091-41b7-a8f3-26bcfab2405d",
+    "name": "Seqera Tokens API",
+    "description": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:04:27.000Z",
+    "updatedAt": "2026-10-21T20:04:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c66b1099-a091-41b7-a8f3-26bcfab2405d"
+  },
   "item": [
     {
-      "id": "0f3a1a85-fa95-4663-a7c1-9272d178f8f2",
       "name": "tokens",
-      "description": {
-        "content": "API access tokens",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "4e633fac-7f23-4448-82f8-0feea08263f4",
+          "name": "delete-all",
+          "item": [
+            {
+              "name": "Delete all user tokens",
+              "id": "d9d3e604-b676-4fa7-b6fd-fb91cb6f8232",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tokens/delete-all",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokens",
+                    "delete-all"
+                  ]
+                },
+                "description": "Deletes all API access tokens in the user context."
+              },
+              "response": [
+                {
+                  "id": "72b39c89-0887-4d2b-a986-4c9e363da7d0",
+                  "name": "OK - No content",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tokens/delete-all",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tokens",
+                        "delete-all"
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-72b39c89-0887-4d2b-a986-4c9e363da7d0"
+                },
+                {
+                  "id": "019e03d9-8301-4e1c-934d-45b26956a614",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tokens/delete-all",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tokens",
+                        "delete-all"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-019e03d9-8301-4e1c-934d-45b26956a614"
+                },
+                {
+                  "id": "762258aa-4d0d-4724-83fd-20fda3853ea5",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tokens/delete-all",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tokens",
+                        "delete-all"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-762258aa-4d0d-4724-83fd-20fda3853ea5"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-d9d3e604-b676-4fa7-b6fd-fb91cb6f8232"
+            }
+          ],
+          "id": "75a5b82e-4af2-4cf9-bf78-bd87a3b115ea",
+          "createdAt": "2026-10-21T20:04:28.000Z",
+          "updatedAt": "2026-10-21T20:04:28.000Z",
+          "uid": "35240-75a5b82e-4af2-4cf9-bf78-bd87a3b115ea"
+        },
+        {
+          "name": "{tokenId}",
+          "item": [
+            {
+              "name": "Delete token",
+              "id": "a3fcef00-2b5b-447d-a46f-85b6dfe5783c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tokens/:tokenId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokens",
+                    ":tokenId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ce5d9e8f-c4e7-4f31-8687-0831b032d6b3",
+                      "key": "tokenId",
+                      "value": "<long>",
+                      "description": "(Required) Token numeric identifier"
+                    }
+                  ]
+                },
+                "description": "Deletes the given API access token ID."
+              },
+              "response": [
+                {
+                  "id": "47b83309-43df-4a02-8d9c-0de4c4bcd7e1",
+                  "name": "OK - No content",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tokens/:tokenId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tokens",
+                        ":tokenId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "tokenId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-47b83309-43df-4a02-8d9c-0de4c4bcd7e1"
+                },
+                {
+                  "id": "caf7887c-3aa0-4a71-810f-b394ca25a99f",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tokens/:tokenId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tokens",
+                        ":tokenId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "tokenId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-caf7887c-3aa0-4a71-810f-b394ca25a99f"
+                },
+                {
+                  "id": "661cca1e-b26a-40db-90f0-dc694dc0d892",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/tokens/:tokenId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "tokens",
+                        ":tokenId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "tokenId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:04:28.000Z",
+                  "updatedAt": "2026-10-21T20:04:28.000Z",
+                  "uid": "35240-661cca1e-b26a-40db-90f0-dc694dc0d892"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-a3fcef00-2b5b-447d-a46f-85b6dfe5783c"
+            }
+          ],
+          "id": "9b69c7d5-88ff-43c3-9513-9a9a3a340534",
+          "createdAt": "2026-10-21T20:04:28.000Z",
+          "updatedAt": "2026-10-21T20:04:28.000Z",
+          "uid": "35240-9b69c7d5-88ff-43c3-9513-9a9a3a340534"
+        },
+        {
           "name": "List tokens",
+          "id": "bca33959-285c-44d0-b627-23e60ce592b9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List tokens",
-            "description": {
-              "content": "Retrieves the list of all available API access tokens.",
-              "type": "text/plain"
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
             },
-            "url": {
-              "path": [
-                "tokens"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/tokens",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tokens"
+              ]
+            },
+            "description": "Retrieves the list of all available API access tokens."
+          },
+          "response": [
+            {
+              "id": "d6e0165a-9879-4232-b6a5-1a9790221037",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokens"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"tokens\": [\n    {\n      \"name\": \"<string>\",\n      \"basicAuth\": \"<string>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"id\": \"<long>\",\n      \"lastUsed\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"basicAuth\": \"<string>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"id\": \"<long>\",\n      \"lastUsed\": \"<dateTime>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-d6e0165a-9879-4232-b6a5-1a9790221037"
+            },
+            {
+              "id": "eb6633bc-63a4-409c-9323-2cd5aa6bf56b",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokens"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-eb6633bc-63a4-409c-9323-2cd5aa6bf56b"
+            },
+            {
+              "id": "b2eabe2a-7920-4f29-8fe5-604a31cbb0a1",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokens"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-b2eabe2a-7920-4f29-8fe5-604a31cbb0a1"
+            }
+          ],
+          "createdAt": "2026-10-21T20:04:28.000Z",
+          "updatedAt": "2026-10-21T20:04:28.000Z",
+          "uid": "35240-bca33959-285c-44d0-b627-23e60ce592b9"
+        },
+        {
+          "name": "Create token",
+          "id": "ff1aaa40-7917-4c31-a77a-607dc5b8b18e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
             "auth": {
               "type": "bearer",
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{bearerToken}}"
+                  "value": "{{bearerToken}}",
+                  "type": "string"
                 }
               ]
-            }
-          },
-          "response": [
-            {
-              "id": "4573cfd2-1a8a-4e8b-a945-d27cc08dfdf7",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"tokens\": [\n    {\n      \"name\": \"string\",\n      \"basicAuth\": \"string\",\n      \"dateCreated\": \"1950-07-06T03:57:52.062Z\",\n      \"id\": 7060,\n      \"lastUsed\": \"2007-01-29T13:41:57.363Z\"\n    },\n    {\n      \"name\": \"s\",\n      \"basicAuth\": \"string\",\n      \"dateCreated\": \"1975-03-26T19:00:33.609Z\",\n      \"id\": 8939,\n      \"lastUsed\": \"2018-05-14T20:50:40.770Z\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
             },
-            {
-              "id": "306e50c0-c754-4f0a-b427-6afbf98d249e",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cff3b5e8-4a95-40df-be1f-6074584879e0",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e792f215-e58e-409f-a83d-7bf033ab1995",
-          "name": "Create token",
-          "request": {
-            "name": "Create token",
-            "description": {
-              "content": "Creates an API access token with the details in the given request body.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tokens"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -205,620 +546,259 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"name\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/tokens",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "tokens"
+              ]
+            },
+            "description": "Creates an API access token with the details in the given request body."
           },
           "response": [
             {
-              "id": "44e184ba-1931-4bb1-92c1-4ffc2eb0210c",
+              "id": "120c4e10-eb3c-47d6-931b-b3d5723722ad",
               "name": "OK",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokens"
+                  ]
                 }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"accessKey\": \"string\",\n  \"token\": {\n    \"name\": \"strin\",\n    \"basicAuth\": \"string\",\n    \"dateCreated\": \"1985-09-05T17:19:19.653Z\",\n    \"id\": 9669,\n    \"lastUsed\": \"1974-01-20T10:08:34.734Z\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"accessKey\": \"<string>\",\n  \"token\": {\n    \"name\": \"<string>\",\n    \"basicAuth\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"id\": \"<long>\",\n    \"lastUsed\": \"<dateTime>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-120c4e10-eb3c-47d6-931b-b3d5723722ad"
             },
             {
-              "id": "3327e2c8-279e-440b-ab52-428233699d46",
+              "id": "681064c8-0f0b-4d39-b6ab-af635d3fed0e",
               "name": "Bad request",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokens"
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-681064c8-0f0b-4d39-b6ab-af635d3fed0e"
             },
             {
-              "id": "bcd20b73-eddd-4f01-9db1-d8017549c2df",
+              "id": "9f001e11-ef1f-4559-9bfb-a0b79db82b9a",
               "name": "Operation not allowed",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokens"
+                  ]
                 }
               },
               "status": "Forbidden",
               "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-9f001e11-ef1f-4559-9bfb-a0b79db82b9a"
             },
             {
-              "id": "5f70263b-2b96-43e2-803f-d935962b55e4",
+              "id": "72d8232d-ce70-43ed-990f-671b830242d1",
               "name": "Duplicated element",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"name\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/tokens",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "tokens"
+                  ]
                 }
               },
               "status": "Conflict",
               "code": 409,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:04:28.000Z",
+              "updatedAt": "2026-10-21T20:04:28.000Z",
+              "uid": "35240-72d8232d-ce70-43ed-990f-671b830242d1"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f3b37b82-154a-47b9-81cf-94ae87a8f16e",
-          "name": "Delete all user tokens",
-          "request": {
-            "name": "Delete all user tokens",
-            "description": {
-              "content": "Deletes all API access tokens in the user context.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tokens",
-                "delete-all"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "a0dddfbe-b020-4641-9b67-85d85e13359a",
-              "name": "OK - No content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens",
-                    "delete-all"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "4bf7bf6a-1770-4db0-b5f4-c887f090c0c8",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens",
-                    "delete-all"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bfb7a569-7c6b-49a8-8d03-641e04c1f377",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens",
-                    "delete-all"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6d5d6110-63f4-41e9-8594-8bed232d0fae",
-          "name": "Delete token",
-          "request": {
-            "name": "Delete token",
-            "description": {
-              "content": "Deletes the given API access token ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "tokens",
-                ":tokenId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<long>",
-                  "key": "tokenId",
-                  "description": "(Required) Token numeric identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "05652fed-5f58-421c-acd0-d942b7ef024d",
-              "name": "OK - No content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens",
-                    ":tokenId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "tokenId",
-                      "description": "(Required) Token numeric identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "9b3863f6-71d6-4df3-b2b7-20707be9adfd",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens",
-                    ":tokenId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "tokenId",
-                      "description": "(Required) Token numeric identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5d9f9427-41af-4731-ab66-c8cad89ed3cd",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "tokens",
-                    ":tokenId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "tokenId",
-                      "description": "(Required) Token numeric identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:04:28.000Z",
+          "updatedAt": "2026-10-21T20:04:28.000Z",
+          "uid": "35240-ff1aaa40-7917-4c31-a77a-607dc5b8b18e"
         }
       ],
-      "event": []
+      "id": "283a6cdd-94ae-4a19-9ba4-23966be2ff34",
+      "createdAt": "2026-10-21T20:04:28.000Z",
+      "updatedAt": "2026-10-21T20:04:28.000Z",
+      "uid": "35240-283a6cdd-94ae-4a19-9ba4-23966be2ff34"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "/",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "/"
     }
-  ],
-  "info": {
-    "_postman_id": "8037bfa8-e2e3-4778-ace9-2c59fc78bc7d",
-    "name": "Seqera actions tokens API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

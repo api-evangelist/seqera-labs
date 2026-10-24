@@ -1,768 +1,763 @@
 {
+  "info": {
+    "_postman_id": "7e2a8ceb-5ec6-4aff-8a03-5d76e2effbbf",
+    "name": "Seqera Platforms API",
+    "description": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:43.000Z",
+    "updatedAt": "2026-10-21T20:03:44.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7e2a8ceb-5ec6-4aff-8a03-5d76e2effbbf"
+  },
   "item": [
     {
-      "id": "89fe8fa1-6753-431c-aa04-f2c73138d50a",
       "name": "platforms",
-      "description": {
-        "content": "Computing platforms",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "75696b6f-b159-4bfc-b6d7-f96942cd00f2",
-          "name": "List platforms",
-          "request": {
-            "name": "List platforms",
-            "description": {
-              "content": "Lists all available computing platforms in a user context. Append `?workspaceId` to list platforms in a workspace context.",
-              "type": "text/plain"
+          "name": "{platformId}",
+          "item": [
+            {
+              "name": "regions",
+              "item": [
+                {
+                  "name": "List platform regions",
+                  "id": "29e8cf00-974e-47c1-a7b8-eeceb8d376bc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/platforms/:platformId/regions?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "platforms",
+                        ":platformId",
+                        "regions"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "e1ab22b9-b059-497e-bbea-a01e56c1ce7a",
+                          "key": "platformId",
+                          "value": "<string>",
+                          "description": "(Required) Platform string identifier"
+                        }
+                      ]
+                    },
+                    "description": "Lists the available regions for the computing platform identified by the given `platformId`."
+                  },
+                  "response": [
+                    {
+                      "id": "e70a9f85-35a0-4593-91ee-c485eef493fa",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/platforms/:platformId/regions?workspaceId=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "platforms",
+                            ":platformId",
+                            "regions"
+                          ],
+                          "query": [
+                            {
+                              "description": "Workspace numeric identifier",
+                              "key": "workspaceId",
+                              "value": "<long>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "platformId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"regions\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-10-21T20:03:44.000Z",
+                      "updatedAt": "2026-10-21T20:03:44.000Z",
+                      "uid": "35240-e70a9f85-35a0-4593-91ee-c485eef493fa"
+                    },
+                    {
+                      "id": "353ebb60-10d6-4d19-821b-2d6409f6324d",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/platforms/:platformId/regions?workspaceId=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "platforms",
+                            ":platformId",
+                            "regions"
+                          ],
+                          "query": [
+                            {
+                              "description": "Workspace numeric identifier",
+                              "key": "workspaceId",
+                              "value": "<long>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "platformId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:03:44.000Z",
+                      "updatedAt": "2026-10-21T20:03:44.000Z",
+                      "uid": "35240-353ebb60-10d6-4d19-821b-2d6409f6324d"
+                    },
+                    {
+                      "id": "14df8830-4d6f-48f8-a51f-a9f818e3b670",
+                      "name": "Operation not allowed",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/platforms/:platformId/regions?workspaceId=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "platforms",
+                            ":platformId",
+                            "regions"
+                          ],
+                          "query": [
+                            {
+                              "description": "Workspace numeric identifier",
+                              "key": "workspaceId",
+                              "value": "<long>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "platformId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:03:44.000Z",
+                      "updatedAt": "2026-10-21T20:03:44.000Z",
+                      "uid": "35240-14df8830-4d6f-48f8-a51f-a9f818e3b670"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:03:44.000Z",
+                  "updatedAt": "2026-10-21T20:03:44.000Z",
+                  "uid": "35240-29e8cf00-974e-47c1-a7b8-eeceb8d376bc"
+                }
+              ],
+              "id": "47677fb2-4ac8-4257-983c-a97c47b613a4",
+              "createdAt": "2026-10-21T20:03:44.000Z",
+              "updatedAt": "2026-10-21T20:03:44.000Z",
+              "uid": "35240-47677fb2-4ac8-4257-983c-a97c47b613a4"
             },
+            {
+              "name": "Describe platform",
+              "id": "245cabfb-d247-4d38-ae85-03a36c8b5d8e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/platforms/:platformId?workspaceId=<long>&sched=<boolean>&nvme=<boolean>&regionId=<string>&credentialsId=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "platforms",
+                    ":platformId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "When true, narrow the catalog to Scheduler-compatible instance types (AWS only).",
+                      "key": "sched",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "When true, narrow the catalog to NVMe-equipped instance types (AWS only).",
+                      "key": "nvme",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "regionId",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "credentialsId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "8aad0df1-1623-4e62-837d-183f83337fec",
+                      "key": "platformId",
+                      "value": "<string>",
+                      "description": "(Required) Platform string identifier"
+                    }
+                  ]
+                },
+                "description": "Retrieves the details of the computing platform identified by the given `platformId`."
+              },
+              "response": [
+                {
+                  "id": "136f8c7e-031a-47ae-a986-5f3fa361044c",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/platforms/:platformId?workspaceId=<long>&sched=<boolean>&nvme=<boolean>&regionId=<string>&credentialsId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "platforms",
+                        ":platformId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "When true, narrow the catalog to Scheduler-compatible instance types (AWS only).",
+                          "key": "sched",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When true, narrow the catalog to NVMe-equipped instance types (AWS only).",
+                          "key": "nvme",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "regionId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "credentialsId",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "platformId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"metainfo\": {\n    \"allocStrategy\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"buckets\": [\n      {\n        \"path\": \"<string>\"\n      },\n      {\n        \"path\": \"<string>\"\n      }\n    ],\n    \"efsFileSystems\": [\n      {\n        \"id\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\"\n      }\n    ],\n    \"fileSystems\": [\n      {\n        \"dns\": \"<string>\",\n        \"id\": \"<string>\",\n        \"mount\": \"<string>\"\n      },\n      {\n        \"dns\": \"<string>\",\n        \"id\": \"<string>\",\n        \"mount\": \"<string>\"\n      }\n    ],\n    \"images\": [\n      {\n        \"arch\": \"<string>\",\n        \"description\": \"<string>\",\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"arch\": \"<string>\",\n        \"description\": \"<string>\",\n        \"id\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"instanceFamilies\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"jobQueues\": [\n      {\n        \"name\": \"<string>\",\n        \"state\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"state\": \"<string>\"\n      }\n    ],\n    \"keyPairs\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"securityGroups\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"vpcId\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"vpcId\": \"<string>\"\n      }\n    ],\n    \"subnets\": [\n      {\n        \"id\": \"<string>\",\n        \"vpcId\": \"<string>\",\n        \"zone\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"vpcId\": \"<string>\",\n        \"zone\": \"<string>\"\n      }\n    ],\n    \"vpcs\": [\n      {\n        \"id\": \"<string>\",\n        \"isDefault\": \"<boolean>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"isDefault\": \"<boolean>\"\n      }\n    ],\n    \"warnings\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:03:44.000Z",
+                  "updatedAt": "2026-10-21T20:03:44.000Z",
+                  "uid": "35240-136f8c7e-031a-47ae-a986-5f3fa361044c"
+                },
+                {
+                  "id": "387bc2b8-23e7-421f-86f9-d545bf744771",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/platforms/:platformId?workspaceId=<long>&sched=<boolean>&nvme=<boolean>&regionId=<string>&credentialsId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "platforms",
+                        ":platformId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "When true, narrow the catalog to Scheduler-compatible instance types (AWS only).",
+                          "key": "sched",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When true, narrow the catalog to NVMe-equipped instance types (AWS only).",
+                          "key": "nvme",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "regionId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "credentialsId",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "platformId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:44.000Z",
+                  "updatedAt": "2026-10-21T20:03:44.000Z",
+                  "uid": "35240-387bc2b8-23e7-421f-86f9-d545bf744771"
+                },
+                {
+                  "id": "49c2e448-db49-455e-badb-09a417360dda",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/platforms/:platformId?workspaceId=<long>&sched=<boolean>&nvme=<boolean>&regionId=<string>&credentialsId=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "platforms",
+                        ":platformId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "When true, narrow the catalog to Scheduler-compatible instance types (AWS only).",
+                          "key": "sched",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "When true, narrow the catalog to NVMe-equipped instance types (AWS only).",
+                          "key": "nvme",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "regionId",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "credentialsId",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "platformId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:44.000Z",
+                  "updatedAt": "2026-10-21T20:03:44.000Z",
+                  "uid": "35240-49c2e448-db49-455e-badb-09a417360dda"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:44.000Z",
+              "updatedAt": "2026-10-21T20:03:44.000Z",
+              "uid": "35240-245cabfb-d247-4d38-ae85-03a36c8b5d8e"
+            }
+          ],
+          "id": "7bb70e30-998b-44e7-a139-3b3407663e05",
+          "createdAt": "2026-10-21T20:03:44.000Z",
+          "updatedAt": "2026-10-21T20:03:44.000Z",
+          "uid": "35240-7bb70e30-998b-44e7-a139-3b3407663e05"
+        },
+        {
+          "name": "List platforms",
+          "id": "b11e01f9-ebe1-4e78-bbb1-2a98b63de199",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/platforms?orgId=<long>&workspaceId=<long>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "platforms"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Organization numeric identifier",
                   "key": "orgId",
-                  "value": "<long>",
-                  "description": "Organization numeric identifier"
+                  "value": "<long>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Workspace numeric identifier",
                   "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
+                  "value": "<long>"
                 }
               ]
-            }
+            },
+            "description": "Lists all available computing platforms in a user context. Append `?workspaceId` to list platforms in a workspace context."
           },
           "response": [
             {
-              "id": "509d10e3-575f-4a07-84e9-63ee37afbc93",
+              "id": "61d290a0-804c-4e55-b0db-3adaa928009c",
               "name": "OK",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "platforms"
-                  ],
+                  "raw": "{{baseUrl}}/platforms?orgId=<long>&workspaceId=<long>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "platforms"
+                  ],
                   "query": [
                     {
+                      "description": "Organization numeric identifier",
                       "key": "orgId",
                       "value": "<long>"
                     },
                     {
+                      "description": "Workspace numeric identifier",
                       "key": "workspaceId",
                       "value": "<long>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"platforms\": [\n    {\n      \"credentialsProviders\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"credentialsProviders\": [\n        \"string\",\n        \"string\"\n      ],\n      \"id\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"platforms\": [\n    {\n      \"credentialsProviders\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"credentialsProviders\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"id\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-10-21T20:03:44.000Z",
+              "updatedAt": "2026-10-21T20:03:44.000Z",
+              "uid": "35240-61d290a0-804c-4e55-b0db-3adaa928009c"
             },
             {
-              "id": "43b66800-ad4d-4041-91c4-d423f5d9a19f",
+              "id": "0aecbd66-3190-4b17-b182-783b415a03b5",
               "name": "Bad request",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "platforms"
-                  ],
+                  "raw": "{{baseUrl}}/platforms?orgId=<long>&workspaceId=<long>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "platforms"
+                  ],
                   "query": [
                     {
+                      "description": "Organization numeric identifier",
                       "key": "orgId",
                       "value": "<long>"
                     },
                     {
+                      "description": "Workspace numeric identifier",
                       "key": "workspaceId",
                       "value": "<long>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:03:44.000Z",
+              "updatedAt": "2026-10-21T20:03:44.000Z",
+              "uid": "35240-0aecbd66-3190-4b17-b182-783b415a03b5"
             },
             {
-              "id": "f98eae07-c5eb-4f16-9c90-1c38ca8f4a3f",
+              "id": "f71d97cb-947c-4ef1-a5ba-69378b581ea6",
               "name": "Operation not allowed",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "platforms"
-                  ],
+                  "raw": "{{baseUrl}}/platforms?orgId=<long>&workspaceId=<long>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "platforms"
+                  ],
                   "query": [
                     {
+                      "description": "Organization numeric identifier",
                       "key": "orgId",
                       "value": "<long>"
                     },
                     {
+                      "description": "Workspace numeric identifier",
                       "key": "workspaceId",
                       "value": "<long>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Forbidden",
               "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:03:44.000Z",
+              "updatedAt": "2026-10-21T20:03:44.000Z",
+              "uid": "35240-f71d97cb-947c-4ef1-a5ba-69378b581ea6"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8b609182-5c57-4723-a480-35d17a1006c9",
-          "name": "Describe platform",
-          "request": {
-            "name": "Describe platform",
-            "description": {
-              "content": "Retrieves the details of the computing platform identified by the given `platformId`.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "platforms",
-                ":platformId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
-                },
-                {
-                  "disabled": false,
-                  "key": "sched",
-                  "value": "<boolean>",
-                  "description": "When true, narrow the catalog to Scheduler-compatible instance types (AWS only)."
-                },
-                {
-                  "disabled": false,
-                  "key": "nvme",
-                  "value": "<boolean>",
-                  "description": "When true, narrow the catalog to NVMe-equipped instance types (AWS only)."
-                },
-                {
-                  "disabled": false,
-                  "key": "regionId",
-                  "value": "<string>",
-                  "description": "(Required) "
-                },
-                {
-                  "disabled": false,
-                  "key": "credentialsId",
-                  "value": "<string>",
-                  "description": "(Required) "
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "platformId",
-                  "description": "(Required) Platform string identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "38633ca2-30ba-4cd7-829e-1d10ad541ac7",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "platforms",
-                    ":platformId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "sched",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "nvme",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "regionId",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "credentialsId",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "platformId",
-                      "description": "(Required) Platform string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"metainfo\": {\n    \"allocStrategy\": [\n      \"string\",\n      \"string\"\n    ],\n    \"buckets\": [\n      {\n        \"path\": \"string\"\n      },\n      {\n        \"path\": \"string\"\n      }\n    ],\n    \"efsFileSystems\": [\n      {\n        \"id\": \"string\"\n      },\n      {\n        \"id\": \"string\"\n      }\n    ],\n    \"fileSystems\": [\n      {\n        \"dns\": \"string\",\n        \"id\": \"string\",\n        \"mount\": \"string\"\n      },\n      {\n        \"dns\": \"string\",\n        \"id\": \"string\",\n        \"mount\": \"string\"\n      }\n    ],\n    \"images\": [\n      {\n        \"arch\": \"string\",\n        \"description\": \"string\",\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      {\n        \"arch\": \"string\",\n        \"description\": \"string\",\n        \"id\": \"string\",\n        \"name\": \"string\"\n      }\n    ],\n    \"instanceFamilies\": [\n      \"string\",\n      \"string\"\n    ],\n    \"jobQueues\": [\n      {\n        \"name\": \"string\",\n        \"state\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"state\": \"string\"\n      }\n    ],\n    \"keyPairs\": [\n      \"string\",\n      \"string\"\n    ],\n    \"securityGroups\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"vpcId\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"vpcId\": \"string\"\n      }\n    ],\n    \"subnets\": [\n      {\n        \"id\": \"string\",\n        \"vpcId\": \"string\",\n        \"zone\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"vpcId\": \"string\",\n        \"zone\": \"string\"\n      }\n    ],\n    \"vpcs\": [\n      {\n        \"id\": \"string\",\n        \"isDefault\": false\n      },\n      {\n        \"id\": \"string\",\n        \"isDefault\": false\n      }\n    ],\n    \"warnings\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cdf91276-51c2-4003-9b08-bf02ab7079d1",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "platforms",
-                    ":platformId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "sched",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "nvme",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "regionId",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "credentialsId",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "platformId",
-                      "description": "(Required) Platform string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bbdc858a-9a00-4ed8-98ea-9c3196613634",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "platforms",
-                    ":platformId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "sched",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "nvme",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "regionId",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "credentialsId",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "platformId",
-                      "description": "(Required) Platform string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "92aa3440-18cc-4126-819d-1d0415a77bcb",
-          "name": "List platform regions",
-          "request": {
-            "name": "List platform regions",
-            "description": {
-              "content": "Lists the available regions for the computing platform identified by the given `platformId`.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "platforms",
-                ":platformId",
-                "regions"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "platformId",
-                  "description": "(Required) Platform string identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "228d39ae-cb6d-4e74-9580-055a6e064bb4",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "platforms",
-                    ":platformId",
-                    "regions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "platformId",
-                      "description": "(Required) Platform string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"regions\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0f7af8a6-963b-45e0-8e85-0279651343c4",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "platforms",
-                    ":platformId",
-                    "regions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "platformId",
-                      "description": "(Required) Platform string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "232443f3-9b4c-4f6d-b77d-d7212f7c9be6",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "platforms",
-                    ":platformId",
-                    "regions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "platformId",
-                      "description": "(Required) Platform string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:03:44.000Z",
+          "updatedAt": "2026-10-21T20:03:44.000Z",
+          "uid": "35240-b11e01f9-ebe1-4e78-bbb1-2a98b63de199"
         }
       ],
-      "event": []
+      "id": "385aeb3e-d028-456e-ad75-431622c667c6",
+      "createdAt": "2026-10-21T20:03:44.000Z",
+      "updatedAt": "2026-10-21T20:03:44.000Z",
+      "uid": "35240-385aeb3e-d028-456e-ad75-431622c667c6"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "/",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "/"
     }
-  ],
-  "info": {
-    "_postman_id": "e1999661-f994-451e-be6c-b1709c34ad9b",
-    "name": "Seqera actions platforms API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

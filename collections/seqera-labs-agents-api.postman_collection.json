@@ -1,2033 +1,2032 @@
 {
+  "info": {
+    "_postman_id": "92bde7f6-e352-4aea-9e03-d2ff1c67b7d2",
+    "name": "Seqera Agents API",
+    "description": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:01:58.000Z",
+    "updatedAt": "2026-10-21T20:01:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-92bde7f6-e352-4aea-9e03-d2ff1c67b7d2"
+  },
   "item": [
     {
-      "id": "4b5272fa-8676-4702-9231-a1f4a067a420",
       "name": "agents",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "ab38086d-1bac-42bc-bdcf-470982bf007f",
+          "name": "{agentId}",
+          "item": [
+            {
+              "name": "disable",
+              "item": [
+                {
+                  "name": "Disable agent",
+                  "id": "2cae25f6-7420-4392-8616-86b57e952c1a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId/disable?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId",
+                        "disable"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "87180342-3007-4cb7-803f-b71682bb3494",
+                          "key": "agentId",
+                          "value": "<string>",
+                          "description": "(Required) Agent string identifier"
+                        }
+                      ]
+                    },
+                    "description": "Marks an active agent as inactive."
+                  },
+                  "response": [
+                    {
+                      "id": "cf168102-b16c-48ff-94f3-85c56b05a83c",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agents/:agentId/disable?workspaceId=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agents",
+                            ":agentId",
+                            "disable"
+                          ],
+                          "query": [
+                            {
+                              "description": "Workspace numeric identifier",
+                              "key": "workspaceId",
+                              "value": "<long>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "agentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"agent\": {\n    \"createdBy\": \"<long>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"id\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"status\": \"deleted\",\n    \"systemPrompt\": \"<string>\",\n    \"templateId\": \"<string,null>\",\n    \"updatedBy\": \"<long>\",\n    \"workspaceId\": \"<long>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:01:58.000Z",
+                      "updatedAt": "2026-10-21T20:01:58.000Z",
+                      "uid": "35240-cf168102-b16c-48ff-94f3-85c56b05a83c"
+                    },
+                    {
+                      "id": "7a0b3a09-5f54-4ebb-8763-9063e79c6d9a",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agents/:agentId/disable?workspaceId=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agents",
+                            ":agentId",
+                            "disable"
+                          ],
+                          "query": [
+                            {
+                              "description": "Workspace numeric identifier",
+                              "key": "workspaceId",
+                              "value": "<long>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "agentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:01:58.000Z",
+                      "updatedAt": "2026-10-21T20:01:58.000Z",
+                      "uid": "35240-7a0b3a09-5f54-4ebb-8763-9063e79c6d9a"
+                    },
+                    {
+                      "id": "0b44d9ad-d7d9-4455-85e8-a180c200c178",
+                      "name": "Operation not allowed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agents/:agentId/disable?workspaceId=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agents",
+                            ":agentId",
+                            "disable"
+                          ],
+                          "query": [
+                            {
+                              "description": "Workspace numeric identifier",
+                              "key": "workspaceId",
+                              "value": "<long>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "agentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:01:58.000Z",
+                      "updatedAt": "2026-10-21T20:01:58.000Z",
+                      "uid": "35240-0b44d9ad-d7d9-4455-85e8-a180c200c178"
+                    },
+                    {
+                      "id": "f24153ad-6382-43db-ab4b-615dcf747bb8",
+                      "name": "Not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agents/:agentId/disable?workspaceId=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agents",
+                            ":agentId",
+                            "disable"
+                          ],
+                          "query": [
+                            {
+                              "description": "Workspace numeric identifier",
+                              "key": "workspaceId",
+                              "value": "<long>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "agentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:01:58.000Z",
+                      "updatedAt": "2026-10-21T20:01:58.000Z",
+                      "uid": "35240-f24153ad-6382-43db-ab4b-615dcf747bb8"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-2cae25f6-7420-4392-8616-86b57e952c1a"
+                }
+              ],
+              "id": "a07cdaa1-a183-4de8-979a-6ded03005bb4",
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-a07cdaa1-a183-4de8-979a-6ded03005bb4"
+            },
+            {
+              "name": "enable",
+              "item": [
+                {
+                  "name": "Enable agent",
+                  "id": "c1ef5064-1b51-4fa7-bbb4-c7e1164c338b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId/enable?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId",
+                        "enable"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "393c33b9-fc21-4579-8297-e08c1152ad38",
+                          "key": "agentId",
+                          "value": "<string>",
+                          "description": "(Required) Agent string identifier"
+                        }
+                      ]
+                    },
+                    "description": "Marks an inactive agent as active."
+                  },
+                  "response": [
+                    {
+                      "id": "75e4f499-81cb-4c5e-b988-69603f568085",
+                      "name": "OK",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agents/:agentId/enable?workspaceId=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agents",
+                            ":agentId",
+                            "enable"
+                          ],
+                          "query": [
+                            {
+                              "description": "Workspace numeric identifier",
+                              "key": "workspaceId",
+                              "value": "<long>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "agentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"agent\": {\n    \"createdBy\": \"<long>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"id\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"status\": \"deleted\",\n    \"systemPrompt\": \"<string>\",\n    \"templateId\": \"<string,null>\",\n    \"updatedBy\": \"<long>\",\n    \"workspaceId\": \"<long>\"\n  }\n}",
+                      "createdAt": "2026-10-21T20:01:58.000Z",
+                      "updatedAt": "2026-10-21T20:01:58.000Z",
+                      "uid": "35240-75e4f499-81cb-4c5e-b988-69603f568085"
+                    },
+                    {
+                      "id": "e22f6759-4ad0-41ad-920a-681c0190214b",
+                      "name": "Bad request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agents/:agentId/enable?workspaceId=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agents",
+                            ":agentId",
+                            "enable"
+                          ],
+                          "query": [
+                            {
+                              "description": "Workspace numeric identifier",
+                              "key": "workspaceId",
+                              "value": "<long>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "agentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:01:58.000Z",
+                      "updatedAt": "2026-10-21T20:01:58.000Z",
+                      "uid": "35240-e22f6759-4ad0-41ad-920a-681c0190214b"
+                    },
+                    {
+                      "id": "74263f09-92e1-451b-a5ba-635c4af8b41c",
+                      "name": "Operation not allowed",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agents/:agentId/enable?workspaceId=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agents",
+                            ":agentId",
+                            "enable"
+                          ],
+                          "query": [
+                            {
+                              "description": "Workspace numeric identifier",
+                              "key": "workspaceId",
+                              "value": "<long>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "agentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-21T20:01:58.000Z",
+                      "updatedAt": "2026-10-21T20:01:58.000Z",
+                      "uid": "35240-74263f09-92e1-451b-a5ba-635c4af8b41c"
+                    },
+                    {
+                      "id": "f9f1a5a9-68ee-4b00-8146-4ec56679837d",
+                      "name": "Not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/agents/:agentId/enable?workspaceId=<long>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "agents",
+                            ":agentId",
+                            "enable"
+                          ],
+                          "query": [
+                            {
+                              "description": "Workspace numeric identifier",
+                              "key": "workspaceId",
+                              "value": "<long>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "agentId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-10-21T20:01:58.000Z",
+                      "updatedAt": "2026-10-21T20:01:58.000Z",
+                      "uid": "35240-f9f1a5a9-68ee-4b00-8146-4ec56679837d"
+                    }
+                  ],
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-c1ef5064-1b51-4fa7-bbb4-c7e1164c338b"
+                }
+              ],
+              "id": "250c5b84-fbc8-4de8-ace3-e358f8f992a0",
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-250c5b84-fbc8-4de8-ace3-e358f8f992a0"
+            },
+            {
+              "name": "Delete agent",
+              "id": "c183157d-8936-433e-9c5e-1941f19eef0f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agents",
+                    ":agentId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "12d8f023-e7e0-406c-b946-e52ba71d7dc6",
+                      "key": "agentId",
+                      "value": "<string>",
+                      "description": "(Required) Agent string identifier"
+                    }
+                  ]
+                },
+                "description": "Tombstones an agent in a workspace."
+              },
+              "response": [
+                {
+                  "id": "4ca28dcb-411b-49f7-a155-7536339c7ddc",
+                  "name": "OK - No content",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-4ca28dcb-411b-49f7-a155-7536339c7ddc"
+                },
+                {
+                  "id": "6e0de921-55d7-44e5-bb13-e8f989c2db12",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-6e0de921-55d7-44e5-bb13-e8f989c2db12"
+                },
+                {
+                  "id": "8e96e740-5f27-4040-8401-dec73b4d7784",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-8e96e740-5f27-4040-8401-dec73b4d7784"
+                }
+              ],
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-c183157d-8936-433e-9c5e-1941f19eef0f"
+            },
+            {
+              "name": "Describe agent",
+              "id": "a5f5e9bd-a427-4791-9b08-c29d1a14475f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agents",
+                    ":agentId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "a67dc641-23eb-449e-af89-3d52b85b52ec",
+                      "key": "agentId",
+                      "value": "<string>",
+                      "description": "(Required) Agent string identifier"
+                    }
+                  ]
+                },
+                "description": "Retrieves an agent in a workspace."
+              },
+              "response": [
+                {
+                  "id": "9aa5611e-7c55-4d1d-a5ef-4c1ea2efc397",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"agent\": {\n    \"createdBy\": \"<long>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"id\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"status\": \"deleted\",\n    \"systemPrompt\": \"<string>\",\n    \"templateId\": \"<string,null>\",\n    \"updatedBy\": \"<long>\",\n    \"workspaceId\": \"<long>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-9aa5611e-7c55-4d1d-a5ef-4c1ea2efc397"
+                },
+                {
+                  "id": "e61a872e-08bd-4798-b32a-9ef6c9cc748c",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-e61a872e-08bd-4798-b32a-9ef6c9cc748c"
+                },
+                {
+                  "id": "2dcc8e70-6791-4c40-9990-c0a060faa6b0",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-2dcc8e70-6791-4c40-9990-c0a060faa6b0"
+                },
+                {
+                  "id": "d9ee8c80-0b87-4e87-b487-f6d3d7f00955",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-d9ee8c80-0b87-4e87-b487-f6d3d7f00955"
+                }
+              ],
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-a5f5e9bd-a427-4791-9b08-c29d1a14475f"
+            },
+            {
+              "name": "Update agent",
+              "id": "790f76c5-605e-4441-8613-2a42bd540f22",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string,null>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agents",
+                    ":agentId"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "9d96998d-5d3d-4cc8-b073-8a7692497fda",
+                      "key": "agentId",
+                      "value": "<string>",
+                      "description": "(Required) Agent string identifier"
+                    }
+                  ]
+                },
+                "description": "Updates an agent in a workspace."
+              },
+              "response": [
+                {
+                  "id": "305430a5-986e-419d-bba5-20c0b101ab72",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"agent\": {\n    \"createdBy\": \"<long>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"id\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"status\": \"deleted\",\n    \"systemPrompt\": \"<string>\",\n    \"templateId\": \"<string,null>\",\n    \"updatedBy\": \"<long>\",\n    \"workspaceId\": \"<long>\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-305430a5-986e-419d-bba5-20c0b101ab72"
+                },
+                {
+                  "id": "eb730be7-8c5f-4f38-8499-ad08081b21db",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-eb730be7-8c5f-4f38-8499-ad08081b21db"
+                },
+                {
+                  "id": "90a7621d-74fe-468d-9afc-c77c15926f8b",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-90a7621d-74fe-468d-9afc-c77c15926f8b"
+                },
+                {
+                  "id": "042f592f-c13f-43d0-a0c6-38b1ce451f0e",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-042f592f-c13f-43d0-a0c6-38b1ce451f0e"
+                },
+                {
+                  "id": "3bf51419-3ad3-4ba6-8fc4-14bdf2ed887b",
+                  "name": "Duplicate element",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string,null>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/agents/:agentId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "agents",
+                        ":agentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "agentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:01:58.000Z",
+                  "updatedAt": "2026-10-21T20:01:58.000Z",
+                  "uid": "35240-3bf51419-3ad3-4ba6-8fc4-14bdf2ed887b"
+                }
+              ],
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-790f76c5-605e-4441-8613-2a42bd540f22"
+            }
+          ],
+          "id": "d4d4739a-71ab-4347-88d0-f226bbf07744",
+          "createdAt": "2026-10-21T20:01:58.000Z",
+          "updatedAt": "2026-10-21T20:01:58.000Z",
+          "uid": "35240-d4d4739a-71ab-4347-88d0-f226bbf07744"
+        },
+        {
           "name": "List agents",
+          "id": "fda37854-7ff3-4c8d-803e-7557dc1c0c29",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "List agents",
-            "description": {
-              "content": "Lists non-deleted agents in a workspace.",
-              "type": "text/plain"
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
             },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
-              "path": [
-                "agents"
-              ],
+              "raw": "{{baseUrl}}/agents?workspaceId=<long>&search=<string>&max=<integer>&offset=<integer>",
               "host": [
                 "{{baseUrl}}"
               ],
+              "path": [
+                "agents"
+              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Workspace numeric identifier",
                   "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
+                  "value": "<long>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Filter by agent name",
                   "key": "search",
-                  "value": "<string>",
-                  "description": "Filter by agent name"
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Pagination max results",
                   "key": "max",
-                  "value": "<integer>",
-                  "description": "Pagination max results"
+                  "value": "<integer>"
                 },
                 {
-                  "disabled": false,
+                  "description": "Pagination offset",
                   "key": "offset",
-                  "value": "<integer>",
-                  "description": "Pagination offset"
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Lists non-deleted agents in a workspace."
+          },
+          "response": [
+            {
+              "id": "aacfcc5e-15f7-40f6-8060-2cd71b0a0770",
+              "name": "OK",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agents?workspaceId=<long>&search=<string>&max=<integer>&offset=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agents"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "Filter by agent name",
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Pagination max results",
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination offset",
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
                 }
               ],
-              "variable": []
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"agents\": [\n    {\n      \"createdBy\": \"<long>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"description\": \"<string,null>\",\n      \"id\": \"<string>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"status\": \"active\",\n      \"systemPrompt\": \"<string>\",\n      \"templateId\": \"<string,null>\",\n      \"updatedBy\": \"<long>\",\n      \"workspaceId\": \"<long>\"\n    },\n    {\n      \"createdBy\": \"<long>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"description\": \"<string,null>\",\n      \"id\": \"<string>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"status\": \"inactive\",\n      \"systemPrompt\": \"<string>\",\n      \"templateId\": \"<string,null>\",\n      \"updatedBy\": \"<long>\",\n      \"workspaceId\": \"<long>\"\n    }\n  ],\n  \"totalSize\": \"<long>\"\n}",
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-aacfcc5e-15f7-40f6-8060-2cd71b0a0770"
             },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
+            {
+              "id": "c72ac250-9b2d-46ab-bc1f-f3d239fcea38",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agents?workspaceId=<long>&search=<string>&max=<integer>&offset=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agents"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "Filter by agent name",
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Pagination max results",
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination offset",
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-c72ac250-9b2d-46ab-bc1f-f3d239fcea38"
+            },
+            {
+              "id": "c83bce29-baca-4f7b-8bd4-22e4c8d978b7",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/agents?workspaceId=<long>&search=<string>&max=<integer>&offset=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agents"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "Filter by agent name",
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Pagination max results",
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination offset",
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-c83bce29-baca-4f7b-8bd4-22e4c8d978b7"
+            }
+          ],
+          "createdAt": "2026-10-21T20:01:58.000Z",
+          "updatedAt": "2026-10-21T20:01:58.000Z",
+          "uid": "35240-fda37854-7ff3-4c8d-803e-7557dc1c0c29"
+        },
+        {
+          "name": "Create agent",
+          "id": "6bc83012-7207-4683-8a67-60db7b67f6d0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
             "auth": {
               "type": "bearer",
               "bearer": [
                 {
                   "key": "token",
-                  "value": "{{bearerToken}}"
+                  "value": "{{bearerToken}}",
+                  "type": "string"
                 }
               ]
-            }
-          },
-          "response": [
-            {
-              "id": "a20df2fe-69ae-41a5-9707-7a796e0dd236",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "search",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "max",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"agents\": [\n    {\n      \"createdBy\": 9661,\n      \"dateCreated\": \"2007-12-08T22:13:20.098Z\",\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"lastUpdated\": \"1958-11-14T05:18:42.105Z\",\n      \"name\": \"string\",\n      \"status\": \"deleted\",\n      \"systemPrompt\": \"string\",\n      \"templateId\": \"string\",\n      \"updatedBy\": 5914,\n      \"workspaceId\": 9101\n    },\n    {\n      \"createdBy\": 5232,\n      \"dateCreated\": \"1996-05-21T07:21:33.324Z\",\n      \"description\": \"string\",\n      \"id\": \"string\",\n      \"lastUpdated\": \"1961-03-30T14:22:13.911Z\",\n      \"name\": \"string\",\n      \"status\": \"inactive\",\n      \"systemPrompt\": \"string\",\n      \"templateId\": \"string\",\n      \"updatedBy\": 632,\n      \"workspaceId\": 8591\n    }\n  ],\n  \"totalSize\": 2228\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
             },
-            {
-              "id": "3ae82adb-326a-4194-83bd-d0a5544146b7",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "search",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "max",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
               },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string,null>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
                 }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1fe5e8de-84bb-410f-954c-677c4d325734",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "search",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "max",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "85e2ee30-ec93-4459-8a3c-d056d20779fa",
-          "name": "Create agent",
-          "request": {
-            "name": "Create agent",
-            "description": {
-              "content": "Creates an agent in a workspace.",
-              "type": "text/plain"
+              }
             },
             "url": {
+              "raw": "{{baseUrl}}/agents?workspaceId=<long>",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "agents"
               ],
-              "host": [
-                "{{baseUrl}}"
-              ],
               "query": [
                 {
-                  "disabled": false,
+                  "description": "Workspace numeric identifier",
                   "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
+                  "value": "<long>"
                 }
               ]
             },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
+            "description": "Creates an agent in a workspace."
           },
           "response": [
             {
-              "id": "8d03bb15-b63f-4290-bf31-622a4bd9e201",
+              "id": "b582a5d0-be27-448a-aadc-a05cb7ba735e",
               "name": "OK",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string>\"\n}",
+                  "raw": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string,null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agents?workspaceId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agents"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ]
                 }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"agent\": {\n    \"createdBy\": 8265,\n    \"dateCreated\": \"1975-12-28T18:02:13.075Z\",\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"lastUpdated\": \"1950-10-30T04:56:23.329Z\",\n    \"name\": \"string\",\n    \"status\": \"inactive\",\n    \"systemPrompt\": \"string\",\n    \"templateId\": \"string\",\n    \"updatedBy\": 5870,\n    \"workspaceId\": 7734\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"agent\": {\n    \"createdBy\": \"<long>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"id\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"status\": \"deleted\",\n    \"systemPrompt\": \"<string>\",\n    \"templateId\": \"<string,null>\",\n    \"updatedBy\": \"<long>\",\n    \"workspaceId\": \"<long>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-b582a5d0-be27-448a-aadc-a05cb7ba735e"
             },
             {
-              "id": "49005512-4335-497f-8f69-0b12f8fbc7c9",
+              "id": "f9cfe1cd-49a3-4bf6-87c2-760fb9bf642f",
               "name": "Bad request",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string>\"\n}",
+                  "raw": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string,null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agents?workspaceId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agents"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-f9cfe1cd-49a3-4bf6-87c2-760fb9bf642f"
             },
             {
-              "id": "ef87a5ec-f2e9-468c-a142-51bb81a8a368",
+              "id": "e5794706-678e-46f0-a5c6-f62251db8ec3",
               "name": "Operation not allowed",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string>\"\n}",
+                  "raw": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string,null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agents?workspaceId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agents"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ]
                 }
               },
               "status": "Forbidden",
               "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-e5794706-678e-46f0-a5c6-f62251db8ec3"
             },
             {
-              "id": "6dc0e85a-f9b3-4fd2-b7e6-7a890a44ea67",
+              "id": "56c75eb2-93bb-4dbf-885a-db618abc672e",
               "name": "Duplicate element",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string>\"\n}",
+                  "raw": "{\n  \"description\": \"<string,null>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string,null>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/agents?workspaceId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "agents"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ]
                 }
               },
               "status": "Conflict",
               "code": 409,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:01:58.000Z",
+              "updatedAt": "2026-10-21T20:01:58.000Z",
+              "uid": "35240-56c75eb2-93bb-4dbf-885a-db618abc672e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b72872c0-21ef-4a23-b1c2-df2b6babf712",
-          "name": "Delete agent",
-          "request": {
-            "name": "Delete agent",
-            "description": {
-              "content": "Tombstones an agent in a workspace.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "agents",
-                ":agentId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "agentId",
-                  "description": "(Required) Agent string identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "a5744ed3-211e-4843-a940-684db3d4ba62",
-              "name": "OK - No content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "ed0b6f21-ca23-4c32-99e3-3c622a072800",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "25a18d73-ebe9-4ae3-baab-f684d54fcdce",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ccc29640-ae37-4e87-9a9f-ea270c3b4564",
-          "name": "Describe agent",
-          "request": {
-            "name": "Describe agent",
-            "description": {
-              "content": "Retrieves an agent in a workspace.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "agents",
-                ":agentId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "agentId",
-                  "description": "(Required) Agent string identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "36a97103-2e41-4521-a013-929f4487aa60",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"agent\": {\n    \"createdBy\": 8265,\n    \"dateCreated\": \"1975-12-28T18:02:13.075Z\",\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"lastUpdated\": \"1950-10-30T04:56:23.329Z\",\n    \"name\": \"string\",\n    \"status\": \"inactive\",\n    \"systemPrompt\": \"string\",\n    \"templateId\": \"string\",\n    \"updatedBy\": 5870,\n    \"workspaceId\": 7734\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0876a356-aa5c-43e9-93b5-da5e2f0e9fdd",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f3a85e83-4d0b-46cc-ab20-c6db4ec08339",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "fde73da2-25b2-4446-9270-5e42523b0eb6",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "f46d176d-f900-46e9-ad93-d4d1f7ddd3a9",
-          "name": "Update agent",
-          "request": {
-            "name": "Update agent",
-            "description": {
-              "content": "Updates an agent in a workspace.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "agents",
-                ":agentId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "agentId",
-                  "description": "(Required) Agent string identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "d03b9975-19be-431b-9f80-0736ab033d60",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"agent\": {\n    \"createdBy\": 8265,\n    \"dateCreated\": \"1975-12-28T18:02:13.075Z\",\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"lastUpdated\": \"1950-10-30T04:56:23.329Z\",\n    \"name\": \"string\",\n    \"status\": \"inactive\",\n    \"systemPrompt\": \"string\",\n    \"templateId\": \"string\",\n    \"updatedBy\": 5870,\n    \"workspaceId\": 7734\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a1b6b562-a513-443e-a8f3-73c21119c553",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "642ea9ec-b0c3-46c4-b54c-ee92620e505b",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "665a47a6-2a04-40cc-8e0d-1517f4e1d47e",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cc291a8f-4431-4600-aebc-5aa2e0a3389b",
-              "name": "Duplicate element",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"systemPrompt\": \"<string>\",\n  \"templateId\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "75323994-9430-4117-b1b5-138cec4b1341",
-          "name": "Disable agent",
-          "request": {
-            "name": "Disable agent",
-            "description": {
-              "content": "Marks an active agent as inactive.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "agents",
-                ":agentId",
-                "disable"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "agentId",
-                  "description": "(Required) Agent string identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "58bd86ee-8bc3-4290-a262-98b582b8324c",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId",
-                    "disable"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"agent\": {\n    \"createdBy\": 8265,\n    \"dateCreated\": \"1975-12-28T18:02:13.075Z\",\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"lastUpdated\": \"1950-10-30T04:56:23.329Z\",\n    \"name\": \"string\",\n    \"status\": \"inactive\",\n    \"systemPrompt\": \"string\",\n    \"templateId\": \"string\",\n    \"updatedBy\": 5870,\n    \"workspaceId\": 7734\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c0e73429-3673-4a48-bda0-1f5e8a56ff91",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId",
-                    "disable"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ec4139a8-c569-42cf-9518-d91a9c19faa8",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId",
-                    "disable"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "453f5cf3-416c-4053-a55a-ff29adf0f214",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId",
-                    "disable"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0fdf67f7-91fb-4761-af83-7611e2cf8488",
-          "name": "Enable agent",
-          "request": {
-            "name": "Enable agent",
-            "description": {
-              "content": "Marks an inactive agent as active.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "agents",
-                ":agentId",
-                "enable"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "agentId",
-                  "description": "(Required) Agent string identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "c1e06298-c75c-4cc8-89ac-3f3a9e7dfc0e",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId",
-                    "enable"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"agent\": {\n    \"createdBy\": 8265,\n    \"dateCreated\": \"1975-12-28T18:02:13.075Z\",\n    \"description\": \"string\",\n    \"id\": \"string\",\n    \"lastUpdated\": \"1950-10-30T04:56:23.329Z\",\n    \"name\": \"string\",\n    \"status\": \"inactive\",\n    \"systemPrompt\": \"string\",\n    \"templateId\": \"string\",\n    \"updatedBy\": 5870,\n    \"workspaceId\": 7734\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0bdb55b1-a345-4801-a48e-f96276edb9da",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId",
-                    "enable"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "16358742-c329-4753-8878-4bce9ba43660",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId",
-                    "enable"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "1036173b-38f5-44bf-b20c-c9e61de148cf",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "agents",
-                    ":agentId",
-                    "enable"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "agentId",
-                      "description": "(Required) Agent string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:01:58.000Z",
+          "updatedAt": "2026-10-21T20:01:58.000Z",
+          "uid": "35240-6bc83012-7207-4683-8a67-60db7b67f6d0"
         }
       ],
-      "event": []
+      "id": "af89ad86-2578-413c-aa2f-ef7945a2c897",
+      "createdAt": "2026-10-21T20:01:58.000Z",
+      "updatedAt": "2026-10-21T20:01:58.000Z",
+      "uid": "35240-af89ad86-2578-413c-aa2f-ef7945a2c897"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "/",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "/"
     }
-  ],
-  "info": {
-    "_postman_id": "2b15e771-d7c3-4dac-a2d6-963e96d41eb7",
-    "name": "Seqera actions agents API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

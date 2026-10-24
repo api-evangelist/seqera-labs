@@ -1,258 +1,251 @@
 {
+  "info": {
+    "_postman_id": "ae509182-36dc-4bc2-b4af-ce3f955923ea",
+    "name": "Seqera Launch API",
+    "description": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:02:57.000Z",
+    "updatedAt": "2026-10-21T20:02:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ae509182-36dc-4bc2-b4af-ce3f955923ea"
+  },
   "item": [
     {
-      "id": "9ee226d1-2f45-457e-b0ec-371ab9db4dee",
       "name": "launch",
-      "description": {
-        "content": "Workflow launch events",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "a0096767-efe5-466f-a40c-61dd9283019f",
-          "name": "Describe Launch record",
-          "request": {
-            "name": "Describe Launch record",
-            "description": {
-              "content": "Retrieves the details of the launch identified by the given `launchId`.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "launch",
-                ":launchId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "launchId",
-                  "description": "(Required) Launch string identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "{launchId}",
+          "item": [
             {
-              "id": "9cf27e8b-421e-4da6-98f6-6bc9ae5cdcc8",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "launch",
-                    ":launchId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+              "name": "Describe Launch record",
+              "id": "1c5384a6-605a-4f18-bea9-46278ba4263e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
                     {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "launchId",
-                      "description": "(Required) Launch string identifier"
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
                     }
                   ]
                 },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"launch\": {\n    \"commitId\": \"string\",\n    \"computeEnv\": {\n      \"config\": {\n        \"cliPath\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"computeJobRole\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"computeQueue\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"deletedResources\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dragenInstanceType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"dragenQueue\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"executionRole\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"forge\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"forgedResources\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fusion2Enabled\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"fusionSnapshots\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headJobCpus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headJobMemoryMb\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headJobRole\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headQueue\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"logGroup\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"lustreId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"nvnmeStorageEnabled\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"region\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"storageType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"volumes\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"waveEnabled\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"name\": \"string\",\n      \"platform\": \"google-batch\",\n      \"credentialsId\": \"string\",\n      \"dateCreated\": \"2018-03-17T23:13:34.063Z\",\n      \"deleted\": false,\n      \"description\": \"string\",\n      \"fusionMetricsCollectionEnabled\": false,\n      \"id\": \"string\",\n      \"lastUpdated\": \"1953-02-18T01:02:32.026Z\",\n      \"lastUsed\": \"2007-10-31T16:32:37.356Z\",\n      \"message\": \"string\",\n      \"orgId\": 4670,\n      \"primary\": false,\n      \"status\": \"ERRORED\",\n      \"workspaceId\": 9575\n    },\n    \"configProfiles\": [\n      \"string\",\n      \"string\"\n    ],\n    \"configText\": \"string\",\n    \"dateCreated\": \"1974-12-21T14:14:22.285Z\",\n    \"entryName\": \"string\",\n    \"headJobCpus\": 8380,\n    \"headJobMemoryMb\": 945,\n    \"id\": \"string\",\n    \"lastUpdated\": \"2024-03-03T15:26:11.568Z\",\n    \"launchContainer\": \"string\",\n    \"mainScript\": \"string\",\n    \"optimizationId\": \"string\",\n    \"optimizationTargets\": \"string\",\n    \"outputDir\": \"string\",\n    \"paramsText\": \"string\",\n    \"pipeline\": \"string\",\n    \"pipelineSchemaId\": 4305,\n    \"postRunScript\": \"string\",\n    \"preRunScript\": \"string\",\n    \"pullLatest\": false,\n    \"resume\": false,\n    \"resumeLaunchId\": \"string\",\n    \"revision\": \"string\",\n    \"runName\": \"string\",\n    \"schemaName\": \"string\",\n    \"sessionId\": \"string\",\n    \"stubRun\": false,\n    \"syntaxParser\": \"v1\",\n    \"towerConfig\": \"string\",\n    \"userSecrets\": [\n      \"string\",\n      \"string\"\n    ],\n    \"workDir\": \"string\",\n    \"workspaceId\": 7322,\n    \"workspaceSecrets\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c117d971-1d6a-4828-bd74-186b386e97f7",
-              "name": "Bad request",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/launch/:launchId?workspaceId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "launch",
                     ":launchId"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Workspace numeric identifier",
                       "key": "workspaceId",
                       "value": "<long>"
                     }
                   ],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "6b67dcd7-7ced-4376-9483-2a6375963efd",
                       "key": "launchId",
+                      "value": "<string>",
                       "description": "(Required) Launch string identifier"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                "description": "Retrieves the details of the launch identified by the given `launchId`."
+              },
+              "response": [
+                {
+                  "id": "6908cd50-804c-4376-9aaf-d418a72d2ca3",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/launch/:launchId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "launch",
+                        ":launchId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "launchId"
+                        }
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b8be2ab9-eea6-4d24-8bef-4a87f9a8deca",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "launch",
-                    ":launchId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
                     {
-                      "key": "workspaceId",
-                      "value": "<long>"
+                      "key": "Content-Type",
+                      "value": "application/json"
                     }
                   ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "launchId",
-                      "description": "(Required) Launch string identifier"
-                    }
-                  ]
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"launch\": {\n    \"commitId\": \"<string>\",\n    \"computeEnv\": {\n      \"config\": {\n        \"cliPath\": \"<string>\",\n        \"computeJobRole\": \"<string>\",\n        \"computeQueue\": \"<string>\",\n        \"deletedResources\": [\n          {\n            \"cillum787\": {},\n            \"cillumda\": {}\n          },\n          {\n            \"pariatur702\": {},\n            \"consectetur9\": {},\n            \"deserunt_8\": {},\n            \"non0e\": {}\n          }\n        ],\n        \"dragenInstanceType\": \"<string>\",\n        \"dragenQueue\": \"<string>\",\n        \"executionRole\": \"<string>\",\n        \"forge\": {\n          \"allocStrategy\": \"BEST_FIT\",\n          \"allowBuckets\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"arm64Enabled\": \"<boolean>\",\n          \"bidPercentage\": \"<integer>\",\n          \"disposeOnDeletion\": \"<boolean>\",\n          \"dragenAmiId\": \"<string>\",\n          \"dragenEnabled\": \"<boolean>\",\n          \"dragenInstanceType\": \"<string>\",\n          \"ebsAutoScale\": \"<boolean>\",\n          \"ebsBlockSize\": \"<integer>\",\n          \"ebsBootSize\": \"<integer>\",\n          \"ec2KeyPair\": \"<string>\",\n          \"ecsConfig\": \"<string>\",\n          \"efsCreate\": \"<boolean>\",\n          \"efsId\": \"<string>\",\n          \"efsMount\": \"<string>\",\n          \"fargateHeadEnabled\": \"<boolean>\",\n          \"fsxMount\": \"<string>\",\n          \"fsxName\": \"<string>\",\n          \"fsxSize\": \"<integer>\",\n          \"fusionEnabled\": \"<boolean>\",\n          \"gpuEnabled\": \"<boolean>\",\n          \"imageId\": \"<string>\",\n          \"instanceTypes\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"maxCpus\": \"<integer>\",\n          \"minCpus\": \"<integer>\",\n          \"securityGroups\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"subnets\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"type\": \"SPOT\",\n          \"vpcId\": \"<string>\"\n        },\n        \"forgedResources\": [\n          {\n            \"aliqua_da\": {},\n            \"occaecat_9d8\": {},\n            \"veniam_77\": {},\n            \"eta\": {},\n            \"ullamco_566\": {}\n          },\n          {\n            \"proident_307\": {}\n          }\n        ],\n        \"fusion2Enabled\": \"<boolean>\",\n        \"fusionSnapshots\": \"<boolean>\",\n        \"headJobCpus\": \"<integer>\",\n        \"headJobMemoryMb\": \"<integer>\",\n        \"headJobRole\": \"<string>\",\n        \"headQueue\": \"<string>\",\n        \"logGroup\": \"<string>\",\n        \"lustreId\": \"<string>\",\n        \"nvnmeStorageEnabled\": \"<boolean>\",\n        \"region\": \"<string>\",\n        \"storageType\": \"<string>\",\n        \"volumes\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"waveEnabled\": \"<boolean>\"\n      },\n      \"name\": \"<string>\",\n      \"platform\": \"google-lifesciences\",\n      \"credentialsId\": \"<string>\",\n      \"dateCreated\": \"<dateTime>\",\n      \"deleted\": \"<boolean>\",\n      \"description\": \"<string>\",\n      \"fusionMetricsCollectionEnabled\": \"<boolean>\",\n      \"id\": \"<string>\",\n      \"lastUpdated\": \"<dateTime>\",\n      \"lastUsed\": \"<dateTime>\",\n      \"message\": \"<string>\",\n      \"orgId\": \"<long>\",\n      \"primary\": \"<boolean>\",\n      \"status\": \"DELETING\",\n      \"workspaceId\": \"<long>\"\n    },\n    \"configProfiles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"configText\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"entryName\": \"<string>\",\n    \"headJobCpus\": \"<integer>\",\n    \"headJobMemoryMb\": \"<integer>\",\n    \"id\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"launchContainer\": \"<string>\",\n    \"mainScript\": \"<string>\",\n    \"optimizationId\": \"<string>\",\n    \"optimizationTargets\": \"<string>\",\n    \"outputDir\": \"<string,null>\",\n    \"paramsText\": \"<string>\",\n    \"pipeline\": \"<string>\",\n    \"pipelineSchemaId\": \"<long>\",\n    \"postRunScript\": \"<string>\",\n    \"preRunScript\": \"<string>\",\n    \"pullLatest\": \"<boolean>\",\n    \"resume\": \"<boolean>\",\n    \"resumeLaunchId\": \"<string>\",\n    \"revision\": \"<string>\",\n    \"runName\": \"<string>\",\n    \"schemaName\": \"<string>\",\n    \"sessionId\": \"<string>\",\n    \"stubRun\": \"<boolean>\",\n    \"syntaxParser\": \"v1\",\n    \"towerConfig\": \"<string>\",\n    \"userSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"workDir\": \"<string>\",\n    \"workspaceId\": \"<long>\",\n    \"workspaceSecrets\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:02:57.000Z",
+                  "updatedAt": "2026-10-21T20:02:57.000Z",
+                  "uid": "35240-6908cd50-804c-4376-9aaf-d418a72d2ca3"
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "53bb33ae-b877-42cf-bd39-5513d1166e2f",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/launch/:launchId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "launch",
+                        ":launchId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "launchId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:02:57.000Z",
+                  "updatedAt": "2026-10-21T20:02:57.000Z",
+                  "uid": "35240-53bb33ae-b877-42cf-bd39-5513d1166e2f"
+                },
+                {
+                  "id": "b275cad1-6ef2-46a6-aaa2-78d31eba5ccd",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/launch/:launchId?workspaceId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "launch",
+                        ":launchId"
+                      ],
+                      "query": [
+                        {
+                          "description": "Workspace numeric identifier",
+                          "key": "workspaceId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "launchId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:02:57.000Z",
+                  "updatedAt": "2026-10-21T20:02:57.000Z",
+                  "uid": "35240-b275cad1-6ef2-46a6-aaa2-78d31eba5ccd"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T20:02:57.000Z",
+              "updatedAt": "2026-10-21T20:02:57.000Z",
+              "uid": "35240-1c5384a6-605a-4f18-bea9-46278ba4263e"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "8e8fcd97-3ca5-4766-87f0-c114059595c6",
+          "createdAt": "2026-10-21T20:02:57.000Z",
+          "updatedAt": "2026-10-21T20:02:57.000Z",
+          "uid": "35240-8e8fcd97-3ca5-4766-87f0-c114059595c6"
         }
       ],
-      "event": []
+      "id": "9ae0c34a-bdc6-420e-9f2c-6ddac6ac095d",
+      "createdAt": "2026-10-21T20:02:57.000Z",
+      "updatedAt": "2026-10-21T20:02:57.000Z",
+      "uid": "35240-9ae0c34a-bdc6-420e-9f2c-6ddac6ac095d"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "/",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "/"
     }
-  ],
-  "info": {
-    "_postman_id": "4f818847-8b6a-4279-9584-d45d5a4ce8d0",
-    "name": "Seqera actions launch API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

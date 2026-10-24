@@ -1,295 +1,1715 @@
 {
+  "info": {
+    "_postman_id": "9117fa4c-5356-4832-9c42-7b3a24af53fa",
+    "name": "Seqera Roles API",
+    "description": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:47.000Z",
+    "updatedAt": "2026-10-21T20:03:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9117fa4c-5356-4832-9c42-7b3a24af53fa"
+  },
   "item": [
     {
-      "id": "a9df3a24-0bbf-4d61-af1e-4a9b7041011d",
       "name": "roles",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "0691a832-5c1f-4497-b9e2-19e0a35a2b4f",
-          "name": "List all roles",
-          "request": {
-            "name": "List all roles",
-            "description": {},
-            "url": {
-              "path": [
-                "roles"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+          "name": "permissions",
+          "item": [
+            {
+              "name": "List all role permissions available in the system",
+              "id": "5456b34f-e1f3-4816-b311-29b282b24be7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles/permissions?orgId=<long>&name=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles",
+                    "permissions"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Numeric identifier of the organization",
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "Search query for name filtering",
+                      "key": "name",
+                      "value": "<long>"
+                    }
+                  ]
+                }
+              },
+              "response": [
                 {
-                  "disabled": false,
-                  "key": "orgId",
-                  "value": "<long>",
-                  "description": "Numeric identifier of the organization"
+                  "id": "ba3349c4-f6b9-49df-8543-79c7ed3d83aa",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/permissions?orgId=<long>&name=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "permissions"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "Search query for name filtering",
+                          "key": "name",
+                          "value": "<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"permissions\": [\n    {\n      \"category\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"category\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-ba3349c4-f6b9-49df-8543-79c7ed3d83aa"
                 },
                 {
-                  "disabled": false,
-                  "key": "max",
-                  "value": "<integer>",
-                  "description": "Pagination max results"
+                  "id": "90c478e3-09a3-4bfa-9647-705cedcddddf",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/permissions?orgId=<long>&name=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "permissions"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "Search query for name filtering",
+                          "key": "name",
+                          "value": "<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-90c478e3-09a3-4bfa-9647-705cedcddddf"
                 },
                 {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "<integer>",
-                  "description": "Pagination offset"
+                  "id": "954b530c-c2f6-49eb-aec7-cdc75e0dafa5",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/permissions?orgId=<long>&name=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "permissions"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "Search query for name filtering",
+                          "key": "name",
+                          "value": "<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-954b530c-c2f6-49eb-aec7-cdc75e0dafa5"
                 },
                 {
-                  "disabled": false,
-                  "key": "name",
-                  "value": "<string>",
-                  "description": "Search by name parameter"
-                },
-                {
-                  "disabled": false,
-                  "key": "type",
-                  "value": "<string>",
-                  "description": "Filter by role type (predefined, custom)"
+                  "id": "b9c09121-7bdc-4aab-ad36-0fc41ff6d339",
+                  "name": "Not Found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/permissions?orgId=<long>&name=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "permissions"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        },
+                        {
+                          "description": "Search query for name filtering",
+                          "key": "name",
+                          "value": "<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-b9c09121-7bdc-4aab-ad36-0fc41ff6d339"
                 }
               ],
-              "variable": []
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-5456b34f-e1f3-4816-b311-29b282b24be7"
+            }
+          ],
+          "id": "3f043997-f779-4bc1-863f-4b2b1d9c019e",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-3f043997-f779-4bc1-863f-4b2b1d9c019e"
+        },
+        {
+          "name": "validate",
+          "item": [
+            {
+              "name": "Validate if a role name is available within the organization",
+              "id": "165eb1f9-c7db-4a8c-a51e-f4bcc3ec403b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles/validate?name=<string>&orgId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles",
+                    "validate"
+                  ],
+                  "query": [
+                    {
+                      "description": "The role name",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Numeric identifier of the organization",
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "10e3884b-2a64-4aa8-82f3-830924d72e39",
+                  "name": "No content - Role name is valid and available",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/validate?name=<string>&orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "validate"
+                      ],
+                      "query": [
+                        {
+                          "description": "The role name",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-10e3884b-2a64-4aa8-82f3-830924d72e39"
+                },
+                {
+                  "id": "f221c84e-a546-4c25-81d8-126c71500f7c",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/validate?name=<string>&orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "validate"
+                      ],
+                      "query": [
+                        {
+                          "description": "The role name",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-f221c84e-a546-4c25-81d8-126c71500f7c"
+                },
+                {
+                  "id": "50d23198-38cb-464f-9335-70576c96181c",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/validate?name=<string>&orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "validate"
+                      ],
+                      "query": [
+                        {
+                          "description": "The role name",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-50d23198-38cb-464f-9335-70576c96181c"
+                },
+                {
+                  "id": "a85e713a-061e-4d53-8254-bc41cb7c5d88",
+                  "name": "Role name already exists",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/validate?name=<string>&orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        "validate"
+                      ],
+                      "query": [
+                        {
+                          "description": "The role name",
+                          "key": "name",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-a85e713a-061e-4d53-8254-bc41cb7c5d88"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-165eb1f9-c7db-4a8c-a51e-f4bcc3ec403b"
+            }
+          ],
+          "id": "3ec38f6d-11df-4dd3-9c96-1ab187bbe9ca",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-3ec38f6d-11df-4dd3-9c96-1ab187bbe9ca"
+        },
+        {
+          "name": "{roleName}",
+          "item": [
+            {
+              "name": "Delete a role with the given name",
+              "id": "183645ce-630f-4965-9b47-a38ba3803622",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles",
+                    ":roleName"
+                  ],
+                  "query": [
+                    {
+                      "description": "Numeric identifier of the organization",
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "4acd41ab-8611-4bcf-8995-09ecb465cc86",
+                      "key": "roleName",
+                      "value": "<string>",
+                      "description": "(Required) The role name"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "59991bc5-eafe-4d53-b31a-a2f611ceb9b8",
+                  "name": "No Content - Role deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-59991bc5-eafe-4d53-b31a-a2f611ceb9b8"
+                },
+                {
+                  "id": "efb263dd-93f5-4ca7-bfcf-40082b26dd0d",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-efb263dd-93f5-4ca7-bfcf-40082b26dd0d"
+                },
+                {
+                  "id": "b047b0fc-821c-487d-9f1b-c989ef621a74",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-b047b0fc-821c-487d-9f1b-c989ef621a74"
+                },
+                {
+                  "id": "dd473c48-7a5b-473d-9a5a-058b0a683084",
+                  "name": "Role not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-dd473c48-7a5b-473d-9a5a-058b0a683084"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-183645ce-630f-4965-9b47-a38ba3803622"
             },
+            {
+              "name": "Describe role and its permissions fetching by role name",
+              "id": "356c46a0-05d2-4a2c-b43a-0021b66836c1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles",
+                    ":roleName"
+                  ],
+                  "query": [
+                    {
+                      "description": "Numeric identifier of the organization",
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "b0f33438-e0d2-484c-a22f-b2bda13b605d",
+                      "key": "roleName",
+                      "value": "<string>",
+                      "description": "(Required) The role name"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "60e75579-b5a9-4289-9737-28071b250046",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"role\": {\n    \"description\": \"<string>\",\n    \"isPredefined\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"permissions\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-60e75579-b5a9-4289-9737-28071b250046"
+                },
+                {
+                  "id": "d65452af-4829-4549-99f6-d66519678282",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-d65452af-4829-4549-99f6-d66519678282"
+                },
+                {
+                  "id": "5dc7305b-d9ef-4c1d-9bb6-2fa7a9ab6bc2",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-5dc7305b-d9ef-4c1d-9bb6-2fa7a9ab6bc2"
+                },
+                {
+                  "id": "481e2fa7-ec57-4187-a9a4-d323b77c05fe",
+                  "name": "Role not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-481e2fa7-ec57-4187-a9a4-d323b77c05fe"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-356c46a0-05d2-4a2c-b43a-0021b66836c1"
+            },
+            {
+              "name": "Update a role with the given name",
+              "id": "8f1ea250-4b7a-4846-9c7c-ce688c8d3dce",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles",
+                    ":roleName"
+                  ],
+                  "query": [
+                    {
+                      "description": "Numeric identifier of the organization",
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "7bd4dcdf-4ec6-43fe-8052-f2173ebd6009",
+                      "key": "roleName",
+                      "value": "<string>",
+                      "description": "(Required) The role name"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "3cdea929-3430-46b3-b67f-9f17f049e3b4",
+                  "name": "No Content - Role updated successfully",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-3cdea929-3430-46b3-b67f-9f17f049e3b4"
+                },
+                {
+                  "id": "5cfbe0ca-1cbf-413a-aae5-420a2efd86da",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-5cfbe0ca-1cbf-413a-aae5-420a2efd86da"
+                },
+                {
+                  "id": "6c134cfe-e8aa-4945-bf41-2fb123ee97f2",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-6c134cfe-e8aa-4945-bf41-2fb123ee97f2"
+                },
+                {
+                  "id": "c3eee267-d77a-4865-b016-4dd3ffa8c431",
+                  "name": "Role not found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-c3eee267-d77a-4865-b016-4dd3ffa8c431"
+                },
+                {
+                  "id": "665f061b-21e6-40f5-a48d-72f632bad432",
+                  "name": "Duplicate role name",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/roles/:roleName?orgId=<long>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "roles",
+                        ":roleName"
+                      ],
+                      "query": [
+                        {
+                          "description": "Numeric identifier of the organization",
+                          "key": "orgId",
+                          "value": "<long>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "roleName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:03:47.000Z",
+                  "updatedAt": "2026-10-21T20:03:47.000Z",
+                  "uid": "35240-665f061b-21e6-40f5-a48d-72f632bad432"
+                }
+              ],
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-8f1ea250-4b7a-4846-9c7c-ce688c8d3dce"
+            }
+          ],
+          "id": "34937985-5420-43a1-a8d4-44b164322541",
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-34937985-5420-43a1-a8d4-44b164322541"
+        },
+        {
+          "name": "List all roles",
+          "id": "6debbd99-87fe-42f4-b893-de1a14fb7a9d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
+            "url": {
+              "raw": "{{baseUrl}}/roles?orgId=<long>&max=<integer>&offset=<integer>&name=<string>&type=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "roles"
+              ],
+              "query": [
                 {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
+                  "description": "Numeric identifier of the organization",
+                  "key": "orgId",
+                  "value": "<long>"
+                },
+                {
+                  "description": "Pagination max results",
+                  "key": "max",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Pagination offset",
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Search by name parameter",
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Filter by role type (predefined, custom)",
+                  "key": "type",
+                  "value": "<string>"
                 }
               ]
             }
           },
           "response": [
             {
-              "id": "3585f403-da63-4229-9bc2-ea4ed33dd1e1",
+              "id": "99f745c5-971f-4418-81cc-d8e3d00efe22",
               "name": "OK",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "roles"
-                  ],
+                  "raw": "{{baseUrl}}/roles?orgId=<long>&max=<integer>&offset=<integer>&name=<string>&type=<string>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "roles"
+                  ],
                   "query": [
                     {
+                      "description": "Numeric identifier of the organization",
                       "key": "orgId",
                       "value": "<long>"
                     },
                     {
+                      "description": "Pagination max results",
                       "key": "max",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Pagination offset",
                       "key": "offset",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Search by name parameter",
                       "key": "name",
                       "value": "<string>"
                     },
                     {
+                      "description": "Filter by role type (predefined, custom)",
                       "key": "type",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"roles\": [\n    {\n      \"description\": \"string\",\n      \"isPredefined\": true,\n      \"name\": \"string\"\n    },\n    {\n      \"description\": \"string\",\n      \"isPredefined\": false,\n      \"name\": \"string\"\n    }\n  ],\n  \"totalSize\": 5323\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"roles\": [\n    {\n      \"description\": \"<string>\",\n      \"isPredefined\": \"<boolean>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"description\": \"<string>\",\n      \"isPredefined\": \"<boolean>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"totalSize\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-99f745c5-971f-4418-81cc-d8e3d00efe22"
             },
             {
-              "id": "d3c2c841-66d6-44e6-a67b-9b51d4bdde5e",
+              "id": "a341ad23-8276-4a41-bb66-80cdfd793e42",
               "name": "Bad request",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "max",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "type",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/roles?orgId=<long>&max=<integer>&offset=<integer>&name=<string>&type=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Numeric identifier of the organization",
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "Pagination max results",
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination offset",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Search by name parameter",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by role type (predefined, custom)",
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-a341ad23-8276-4a41-bb66-80cdfd793e42"
             },
             {
-              "id": "9165030c-1ebb-47f4-8738-b9e981b61b42",
+              "id": "8961fd41-cdc2-4082-a4d9-762adb195dbb",
               "name": "Operation not allowed",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "max",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "type",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/roles?orgId=<long>&max=<integer>&offset=<integer>&name=<string>&type=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Numeric identifier of the organization",
+                      "key": "orgId",
+                      "value": "<long>"
+                    },
+                    {
+                      "description": "Pagination max results",
+                      "key": "max",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Pagination offset",
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Search by name parameter",
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Filter by role type (predefined, custom)",
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
               },
               "status": "Forbidden",
               "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-8961fd41-cdc2-4082-a4d9-762adb195dbb"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-6debbd99-87fe-42f4-b893-de1a14fb7a9d"
         },
         {
-          "id": "1502b0a3-f820-48ae-88b2-2d3a6fab65d0",
           "name": "Create a role with the given name",
+          "id": "dc80ad16-39f2-4153-a897-0d3a85a85ba7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create a role with the given name",
-            "description": {},
-            "url": {
-              "path": [
-                "roles"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "disabled": false,
-                  "key": "orgId",
-                  "value": "<long>",
-                  "description": "Numeric identifier of the organization"
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
                 }
-              ],
-              "variable": []
+              ]
             },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -300,1706 +1720,284 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/roles?orgId=<long>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "roles"
+              ],
+              "query": [
+                {
+                  "description": "Numeric identifier of the organization",
+                  "key": "orgId",
+                  "value": "<long>"
+                }
+              ]
             }
           },
           "response": [
             {
-              "id": "26d3bdf8-021c-46db-9829-a9e9d25cdf33",
+              "id": "ed0f5b00-1168-4409-9db1-07587bf45adb",
               "name": "Created",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles?orgId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Numeric identifier of the organization",
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ]
                 }
               },
               "status": "Created",
               "code": 201,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"description\": \"string\",\n  \"name\": \"string\",\n  \"permissions\": [\n    \"string\",\n    \"string\"\n  ]\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-ed0f5b00-1168-4409-9db1-07587bf45adb"
             },
             {
-              "id": "02e7cae6-efcb-4b77-bf2c-6bc3d822a1d5",
+              "id": "49ed83ca-71d1-4ac4-ad8b-25263c007023",
               "name": "Bad request",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles?orgId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Numeric identifier of the organization",
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-49ed83ca-71d1-4ac4-ad8b-25263c007023"
             },
             {
-              "id": "7366c30c-2058-4b90-8078-8dbbf5f52593",
+              "id": "c791db62-6a3d-481c-ad24-7ccd4df62cc8",
               "name": "Operation not allowed",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/roles?orgId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "roles"
+                  ],
+                  "query": [
+                    {
+                      "description": "Numeric identifier of the organization",
+                      "key": "orgId",
+                      "value": "<long>"
+                    }
+                  ]
                 }
               },
               "status": "Forbidden",
               "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-c791db62-6a3d-481c-ad24-7ccd4df62cc8"
             },
             {
-              "id": "dcbb67e5-9b8e-4930-bac1-e03a4bc69cee",
+              "id": "8c8004ab-eca7-47cb-9f29-69452cee798c",
               "name": "Duplicate role name",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/roles?orgId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "roles"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "Numeric identifier of the organization",
                       "key": "orgId",
                       "value": "<long>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
+                  ]
                 }
               },
               "status": "Conflict",
               "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:03:47.000Z",
+              "updatedAt": "2026-10-21T20:03:47.000Z",
+              "uid": "35240-8c8004ab-eca7-47cb-9f29-69452cee798c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "272ab9fe-f065-4233-9acf-b1baae474ec0",
-          "name": "List all role permissions available in the system",
-          "request": {
-            "name": "List all role permissions available in the system",
-            "description": {},
-            "url": {
-              "path": [
-                "roles",
-                "permissions"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "orgId",
-                  "value": "<long>",
-                  "description": "(Required) Numeric identifier of the organization"
-                },
-                {
-                  "disabled": false,
-                  "key": "name",
-                  "value": "<long>",
-                  "description": "Search query for name filtering"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "046181d1-706a-4e3b-9d27-72af9a1d167b",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    "permissions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "name",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"permissions\": [\n    {\n      \"category\": \"string\",\n      \"name\": \"string\"\n    },\n    {\n      \"category\": \"string\",\n      \"name\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "db221ba4-f01b-4df7-898e-a9137d33b4e7",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    "permissions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "name",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "98f61767-18ab-4bb8-9709-3d9cdd629122",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    "permissions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "name",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "7494db14-2ce2-431c-aca4-eb7971affa57",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    "permissions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    },
-                    {
-                      "key": "name",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d9ce451d-f97f-4a55-941b-79e492a6c34d",
-          "name": "Validate if a role name is available within the organization",
-          "request": {
-            "name": "Validate if a role name is available within the organization",
-            "description": {},
-            "url": {
-              "path": [
-                "roles",
-                "validate"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "name",
-                  "value": "<string>",
-                  "description": "The role name"
-                },
-                {
-                  "disabled": false,
-                  "key": "orgId",
-                  "value": "<long>",
-                  "description": "Numeric identifier of the organization"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "e2ed9601-927c-4599-85a2-161c3f0ce3f4",
-              "name": "No content - Role name is valid and available",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    "validate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "4ddfc991-567b-489a-ba88-a01e1a9577c6",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    "validate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d51cea01-1b84-4fa7-8c83-d061321ad4b6",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    "validate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0839d1d9-2fe5-48ca-90ff-399aa36a13bd",
-              "name": "Role name already exists",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    "validate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "691f2c15-30bd-4974-9d85-545b37ef434d",
-          "name": "Delete a role with the given name",
-          "request": {
-            "name": "Delete a role with the given name",
-            "description": {},
-            "url": {
-              "path": [
-                "roles",
-                ":roleName"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "orgId",
-                  "value": "<long>",
-                  "description": "Numeric identifier of the organization"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "roleName",
-                  "description": "(Required) The role name"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "6f54187d-ff16-414c-8622-0013a37d1e5f",
-              "name": "No Content - Role deleted successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0cb465c2-a004-4249-a9fd-604adbd175d9",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b780f9f9-d828-4b03-9965-a9ceccf417d2",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "48a0f856-e248-4e7e-b3f2-8325bb067bad",
-              "name": "Role not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7854735d-d557-4d48-ae01-9b66fc367ed2",
-          "name": "Describe role and its permissions fetching by role name",
-          "request": {
-            "name": "Describe role and its permissions fetching by role name",
-            "description": {},
-            "url": {
-              "path": [
-                "roles",
-                ":roleName"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "orgId",
-                  "value": "<long>",
-                  "description": "Numeric identifier of the organization"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "roleName",
-                  "description": "(Required) The role name"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "6ce69b08-dead-4ace-aa48-c2de69b4881b",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"role\": {\n    \"description\": \"string\",\n    \"isPredefined\": true,\n    \"name\": \"string\",\n    \"permissions\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b7ed5e4d-93d5-46d7-ab2a-ceea76a5d922",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "23630bc5-afd6-4080-8cf4-24727324074e",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "9877f3b4-42b6-4667-81c8-5cb1b8013bb7",
-              "name": "Role not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "d5ba2f9d-74a8-4199-8b20-27c7890b06af",
-          "name": "Update a role with the given name",
-          "request": {
-            "name": "Update a role with the given name",
-            "description": {},
-            "url": {
-              "path": [
-                "roles",
-                ":roleName"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "orgId",
-                  "value": "<long>",
-                  "description": "Numeric identifier of the organization"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "roleName",
-                  "description": "(Required) The role name"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "d2b194f4-daf9-4b8f-862b-5d8f0aa5139b",
-              "name": "No Content - Role updated successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "de0bbe68-83e6-4c2a-8048-f6c35cc6557c",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "61b4f8f7-1416-4406-a366-7efbd1eb919d",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "323dc184-b5fa-42bf-a640-9184bc53f14a",
-              "name": "Role not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "fffcb42f-f4a1-49eb-ac04-3961d6737a9a",
-              "name": "Duplicate role name",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "roles",
-                    ":roleName"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "orgId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "roleName",
-                      "description": "(Required) The role name"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\",\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:03:47.000Z",
+          "updatedAt": "2026-10-21T20:03:47.000Z",
+          "uid": "35240-dc80ad16-39f2-4153-a897-0d3a85a85ba7"
         }
       ],
-      "event": []
+      "id": "58e52677-8753-460a-8e70-25351e9ec0d8",
+      "createdAt": "2026-10-21T20:03:47.000Z",
+      "updatedAt": "2026-10-21T20:03:47.000Z",
+      "uid": "35240-58e52677-8753-460a-8e70-25351e9ec0d8"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "/",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "/"
     }
-  ],
-  "info": {
-    "_postman_id": "dee89af5-48fc-4ea4-ac36-3638f92d5552",
-    "name": "Seqera actions roles API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

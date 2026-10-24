@@ -1,39 +1,36 @@
 {
+  "info": {
+    "_postman_id": "fb2c9c6d-8590-4666-b9a5-1c40933b82e3",
+    "name": "Seqera Pipeline Schemas API",
+    "description": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:03:09.000Z",
+    "updatedAt": "2026-10-21T20:03:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fb2c9c6d-8590-4666-b9a5-1c40933b82e3"
+  },
   "item": [
     {
-      "id": "b6860450-a40e-4d9b-8dd4-cc7d6e3154bd",
       "name": "pipeline-schemas",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "3911ea68-e546-4307-a0e9-3741c04521d7",
           "name": "Create pipeline schema",
+          "id": "6ade06f9-5a62-4879-ad75-4904a7f3b992",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create pipeline schema",
-            "description": {
-              "content": "Creates a new pipeline schema in a user context. Append `?workspaceId` to create the schema in a workspace context.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "pipeline-schemas"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
+            "auth": {
+              "type": "bearer",
+              "bearer": [
                 {
-                  "disabled": false,
-                  "key": "workspaceId",
-                  "value": "<long>",
-                  "description": "Workspace numeric identifier"
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
                 }
-              ],
-              "variable": []
+              ]
             },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -44,216 +41,231 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
             "body": {
               "mode": "raw",
               "raw": "{\n  \"content\": \"<string>\"\n}",
               "options": {
                 "raw": {
+                  "headerFamily": "json",
                   "language": "json"
                 }
               }
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/pipeline-schemas?workspaceId=<long>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "pipeline-schemas"
+              ],
+              "query": [
+                {
+                  "description": "Workspace numeric identifier",
+                  "key": "workspaceId",
+                  "value": "<long>"
+                }
+              ]
+            },
+            "description": "Creates a new pipeline schema in a user context. Append `?workspaceId` to create the schema in a workspace context."
           },
           "response": [
             {
-              "id": "02ccc50c-1809-4c9c-acf6-a391f4f4fcc6",
+              "id": "4d834c6e-3839-428b-b3b0-7d5ff43a5841",
               "name": "OK",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "pipeline-schemas"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"content\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pipeline-schemas?workspaceId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pipeline-schemas"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ]
                 }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"pipelineSchema\": {\n    \"content\": \"string\",\n    \"id\": 2809\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"pipelineSchema\": {\n    \"content\": \"<string>\",\n    \"id\": \"<long>\"\n  }\n}",
+              "createdAt": "2026-10-21T20:03:10.000Z",
+              "updatedAt": "2026-10-21T20:03:10.000Z",
+              "uid": "35240-4d834c6e-3839-428b-b3b0-7d5ff43a5841"
             },
             {
-              "id": "1d14f8e8-9f26-4700-8047-2445191c918e",
+              "id": "3ed9a6df-03f2-48ad-8989-acbe15d787ee",
               "name": "Bad request",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "pipeline-schemas"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "application/json"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"content\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pipeline-schemas?workspaceId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pipeline-schemas"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:03:10.000Z",
+              "updatedAt": "2026-10-21T20:03:10.000Z",
+              "uid": "35240-3ed9a6df-03f2-48ad-8989-acbe15d787ee"
             },
             {
-              "id": "4085bc26-712e-4179-8a1f-a1ce3eeb0b62",
+              "id": "9fc46e81-50b4-4736-9386-1d7fa4585a78",
               "name": "Operation not allowed",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "pipeline-schemas"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "workspaceId",
-                      "value": "<long>"
-                    }
-                  ],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "raw",
                   "raw": "{\n  \"content\": \"<string>\"\n}",
                   "options": {
                     "raw": {
+                      "headerFamily": "json",
                       "language": "json"
                     }
                   }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pipeline-schemas?workspaceId=<long>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "pipeline-schemas"
+                  ],
+                  "query": [
+                    {
+                      "description": "Workspace numeric identifier",
+                      "key": "workspaceId",
+                      "value": "<long>"
+                    }
+                  ]
                 }
               },
               "status": "Forbidden",
               "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:03:10.000Z",
+              "updatedAt": "2026-10-21T20:03:10.000Z",
+              "uid": "35240-9fc46e81-50b4-4736-9386-1d7fa4585a78"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:03:10.000Z",
+          "updatedAt": "2026-10-21T20:03:10.000Z",
+          "uid": "35240-6ade06f9-5a62-4879-ad75-4904a7f3b992"
         }
       ],
-      "event": []
+      "id": "3c99c974-a73f-4404-9930-74519e11af0d",
+      "createdAt": "2026-10-21T20:03:10.000Z",
+      "updatedAt": "2026-10-21T20:03:10.000Z",
+      "uid": "35240-3c99c974-a73f-4404-9930-74519e11af0d"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "/",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "/"
     }
-  ],
-  "info": {
-    "_postman_id": "5cfc34d8-3cb4-4563-afaa-c23b02a0b91c",
-    "name": "Seqera actions pipeline-schemas API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

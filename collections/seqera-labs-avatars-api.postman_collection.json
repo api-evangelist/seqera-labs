@@ -1,29 +1,268 @@
 {
+  "info": {
+    "_postman_id": "1f417129-5272-40fa-9007-d988bef8a2b4",
+    "name": "Seqera Avatars API",
+    "description": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:02:06.000Z",
+    "updatedAt": "2026-10-21T20:02:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1f417129-5272-40fa-9007-d988bef8a2b4"
+  },
   "item": [
     {
-      "id": "b5fa32b8-5beb-4bf2-9692-366f7835d2e8",
       "name": "avatars",
-      "description": {
-        "content": "Avatars",
-        "type": "text/plain"
-      },
       "item": [
         {
-          "id": "3c1e0cdc-3f05-4622-bf05-2b2d8fb1f53e",
+          "name": "{avatarId}",
+          "item": [
+            {
+              "name": "Download the avatar image",
+              "id": "5b030f08-0e0d-41ba-b171-d2052ebae97d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/avatars/:avatarId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "avatars",
+                    ":avatarId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "15ac9822-6751-42d8-9ce4-30d9c3e87591",
+                      "key": "avatarId",
+                      "value": "<string>",
+                      "description": "(Required) Avatar string identifier"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "5885a5b8-309d-436a-8f68-e2ba98feef0d",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/octet-stream"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/avatars/:avatarId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "avatars",
+                        ":avatarId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "avatarId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/octet-stream"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "<binary>",
+                  "createdAt": "2026-10-21T20:02:06.000Z",
+                  "updatedAt": "2026-10-21T20:02:06.000Z",
+                  "uid": "35240-5885a5b8-309d-436a-8f68-e2ba98feef0d"
+                },
+                {
+                  "id": "e8d880d0-6c38-4f65-b365-20e36ebd47f4",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/avatars/:avatarId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "avatars",
+                        ":avatarId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "avatarId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:02:06.000Z",
+                  "updatedAt": "2026-10-21T20:02:06.000Z",
+                  "uid": "35240-e8d880d0-6c38-4f65-b365-20e36ebd47f4"
+                },
+                {
+                  "id": "eff8bfc1-c0ce-4c71-9205-fb7ff98abb22",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/avatars/:avatarId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "avatars",
+                        ":avatarId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "avatarId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:02:06.000Z",
+                  "updatedAt": "2026-10-21T20:02:06.000Z",
+                  "uid": "35240-eff8bfc1-c0ce-4c71-9205-fb7ff98abb22"
+                },
+                {
+                  "id": "d6c40cbd-e135-4a61-a662-54512ae8064c",
+                  "name": "Not found element",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/avatars/:avatarId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "avatars",
+                        ":avatarId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "avatarId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:02:06.000Z",
+                  "updatedAt": "2026-10-21T20:02:06.000Z",
+                  "uid": "35240-d6c40cbd-e135-4a61-a662-54512ae8064c"
+                }
+              ],
+              "createdAt": "2026-10-21T20:02:06.000Z",
+              "updatedAt": "2026-10-21T20:02:06.000Z",
+              "uid": "35240-5b030f08-0e0d-41ba-b171-d2052ebae97d"
+            }
+          ],
+          "id": "c9fb23c8-650b-4430-a2c1-115efaebb954",
+          "createdAt": "2026-10-21T20:02:06.000Z",
+          "updatedAt": "2026-10-21T20:02:06.000Z",
+          "uid": "35240-c9fb23c8-650b-4430-a2c1-115efaebb954"
+        },
+        {
           "name": "Create the avatar image",
+          "id": "6285f26d-cc53-4983-9f5e-a18573d00847",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create the avatar image",
-            "description": {},
-            "url": {
-              "path": [
-                "avatars"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
             },
+            "method": "POST",
             "header": [
               {
                 "key": "Content-Type",
@@ -34,16 +273,6 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
             "body": {
               "mode": "formdata",
               "formdata": [
@@ -51,453 +280,196 @@
                   "key": "image",
                   "type": "file",
                   "contentType": "application/octet-stream",
-                  "description": ""
+                  "value": null
                 }
               ]
-            }
-          },
-          "response": [
-            {
-              "id": "cc3b9fa5-fd33-4d56-9b5e-b546e886246d",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "avatars"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "",
-                        "type": "text/plain"
-                      },
-                      "key": "image",
-                      "value": "<binary>",
-                      "type": "text",
-                      "contentType": "application/octet-stream"
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"avatar\": {\n    \"dateCreated\": \"1983-09-24T10:52:14.188Z\",\n    \"id\": \"string\",\n    \"lastUpdated\": \"2026-05-04T16:37:10.678Z\"\n  },\n  \"url\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
             },
-            {
-              "id": "c6c512cb-bc94-438e-af1d-df37b6c91d8c",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "avatars"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "",
-                        "type": "text/plain"
-                      },
-                      "key": "image",
-                      "value": "<binary>",
-                      "type": "text",
-                      "contentType": "application/octet-stream"
-                    }
-                  ]
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bddf21f8-1c81-49ca-a1ec-3c626c6d658d",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "avatars"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "formdata",
-                  "formdata": [
-                    {
-                      "description": {
-                        "content": "",
-                        "type": "text/plain"
-                      },
-                      "key": "image",
-                      "value": "<binary>",
-                      "type": "text",
-                      "contentType": "application/octet-stream"
-                    }
-                  ]
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "31aee585-3c13-4a43-a15d-8cbec8da50fd",
-          "name": "Download the avatar image",
-          "request": {
-            "name": "Download the avatar image",
-            "description": {},
             "url": {
-              "path": [
-                "avatars",
-                ":avatarId"
-              ],
+              "raw": "{{baseUrl}}/avatars",
               "host": [
                 "{{baseUrl}}"
               ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "avatarId",
-                  "description": "(Required) Avatar string identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/octet-stream"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
+              "path": [
+                "avatars"
               ]
             }
           },
           "response": [
             {
-              "id": "dac554c7-a324-47b2-892e-795b61249368",
+              "id": "4f3fefde-97a5-492b-9776-2403593c860d",
               "name": "OK",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "avatars",
-                    ":avatarId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "avatarId",
-                      "description": "(Required) Avatar string identifier"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/octet-stream"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/octet-stream"
-                }
-              ],
-              "body": "string",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0f3093e8-8fd0-40d3-afd7-01b74d02034f",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "avatars",
-                    ":avatarId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "avatarId",
-                      "description": "(Required) Avatar string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "contentType": "application/octet-stream"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/avatars",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "avatars"
+                  ]
+                }
               },
-              "status": "Bad Request",
-              "code": 400,
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"avatar\": {\n    \"dateCreated\": \"<dateTime>\",\n    \"id\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\"\n  },\n  \"url\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:02:06.000Z",
+              "updatedAt": "2026-10-21T20:02:06.000Z",
+              "uid": "35240-4f3fefde-97a5-492b-9776-2403593c860d"
             },
             {
-              "id": "8133c85b-74a8-4c6c-92c8-137f4e139efa",
-              "name": "Operation not allowed",
+              "id": "c42efd1f-ed8f-43eb-ae20-d6e4af7d3216",
+              "name": "Bad request",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "avatars",
-                    ":avatarId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "avatarId",
-                      "description": "(Required) Avatar string identifier"
-                    }
-                  ]
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
                     "key": "Authorization",
                     "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "contentType": "application/octet-stream"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/avatars",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "avatars"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:02:06.000Z",
+              "updatedAt": "2026-10-21T20:02:06.000Z",
+              "uid": "35240-c42efd1f-ed8f-43eb-ae20-d6e4af7d3216"
+            },
+            {
+              "id": "ada6d7e8-e06e-484e-a384-de1838b87b02",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "image",
+                      "type": "file",
+                      "contentType": "application/octet-stream"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/avatars",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "avatars"
+                  ]
+                }
               },
               "status": "Forbidden",
               "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "75035a54-34c2-4074-b381-c3f2b201ae00",
-              "name": "Not found element",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "avatars",
-                    ":avatarId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "avatarId",
-                      "description": "(Required) Avatar string identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:02:06.000Z",
+              "updatedAt": "2026-10-21T20:02:06.000Z",
+              "uid": "35240-ada6d7e8-e06e-484e-a384-de1838b87b02"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:02:06.000Z",
+          "updatedAt": "2026-10-21T20:02:06.000Z",
+          "uid": "35240-6285f26d-cc53-4983-9f5e-a18573d00847"
         }
       ],
-      "event": []
+      "id": "130456cb-086a-4abe-a4e0-e8f2eb1a9130",
+      "createdAt": "2026-10-21T20:02:06.000Z",
+      "updatedAt": "2026-10-21T20:02:06.000Z",
+      "uid": "35240-130456cb-086a-4abe-a4e0-e8f2eb1a9130"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "/",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "/"
     }
-  ],
-  "info": {
-    "_postman_id": "8f9af3cb-cf42-4550-a179-788f6588a502",
-    "name": "Seqera actions avatars API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

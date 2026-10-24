@@ -1,1065 +1,1033 @@
 {
+  "info": {
+    "_postman_id": "f0469265-3de8-4445-bdfc-ba9661a1dba8",
+    "name": "Seqera Users API",
+    "description": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T20:04:40.000Z",
+    "updatedAt": "2026-10-21T20:04:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f0469265-3de8-4445-bdfc-ba9661a1dba8"
+  },
   "item": [
     {
-      "id": "0b42ae0a-2647-4916-8830-07a5a3f8320b",
-      "name": "users",
-      "description": {
-        "content": "Users",
-        "type": "text/plain"
-      },
+      "name": "user-info",
       "item": [
         {
-          "id": "5b32e3c1-01ae-40e3-b451-9f5f96a9984b",
           "name": "Describe current user",
+          "id": "c486e86a-18fc-40e6-bca3-4c14e51c9e8f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Describe current user",
-            "description": {},
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
             "url": {
+              "raw": "{{baseUrl}}/user-info",
+              "host": [
+                "{{baseUrl}}"
+              ],
               "path": [
                 "user-info"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
               ]
             }
           },
           "response": [
             {
-              "id": "cf7688f5-1520-4032-ad6e-9fb905001b81",
+              "id": "efd5d4c0-32c0-4591-8a28-3abbe4643ea8",
               "name": "OK",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "user-info"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/user-info",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "user-info"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"defaultWorkspaceId\": 7126,\n  \"needConsent\": false,\n  \"user\": {\n    \"avatar\": \"string\",\n    \"avatarId\": \"string\",\n    \"dateCreated\": \"1952-01-17T09:09:47.890Z\",\n    \"deleted\": false,\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"firstName\": \"string\",\n    \"id\": 4879,\n    \"lastAccess\": \"1994-06-14T20:58:31.258Z\",\n    \"lastName\": \"string\",\n    \"lastUpdated\": \"2009-11-10T03:54:00.345Z\",\n    \"marketingConsent\": false,\n    \"notification\": false,\n    \"organization\": \"string\",\n    \"termsOfUseConsent\": false,\n    \"userName\": \"string\",\n    \"waveBuildNotification\": \"ALWAYS_OFF\"\n  }\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"defaultWorkspaceId\": \"<long>\",\n  \"needConsent\": \"<boolean>\",\n  \"user\": {\n    \"avatar\": \"<string>\",\n    \"avatarId\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"deleted\": \"<boolean>\",\n    \"description\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastAccess\": \"<dateTime>\",\n    \"lastName\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"marketingConsent\": \"<boolean>\",\n    \"notification\": \"<boolean>\",\n    \"organization\": \"<string>\",\n    \"termsOfUseConsent\": \"<boolean>\",\n    \"userName\": \"<string>\",\n    \"waveBuildNotification\": \"ALWAYS_ON\"\n  }\n}",
+              "createdAt": "2026-10-21T20:04:41.000Z",
+              "updatedAt": "2026-10-21T20:04:41.000Z",
+              "uid": "35240-efd5d4c0-32c0-4591-8a28-3abbe4643ea8"
             },
             {
-              "id": "04f069d1-7497-430e-b4e7-69afe588c023",
+              "id": "f01551dc-61ae-4d27-b105-25841897e84c",
               "name": "Bad request",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/user-info",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "user-info"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                  ]
+                }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"message\": \"string\"\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-10-21T20:04:41.000Z",
+              "updatedAt": "2026-10-21T20:04:41.000Z",
+              "uid": "35240-f01551dc-61ae-4d27-b105-25841897e84c"
             },
             {
-              "id": "055fd926-5432-43da-8249-6fb333c54413",
+              "id": "f8e36b84-b328-4140-ab18-598139d3bdc2",
               "name": "Operation not allowed",
               "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/user-info",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "user-info"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "35a4c92d-ecee-4010-b620-6615c006210b",
-          "name": "Check that the user name is valid",
-          "request": {
-            "name": "Check that the user name is valid",
-            "description": {},
-            "url": {
-              "path": [
-                "users",
-                "validate"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "name",
-                  "value": "<string>",
-                  "description": "User name to validate"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "8bf836f6-d29a-4ccf-8252-5934d21b9c79",
-              "name": "OK - No content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    "validate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "0bd3eb28-428d-4073-9f11-5bf32383a3a4",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    "validate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f0d6336b-878f-4ae5-bcd5-d46b4ce552d9",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    "validate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "1f5f3de4-0c9a-4bc4-b911-8d5ae868268b",
-              "name": "Duplicated element",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    "validate"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a578b25b-d6a6-4867-8a95-0c99321fd3e6",
-          "name": "Delete a user entity",
-          "request": {
-            "name": "Delete a user entity",
-            "description": {},
-            "url": {
-              "path": [
-                "users",
-                ":userId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<long>",
-                  "key": "userId",
-                  "description": "(Required) User numeric identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "1a3be1cb-c3ef-4929-8dd7-a56d57a50b2b",
-              "name": "OK - No content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "userId",
-                      "description": "(Required) User numeric identifier"
-                    }
                   ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "b40d089f-847a-45d8-a369-ba55aa6f38ff",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "userId",
-                      "description": "(Required) User numeric identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "37fca933-cfba-4053-95d9-30e8c231d4f7",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "userId",
-                      "description": "(Required) User numeric identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "52b31c33-88e1-4519-b10e-2b17c5e61aa0",
-          "name": "Describe a user entity",
-          "request": {
-            "name": "Describe a user entity",
-            "description": {},
-            "url": {
-              "path": [
-                "users",
-                ":userId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<long>",
-                  "key": "userId",
-                  "description": "(Required) User numeric identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "bceed026-8d62-4591-b11a-6ab5d1ac7209",
-              "name": "OK",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "userId",
-                      "description": "(Required) User numeric identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"defaultWorkspaceId\": 7126,\n  \"needConsent\": false,\n  \"user\": {\n    \"avatar\": \"string\",\n    \"avatarId\": \"string\",\n    \"dateCreated\": \"1952-01-17T09:09:47.890Z\",\n    \"deleted\": false,\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"firstName\": \"string\",\n    \"id\": 4879,\n    \"lastAccess\": \"1994-06-14T20:58:31.258Z\",\n    \"lastName\": \"string\",\n    \"lastUpdated\": \"2009-11-10T03:54:00.345Z\",\n    \"marketingConsent\": false,\n    \"notification\": false,\n    \"organization\": \"string\",\n    \"termsOfUseConsent\": false,\n    \"userName\": \"string\",\n    \"waveBuildNotification\": \"ALWAYS_OFF\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3c02615b-dec5-47a4-bd33-9cad5261af4e",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "userId",
-                      "description": "(Required) User numeric identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9be9ee4d-2e83-4ef5-bf84-5d9a1bacccf1",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "userId",
-                      "description": "(Required) User numeric identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ad530ca0-94a8-41e6-b722-6774b29ce217",
-          "name": "Update an user entity",
-          "request": {
-            "name": "Update an user entity",
-            "description": {},
-            "url": {
-              "path": [
-                "users",
-                ":userId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<long>",
-                  "key": "userId",
-                  "description": "(Required) User numeric identifier"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{bearerToken}}"
-                }
-              ]
-            },
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"<email>\",\n  \"userName\": \"<string>\",\n  \"avatar\": \"<string>\",\n  \"avatarId\": \"<string>\",\n  \"defaultWorkspaceId\": \"<long>\",\n  \"description\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"notification\": \"<boolean>\",\n  \"organization\": \"<string>\",\n  \"waveBuildNotification\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "d596a0bb-27bd-4364-9149-fbe349a22792",
-              "name": "OK - No content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "userId",
-                      "description": "(Required) User numeric identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"userName\": \"<string>\",\n  \"avatar\": \"<string>\",\n  \"avatarId\": \"<string>\",\n  \"defaultWorkspaceId\": \"<long>\",\n  \"description\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"notification\": \"<boolean>\",\n  \"organization\": \"<string>\",\n  \"waveBuildNotification\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "63aff55d-844f-4f0c-9a5d-bf27f53458de",
-              "name": "Bad request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "userId",
-                      "description": "(Required) User numeric identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"userName\": \"<string>\",\n  \"avatar\": \"<string>\",\n  \"avatarId\": \"<string>\",\n  \"defaultWorkspaceId\": \"<long>\",\n  \"description\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"notification\": \"<boolean>\",\n  \"organization\": \"<string>\",\n  \"waveBuildNotification\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"message\": \"string\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "0e3e29d0-af06-4ece-bd2c-753eb05f7deb",
-              "name": "Operation not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<long>",
-                      "key": "userId",
-                      "description": "(Required) User numeric identifier"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"email\": \"<email>\",\n  \"userName\": \"<string>\",\n  \"avatar\": \"<string>\",\n  \"avatarId\": \"<string>\",\n  \"defaultWorkspaceId\": \"<long>\",\n  \"description\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"notification\": \"<boolean>\",\n  \"organization\": \"<string>\",\n  \"waveBuildNotification\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
                 }
               },
               "status": "Forbidden",
               "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
+              "_postman_previewlanguage": "text",
+              "header": [],
               "cookie": [],
-              "_postman_previewlanguage": "text"
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T20:04:41.000Z",
+              "updatedAt": "2026-10-21T20:04:41.000Z",
+              "uid": "35240-f8e36b84-b328-4140-ab18-598139d3bdc2"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-21T20:04:40.000Z",
+          "updatedAt": "2026-10-21T20:04:40.000Z",
+          "uid": "35240-c486e86a-18fc-40e6-bca3-4c14e51c9e8f"
         }
       ],
-      "event": []
+      "id": "92f2cb06-eab8-4638-bc59-1c1f7b54dce2",
+      "createdAt": "2026-10-21T20:04:40.000Z",
+      "updatedAt": "2026-10-21T20:04:40.000Z",
+      "uid": "35240-92f2cb06-eab8-4638-bc59-1c1f7b54dce2"
+    },
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "validate",
+          "item": [
+            {
+              "name": "Check that the user name is valid",
+              "id": "1781a222-3324-447e-bb68-7501662046d1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/validate?name=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    "validate"
+                  ],
+                  "query": [
+                    {
+                      "description": "User name to validate",
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "de309d90-00bf-47f9-a865-e2840c8092d4",
+                  "name": "OK - No content",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/validate?name=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "validate"
+                      ],
+                      "query": [
+                        {
+                          "description": "User name to validate",
+                          "key": "name",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-de309d90-00bf-47f9-a865-e2840c8092d4"
+                },
+                {
+                  "id": "adc19df4-c5ad-49b9-8b19-1af63e82c814",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/validate?name=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "validate"
+                      ],
+                      "query": [
+                        {
+                          "description": "User name to validate",
+                          "key": "name",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-adc19df4-c5ad-49b9-8b19-1af63e82c814"
+                },
+                {
+                  "id": "7c41252a-9768-4630-844d-9bf80d6ae4ee",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/validate?name=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "validate"
+                      ],
+                      "query": [
+                        {
+                          "description": "User name to validate",
+                          "key": "name",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-7c41252a-9768-4630-844d-9bf80d6ae4ee"
+                },
+                {
+                  "id": "de2c75bd-4389-4e72-884a-ba00cf288daf",
+                  "name": "Duplicated element",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/validate?name=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        "validate"
+                      ],
+                      "query": [
+                        {
+                          "description": "User name to validate",
+                          "key": "name",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-de2c75bd-4389-4e72-884a-ba00cf288daf"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:40.000Z",
+              "updatedAt": "2026-10-21T20:04:40.000Z",
+              "uid": "35240-1781a222-3324-447e-bb68-7501662046d1"
+            }
+          ],
+          "id": "f38d023e-045e-4de4-b651-c09786fcc3cb",
+          "createdAt": "2026-10-21T20:04:40.000Z",
+          "updatedAt": "2026-10-21T20:04:40.000Z",
+          "uid": "35240-f38d023e-045e-4de4-b651-c09786fcc3cb"
+        },
+        {
+          "name": "{userId}",
+          "item": [
+            {
+              "name": "Delete a user entity",
+              "id": "df8cb6b8-a335-4033-9d32-7bb4e3808cba",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:userId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7543f74b-5c0e-488d-a407-8367abe338c5",
+                      "key": "userId",
+                      "value": "<long>",
+                      "description": "(Required) User numeric identifier"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "29767294-fe2c-44e4-adff-b4e7f5150633",
+                  "name": "OK - No content",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-29767294-fe2c-44e4-adff-b4e7f5150633"
+                },
+                {
+                  "id": "56fc2683-af8e-47d4-baa4-5f1479a3224e",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-56fc2683-af8e-47d4-baa4-5f1479a3224e"
+                },
+                {
+                  "id": "162b7556-bbcc-4ccc-989a-0dd46227b0b1",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-162b7556-bbcc-4ccc-989a-0dd46227b0b1"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:40.000Z",
+              "updatedAt": "2026-10-21T20:04:40.000Z",
+              "uid": "35240-df8cb6b8-a335-4033-9d32-7bb4e3808cba"
+            },
+            {
+              "name": "Describe a user entity",
+              "id": "dc4155f9-9615-4bc3-90b2-13b6b1279dfa",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:userId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f1249fc8-fa27-4658-976c-a8ecc0544a9d",
+                      "key": "userId",
+                      "value": "<long>",
+                      "description": "(Required) User numeric identifier"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "7096200c-cc92-4047-bef2-4895a09915ee",
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"defaultWorkspaceId\": \"<long>\",\n  \"needConsent\": \"<boolean>\",\n  \"user\": {\n    \"avatar\": \"<string>\",\n    \"avatarId\": \"<string>\",\n    \"dateCreated\": \"<dateTime>\",\n    \"deleted\": \"<boolean>\",\n    \"description\": \"<string>\",\n    \"email\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"id\": \"<long>\",\n    \"lastAccess\": \"<dateTime>\",\n    \"lastName\": \"<string>\",\n    \"lastUpdated\": \"<dateTime>\",\n    \"marketingConsent\": \"<boolean>\",\n    \"notification\": \"<boolean>\",\n    \"organization\": \"<string>\",\n    \"termsOfUseConsent\": \"<boolean>\",\n    \"userName\": \"<string>\",\n    \"waveBuildNotification\": \"ALWAYS_ON\"\n  }\n}",
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-7096200c-cc92-4047-bef2-4895a09915ee"
+                },
+                {
+                  "id": "b3012138-490e-4110-a4fc-410629aebd14",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-b3012138-490e-4110-a4fc-410629aebd14"
+                },
+                {
+                  "id": "a1d362fc-7e0d-41ec-b0bc-3bb48bb06297",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-a1d362fc-7e0d-41ec-b0bc-3bb48bb06297"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:40.000Z",
+              "updatedAt": "2026-10-21T20:04:40.000Z",
+              "uid": "35240-dc4155f9-9615-4bc3-90b2-13b6b1279dfa"
+            },
+            {
+              "name": "Update an user entity",
+              "id": "338e0242-4c63-4f59-8e88-6d38a1f8d2a4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"userName\": \"<string>\",\n  \"avatar\": \"<string>\",\n  \"avatarId\": \"<string>\",\n  \"defaultWorkspaceId\": \"<integer,null-int64>\",\n  \"description\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"notification\": \"<boolean>\",\n  \"organization\": \"<string>\",\n  \"waveBuildNotification\": \"ALWAYS_OFF\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/users/:userId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":userId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f628eafa-fb78-49a3-98b9-2aadd0996a8e",
+                      "key": "userId",
+                      "value": "<long>",
+                      "description": "(Required) User numeric identifier"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "b73c5daa-2b3b-4b2c-8382-39ecea846898",
+                  "name": "OK - No content",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"userName\": \"<string>\",\n  \"avatar\": \"<string>\",\n  \"avatarId\": \"<string>\",\n  \"defaultWorkspaceId\": \"<integer,null-int64>\",\n  \"description\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"notification\": \"<boolean>\",\n  \"organization\": \"<string>\",\n  \"waveBuildNotification\": \"ALWAYS_OFF\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-b73c5daa-2b3b-4b2c-8382-39ecea846898"
+                },
+                {
+                  "id": "ca396517-3438-4922-9008-1accf37d3d71",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"userName\": \"<string>\",\n  \"avatar\": \"<string>\",\n  \"avatarId\": \"<string>\",\n  \"defaultWorkspaceId\": \"<integer,null-int64>\",\n  \"description\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"notification\": \"<boolean>\",\n  \"organization\": \"<string>\",\n  \"waveBuildNotification\": \"ALWAYS_OFF\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-ca396517-3438-4922-9008-1accf37d3d71"
+                },
+                {
+                  "id": "9b550b5d-a992-4bc2-99b3-217b54c03d8a",
+                  "name": "Operation not allowed",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"userName\": \"<string>\",\n  \"avatar\": \"<string>\",\n  \"avatarId\": \"<string>\",\n  \"defaultWorkspaceId\": \"<integer,null-int64>\",\n  \"description\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"notification\": \"<boolean>\",\n  \"organization\": \"<string>\",\n  \"waveBuildNotification\": \"ALWAYS_OFF\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "userId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T20:04:41.000Z",
+                  "updatedAt": "2026-10-21T20:04:41.000Z",
+                  "uid": "35240-9b550b5d-a992-4bc2-99b3-217b54c03d8a"
+                }
+              ],
+              "createdAt": "2026-10-21T20:04:40.000Z",
+              "updatedAt": "2026-10-21T20:04:40.000Z",
+              "uid": "35240-338e0242-4c63-4f59-8e88-6d38a1f8d2a4"
+            }
+          ],
+          "id": "cb43295b-6ee7-4d22-b86c-e466c57c842b",
+          "createdAt": "2026-10-21T20:04:40.000Z",
+          "updatedAt": "2026-10-21T20:04:40.000Z",
+          "uid": "35240-cb43295b-6ee7-4d22-b86c-e466c57c842b"
+        }
+      ],
+      "id": "2f2554e8-9ec2-4463-8654-34be8302def0",
+      "createdAt": "2026-10-21T20:04:40.000Z",
+      "updatedAt": "2026-10-21T20:04:40.000Z",
+      "uid": "35240-2f2554e8-9ec2-4463-8654-34be8302def0"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "/",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "/"
     }
-  ],
-  "info": {
-    "_postman_id": "1ae353ec-2158-4165-b5ae-d796c678bd1f",
-    "name": "Seqera actions users API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "Seqera Platform services API\n\nContact Support:\n Email: info@seqera.io",
-      "type": "text/plain"
-    }
-  }
+  ]
 }
